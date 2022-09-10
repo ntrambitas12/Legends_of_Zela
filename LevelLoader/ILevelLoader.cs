@@ -10,7 +10,7 @@ interface ILevelLoader{
     
     }
     public void Update() {
-    // method that will update current state of the level/game. This includes updating the controllers and all sprites in the game
+    // method that will update current state of the level/game. This includes updating the controllers and sprites
     }
     public void Draw() { 
     // method that will draw current state of the level/game
