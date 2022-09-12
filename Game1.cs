@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace CSE3902Project
 {
@@ -8,6 +9,12 @@ namespace CSE3902Project
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private List<Texture2D>[] marioFrames;
+        private List<Texture2D> marioRight;
+        private List<Texture2D> marioLeft;
+        private EnemyController enemyController;
+        private ISprite mario1;
+        private ISprite mario2;
 
         public Game1()
         {
@@ -19,6 +26,9 @@ namespace CSE3902Project
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            marioFrames = new List<Texture2D>[4];
+            marioLeft = new List<Texture2D>();
+            marioRight = new List<Texture2D>();
 
             base.Initialize();
         }
@@ -28,21 +38,51 @@ namespace CSE3902Project
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            for (int i = 0; i <= 2; i++)
+            {
+                marioRight.Add(Content.Load<Texture2D>("marioRight" + i));
+                marioLeft.Add(Content.Load<Texture2D>("marioLeft" + i));
+
+            }
+
+            //add the mario frames to the list
+            marioFrames[0] = marioRight;
+            marioFrames[1] = marioLeft;
+            marioFrames[2] = marioRight;
+            marioFrames[3] = marioLeft;
+
+            //create the enemy controller
+            enemyController = new EnemyController();
+
+            // create mario
+            mario1 = new EnemySprite(_spriteBatch, new Vector2(450, 240), marioFrames);
+            mario2 = new EnemySprite(_spriteBatch, new Vector2(250, 340), marioFrames);
+
+
+            //add mario to the enemy controller
+            enemyController.AddEnemy(new EnemyCommand(mario1));
+            enemyController.AddEnemy(new EnemyCommand(mario2));
+
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+            _spriteBatch.Begin();
 
-            // TODO: Add your update logic here
+            // Update enemies on screen
+            enemyController.Update();
+
+            _spriteBatch.End();
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
 

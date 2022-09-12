@@ -25,8 +25,9 @@ using System.Threading.Tasks;
         this.screenCord = position;
         this.spritePos = 0;
         this.textures = textures;
-        currentFrame = 0;
+        this.SetSpritePosition(spritePos);
         
+
     }
     public void Draw()
     {

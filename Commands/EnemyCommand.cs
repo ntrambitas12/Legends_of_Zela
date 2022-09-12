@@ -20,8 +20,9 @@ using System.Threading.Tasks;
     public void Execute()
     {
         // Have position of an enemy change once every 10 frames
-        if (counter % 10 == 0)
+        if (counter == 100)
         {
+            counter = 0;
             /*set a random postion between 0 and 3*/
             enemy.SetSpritePosition(rand.Next(4));
         }
