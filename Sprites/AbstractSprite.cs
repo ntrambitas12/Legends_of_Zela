@@ -9,29 +9,32 @@ using System.Threading.Tasks;
 
    public abstract class AbstractSprite: ISprite
     {
-    protected IAnimate animateObj;
-    protected IPosition updateObj; 
-    protected int currentFrame;
-    protected int totalFrames;
-    protected int spritePos;
+    public int currentFrame { get { return _currentFrame; } set { _currentFrame = value; } }
+    public int spritePos { get { return _spritePos; } set { _spritePos = value; } }
+    public Vector2 screenCord { get { return _screenCord; } set { _screenCord = value; } }
+    public int totalFrames { get { return _totalFrames; } set { _totalFrames = value; } }
+
+    private int _currentFrame;
+    private int _totalFrames;
+    private int _spritePos;
     private SpriteBatch spriteBatch;
-    protected Vector2 screenCord;
+    private Vector2 _screenCord;
     private List<Texture2D>[] textures;
     private List<Texture2D> textureToDraw;
 
     public AbstractSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures)
     {
         this.spriteBatch = spriteBatch;
-        this.screenCord = position;
-        this.spritePos = 0;
+        _screenCord = position;
+        _spritePos = 0;
         this.textures = textures;
-        this.SetSpritePosition(spritePos);
+        SetSpritePosition(_spritePos);
         
 
     }
     public void Draw()
     {
-        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, Color.White);
+        spriteBatch.Draw(textureToDraw[_currentFrame], _screenCord, Color.White);
 
 
     }
@@ -39,9 +42,9 @@ using System.Threading.Tasks;
     public abstract void Update();
     public void SetSpritePosition(int spritePos)
     {
-        this.spritePos = spritePos;
-        textureToDraw = textures[spritePos];
-        totalFrames = textureToDraw.Count;
+        _spritePos = spritePos;
+        textureToDraw = textures[_spritePos];
+        _totalFrames = textureToDraw.Count;
     }
     }
 

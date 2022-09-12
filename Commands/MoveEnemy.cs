@@ -5,17 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    public class EnemyCommand: ICommand
+    public class MoveEnemy: ICommand
     {
+    private IAnimate animateObj;
+    private IPosition updateObj;
     private ISprite enemy;
     private int counter;
     private Random rand;
 
-    public EnemyCommand(ISprite enemy)
+    public MoveEnemy(ISprite enemy)
     {
         this.enemy = enemy;
         this.counter = 0;
         this.rand = new Random();
+        animateObj = new AnimateSprite();
+        updateObj = new UpdateSpritePos();
     }
     public void Execute()
     {
@@ -29,10 +33,11 @@ using System.Threading.Tasks;
         counter++;
         
         /*update the enemy position on the screen*/
-        enemy.Update();
+        updateObj.Update(enemy);
 
-        /*draw the enemy on the screen*/
-        enemy.Draw();
+        /*update the frame of the enemy*/
+        animateObj.Animate(enemy);
+
     }
     }
 

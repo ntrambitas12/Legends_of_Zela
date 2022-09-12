@@ -12,6 +12,7 @@ namespace CSE3902Project
         private List<Texture2D>[] marioFrames;
         private List<Texture2D> marioRight;
         private List<Texture2D> marioLeft;
+        private List<ISprite> sprites;
         private EnemyController enemyController;
         private ISprite mario1;
         private ISprite mario2;
@@ -29,7 +30,7 @@ namespace CSE3902Project
             marioFrames = new List<Texture2D>[4];
             marioLeft = new List<Texture2D>();
             marioRight = new List<Texture2D>();
-
+            sprites = new List<ISprite>();
             base.Initialize();
         }
 
@@ -59,10 +60,13 @@ namespace CSE3902Project
             mario1 = new EnemySprite(_spriteBatch, new Vector2(450, 240), marioFrames);
             mario2 = new EnemySprite(_spriteBatch, new Vector2(250, 340), marioFrames);
 
+            //add marios to the list 
+            sprites.Add(mario1);
+            sprites.Add(mario2);
 
             //add mario to the enemy controller
-            enemyController.AddEnemy(new EnemyCommand(mario1));
-            enemyController.AddEnemy(new EnemyCommand(mario2));
+            enemyController.AddEnemy(new MoveEnemy(mario1));
+            enemyController.AddEnemy(new MoveEnemy(mario2));
 
         }
 
@@ -71,21 +75,26 @@ namespace CSE3902Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            _spriteBatch.Begin();
+           
 
             // Update enemies on screen
             enemyController.Update();
 
-            _spriteBatch.End();
+            
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-
             // TODO: Add your drawing code here
-
+            _spriteBatch.Begin();
+            foreach (ISprite sprite in sprites)
+            {
+                sprite.Draw();
+            }
+            _spriteBatch.End();
+          
             base.Draw(gameTime);
         }
     }

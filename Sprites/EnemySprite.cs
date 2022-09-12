@@ -12,13 +12,8 @@ using System.Threading.Tasks;
 
     public override void Update()
     {
-        animateObj = new AnimateSprite();
-        updateObj = new UpdateSpritePos();
-
-        /*Update the position of the sprite on the screen*/
-        screenCord = updateObj.Update(screenCord, spritePos);
-        /*Update the current frame of the sprite*/
-        currentFrame = animateObj.Animate(currentFrame, totalFrames);
+       /*This is where code relating to the state of the enemy lives.
+        * Things that need to be updated without changing the position of the enemy */
     }
 }
 
