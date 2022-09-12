@@ -22,14 +22,16 @@ using System.Threading.Tasks;
         // Have position of an enemy change once every 10 frames
         if (counter % 10 == 0)
         {
-            /*set a random postion between 0 and 4*/
+            /*set a random postion between 0 and 3*/
             enemy.SetSpritePosition(rand.Next(4));
         }
         counter++;
         
-        /*update the enemy*/
+        /*update the enemy position on the screen*/
         enemy.Update();
 
+        /*draw the enemy on the screen*/
+        enemy.Draw();
     }
     }
 

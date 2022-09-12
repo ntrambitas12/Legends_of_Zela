@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 
    public abstract class AbstractSprite: ISprite
     {
-    private int currentFrame;
-    private int totalFrames;
-    private int spritePos;
+    protected IAnimate animateObj;
+    protected IPosition updateObj; 
+    protected int currentFrame;
+    protected int totalFrames;
+    protected int spritePos;
     private SpriteBatch spriteBatch;
-    private Vector2 screenCord;
+    protected Vector2 screenCord;
     private List<Texture2D>[] textures;
     private List<Texture2D> textureToDraw;
 
