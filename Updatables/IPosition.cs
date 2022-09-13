@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
     public interface IPosition
     {
-    public Vector2 Update(Vector2 screenPos, int spritePos);
+    public void Update(ISprite sprite);
     }
 

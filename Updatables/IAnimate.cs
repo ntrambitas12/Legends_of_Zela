@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
     public interface IAnimate
     {
-    public int Animate(int currentFrame, int totalFrames);
+    public void Animate(ISprite sprite);
     }
 
