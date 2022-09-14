@@ -10,6 +10,13 @@ public interface ILinkActionState
     public void Move(Vector2 movement);
     public void SwordAttack();
     public void BowAttack();
+    public void Interact();
+}
+
+public interface IEnemyActionState
+{
+    public void Move(Vector2 movement);
+    public void Attack();
 }
 
 public interface IDamageState
