@@ -17,7 +17,7 @@ using System.Threading.Tasks;
     public List<Texture2D> textureToDraw { get; set; }
     void Draw();
     void Update();
-    void SetSpritePosition(int spritePos);
+    void SetSpriteAction(SpriteAction action);
     }
     
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    public class DrawAnimatedSprite: IDraw
+    public class DrawSprite: IDraw
     {
     private int currentFrame;
     private int totalFrames;
@@ -23,7 +23,10 @@ using System.Threading.Tasks;
         textureToDraw = sprite.textureToDraw;
         screenCord = sprite.screenCord;
 
+        //draw the sprite
+        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, Color.White);
 
+        //update and save the frames
         currentFrame++;
         if (currentFrame == totalFrames)
         {
@@ -32,8 +35,7 @@ using System.Threading.Tasks;
 
         //update the instance variables for the sprite
         sprite.currentFrame = currentFrame;
-        //draw the sprite
-        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, Color.White);
+        
 
     }
 

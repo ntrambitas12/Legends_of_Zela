@@ -10,30 +10,46 @@ using System.Threading.Tasks;
     private ISprite enemy;
     private int counter;
     private Random rand;
-    private int pos;
+    private bool isMoving;
+    private List<SpriteAction> actions;
+    private SpriteAction action;
 
     public MoveEnemy(ISprite enemy)
     {
         this.enemy = enemy;
-        this.counter = 0;
-        this.rand = new Random();   
-        this.pos = 0;
+        counter = 0;
+        rand = new Random();
+        isMoving = false;
+        actions = new List<SpriteAction>();
+        actions.Add(SpriteAction.stillDown);
+        actions.Add(SpriteAction.stillUp);
+        actions.Add(SpriteAction.stillLeft);
+        actions.Add(SpriteAction.stillRight);
     }
     public void Execute()
     {
-        /*set a random postion between 0 and 3
+        /*set a random action for the enemy 
          Update counter every 100 frames
          */
 
         if (counter == 100)
         {
+            action = actions[rand.Next(4)];
+
             counter = 0;
-             pos = rand.Next(4);
+            
+            isMoving = !isMoving;
         }
-        
-          
-            enemy.SetSpritePosition(pos);
-        
+
+       
+        //set the action of the enemy 
+        enemy.SetSpriteAction(action);
+
+        /*Call function to move, will refactor once state code exists*/
+        if (isMoving)
+        {
+            enemy.Update();
+        }
         counter++;
         
 
