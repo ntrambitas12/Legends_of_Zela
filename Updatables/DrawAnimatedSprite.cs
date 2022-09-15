@@ -1,18 +1,28 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    public class AnimateSprite: IAnimate
+    public class DrawAnimatedSprite: IDraw
     {
     private int currentFrame;
     private int totalFrames;
-    public void Animate(ISprite sprite)
+    private SpriteBatch spriteBatch;
+    private List<Texture2D> textureToDraw;
+    private Vector2 screenCord;
+
+    public void Draw(ISprite sprite)
     {
         //get the current frames from the sprite instance variables
         currentFrame = sprite.currentFrame;
         totalFrames = sprite.totalFrames;
+        spriteBatch = sprite.spriteBatch;
+        textureToDraw = sprite.textureToDraw;
+        screenCord = sprite.screenCord;
+
 
         currentFrame++;
         if (currentFrame == totalFrames)
@@ -22,7 +32,9 @@ using System.Threading.Tasks;
 
         //update the instance variables for the sprite
         sprite.currentFrame = currentFrame;
-        sprite.totalFrames = totalFrames;
+        //draw the sprite
+        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, Color.White);
+
     }
 
 }

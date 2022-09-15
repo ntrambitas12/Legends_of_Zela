@@ -7,36 +7,35 @@ using System.Threading.Tasks;
 
     public class MoveEnemy: ICommand
     {
-    private IAnimate animateObj;
-    private IPosition updateObj;
     private ISprite enemy;
     private int counter;
     private Random rand;
+    private int pos;
 
     public MoveEnemy(ISprite enemy)
     {
         this.enemy = enemy;
         this.counter = 0;
-        this.rand = new Random();
-        animateObj = new AnimateSprite();
-        updateObj = new UpdateSpritePos();
+        this.rand = new Random();   
+        this.pos = 0;
     }
     public void Execute()
     {
-        // Have position of an enemy change once every 10 frames
+        /*set a random postion between 0 and 3
+         Update counter every 100 frames
+         */
+
         if (counter == 100)
         {
             counter = 0;
-            /*set a random postion between 0 and 3*/
-            enemy.SetSpritePosition(rand.Next(4));
+             pos = rand.Next(4);
         }
+        
+          
+            enemy.SetSpritePosition(pos);
+        
         counter++;
         
-        /*update the enemy position on the screen*/
-        updateObj.Update(enemy);
-
-        /*update the frame of the enemy*/
-        animateObj.Animate(enemy);
 
     }
     }
