@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    public interface IAnimate
+    public interface IDraw
     {
-    public void Animate(ISprite sprite);
+    public void Draw(ISprite sprite);
     }
 
