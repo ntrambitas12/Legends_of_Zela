@@ -12,39 +12,48 @@ using System.Threading.Tasks;
     public int currentFrame { get { return _currentFrame; } set { _currentFrame = value; } }
     public int spritePos { get { return _spritePos; } set { _spritePos = value; } }
     public Vector2 screenCord { get { return _screenCord; } set { _screenCord = value; } }
-    public int totalFrames { get { return _totalFrames; } set { _totalFrames = value; } }
+    public int totalFrames { get { return _totalFrames; } set {} }
+    public SpriteBatch spriteBatch { get { return _spriteBatch; } set {} }
+    public List<Texture2D> textureToDraw { get { return _textureToDraw; } set {} }
 
     private int _currentFrame;
     private int _totalFrames;
     private int _spritePos;
-    private SpriteBatch spriteBatch;
+    private SpriteBatch _spriteBatch;
     private Vector2 _screenCord;
     private List<Texture2D>[] textures;
-    private List<Texture2D> textureToDraw;
+    private List<Texture2D> _textureToDraw;
 
     public AbstractSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures)
     {
-        this.spriteBatch = spriteBatch;
+        _spriteBatch = spriteBatch;
         _screenCord = position;
-        _spritePos = 0;
         this.textures = textures;
-        SetSpritePosition(_spritePos);
+        //needed to get code to intialize
+        _spritePos = 999;
+        SetSpriteAction(SpriteAction.stillLeft);
         
 
     }
-    public void Draw()
-    {
-        spriteBatch.Draw(textureToDraw[_currentFrame], _screenCord, Color.White);
-
-
-    }
+    public abstract void Draw();
     
     public abstract void Update();
-    public void SetSpritePosition(int spritePos)
+
+    /* This method, SetSpriteAction, sets the correct set of textures to draw, based on the desired action of the sprite.
+     * Examples include: set the texture for the sprite moving left, set the texture for sprite moving right,
+     * texture for sprite attacking facing left, etc. Textures are loaded in from an array of lists,
+     * where each element in the array contains a different list of motion frames of the sprite
+     */
+    public void SetSpriteAction(SpriteAction action)
     {
-        _spritePos = spritePos;
-        textureToDraw = textures[_spritePos];
-        _totalFrames = textureToDraw.Count;
+        //only run if spritePos changes
+        if ((int)action != _spritePos)
+        {
+            _spritePos = (int)action;
+            _textureToDraw = textures[_spritePos];
+            _totalFrames = textureToDraw.Count;
+            _currentFrame = 0;
+       }
     }
     }
 

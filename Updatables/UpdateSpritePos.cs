@@ -64,7 +64,8 @@ public class UpdateSpritePos: IPosition
                 }
                 sprite.screenCord = screenCord;
                 break;
-                default:
+            default:
+                /*If none, don't change the orientation of the sprite on the screen*/
                 break;
         }
     }
