@@ -12,10 +12,19 @@ namespace CSE3902Project
         private List<Texture2D>[] marioFrames;
         private List<Texture2D> marioRight;
         private List<Texture2D> marioLeft;
+        private List<Texture2D>[] arrowFrames;
+        private List<Texture2D> arrowLeft;
+        private List<Texture2D> arrowRight;
+        private List<Texture2D> arrowUp;
+        private List<Texture2D> arrowDown;
         private List<ISprite> sprites;
         private EnemyController enemyController;
         private ISprite mario1;
         private ISprite mario2;
+        private IItem arrow;
+        private List<IItem> items;
+        private ICommand fireProjectile;
+        private KeyboardController keyboard;
 
         public Game1()
         {
@@ -30,7 +39,14 @@ namespace CSE3902Project
             marioFrames = new List<Texture2D>[4];
             marioLeft = new List<Texture2D>();
             marioRight = new List<Texture2D>();
+            arrowFrames = new List<Texture2D>[4];
+            arrowLeft = new List<Texture2D>();
+            arrowRight = new List<Texture2D>();
+            arrowUp = new List<Texture2D>();
+            arrowDown = new List<Texture2D>();
             sprites = new List<ISprite>();
+            items = new List<IItem>();
+            keyboard = new KeyboardController();
             base.Initialize();
         }
 
@@ -47,11 +63,21 @@ namespace CSE3902Project
 
             }
 
+            arrowLeft.Add(Content.Load<Texture2D>("ZeldaSpriteArrowLeft"));
+            arrowRight.Add(Content.Load<Texture2D>("ZeldaSpriteArrowR"));
+            arrowUp.Add(Content.Load<Texture2D>("ZeldaSpriteArrow"));
+            arrowDown.Add(Content.Load<Texture2D>("ZeldaSpriteArrowD"));
+
             //add the mario frames to the list
             marioFrames[0] = marioRight;
             marioFrames[1] = marioLeft;
             marioFrames[2] = marioRight;
             marioFrames[3] = marioLeft;
+
+            arrowFrames[(int)SpriteAction.stillLeft] = arrowLeft;
+            arrowFrames[(int)SpriteAction.stillRight] = arrowRight;
+            arrowFrames[(int)SpriteAction.stillUp] = arrowUp;
+            arrowFrames[(int)SpriteAction.stillDown] = arrowDown;
 
             //create the enemy controller
             enemyController = new EnemyController();
@@ -60,13 +86,25 @@ namespace CSE3902Project
             mario1 = new EnemySprite(_spriteBatch, new Vector2(450, 240), marioFrames);
             mario2 = new EnemySprite(_spriteBatch, new Vector2(250, 340), marioFrames);
 
+            arrow = new ArrowItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
+
             //add marios to the list 
             sprites.Add(mario1);
             sprites.Add(mario2);
 
+            items.Add(arrow);
+
             //add mario to the enemy controller
             enemyController.AddEnemy(new MoveEnemy(mario1));
             enemyController.AddEnemy(new MoveEnemy(mario2));
+
+            // Create fireProjectile command
+            fireProjectile = new FireProjectile(mario1, arrow, items);
+
+            // Add to keyboard controller
+            keyboard.RegisterCommand(Keys.D1, fireProjectile);
+
+            arrow.SetFireCommand(fireProjectile);
 
         }
 
@@ -79,6 +117,18 @@ namespace CSE3902Project
 
             // Update enemies on screen
             enemyController.Update();
+            if (arrow.ShouldDraw() == false)
+            {
+                keyboard.Update();
+            }
+
+            foreach (IItem item in items)
+            {
+                if (item.ShouldDraw())
+                {
+                    item.Update();
+                }
+            }
 
             
 
@@ -92,6 +142,14 @@ namespace CSE3902Project
             foreach (ISprite sprite in sprites)
             {
                 sprite.Draw();
+            }
+
+            foreach (IItem item in items)
+            {
+                if (item.ShouldDraw())
+                {
+                    item.Draw();
+                }
             }
             _spriteBatch.End();
           
