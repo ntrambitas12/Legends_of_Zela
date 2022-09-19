@@ -99,7 +99,7 @@ namespace CSE3902Project
             enemyController.AddEnemy(new MoveEnemy(mario2));
 
             // Create fireProjectile command
-            fireProjectile = new FireProjectile(mario1, arrow, items);
+            fireProjectile = new FireProjectile(mario1, arrow);
 
             // Add to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireProjectile);
@@ -117,20 +117,24 @@ namespace CSE3902Project
 
             // Update enemies on screen
             enemyController.Update();
-            if (arrow.ShouldDraw() == false)
+
+            // Only update keyboard if no projectiles are on screen
+            // Might need something in keyboard controller to handle this
+            bool updateKeys = true;
+            foreach (IItem item in items)
+            {
+                updateKeys = updateKeys && !(item.ShouldDraw());
+            }
+
+            if (updateKeys)
             {
                 keyboard.Update();
             }
 
             foreach (IItem item in items)
             {
-                if (item.ShouldDraw())
-                {
-                    item.Update();
-                }
+                item.Update();
             }
-
-            
 
             base.Update(gameTime);
         }
@@ -146,10 +150,7 @@ namespace CSE3902Project
 
             foreach (IItem item in items)
             {
-                if (item.ShouldDraw())
-                {
-                    item.Draw();
-                }
+                item.Draw();
             }
             _spriteBatch.End();
           
