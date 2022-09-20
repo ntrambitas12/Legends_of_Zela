@@ -19,8 +19,8 @@ namespace CSE3902Project
         private List<Texture2D> arrowDown;
         private List<ISprite> sprites;
         private EnemyController enemyController;
-        private ISprite mario1;
-        private ISprite mario2;
+        private IConcreteSprite mario1;
+        private IConcreteSprite mario2;
         private IItem arrow;
         private List<IItem> items;
         private ICommand fireProjectile;
@@ -83,14 +83,14 @@ namespace CSE3902Project
             enemyController = new EnemyController();
 
             // create mario
-            mario1 = new EnemySprite(_spriteBatch, new Vector2(450, 240), marioFrames);
-            mario2 = new EnemySprite(_spriteBatch, new Vector2(250, 340), marioFrames);
+            mario1 = new ConcreteSprite(_spriteBatch, new Vector2(450, 240), marioFrames);
+            mario2 = new ConcreteSprite(_spriteBatch, new Vector2(250, 340), marioFrames);
 
             arrow = new ArrowItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
 
             //add marios to the list 
-            sprites.Add(mario1);
-            sprites.Add(mario2);
+            sprites.Add((ISprite)mario1);
+            sprites.Add((ISprite)mario2);
 
             items.Add(arrow);
 
@@ -99,7 +99,7 @@ namespace CSE3902Project
             enemyController.AddEnemy(new MoveEnemy(mario2));
 
             // Create fireProjectile command
-            fireProjectile = new FireProjectile(mario1, arrow);
+            fireProjectile = new FireProjectile((ISprite)mario1, arrow);
 
             // Add to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireProjectile);
