@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
-    public interface IFactory
+public interface IFactory
     {
-    /* TODO: Create IFactory interface for Sprite Factory */
+    void LoadAllContent(ContentManager Content);
+    void CreateSprite();
 }
 
