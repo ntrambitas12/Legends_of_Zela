@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
     public class MoveEnemy: ICommand
     {
-    private ISprite enemy;
+    private IConcreteSprite enemy;
     private int counter;
     private Random rand;
     private bool isMoving;
     private List<SpriteAction> actions;
     private SpriteAction action;
 
-    public MoveEnemy(ISprite enemy)
+    public MoveEnemy(IConcreteSprite enemy)
     {
         this.enemy = enemy;
         counter = 0;
@@ -41,13 +41,15 @@ using System.Threading.Tasks;
             isMoving = !isMoving;
         }
 
-       
-        //set the action of the enemy 
-        enemy.SetSpriteAction(action);
 
         /*Call function to move, will refactor once state code exists*/
         if (isMoving)
         {
+            enemy.SetSpriteState(action, enemy.moving);
+            enemy.Update();
+        } else
+        {
+            enemy.SetSpriteState(action, enemy.still);
             enemy.Update();
         }
         counter++;

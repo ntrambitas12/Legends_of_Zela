@@ -1,33 +1,33 @@
 ﻿using System;
 
-    public class StillState:IItemState
+    public class StillState:ISpriteState
     {
-    //might want to use IItem interface
-    private ISprite sprite;
-    private IDraw drawSprite = new DrawSprite();
+    private ConcreteSprite sprite;
+    private IDraw drawSprite;
 
-        public StillState(ISprite sprite)
+        public StillState(ConcreteSprite sprite)
         {
         this.sprite = sprite;
+        drawSprite = new DrawSprite();
         }
 
-    void IItemState.Attack()
-    {
-        // change state to attack states
-        //sprite.Attack();
-    }
 
-    void IItemState.Draw()
+    public void Draw()
     {
-        sprite.SetSpriteAction(SpriteAction.stillUp);
         drawSprite.Draw(sprite);
 
     }
 
-    void IItemState.Update()
+    public void Update()
     {
-        // Nothing
+        sprite.SetSpriteAction(SpriteAction.stillRight);
+
     }
+    public void SetPosition(SpriteAction action)
+    {
+        sprite.SetSpriteAction(action);
+    }
+
 }
 
 
