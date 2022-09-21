@@ -9,6 +9,7 @@
         {
         this.sprite = sprite;
         drawSprite = new DrawSprite();
+        //sprite.SetSpriteAction(SpriteAction.stillDown);
         }
 
 

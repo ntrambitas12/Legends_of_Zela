@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CSE3902Project.Commands;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace CSE3902Project
 {
@@ -9,9 +11,16 @@ namespace CSE3902Project
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private List<Texture2D>[] marioFrames;
-        private List<Texture2D> marioRight;
-        private List<Texture2D> marioLeft;
+        private List<Texture2D>[] linkFrames;
+        private List<Texture2D> linkRight;
+        private List<Texture2D> linkLeft;
+        private List<Texture2D> linkUp;
+        private List<Texture2D> linkDown;
+        private List<Texture2D>[] goriyaFrames;
+        private List<Texture2D> goriyaRight;
+        private List<Texture2D> goriyaLeft;
+        private List<Texture2D> goriyaUp;
+        private List<Texture2D> goriyaDown;
         private List<Texture2D>[] arrowFrames;
         private List<Texture2D> arrowLeft;
         private List<Texture2D> arrowRight;
@@ -19,8 +28,8 @@ namespace CSE3902Project
         private List<Texture2D> arrowDown;
         private List<ISprite> sprites;
         private EnemyController enemyController;
-        private IConcreteSprite mario1;
-        private IConcreteSprite mario2;
+        private IConcreteSprite enemy1;
+        private IConcreteSprite enemy2;
         private IItem arrow;
         private List<IItem> items;
         private ICommand fireProjectile;
@@ -36,17 +45,24 @@ namespace CSE3902Project
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            marioFrames = new List<Texture2D>[4];
-            marioLeft = new List<Texture2D>();
-            marioRight = new List<Texture2D>();
+            linkFrames = new List<Texture2D>[4];
+            linkLeft = new List<Texture2D>();
+            linkRight = new List<Texture2D>();
+            linkDown = new List<Texture2D>();
+            linkUp = new List<Texture2D>();
+            goriyaFrames = new List<Texture2D>[4];
+            goriyaLeft = new List<Texture2D>();
+            goriyaRight = new List<Texture2D>();
+            goriyaDown = new List<Texture2D>();
+            goriyaUp = new List<Texture2D>();
             arrowFrames = new List<Texture2D>[4];
             arrowLeft = new List<Texture2D>();
             arrowRight = new List<Texture2D>();
             arrowUp = new List<Texture2D>();
             arrowDown = new List<Texture2D>();
             sprites = new List<ISprite>();
-            items = new List<IItem>();
             keyboard = new KeyboardController();
+            items = new List<IItem>();
             base.Initialize();
         }
 
@@ -56,23 +72,36 @@ namespace CSE3902Project
 
             // TODO: use this.Content to load your game content here
 
-            for (int i = 0; i <= 2; i++)
+            for (int i = 1; i <= 2; i++)
             {
-                marioRight.Add(Content.Load<Texture2D>("marioRight" + i));
-                marioLeft.Add(Content.Load<Texture2D>("marioLeft" + i));
+                linkRight.Add(Content.Load<Texture2D>("LinkSprites/linkRight" + i));
+                linkLeft.Add(Content.Load<Texture2D>("LinkSprites/linkLeft" + i));
+                linkUp.Add(Content.Load<Texture2D>("LinkSprites/linkUp" + i));
+                linkDown.Add(Content.Load<Texture2D>("LinkSprites/linkDown" + i));
+
+                goriyaRight.Add(Content.Load<Texture2D>("EnemySprites/GoriyaRedRight" + i));
+                goriyaLeft.Add(Content.Load<Texture2D>("EnemySprites/GoriyaRedLeft" + i));
+                goriyaUp.Add(Content.Load<Texture2D>("EnemySprites/GoriyaRedUp" + i));
+                goriyaDown.Add(Content.Load<Texture2D>("EnemySprites/GoriyaRedDown" + i));
 
             }
 
-            arrowLeft.Add(Content.Load<Texture2D>("ZeldaSpriteArrowLeft"));
-            arrowRight.Add(Content.Load<Texture2D>("ZeldaSpriteArrowR"));
-            arrowUp.Add(Content.Load<Texture2D>("ZeldaSpriteArrow"));
-            arrowDown.Add(Content.Load<Texture2D>("ZeldaSpriteArrowD"));
+            arrowLeft.Add(Content.Load<Texture2D>("ItemSprites/ArrowLeft"));
+            arrowRight.Add(Content.Load<Texture2D>("ItemSprites/ArrowRight"));
+            arrowUp.Add(Content.Load<Texture2D>("ItemSprites/ArrowUp"));
+            arrowDown.Add(Content.Load<Texture2D>("ItemSprites/ArrowDown"));
 
             //add the mario frames to the list
-            marioFrames[0] = marioRight;
-            marioFrames[1] = marioLeft;
-            marioFrames[2] = marioRight;
-            marioFrames[3] = marioLeft;
+            linkFrames[0] = linkRight;
+            linkFrames[1] = linkLeft;
+            linkFrames[2] = linkDown;
+            linkFrames[3] = linkUp;
+
+            //add example enemy frames to the list
+            goriyaFrames[0] = goriyaRight;
+            goriyaFrames[1] = goriyaLeft;
+            goriyaFrames[2] = goriyaDown;
+            goriyaFrames[3] = goriyaUp;
 
             arrowFrames[(int)SpriteAction.stillLeft] = arrowLeft;
             arrowFrames[(int)SpriteAction.stillRight] = arrowRight;
@@ -83,23 +112,25 @@ namespace CSE3902Project
             enemyController = new EnemyController();
 
             // create mario
-            mario1 = new ConcreteSprite(_spriteBatch, new Vector2(450, 240), marioFrames);
-            mario2 = new ConcreteSprite(_spriteBatch, new Vector2(250, 340), marioFrames);
+            enemy1 = new ConcreteSprite(_spriteBatch, new Vector2(450, 240), linkFrames);
+            enemy2 = new ConcreteSprite(_spriteBatch, new Vector2(250, 340), goriyaFrames);
 
+            // Create new items
             arrow = new ArrowItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
 
             //add marios to the list 
-            sprites.Add((ISprite)mario1);
-            sprites.Add((ISprite)mario2);
+            sprites.Add((ISprite)enemy1);
+            sprites.Add((ISprite)enemy2);
 
+            // Add items to command lists
             items.Add(arrow);
 
             //add mario to the enemy controller
-            enemyController.AddEnemy(new MoveEnemy(mario1));
-            enemyController.AddEnemy(new MoveEnemy(mario2));
+            enemyController.AddEnemy(new MoveEnemy(enemy1));
+            enemyController.AddEnemy(new MoveEnemy(enemy2));
 
-            // Create fireProjectile command
-            fireProjectile = new FireProjectile((ISprite)mario1, arrow);
+            // Create fireProjectile Command
+            fireProjectile = new FireProjectile((ISprite)enemy1, arrow);
 
             // Add to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireProjectile);
@@ -145,6 +176,7 @@ namespace CSE3902Project
             _spriteBatch.Begin();
             foreach (ISprite sprite in sprites)
             {
+
                 sprite.Draw();
             }
 

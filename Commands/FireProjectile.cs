@@ -28,9 +28,7 @@ public class FireProjectile : ICommand
             projectile.SetPosition(newCord);
             projectile.SetShouldDraw(true);
         }
-
-
-
+        
         if (counter == 50) // change this to change distance of shot
         {
             projectile.SetShouldDraw(false);
