@@ -29,7 +29,7 @@ using System.Threading.Tasks;
         textureToDraw = sprite.textureToDraw;
         screenCord = sprite.screenCord;
 
-        //draw the sprite
+        // Draw the sprite
         spriteBatch.Draw(textureToDraw[currentFrame], screenCord, Color.White);
 
         counter++;
