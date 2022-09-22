@@ -32,7 +32,7 @@ namespace CSE3902Project
         private IConcreteSprite enemy2;
         private IItem arrow;
         private List<IItem> items;
-        private ICommand fireProjectile;
+        private FireProjectile fireProjectile;
         private KeyboardController keyboard;
 
         public Game1()
@@ -74,6 +74,7 @@ namespace CSE3902Project
 
             for (int i = 1; i <= 2; i++)
             {
+
                 linkRight.Add(Content.Load<Texture2D>("LinkSprites/linkRight" + i));
                 linkLeft.Add(Content.Load<Texture2D>("LinkSprites/linkLeft" + i));
                 linkUp.Add(Content.Load<Texture2D>("LinkSprites/linkUp" + i));
@@ -83,6 +84,7 @@ namespace CSE3902Project
                 goriyaLeft.Add(Content.Load<Texture2D>("EnemySprites/GoriyaRedLeft" + i));
                 goriyaUp.Add(Content.Load<Texture2D>("EnemySprites/GoriyaRedUp" + i));
                 goriyaDown.Add(Content.Load<Texture2D>("EnemySprites/GoriyaRedDown" + i));
+
 
             }
 
@@ -115,8 +117,11 @@ namespace CSE3902Project
             enemy1 = new ConcreteSprite(_spriteBatch, new Vector2(450, 240), linkFrames);
             enemy2 = new ConcreteSprite(_spriteBatch, new Vector2(250, 340), goriyaFrames);
 
-            // Create new items
-            arrow = new ArrowItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
+
+            arrow = new ConcreteItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
+            arrow.SetDistance(100);
+            arrow.SetProjectileType(new BombType(arrow));
+
 
             //add marios to the list 
             sprites.Add((ISprite)enemy1);
@@ -129,6 +134,7 @@ namespace CSE3902Project
             enemyController.AddEnemy(new MoveEnemy(enemy1));
             enemyController.AddEnemy(new MoveEnemy(enemy2));
 
+
             // Create fireProjectile Command
             fireProjectile = new FireProjectile((ISprite)enemy1, arrow);
 
@@ -136,7 +142,6 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.D1, fireProjectile);
 
             arrow.SetFireCommand(fireProjectile);
-
         }
 
         protected override void Update(GameTime gameTime)

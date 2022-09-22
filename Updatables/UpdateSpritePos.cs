@@ -16,20 +16,8 @@ public class UpdateSpritePos: IPosition
 
         switch(spritePos)
         {
-            /*move sprite to the right*/
+            /*move sprite to the left*/
             case 0:
-                if (screenCord.X >= 0 && screenCord.X <= 800)
-                {
-                    screenCord.X++;
-                }
-                else
-                {
-                    screenCord.X = 0;
-                }
-                sprite.screenCord = screenCord;
-                break;
-           /*move sprite to the left*/
-            case 1:
                 if (screenCord.X >= 0 && screenCord.X <= 800)
                 {
                     screenCord.X--;
@@ -40,20 +28,20 @@ public class UpdateSpritePos: IPosition
                 }
                 sprite.screenCord = screenCord;
                 break;
-            /*move sprite up*/
-            case 2:
-                if (screenCord.Y >= 0 && screenCord.Y <= 480)
+           /*move sprite to the right*/
+            case 1:
+                if (screenCord.X >= 0 && screenCord.X <= 800)
                 {
-                    screenCord.Y++;
+                    screenCord.X++;
                 }
                 else
                 {
-                    screenCord.Y = 0;
+                    screenCord.X = 0;
                 }
                 sprite.screenCord = screenCord;
                 break;
-            /*move sprite down*/
-            case 3:
+            /*move sprite up*/
+            case 2:
                 if (screenCord.Y >= 0 && screenCord.Y <= 480)
                 {
                     screenCord.Y--;
@@ -61,6 +49,18 @@ public class UpdateSpritePos: IPosition
                 else
                 {
                     screenCord.Y = 480;
+                }
+                sprite.screenCord = screenCord;
+                break;
+            /*move sprite down*/
+            case 3:
+                if (screenCord.Y >= 0 && screenCord.Y <= 480)
+                {
+                    screenCord.Y++;
+                }
+                else
+                {
+                    screenCord.Y = 0;
                 }
                 sprite.screenCord = screenCord;
                 break;
