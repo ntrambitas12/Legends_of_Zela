@@ -8,8 +8,7 @@
         public StillState(ConcreteSprite sprite)
         {
         this.sprite = sprite;
-        drawSprite = new DrawSprite();
-        //sprite.SetSpriteAction(SpriteAction.stillDown);
+        drawSprite = new DrawStaticSprite();
         }
 
 
@@ -21,7 +20,7 @@
 
     public void Update()
     {
-        sprite.SetSpriteAction(SpriteAction.stillRight);
+        //No update code needed for still state
 
     }
     public void SetPosition(SpriteAction action)
