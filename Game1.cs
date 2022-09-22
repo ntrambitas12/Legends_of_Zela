@@ -23,7 +23,7 @@ namespace CSE3902Project
         private IConcreteSprite mario2;
         private IItem arrow;
         private List<IItem> items;
-        private ICommand fireProjectile;
+        private FireProjectile fireProjectile;
         private KeyboardController keyboard;
 
         public Game1()
@@ -56,17 +56,17 @@ namespace CSE3902Project
 
             // TODO: use this.Content to load your game content here
 
-            for (int i = 0; i <= 2; i++)
+            for (int i = 1; i <= 2; i++)
             {
-                marioRight.Add(Content.Load<Texture2D>("marioRight" + i));
-                marioLeft.Add(Content.Load<Texture2D>("marioLeft" + i));
+                marioRight.Add(Content.Load<Texture2D>("LinkSprites/LinkRight" + i));
+                marioLeft.Add(Content.Load<Texture2D>("LinkSprites/LinkLeft" + i));
 
             }
 
-            arrowLeft.Add(Content.Load<Texture2D>("ZeldaSpriteArrowLeft"));
-            arrowRight.Add(Content.Load<Texture2D>("ZeldaSpriteArrowR"));
-            arrowUp.Add(Content.Load<Texture2D>("ZeldaSpriteArrow"));
-            arrowDown.Add(Content.Load<Texture2D>("ZeldaSpriteArrowD"));
+            arrowLeft.Add(Content.Load<Texture2D>("ItemSprites/ArrowLeft"));
+            arrowRight.Add(Content.Load<Texture2D>("ItemSprites/ArrowRight"));
+            arrowUp.Add(Content.Load<Texture2D>("ItemSprites/ArrowUp"));
+            arrowDown.Add(Content.Load<Texture2D>("ItemSprites/ArrowDown"));
 
             //add the mario frames to the list
             marioFrames[0] = marioRight;
@@ -86,7 +86,9 @@ namespace CSE3902Project
             mario1 = new ConcreteSprite(_spriteBatch, new Vector2(450, 240), marioFrames);
             mario2 = new ConcreteSprite(_spriteBatch, new Vector2(250, 340), marioFrames);
 
-            arrow = new ArrowItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
+            arrow = new ConcreteItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
+            arrow.SetDistance(100);
+            arrow.SetProjectileType(new BombType(arrow));
 
             //add marios to the list 
             sprites.Add((ISprite)mario1);
@@ -99,13 +101,12 @@ namespace CSE3902Project
             enemyController.AddEnemy(new MoveEnemy(mario2));
 
             // Create fireProjectile command
-            fireProjectile = new FireProjectile((ISprite)mario1, arrow);
+            fireProjectile = new FireProjectile((ISprite)mario1, arrow); // SetDist and Set PType before this
 
             // Add to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireProjectile);
 
             arrow.SetFireCommand(fireProjectile);
-
         }
 
         protected override void Update(GameTime gameTime)

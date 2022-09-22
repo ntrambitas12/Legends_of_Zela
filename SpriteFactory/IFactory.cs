@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
 public interface IFactory
-    {
+{
     void LoadAllContent(ContentManager Content);
     void CreateSprite();
 }
