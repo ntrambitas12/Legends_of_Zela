@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-     class KeyboardController: IController
+    public class KeyboardController: IController
     {
     private Dictionary<Keys, ICommand> controllerMappings;
 
