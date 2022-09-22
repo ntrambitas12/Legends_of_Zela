@@ -52,9 +52,9 @@ public class FireProjectile : ICommand
             projectile.SetShouldDraw(true);
         }
 
-
-
         if (counter == distance)
+        
+
         {
             projectile.SetShouldDraw(false);
             projectile.SetDirection(-1);
