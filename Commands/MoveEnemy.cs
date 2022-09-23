@@ -21,10 +21,11 @@ using System.Threading.Tasks;
         rand = new Random();
         isMoving = false;
         actions = new List<SpriteAction>();
-        actions.Add(SpriteAction.stillDown);
-        actions.Add(SpriteAction.stillUp);
-        actions.Add(SpriteAction.stillLeft);
-        actions.Add(SpriteAction.stillRight);
+        actions.Add(SpriteAction.moveDown);
+        actions.Add(SpriteAction.moveLeft);
+        actions.Add(SpriteAction.moveRight);
+        actions.Add(SpriteAction.moveUp);
+
     }
     public void Execute()
     {

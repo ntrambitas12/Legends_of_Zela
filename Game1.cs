@@ -140,23 +140,23 @@ namespace CSE3902Project
             arrowUp.Add(Content.Load<Texture2D>("ItemSprites/ArrowUp"));
             arrowDown.Add(Content.Load<Texture2D>("ItemSprites/ArrowDown"));
 
-            // Add the mario frames to the list
-            linkFrames[(int)SpriteAction.stillLeft] = linkLeft;
-            linkFrames[(int)SpriteAction.stillRight] = linkRight;
-            linkFrames[(int)SpriteAction.stillUp] = linkUp;
-            linkFrames[(int)SpriteAction.stillDown] = linkDown;
+            // Add the link frames to the list
+            linkFrames[(int)SpriteAction.moveLeft] = linkLeft;
+            linkFrames[(int)SpriteAction.moveRight] = linkRight;
+            linkFrames[(int)SpriteAction.moveUp] = linkUp;
+            linkFrames[(int)SpriteAction.moveDown] = linkDown;
 
             // Add example enemy frames to the list
-            goriyaFrames[(int)SpriteAction.stillLeft] = goriyaLeft;
-            goriyaFrames[(int)SpriteAction.stillRight] = goriyaRight;
-            goriyaFrames[(int)SpriteAction.stillUp] = goriyaUp;
-            goriyaFrames[(int)SpriteAction.stillDown] = goriyaDown;
+            goriyaFrames[(int)SpriteAction.moveLeft] = goriyaLeft;
+            goriyaFrames[(int)SpriteAction.moveRight] = goriyaRight;
+            goriyaFrames[(int)SpriteAction.moveUp] = goriyaUp;
+            goriyaFrames[(int)SpriteAction.moveDown] = goriyaDown;
 
             // Add arrow frames to the list
-            arrowFrames[(int)SpriteAction.stillLeft] = arrowLeft;
-            arrowFrames[(int)SpriteAction.stillRight] = arrowRight;
-            arrowFrames[(int)SpriteAction.stillUp] = arrowUp;
-            arrowFrames[(int)SpriteAction.stillDown] = arrowDown;
+            arrowFrames[(int)SpriteAction.moveLeft] = arrowLeft;
+            arrowFrames[(int)SpriteAction.moveRight] = arrowRight;
+            arrowFrames[(int)SpriteAction.moveUp] = arrowUp;
+            arrowFrames[(int)SpriteAction.moveDown] = arrowDown;
 
             // Create the enemy controller
             enemyController = new EnemyController();
