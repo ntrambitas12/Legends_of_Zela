@@ -13,6 +13,7 @@ public class ConcreteItem : AbstractSprite, IItem
     private Boolean shouldDraw;
     private IProjectileType projectileType;
     private int distance;
+    private ISprite owner;
 
     public ConcreteItem(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures)
     {
@@ -24,6 +25,7 @@ public class ConcreteItem : AbstractSprite, IItem
         shouldDraw = false;
         projectileType = new NotProjectile();
         distance = 0;
+        owner = null;
     }
 
     public override void Draw()
@@ -98,6 +100,16 @@ public class ConcreteItem : AbstractSprite, IItem
     public void SetDistance(int distance)
     {
         this.distance = distance;
+    }
+
+    public ISprite Owner()
+    {
+        return this.owner;
+    }
+
+    public void SetOwner(ISprite owner)
+    {
+        this.owner = owner;
     }
 }
 
