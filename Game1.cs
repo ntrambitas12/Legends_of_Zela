@@ -171,10 +171,11 @@ namespace CSE3902Project
             compassTile = new ConcreteSprite(_spriteBatch, new Vector2(300, 200), compassFrames);
             mapTile = new ConcreteSprite(_spriteBatch, new Vector2(300, 200), mapFrames);
 
-            // Arrow stuff?
+            // Create Arrow (Before command is created)
             arrow = new ConcreteItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
             arrow.SetDistance(100);
-            arrow.SetProjectileType(new BombType(arrow));
+            arrow.SetProjectileType(new BoomerangType(arrow));
+            arrow.SetOwner(enemy1);
 
             // Add enemies to the list 
             sprites.Add((ISprite)enemy1);
@@ -192,7 +193,7 @@ namespace CSE3902Project
             enemyController.AddEnemy(new MoveEnemy(enemy2));
 
             // Create Commands
-            fireProjectile = new FireProjectile((ISprite)enemy1, arrow);
+            fireProjectile = new FireProjectile(arrow);
             tileSwitcher = new TileSwitch(tiles);
             itemSwitcher = new TileSwitch(drops);
 
@@ -201,7 +202,7 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.T, tileSwitcher);
             keyboard.RegisterCommand(Keys.U, itemSwitcher);
 
-            // More arrow stuffs?
+            // Set arrow command (After command is created)
             arrow.SetFireCommand(fireProjectile);
         }
 

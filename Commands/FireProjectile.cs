@@ -4,17 +4,18 @@ using Microsoft.Xna.Framework;
 
 public class FireProjectile : ICommand
 {
-    private ISprite shooter;
     private IItem projectile;
+    private ISprite shooter;
     private int counter;
     private Vector2 newCord;
     public int distance;
 
-    public FireProjectile(ISprite shooter, IItem projectile)
+    public FireProjectile(IItem projectile)
     {
-        this.shooter = shooter;
         this.projectile = projectile;
+        shooter = projectile.Owner();
         counter = 0;
+        newCord = new Vector2(0,0);
         distance = projectile.Distance();
     }
 
@@ -22,6 +23,7 @@ public class FireProjectile : ICommand
     {
         if (counter == 0)
         {
+            shooter = projectile.Owner();
             projectile.SetSpriteAction((SpriteAction)shooter.spritePos);
             projectile.SetDirection(shooter.spritePos);
             newCord = projectile.screenCord;
@@ -53,8 +55,6 @@ public class FireProjectile : ICommand
         }
 
         if (counter == distance)
-        
-
         {
             projectile.SetShouldDraw(false);
             projectile.SetDirection(-1);
