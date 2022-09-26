@@ -52,7 +52,6 @@ namespace CSE3902Project
         private FireProjectile fireProjectile;
         private TileSwitch tileSwitcher;
         private TileSwitch itemSwitcher;
-        private KeyLogic keyLogic;
 
         private KeyboardController keyboard;
         private EnemyController enemyController;
@@ -94,7 +93,6 @@ namespace CSE3902Project
             arrowDown = new List<Texture2D>();
             sprites = new List<ISprite>();
             keyboard = new KeyboardController();
-            keyLogic = new KeyLogic();
             items = new List<IItem>();
             base.Initialize();
         }
@@ -198,9 +196,9 @@ namespace CSE3902Project
             itemSwitcher = new TileSwitch(drops);
 
             // Add to keyboard controller
-            keyboard.RegisterCommand(Keys.D1, fireProjectile);
-            keyboard.RegisterCommand(Keys.T, tileSwitcher);
-            keyboard.RegisterCommand(Keys.U, itemSwitcher);
+            keyboard.RegisterCommand(Keys.D1, fireProjectile, true);
+            keyboard.RegisterCommand(Keys.T, tileSwitcher, true);
+            keyboard.RegisterCommand(Keys.U, itemSwitcher, true);
 
             // Set arrow command (After command is created)
             arrow.SetFireCommand(fireProjectile);
@@ -250,12 +248,10 @@ namespace CSE3902Project
             {
                 item.Draw();
             }
-
-            //if(keyLogic.OneShotKeyPress(Keys.T))
-            //{
+            
             tileSwitcher.currentTile.Draw();
             itemSwitcher.currentTile.Draw();
-            //}
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);

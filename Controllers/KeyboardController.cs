@@ -8,28 +8,46 @@ using System.Threading.Tasks;
 
     public class KeyboardController: IController
     {
-    private Dictionary<Keys, ICommand> controllerMappings;
+    private Dictionary<Keys, (ICommand, bool)> controllerMappings;
+    private KeyboardState currentKeyState;
+    private KeyboardState previousKeyState;
 
     public KeyboardController()
     {
-        controllerMappings = new Dictionary<Keys, ICommand>();
+        controllerMappings = new Dictionary<Keys, (ICommand, bool)>();
     }
 
-    public void RegisterCommand(Keys key, ICommand command)
+    public void RegisterCommand(Keys key, ICommand command, bool runOnce)
     {
-            controllerMappings.Add(key, command);
+            controllerMappings.Add(key, (command, runOnce));
     }
 
     public void Update()
     {
-        Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+        previousKeyState = currentKeyState;
+        currentKeyState = Keyboard.GetState();
 
-       
+        Keys[] pressedKeys = currentKeyState.GetPressedKeys();
+
         foreach (Keys key in pressedKeys)
         {
+
+        
             if (controllerMappings.ContainsKey(key))
-            {
-                controllerMappings[key].Execute();
+            { //if runOnce is false
+                if (!controllerMappings[key].Item2) {
+                    controllerMappings[key].Item1.Execute();
+                }
+
+                //if runOnce is true
+                else
+                {
+                    //make sure to check previous state to run only once on key press
+                    if (currentKeyState.IsKeyDown(key) && !previousKeyState.IsKeyDown(key))
+                    {
+                        controllerMappings[key].Item1.Execute();
+                    }
+                }
             }
         }
     }
