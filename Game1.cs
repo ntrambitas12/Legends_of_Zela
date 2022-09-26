@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace CSE3902Project
@@ -50,8 +51,10 @@ namespace CSE3902Project
         private IItem arrow;
 
         private FireProjectile fireProjectile;
-        private TileSwitch tileSwitcher;
-        private TileSwitch itemSwitcher;
+        private Switcher tileNext;
+        private Switcher tileBack;
+        private Switcher itemNext;
+        private Switcher itemBack;
         private KeyLogic keyLogic;
 
         private KeyboardController keyboard;
@@ -193,13 +196,17 @@ namespace CSE3902Project
 
             // Create Commands
             fireProjectile = new FireProjectile((ISprite)enemy1, arrow);
-            tileSwitcher = new TileSwitch(tiles);
-            itemSwitcher = new TileSwitch(drops);
+            tileNext = new Switcher(tiles);
+            tileBack = new Switcher(tiles);
+            itemNext = new Switcher(drops);
+            itemBack = new Switcher(drops);
 
             // Add to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireProjectile);
-            keyboard.RegisterCommand(Keys.T, tileSwitcher);
-            keyboard.RegisterCommand(Keys.U, itemSwitcher);
+            keyboard.RegisterCommand(Keys.Y, tileNext);
+            keyboard.RegisterCommand(Keys.T, tileBack);
+            keyboard.RegisterCommand(Keys.I, itemNext);
+            keyboard.RegisterCommand(Keys.U, itemBack);
 
             // More arrow stuffs?
             arrow.SetFireCommand(fireProjectile);
@@ -252,8 +259,10 @@ namespace CSE3902Project
 
             //if(keyLogic.OneShotKeyPress(Keys.T))
             //{
-            tileSwitcher.currentTile.Draw();
-            itemSwitcher.currentTile.Draw();
+            tileNext.currentTile.Draw();
+            itemNext.currentTile.Draw();
+            tileBack.currentTile.Draw();
+            itemBack.currentTile.Draw();
             //}
             _spriteBatch.End();
 

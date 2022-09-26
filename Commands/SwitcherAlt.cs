@@ -22,12 +22,12 @@ namespace CSE3902Project.Commands
 
         public void Execute()
         {
-            if (tileIndex == tiles.Count)
+            if (tileIndex == -1)
             {
-                tileIndex = 0;
+                tileIndex = tiles.Count;
             }
             currentTile = tiles[tileIndex];
-            tileIndex++;
+            tileIndex--;
         }
     }
 }
