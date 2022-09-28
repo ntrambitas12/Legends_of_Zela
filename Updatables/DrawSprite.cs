@@ -58,5 +58,34 @@ using System.Threading.Tasks;
         
     }
 
+    public void Draw(ISprite sprite)
+    {
+        //get the current frames from the sprite instance variables
+        currentFrame = sprite.currentFrame;
+        totalFrames = sprite.totalFrames;
+        spriteBatch = sprite.spriteBatch;
+        textureToDraw = sprite.textureToDraw;
+        screenCord = sprite.screenCord;
+
+        // Draw the sprite
+        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, Color.White);
+
+        counter++;
+        //update and save the frames
+        if (counter == 10)
+        {
+            counter = 0;
+            currentFrame++;
+            if (currentFrame == totalFrames)
+            {
+                currentFrame = 0;
+            }
+        }
+
+        //update the instance variables for the sprite
+        sprite.currentFrame = currentFrame;
+
+    }
+
 }
 

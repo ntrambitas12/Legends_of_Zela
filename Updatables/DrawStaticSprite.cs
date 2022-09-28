@@ -36,5 +36,16 @@ using System.Reflection;
         spriteBatch.Draw(textureToDraw[0], screenCord, color);//color is data driven
 
     }
+    public void Draw(ISprite sprite)
+    {
+        //get the current frame from the sprite instance variables
+        spriteBatch = sprite.spriteBatch;
+        textureToDraw = sprite.textureToDraw;
+        screenCord = sprite.screenCord;
+
+        // Draw the sprite
+        spriteBatch.Draw(textureToDraw[0], screenCord, Color.White);//color is data driven
+
+    }
 }
 
