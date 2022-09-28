@@ -14,6 +14,7 @@ using System.Threading.Tasks;
     private bool isMoving;
     private List<SpriteAction> actions;
     private SpriteAction action;
+    private FireProjectile fireProjectile;
 
     private EnemyController()
     {
@@ -63,6 +64,8 @@ using System.Threading.Tasks;
             else
             {
                 currentEnemy.SetSpriteState(action, currentEnemy.still);
+                // Fire a projectile while still
+                fireProjectile.Execute();
             }
 
             // reset the counter and flip if enemy will move or not
@@ -112,6 +115,11 @@ using System.Threading.Tasks;
     private void initEnemy()
     {
         currentEnemy.SetSpriteState(SpriteAction.moveLeft, currentEnemy.still);
+    }
+
+    public void SetFireCommand(FireProjectile fireProjectile)
+    {
+        this.fireProjectile = fireProjectile;
     }
 }
     

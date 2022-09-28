@@ -55,6 +55,14 @@ namespace CSE3902Project
         private NextEnemy nextEnemy;
         private PreviousEnemy previousEnemy;
 
+        private List<Texture2D>[] boomerangFrames;
+        private List<Texture2D> boomerangLeft;
+        private List<Texture2D> boomerangRight;
+        private List<Texture2D> boomerangUp;
+        private List<Texture2D> boomerangDown;
+        private IItem boomerang;
+        private FireProjectile fireProjectile2;
+
         private KeyboardController keyboard;
         private EnemyController enemyController;
 
@@ -96,6 +104,11 @@ namespace CSE3902Project
             sprites = new List<ISprite>();
             keyboard = KeyboardController.GetInstance;
             items = new List<IItem>();
+            boomerangFrames = new List<Texture2D>[4];
+            boomerangLeft = new List<Texture2D>();
+            boomerangRight = new List<Texture2D>();
+            boomerangUp = new List<Texture2D>();
+            boomerangDown = new List<Texture2D>();
             base.Initialize();
         }
 
@@ -140,6 +153,12 @@ namespace CSE3902Project
             arrowUp.Add(Content.Load<Texture2D>("ItemSprites/ArrowUp"));
             arrowDown.Add(Content.Load<Texture2D>("ItemSprites/ArrowDown"));
 
+            // Assign textures to boomerang                        (NEED TO CHANGE SO BOOMERANG ROTATES)
+            boomerangLeft.Add(Content.Load<Texture2D>("ItemSprites/Boomerang"));
+            boomerangRight.Add(Content.Load<Texture2D>("ItemSprites/Boomerang"));
+            boomerangUp.Add(Content.Load<Texture2D>("ItemSprites/Boomerang"));
+            boomerangDown.Add(Content.Load<Texture2D>("ItemSprites/Boomerang"));
+
             // Add the link frames to the list
             linkFrames[(int)SpriteAction.moveLeft] = linkLeft;
             linkFrames[(int)SpriteAction.moveRight] = linkRight;
@@ -158,6 +177,12 @@ namespace CSE3902Project
             arrowFrames[(int)SpriteAction.moveUp] = arrowUp;
             arrowFrames[(int)SpriteAction.moveDown] = arrowDown;
 
+            // Add boomerang frames to the list
+            boomerangFrames[(int)SpriteAction.moveLeft] = boomerangLeft;
+            boomerangFrames[(int)SpriteAction.moveRight] = boomerangRight;
+            boomerangFrames[(int)SpriteAction.moveUp] = boomerangUp;
+            boomerangFrames[(int)SpriteAction.moveDown] = boomerangDown;
+
             // Create the enemy controller
             enemyController = EnemyController.GetInstance;
 
@@ -174,8 +199,14 @@ namespace CSE3902Project
             // Create Arrow (Before command is created)
             arrow = new ConcreteItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
             arrow.SetDistance(100);
-            arrow.SetProjectileType(new BoomerangType(arrow));
+            arrow.SetProjectileType(new ArrowType(arrow));
             arrow.SetOwner(enemy1);
+
+            // Create Boomerang (Before command is created)
+            boomerang = new ConcreteItem(_spriteBatch, new Vector2(50, 50), boomerangFrames);
+            boomerang.SetDistance(150);
+            boomerang.SetProjectileType(new BoomerangType(boomerang));
+            boomerang.SetOwner(enemy2);
 
             // Add enemies to the list 
             sprites.Add((ISprite)enemy1);
@@ -183,6 +214,7 @@ namespace CSE3902Project
 
             // Add items to command lists
             items.Add(arrow);
+            items.Add(boomerang);
             tiles.Add(barrierTile);
             tiles.Add(bushTile);
             drops.Add(mapTile);
@@ -194,6 +226,7 @@ namespace CSE3902Project
 
             // Create Commands
             fireProjectile = new FireProjectile(arrow);
+            fireProjectile2 = new FireProjectile(boomerang);
             tileSwitcher = new TileSwitch(tiles);
             itemSwitcher = new TileSwitch(drops);
             previousEnemy = new PreviousEnemy(enemyController);
@@ -208,6 +241,12 @@ namespace CSE3902Project
 
             // Set arrow command (After command is created)
             arrow.SetFireCommand(fireProjectile);
+
+            // Set boomerang command (After command is created)
+            boomerang.SetFireCommand(fireProjectile2);
+
+            // Set enemy fire command
+            enemyController.SetFireCommand(fireProjectile2);
         }
 
         protected override void Update(GameTime gameTime)
