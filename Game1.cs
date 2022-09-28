@@ -32,11 +32,17 @@ namespace CSE3902Project
         private FireProjectile fireProjectile;
         private TileSwitch tileSwitcher;
         private TileSwitch itemSwitcher;
+
+        private ICommand exitGame;
+        private ICommand restartGame;
+
         private NextEnemy nextEnemy;
         private PreviousEnemy previousEnemy;
 
+
         private KeyboardController keyboard;
         private EnemyController enemyController;
+
 
         public Game1()
         {
@@ -48,27 +54,28 @@ namespace CSE3902Project
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // Create the enemy controller
+            enemyController = EnemyController.GetInstance;
+
             tiles = new List<ISprite>();
             drops = new List<ISprite>();
            
             sprites = new List<ISprite>();
             keyboard = KeyboardController.GetInstance;
             items = new List<IItem>();
+            exitGame = new ExitCommand(this);
+            restartGame = new RestartCommand(this);
+
+            //Load up the content for the sprite factory
+            SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            //Load up the content for the sprite factory
-            SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
-
-
-            // Create the enemy controller
-            enemyController = EnemyController.GetInstance;
-
             // Create enemies
             enemy1 = SpriteFactory.Instance.CreateGoriyaSprite();
             enemy2 = SpriteFactory.Instance.CreateGoriyaSprite();
@@ -112,12 +119,30 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.D1, fireProjectile, true);
             keyboard.RegisterCommand(Keys.T, tileSwitcher, true);
             keyboard.RegisterCommand(Keys.U, itemSwitcher, true);
+
+            keyboard.RegisterCommand(Keys.Q, exitGame, true);
+            keyboard.RegisterCommand(Keys.R, restartGame, true);
+
             keyboard.RegisterCommand(Keys.P, nextEnemy, true);
             keyboard.RegisterCommand(Keys.O, previousEnemy, true);
 
             // Set arrow command (After command is created)
             arrow.SetFireCommand(fireProjectile);
         }
+
+        public void resetGame()
+        {
+            enemyController.resetController();
+            keyboard.resetController();
+            sprites.Clear();
+            items.Clear();
+            tiles.Clear();
+            drops.Clear();
+
+            this.LoadContent();
+        }
+
+        
 
         protected override void Update(GameTime gameTime)
         {
@@ -136,6 +161,7 @@ namespace CSE3902Project
             {
                 updateKeys = updateKeys && !(item.ShouldDraw());
             }
+
 
             if (updateKeys)
             {
