@@ -8,7 +8,7 @@
         public StillState(ConcreteSprite sprite)
         {
         this.sprite = sprite;
-        drawSprite = new DrawStaticSprite();
+        drawSprite = DrawStaticSprite.GetInstance;
         }
 
 

@@ -6,15 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    public class KeyboardController: IController
+    public sealed class KeyboardController: IController
     {
     private Dictionary<Keys, (ICommand, bool)> controllerMappings;
     private KeyboardState currentKeyState;
     private KeyboardState previousKeyState;
 
-    public KeyboardController()
+    private KeyboardController()
     {
         controllerMappings = new Dictionary<Keys, (ICommand, bool)>();
+    }
+    private static readonly KeyboardController instance = new KeyboardController();
+    public static KeyboardController GetInstance
+    {
+        get
+        {
+            return instance;
+        }
     }
 
     public void RegisterCommand(Keys key, ICommand command, bool runOnce)

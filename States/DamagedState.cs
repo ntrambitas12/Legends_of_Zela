@@ -13,8 +13,8 @@ public class DamagedState : ISpriteState
     public DamagedState(ISprite sprite)
     {
         this.sprite = sprite;
-        position = new UpdateSpritePos();
-        drawSprite = new DrawSprite();
+        position = UpdateSpritePos.GetInstance;
+        drawSprite = DrawSprite.GetInstance;
     }
 
     public void Update()

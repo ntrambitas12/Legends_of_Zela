@@ -13,8 +13,9 @@ using System.Threading.Tasks;
     public ISpriteState still { get; set; }
     public ISpriteState moving { get; set; }
     public ISpriteState damaged { get; set; }
-    private IDraw drawSprite = new DrawSprite();
-    private IPosition posUpdate = new UpdateSpritePos();
+    public ISpriteState dead { get; set; }
+    private IDraw drawSprite = DrawSprite.GetInstance;
+    private IPosition posUpdate = UpdateSpritePos.GetInstance;
 
     /*Variable that holds the current state*/
     public ISpriteState state;
@@ -22,6 +23,7 @@ using System.Threading.Tasks;
         still = new StillState(this);
         moving = new MovingState(this);
         damaged = new DamagedState(this);
+        dead = new DeadState();
         state = still;
     }
    
