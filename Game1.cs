@@ -52,6 +52,8 @@ namespace CSE3902Project
         private FireProjectile fireProjectile;
         private TileSwitch tileSwitcher;
         private TileSwitch itemSwitcher;
+        private NextEnemy nextEnemy;
+        private PreviousEnemy previousEnemy;
 
         private KeyboardController keyboard;
         private EnemyController enemyController;
@@ -92,7 +94,7 @@ namespace CSE3902Project
             arrowUp = new List<Texture2D>();
             arrowDown = new List<Texture2D>();
             sprites = new List<ISprite>();
-            keyboard = new KeyboardController();
+            keyboard = KeyboardController.GetInstance;
             items = new List<IItem>();
             base.Initialize();
         }
@@ -157,7 +159,7 @@ namespace CSE3902Project
             arrowFrames[(int)SpriteAction.moveDown] = arrowDown;
 
             // Create the enemy controller
-            enemyController = new EnemyController();
+            enemyController = EnemyController.GetInstance;
 
             // Create enemies
             enemy1 = new ConcreteSprite(_spriteBatch, new Vector2(450, 240), linkFrames);
@@ -187,18 +189,22 @@ namespace CSE3902Project
             drops.Add(compassTile);
 
             // Add enemies to the enemy controller
-            enemyController.AddEnemy(new MoveEnemy(enemy1));
-            enemyController.AddEnemy(new MoveEnemy(enemy2));
+            enemyController.AddEnemy(enemy1);
+            enemyController.AddEnemy(enemy2);
 
             // Create Commands
             fireProjectile = new FireProjectile(arrow);
             tileSwitcher = new TileSwitch(tiles);
             itemSwitcher = new TileSwitch(drops);
+            previousEnemy = new PreviousEnemy(enemyController);
+            nextEnemy = new NextEnemy(enemyController);
 
             // Add to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireProjectile, true);
             keyboard.RegisterCommand(Keys.T, tileSwitcher, true);
             keyboard.RegisterCommand(Keys.U, itemSwitcher, true);
+            keyboard.RegisterCommand(Keys.P, nextEnemy, true);
+            keyboard.RegisterCommand(Keys.O, previousEnemy, true);
 
             // Set arrow command (After command is created)
             arrow.SetFireCommand(fireProjectile);

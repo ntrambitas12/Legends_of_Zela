@@ -5,10 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class UpdateSpritePos: IPosition
+public sealed class UpdateSpritePos : IPosition
 {
     private Vector2 screenCord;
     private int spritePos;
+
+    private UpdateSpritePos(){}
+    private static readonly UpdateSpritePos instance = new UpdateSpritePos();
+    public static UpdateSpritePos GetInstance
+    {
+        get
+        {
+            return instance;
+        }
+    }
     public void Update(ISprite sprite)
     {
         screenCord = sprite.screenCord;
