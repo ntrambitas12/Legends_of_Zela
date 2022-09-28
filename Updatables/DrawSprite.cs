@@ -29,7 +29,7 @@ using System.Threading.Tasks;
         }
     }
 
-    public void Draw(ISprite sprite)
+    public void Draw(ISprite sprite, Color color)
     {
         //get the current frames from the sprite instance variables
         currentFrame = sprite.currentFrame;
@@ -39,7 +39,7 @@ using System.Threading.Tasks;
         screenCord = sprite.screenCord;
 
         // Draw the sprite
-        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, Color.White);
+        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, color);//color is data driven
 
         counter++;
         //update and save the frames
