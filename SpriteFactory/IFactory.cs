@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Content;
 public interface IFactory
 {
     void LoadAllContent(ContentManager Content);
-    void CreateSprite();
+    void LoadSprite(int SpriteID, int setLocation, int frameLocation, string textureName);
+    void GetNewSprite(int index);
+
 }
 

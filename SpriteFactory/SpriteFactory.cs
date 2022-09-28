@@ -11,8 +11,7 @@ namespace CSE3902Project.SpriteFactory
     public class SpriteFactory : IFactory
     {
 
-        private Texture2D linkSpriteSheet;
-        // More sheets potentially placed here based on approach
+        public Dictionary<int key, ISprite sprite> loadedSprites;
 
         private static SpriteFactory instance = new SpriteFactory();
         public static SpriteFactory Instance
@@ -22,16 +21,18 @@ namespace CSE3902Project.SpriteFactory
 
         public void LoadAllContent(ContentManager content)
         {
-            linkSpriteSheet = content.Load<Texture2D>("LinkSprites");
-
             // Idea: Load content from array of lists of Texture2D rather than from individual sprite sheets
             // Try to eliminate the need for multiple load calls.
-            // Furthermore, CreateSprite could return the enum of the associated sprite in the array
         }
 
-        public void CreateSprite()
+        public void LoadSprite(int SpriteID, int setLocation, int frameLocation, string textureName)
         {
-            //return new ISprite();
+            
+        }
+
+        public void GetNewSprite(int index)
+        {
+            
         }
     }
 }
