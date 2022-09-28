@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    public class DrawSprite: IDraw
+    public sealed class DrawSprite: IDraw
     {
     private int currentFrame;
     private int totalFrames;
@@ -15,9 +15,18 @@ using System.Threading.Tasks;
     private Vector2 screenCord;
     private int counter;
 
-    public DrawSprite()
+    private DrawSprite()
     {
         counter = 0;
+    }
+
+    private static readonly DrawSprite instance = new DrawSprite();
+    public static DrawSprite GetInstance
+    {
+        get
+        {
+            return instance;
+        }
     }
 
     public void Draw(ISprite sprite)

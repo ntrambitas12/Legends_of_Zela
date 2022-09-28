@@ -1,37 +1,167 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSE3902Project.SpriteFactory
-{
-    public class SpriteFactory : IFactory
+
+    public sealed class SpriteFactory : IFactory
     {
+    private List<Texture2D>[] compassFrames;
+    private List<Texture2D> compass;
+    private List<Texture2D>[] mapFrames;
+    private List<Texture2D> map;
+    private List<Texture2D>[] barrierFrames;
+    private List<Texture2D> barrier;
+    private List<Texture2D>[] bushFrames;
+    private List<Texture2D> bush;
+    private List<Texture2D>[] linkFrames;
+    private List<Texture2D> linkRight;
+    private List<Texture2D> linkLeft;
+    private List<Texture2D> linkUp;
+    private List<Texture2D> linkDown;
+    private List<Texture2D>[] goriyaFrames;
+    private List<Texture2D> goriyaRight;
+    private List<Texture2D> goriyaLeft;
+    private List<Texture2D> goriyaUp;
+    private List<Texture2D> goriyaDown;
+    private List<Texture2D>[] arrowFrames;
+    private List<Texture2D> arrowLeft;
+    private List<Texture2D> arrowRight;
+    private List<Texture2D> arrowUp;
+    private List<Texture2D> arrowDown;
 
-        private Texture2D linkSpriteSheet;
-        // More sheets potentially placed here based on approach
+    private SpriteBatch _spriteBatch;
+    private SpriteFactory()
+        {
+        compassFrames = new List<Texture2D>[4];
+        mapFrames = new List<Texture2D>[4];
+        barrierFrames = new List<Texture2D>[4];
+        bushFrames = new List<Texture2D>[4];
+        linkFrames = new List<Texture2D>[4];
+        linkLeft = new List<Texture2D>();
+        linkRight = new List<Texture2D>();
+        linkDown = new List<Texture2D>();
+        linkUp = new List<Texture2D>();
+        goriyaFrames = new List<Texture2D>[4];
+        goriyaLeft = new List<Texture2D>();
+        goriyaRight = new List<Texture2D>();
+        goriyaDown = new List<Texture2D>();
+        goriyaUp = new List<Texture2D>();
+        arrowFrames = new List<Texture2D>[4];
+        arrowLeft = new List<Texture2D>();
+        arrowRight = new List<Texture2D>();
+        arrowUp = new List<Texture2D>();
+        arrowDown = new List<Texture2D>();
+        compass = new List<Texture2D>();
+        map = new List<Texture2D>();
+        bush = new List<Texture2D>();
+        barrier = new List<Texture2D>();
 
-        private static SpriteFactory instance = new SpriteFactory();
+    }
+
+        private static readonly SpriteFactory instance = new SpriteFactory();
         public static SpriteFactory Instance
         {
             get { return instance; }
         }
 
-        public void LoadAllContent(ContentManager content)
-        {
-            linkSpriteSheet = content.Load<Texture2D>("LinkSprites");
+       
 
-            // Idea: Load content from array of lists of Texture2D rather than from individual sprite sheets
-            // Try to eliminate the need for multiple load calls.
-            // Furthermore, CreateSprite could return the enum of the associated sprite in the array
+        public void LoadAllContent(ContentManager content, SpriteBatch spriteBatch)
+        {
+        _spriteBatch = spriteBatch;
+
+        // Load tiles in
+        compass.Add(content.Load<Texture2D>("ItemSprites/Compass"));
+        map.Add(content.Load<Texture2D>("ItemSprites/Map"));
+        bush.Add(content.Load<Texture2D>("TileSprites/Bush"));
+        barrier.Add(content.Load<Texture2D>("TileSprites/Barrier"));
+
+        for (int i = 0; i < 4; i++)
+        {
+            bushFrames[i] = bush;
+            barrierFrames[i] = barrier;
+            compassFrames[i] = compass;
+            mapFrames[i] = map;
         }
 
-        public void CreateSprite()
+        for (int i = 1; i <= 2; i++)
         {
-            //return new ISprite();
+            // Loads sprite frames
+            linkRight.Add(content.Load<Texture2D>("LinkSprites/linkRight" + i));
+            linkLeft.Add(content.Load<Texture2D>("LinkSprites/linkLeft" + i));
+            linkUp.Add(content.Load<Texture2D>("LinkSprites/linkUp" + i));
+            linkDown.Add(content.Load<Texture2D>("LinkSprites/linkDown" + i));
+
+            goriyaRight.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedRight" + i));
+            goriyaLeft.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedLeft" + i));
+            goriyaUp.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedUp" + i));
+            goriyaDown.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedDown" + i));
         }
+
+        // Assign textures to arrow directions
+        arrowLeft.Add(content.Load<Texture2D>("ItemSprites/ArrowLeft"));
+        arrowRight.Add(content.Load<Texture2D>("ItemSprites/ArrowRight"));
+        arrowUp.Add(content.Load<Texture2D>("ItemSprites/ArrowUp"));
+        arrowDown.Add(content.Load<Texture2D>("ItemSprites/ArrowDown"));
+
+        // Add the link frames to the list
+        linkFrames[(int)SpriteAction.moveLeft] = linkLeft;
+        linkFrames[(int)SpriteAction.moveRight] = linkRight;
+        linkFrames[(int)SpriteAction.moveUp] = linkUp;
+        linkFrames[(int)SpriteAction.moveDown] = linkDown;
+
+        // Add example enemy frames to the list
+        goriyaFrames[(int)SpriteAction.moveLeft] = goriyaLeft;
+        goriyaFrames[(int)SpriteAction.moveRight] = goriyaRight;
+        goriyaFrames[(int)SpriteAction.moveUp] = goriyaUp;
+        goriyaFrames[(int)SpriteAction.moveDown] = goriyaDown;
+
+        // Add arrow frames to the list
+        arrowFrames[(int)SpriteAction.moveLeft] = arrowLeft;
+        arrowFrames[(int)SpriteAction.moveRight] = arrowRight;
+        arrowFrames[(int)SpriteAction.moveUp] = arrowUp;
+        arrowFrames[(int)SpriteAction.moveDown] = arrowDown;
+    }
+
+    public IConcreteSprite CreateGoriyaSprite()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(250, 340), goriyaFrames);
+    }
+
+    public IConcreteSprite CreateLinkSprite()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(250, 340), linkFrames);
+    }
+
+    public ISprite CreateBarrierTile()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), barrierFrames);
+    }
+
+    public ISprite CreateBushTile()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), bushFrames);
+    }
+
+    public ISprite CreateCompassTile()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), compassFrames); 
+    }
+
+    public ISprite CreateMapTile()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), mapFrames);
+    }
+
+    public IItem CreateArrowSprite()
+    {
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
     }
 }
+

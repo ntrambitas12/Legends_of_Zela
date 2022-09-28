@@ -13,8 +13,8 @@ public class MovingState : ISpriteState
     public MovingState(IConcreteSprite sprite)
     {
         this.sprite = sprite;
-        position = new UpdateSpritePos();
-        drawSprite = new DrawSprite();
+        position = UpdateSpritePos.GetInstance;
+        drawSprite = DrawSprite.GetInstance;
     }
     public void Draw()
     {
