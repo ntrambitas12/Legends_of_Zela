@@ -52,15 +52,22 @@ namespace CSE3902Project
         private FireProjectile fireProjectile;
         private TileSwitch tileSwitcher;
         private TileSwitch itemSwitcher;
+        private ICommand exitGame;
+        private ICommand restartGame;
 
         private KeyboardController keyboard;
         private EnemyController enemyController;
+
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            _graphics.IsFullScreen = true;
+            _graphics.ApplyChanges();
         }
 
         protected override void Initialize()
@@ -94,6 +101,8 @@ namespace CSE3902Project
             sprites = new List<ISprite>();
             keyboard = new KeyboardController();
             items = new List<IItem>();
+            exitGame = new ExitCommand(this);
+            restartGame = new RestartCommand(this);
             base.Initialize();
         }
 
@@ -159,6 +168,7 @@ namespace CSE3902Project
             // Create the enemy controller
             enemyController = new EnemyController();
 
+
             // Create enemies
             enemy1 = new ConcreteSprite(_spriteBatch, new Vector2(450, 240), linkFrames);
             enemy2 = new ConcreteSprite(_spriteBatch, new Vector2(250, 340), goriyaFrames);
@@ -199,6 +209,8 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.D1, fireProjectile, true);
             keyboard.RegisterCommand(Keys.T, tileSwitcher, true);
             keyboard.RegisterCommand(Keys.U, itemSwitcher, true);
+            keyboard.RegisterCommand(Keys.Q, exitGame, true);
+            keyboard.RegisterCommand(Keys.R, restartGame, true);
 
             // Set arrow command (After command is created)
             arrow.SetFireCommand(fireProjectile);
