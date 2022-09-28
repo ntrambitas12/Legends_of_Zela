@@ -17,8 +17,8 @@ public class ConcreteItem : AbstractSprite, IItem
 
     public ConcreteItem(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures)
     {
-        drawSprite = new DrawSprite();
-        posUpdate = new UpdateSpritePos();
+        drawSprite = DrawSprite.GetInstance;
+        posUpdate = UpdateSpritePos.GetInstance;
         direction = -1;
         changeCord = this.screenCord;
         fireProjectile = null;
