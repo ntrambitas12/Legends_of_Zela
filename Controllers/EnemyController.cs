@@ -104,6 +104,15 @@ using System.Threading.Tasks;
 
     }
 
+    public void resetController()
+    {
+        foreach (var enemy in enemies)
+        {
+            enemy.SetSpriteState(action, enemy.dead);
+        }
+        enemies.Clear();
+    }
+
     private void killEnemy()
     {
         currentEnemy.SetSpriteState(action, currentEnemy.dead);

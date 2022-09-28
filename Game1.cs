@@ -49,16 +49,16 @@ namespace CSE3902Project
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            _graphics.IsFullScreen = true;
-            _graphics.ApplyChanges();
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // Create the enemy controller
+            enemyController = EnemyController.GetInstance;
+
             tiles = new List<ISprite>();
             drops = new List<ISprite>();
            
@@ -67,21 +67,15 @@ namespace CSE3902Project
             items = new List<IItem>();
             exitGame = new ExitCommand(this);
             restartGame = new RestartCommand(this);
+
+            //Load up the content for the sprite factory
+            SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            //Load up the content for the sprite factory
-            SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
-
-
-            // Create the enemy controller
-            enemyController = EnemyController.GetInstance;
-
-
             // Create enemies
             enemy1 = SpriteFactory.Instance.CreateGoriyaSprite();
             enemy2 = SpriteFactory.Instance.CreateGoriyaSprite();
@@ -132,10 +126,23 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.P, nextEnemy, true);
             keyboard.RegisterCommand(Keys.O, previousEnemy, true);
 
-
             // Set arrow command (After command is created)
             arrow.SetFireCommand(fireProjectile);
         }
+
+        public void resetGame()
+        {
+            enemyController.resetController();
+            keyboard.resetController();
+            sprites.Clear();
+            items.Clear();
+            tiles.Clear();
+            drops.Clear();
+
+            this.LoadContent();
+        }
+
+        
 
         protected override void Update(GameTime gameTime)
         {
@@ -154,6 +161,7 @@ namespace CSE3902Project
             {
                 updateKeys = updateKeys && !(item.ShouldDraw());
             }
+
 
             if (updateKeys)
             {

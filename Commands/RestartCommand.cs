@@ -12,9 +12,8 @@ namespace CSE3902Project
         }
         public void Execute()
         {
-            Game1 resetGame = new Game1();
-            resetGame.Run();
-            game.Exit();
+            game.resetGame();
+           
         }
     }
 }
