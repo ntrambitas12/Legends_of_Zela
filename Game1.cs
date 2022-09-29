@@ -21,6 +21,7 @@ namespace CSE3902Project
   
         private IConcreteSprite enemy1;
         private IConcreteSprite enemy2;
+        private IConcreteSprite enemy3;
 
 
         private ISprite barrierTile;
@@ -78,7 +79,8 @@ namespace CSE3902Project
         {
             // Create enemies
             enemy1 = SpriteFactory.Instance.CreateGoriyaSprite();
-            enemy2 = SpriteFactory.Instance.CreateGoriyaSprite();
+            enemy2 = SpriteFactory.Instance.CreateOktorokSprite();
+            enemy3 = SpriteFactory.Instance.CreatePeahatSprite();
    
 
             // Create tiles
@@ -96,6 +98,7 @@ namespace CSE3902Project
             // Add enemies to the list 
             sprites.Add((ISprite)enemy1);
             sprites.Add((ISprite)enemy2);
+            sprites.Add((ISprite)enemy3);
 
             // Add items to command lists
             items.Add(arrow);
@@ -107,6 +110,7 @@ namespace CSE3902Project
             // Add enemies to the enemy controller
             enemyController.AddEnemy(enemy1);
             enemyController.AddEnemy(enemy2);
+            enemyController.AddEnemy(enemy3);
 
             // Create Commands
             fireProjectile = new FireProjectile(arrow);
