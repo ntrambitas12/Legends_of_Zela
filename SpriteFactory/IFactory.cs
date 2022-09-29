@@ -11,12 +11,12 @@ public interface IFactory
 {
     public void LoadAllContent(ContentManager Content, SpriteBatch spriteBatch);
 
-    public IConcreteSprite CreateGoriyaSprite();
-    public IConcreteSprite CreateLinkSprite();
+    public ISprite CreateGoriyaSprite();
+    public ISprite CreateLinkSprite();
     public ISprite CreateBarrierTile();
     public ISprite CreateBushTile();
-    public ISprite CreateCompassTile();
-    public ISprite CreateMapTile();
+    public ISprite CreateCompassItem();
+    public ISprite CreateMapItem();
     public IItem CreateArrowSprite();
 
 }

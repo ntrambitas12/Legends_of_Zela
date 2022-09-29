@@ -15,14 +15,14 @@ namespace CSE3902Project.Commands
         private IConcreteSprite Link;
         private Vector2 currentPos;
 
-        public MoveUp(IConcreteSprite link)
+        public MoveUp(ISprite link)
         {
-            this.Link = link;
+            this.Link = (IConcreteSprite)link;
             this.currentPos = link.screenCord;
         }
         public void Execute()
         {
-            Link.SetSpriteState(SpriteAction.moveUp, this.Link.MoveUpState);
+            Link.SetSpriteState(SpriteAction.moveUp, Link.MoveUpState);
             currentPos.Y--;
             Link.Update();
         }

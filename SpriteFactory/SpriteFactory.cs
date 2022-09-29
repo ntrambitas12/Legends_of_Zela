@@ -146,12 +146,12 @@ public sealed class SpriteFactory : IFactory
         arrowFrames[(int)SpriteAction.moveDown] = arrowDown;
     }
 
-    public IConcreteSprite CreateGoriyaSprite()
+    public ISprite CreateGoriyaSprite()
     {
         return new ConcreteSprite(_spriteBatch, new Vector2(250, 340), goriyaFrames);
     }
 
-    public IConcreteSprite CreateLinkSprite()
+    public ISprite CreateLinkSprite()
     {
         return new ConcreteSprite(_spriteBatch, new Vector2(250, 340), linkFrames);
     }
@@ -166,12 +166,12 @@ public sealed class SpriteFactory : IFactory
         return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), bushFrames);
     }
 
-    public ISprite CreateCompassTile()
+    public ISprite CreateCompassItem()
     {
         return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), compassFrames); 
     }
 
-    public ISprite CreateMapTile()
+    public ISprite CreateMapItem()
     {
         return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), mapFrames);
     }
