@@ -10,13 +10,14 @@ using System.Threading.Tasks;
     public sealed class KeyboardController: IController
     {
     private Dictionary<Keys, ICommand> controllerMappings;
+    private List<(List<Keys> keys, ICommand still)> sprites;
+
     private KeyboardState currentKeyState;
     private KeyboardState previousKeyState;
-    private ICommand spriteStill;
-    private List<Keys> spriteKeys;
     private KeyboardController()
     {
         controllerMappings = new Dictionary<Keys, ICommand>();
+        sprites = new List<(List<Keys> keys, ICommand still)> ();
     }
     private static readonly KeyboardController instance = new KeyboardController();
     public static KeyboardController GetInstance
@@ -42,8 +43,7 @@ using System.Threading.Tasks;
      */
     public void AddPlayableSprite (ISprite sprite, List<Keys> spriteKeys)
     {
-        spriteStill = new StillSprite(sprite);
-        this.spriteKeys = spriteKeys;
+        sprites.Add((spriteKeys, new StillSprite(sprite)));
     }
     public void Update()
     {
@@ -78,15 +78,16 @@ using System.Threading.Tasks;
     public void resetController()
     {
         controllerMappings.Clear();
-        spriteKeys.Clear();
+        sprites.Clear();
     }
 
     private void spriteReset()
     {
-        foreach (Keys key in spriteKeys)
+        foreach (var sprite in sprites)
         {
+            foreach(var key in sprite.keys)
             if (previousKeyState.IsKeyUp(key) != currentKeyState.IsKeyUp(key)) {
-                spriteStill.Execute();
+                    sprite.still.Execute();
             }
         }
     }
