@@ -64,6 +64,10 @@ using System.Threading.Tasks;
         }
     }
 
+    public void Draw()
+    {
+        //not implemented
+    }
     public void resetController()
     {
         controllerMappings.Clear();
