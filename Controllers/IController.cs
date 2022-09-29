@@ -12,5 +12,9 @@ using System.Threading.Tasks;
     {
    
     public void Update();
+    public void Draw();
+    public void resetController();
+
+
     }
 

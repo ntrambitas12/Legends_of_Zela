@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,12 @@ public class MovingState : ISpriteState
     public MovingState(IConcreteSprite sprite)
     {
         this.sprite = sprite;
-        position = new UpdateSpritePos();
-        drawSprite = new DrawSprite();
+        position = UpdateSpritePos.GetInstance;
+        drawSprite = DrawSprite.GetInstance;
     }
     public void Draw()
     {
-        drawSprite.Draw((ISprite)sprite);
+        drawSprite.Draw((ISprite)sprite, Color.White);
     }
 
     public void Update()

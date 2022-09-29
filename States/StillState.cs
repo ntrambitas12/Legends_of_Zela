@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 
     public class StillState:ISpriteState
     {
@@ -8,13 +9,13 @@
         public StillState(ConcreteSprite sprite)
         {
         this.sprite = sprite;
-        drawSprite = new DrawStaticSprite();
+        drawSprite = DrawStaticSprite.GetInstance;
         }
 
 
     public void Draw()
     {
-        drawSprite.Draw(sprite);
+        drawSprite.Draw(sprite, Color.White);
 
     }
 

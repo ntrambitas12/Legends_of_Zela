@@ -9,7 +9,15 @@ using Microsoft.Xna.Framework.Content;
 
 public interface IFactory
 {
-    void LoadAllContent(ContentManager Content);
-    void CreateSprite();
+    public void LoadAllContent(ContentManager Content, SpriteBatch spriteBatch);
+
+    public ISprite CreateGoriyaSprite();
+    public ISprite CreateLinkSprite();
+    public ISprite CreateBarrierTile();
+    public ISprite CreateBushTile();
+    public ISprite CreateCompassItem();
+    public ISprite CreateMapItem();
+    public IItem CreateArrowSprite();
+
 }
 

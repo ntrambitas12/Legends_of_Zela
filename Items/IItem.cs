@@ -16,4 +16,6 @@ public interface IItem : ISprite
     public void SetProjectileType(IProjectileType projectileType);
     public int Distance();
     public void SetDistance(int distance);
+    public ISprite Owner();
+    public void SetOwner(ISprite owner);
 }
