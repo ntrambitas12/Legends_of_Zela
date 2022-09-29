@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace CSE3902Project.Commands
 {
-    public class TileSwitch : ICommand
+    public class SwitcherBack : ICommand
     {
 
         public ISprite currentTile;
         private List<ISprite> tiles;
         private int tileIndex;
 
-        public TileSwitch(List<ISprite> tiles)
+        public SwitcherBack(List<ISprite> tiles)
         {
             this.tiles = tiles;
             tileIndex = 0;
@@ -22,12 +22,12 @@ namespace CSE3902Project.Commands
 
         public void Execute()
         {
-            if (tileIndex == tiles.Count)
+            if (tileIndex == -1)
             {
-                tileIndex = 0;
+                tileIndex = tiles.Count - 1;
             }
             currentTile = tiles[tileIndex];
-            tileIndex++;
+            tileIndex--;
         }
     }
 }

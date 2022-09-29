@@ -21,6 +21,7 @@ namespace CSE3902Project
   
         private IConcreteSprite enemy1;
         private IConcreteSprite enemy2;
+        private IConcreteSprite link;
 
 
         private ISprite barrierTile;
@@ -30,8 +31,10 @@ namespace CSE3902Project
         private IItem arrow;
 
         private FireProjectile fireProjectile;
-        private TileSwitch tileSwitcher;
-        private TileSwitch itemSwitcher;
+        private Switcher tileNext;
+        private SwitcherBack tileBack;
+        private Switcher itemNext;
+        private SwitcherBack itemBack;
 
         private ICommand exitGame;
         private ICommand restartGame;
@@ -39,6 +42,11 @@ namespace CSE3902Project
         private NextEnemy nextEnemy;
         private PreviousEnemy previousEnemy;
 
+        private MoveDown linkMoveDown;
+        private MoveUp linkMoveUp;
+        private MoveLeft linkMoveLeft;
+        private MoveRight linkMoveRight;
+        private LinkTakeDamage linkDamage;
 
         private KeyboardController keyboard;
         private EnemyController enemyController;
@@ -79,8 +87,10 @@ namespace CSE3902Project
             // Create enemies
             enemy1 = SpriteFactory.Instance.CreateGoriyaSprite();
             enemy2 = SpriteFactory.Instance.CreateGoriyaSprite();
-   
 
+            // Create link
+            link = SpriteFactory.Instance.CreateLinkSprite();
+   
             // Create tiles
             barrierTile = SpriteFactory.Instance.CreateBarrierTile();
             bushTile = SpriteFactory.Instance.CreateBushTile();
@@ -96,6 +106,7 @@ namespace CSE3902Project
             // Add enemies to the list 
             sprites.Add((ISprite)enemy1);
             sprites.Add((ISprite)enemy2);
+            sprites.Add((ISprite)link);
 
             // Add items to command lists
             items.Add(arrow);
@@ -110,15 +121,35 @@ namespace CSE3902Project
 
             // Create Commands
             fireProjectile = new FireProjectile(arrow);
-            tileSwitcher = new TileSwitch(tiles);
-            itemSwitcher = new TileSwitch(drops);
+            tileNext = new Switcher(tiles);
+            tileBack = new SwitcherBack(tiles);
+            itemNext = new Switcher(drops);
+            itemBack = new SwitcherBack(drops);
             previousEnemy = new PreviousEnemy(enemyController);
             nextEnemy = new NextEnemy(enemyController);
 
+            linkMoveDown = new MoveDown(link);
+            linkMoveUp = new MoveUp(link);
+            linkMoveRight = new MoveRight(link);
+            linkMoveLeft = new MoveLeft(link);
+            linkDamage = new LinkTakeDamage(link);
+
             // Add to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireProjectile, true);
-            keyboard.RegisterCommand(Keys.T, tileSwitcher, true);
-            keyboard.RegisterCommand(Keys.U, itemSwitcher, true);
+            keyboard.RegisterCommand(Keys.T, tileBack, true);
+            keyboard.RegisterCommand(Keys.Y, tileNext, true);
+            keyboard.RegisterCommand(Keys.U, itemBack, true);
+            keyboard.RegisterCommand(Keys.I, itemNext, true);
+
+            keyboard.RegisterCommand(Keys.Up, linkMoveUp, false);
+            keyboard.RegisterCommand(Keys.W, linkMoveUp, false);
+            keyboard.RegisterCommand(Keys.Left, linkMoveLeft, false);
+            keyboard.RegisterCommand(Keys.A, linkMoveLeft, false);
+            keyboard.RegisterCommand(Keys.Right, linkMoveRight, false);
+            keyboard.RegisterCommand(Keys.D, linkMoveRight, false);
+            keyboard.RegisterCommand(Keys.Down, linkMoveDown, false);
+            keyboard.RegisterCommand(Keys.S, linkMoveDown, false);
+            keyboard.RegisterCommand(Keys.E, linkDamage, true);
 
             keyboard.RegisterCommand(Keys.Q, exitGame, true);
             keyboard.RegisterCommand(Keys.R, restartGame, true);
@@ -190,8 +221,10 @@ namespace CSE3902Project
                 item.Draw();
             }
             
-            tileSwitcher.currentTile.Draw();
-            itemSwitcher.currentTile.Draw();
+            tileNext.currentTile.Draw();
+            tileBack.currentTile.Draw();
+            itemNext.currentTile.Draw();
+            itemBack.currentTile.Draw();
             
             _spriteBatch.End();
 
