@@ -42,7 +42,7 @@ using System.Threading.Tasks;
      */
     public void AddPlayableSprite (ISprite sprite, List<Keys> spriteKeys)
     {
-        spriteStill = new LinkStill(sprite);
+        spriteStill = new StillSprite(sprite);
         this.spriteKeys = spriteKeys;
     }
     public void Update()

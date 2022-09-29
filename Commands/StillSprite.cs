@@ -9,40 +9,40 @@ using System.Threading.Tasks;
 
 namespace CSE3902Project.Commands
 {
-    public class LinkStill : ICommand
+    public class StillSprite : ICommand
     {
-        private IConcreteSprite Link;
-        private SpriteAction linkPos;
+        private IConcreteSprite sprite;
+        private SpriteAction spritePos;
 
-        public LinkStill(ISprite link)
+        public StillSprite(ISprite sprite)
         {
-            Link = (IConcreteSprite)link;
+            this.sprite = (IConcreteSprite)sprite;
             
         }
         public void Execute()
         {
-            int spritePos = Link.spritePos; 
+            int spritePos = sprite.spritePos; 
             switch(spritePos)
             {
                 case 0:
-                    linkPos = SpriteAction.moveLeft;
+                    this.spritePos = SpriteAction.moveLeft;
                     break;
                 case 1:
-                    linkPos = SpriteAction.moveRight;
+                    this.spritePos = SpriteAction.moveRight;
                     break;
                 case 2:
-                    linkPos = SpriteAction.moveUp;
+                    this.spritePos = SpriteAction.moveUp;
                     break;
                 case 3:
-                    linkPos = SpriteAction.moveDown;
+                    this.spritePos = SpriteAction.moveDown;
                     break;          
                     default:
-                    linkPos = SpriteAction.moveLeft;
+                    this.spritePos = SpriteAction.moveLeft;
                     break;
 
             }
-            Link.SetSpriteState(linkPos, Link.still);
-            Link.Update();
+            sprite.SetSpriteState(this.spritePos, sprite.still);
+            sprite.Update();
         }
     }
 }
