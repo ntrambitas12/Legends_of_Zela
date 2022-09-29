@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CSE3902Project.States;
 
 public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
@@ -15,10 +14,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public ISpriteState moving { get; set; }
     public ISpriteState damaged { get; set; }
     public ISpriteState dead { get; set; }
-    public ISpriteState MoveUpState { get; set; }
-    public ISpriteState MoveDownState { get; set; }
-    public ISpriteState MoveLeftState { get; set; }
-    public ISpriteState MoveRightState { get; set; }
+
 
     private IDraw drawSprite = DrawSprite.GetInstance;
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
@@ -30,17 +26,18 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         moving = new MovingState(this);
         damaged = new DamagedState(this);
         dead = new DeadState();
-        MoveUpState = new MoveUpState(this);
-        MoveDownState = new MoveDownState(this);
-        MoveLeftState = new MoveLeftState(this);
-        MoveRightState = new MoveRightState(this);
         state = still;
     }
    
     public void SetSpriteState(SpriteAction action, ISpriteState state)
     {
+        if (this.state != state)
+        {
+            this.state = state;
+        }
         SetSpriteAction(action);
-        this.state = state;
+
+
     }
     public override void Update()
     {

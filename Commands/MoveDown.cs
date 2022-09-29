@@ -10,18 +10,15 @@ namespace CSE3902Project.Commands
 {
     public class MoveDown : ICommand
     {
-        private ISprite Link;
-        private Vector2 currentPos;
-
+        private IConcreteSprite Link;
         public MoveDown(ISprite link)
         {
-            this.Link = link;
-            this.currentPos = link.screenCord;
+            this.Link = (IConcreteSprite)link;
         }
         public void Execute()
         {
-            Link.SetSpriteAction(SpriteAction.moveDown);
-            currentPos.Y++;
+            
+            Link.SetSpriteState(SpriteAction.moveDown, Link.moving);
             Link.Update();
         }
     }
