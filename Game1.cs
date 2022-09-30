@@ -27,8 +27,16 @@ namespace CSE3902Project
         private ISprite link;
         private ISprite barrierTile;
         private ISprite bushTile;
+        private ISprite defaultFloorTile;
+        private ISprite dungeonStairsTile;
+        private ISprite gravestoneTile;
+        private ISprite waterTile;
         private ISprite compassItem;
+        private ISprite heartItem;
+        private ISprite keyItem;
         private ISprite mapItem;
+        private ISprite rupiesItem;
+        private ISprite swordItem;
         private IItem arrow;
 
         private FireProjectile fireProjectile;
@@ -107,18 +115,34 @@ namespace CSE3902Project
             // Create tiles
             barrierTile = SpriteFactory.Instance.CreateBarrierTile();
             bushTile = SpriteFactory.Instance.CreateBushTile();
+            defaultFloorTile = SpriteFactory.Instance.CreateDefaultFloorTile();
+            dungeonStairsTile = SpriteFactory.Instance.CreateDungeonStairsTile();
+            gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile();
+            waterTile = SpriteFactory.Instance.CreateWaterTile();
 
             // Create items
             compassItem = SpriteFactory.Instance.CreateCompassItem();
+            heartItem = SpriteFactory.Instance.CreateHeartItem();
+            keyItem = SpriteFactory.Instance.CreateKeyItem();
             mapItem = SpriteFactory.Instance.CreateMapItem();
+            rupiesItem = SpriteFactory.Instance.CreateRupiesItem();
+            swordItem = SpriteFactory.Instance.CreateSwordItem();
 
             // Add tiles to tile controller
             tileController.AddSprite(barrierTile);
             tileController.AddSprite(bushTile);
+            tileController.AddSprite(defaultFloorTile);
+            tileController.AddSprite(dungeonStairsTile);
+            tileController.AddSprite(gravestoneTile);
+            tileController.AddSprite(waterTile);
 
             //Add items to the item controller
             itemController.AddSprite(compassItem);
+            itemController.AddSprite(heartItem);
+            itemController.AddSprite(keyItem);
             itemController.AddSprite(mapItem);
+            itemController.AddSprite(rupiesItem);
+            itemController.AddSprite(swordItem);
 
             // Create Arrow (Before command is created)
             arrow = SpriteFactory.Instance.CreateArrowSprite();

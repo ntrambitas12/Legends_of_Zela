@@ -22,7 +22,6 @@ namespace CSE3902Project.Commands
         {
             Link.SetSpriteState(SpriteAction.moveUp, Link.moving);
             Link.Update();
-            //Link.SetSpriteState(SpriteAction.moveUp, Link.still);
         }
     }
 }

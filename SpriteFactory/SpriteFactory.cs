@@ -13,12 +13,28 @@ public sealed class SpriteFactory : IFactory
     {
     private List<Texture2D>[] compassFrames;
     private List<Texture2D> compass;
+    private List<Texture2D>[] heartFrames;
+    private List<Texture2D> heart;
+    private List<Texture2D>[] keyFrames;
+    private List<Texture2D> key;
     private List<Texture2D>[] mapFrames;
     private List<Texture2D> map;
+    private List<Texture2D>[] rupiesFrames;
+    private List<Texture2D> rupies;
+    private List<Texture2D>[] swordFrames;
+    private List<Texture2D> sword;
     private List<Texture2D>[] barrierFrames;
     private List<Texture2D> barrier;
     private List<Texture2D>[] bushFrames;
     private List<Texture2D> bush;
+    private List<Texture2D>[] defaultFloorFrames;
+    private List<Texture2D> defaultFloor;
+    private List<Texture2D>[] dungeonStairsFrames;
+    private List<Texture2D> dungeonStairs;
+    private List<Texture2D>[] gravestoneFrames;
+    private List<Texture2D> gravestone;
+    private List<Texture2D>[] waterFrames;
+    private List<Texture2D> water;
     private List<Texture2D>[] linkFrames;
     private List<Texture2D> linkRight;
     private List<Texture2D> linkLeft;
@@ -56,9 +72,18 @@ public sealed class SpriteFactory : IFactory
     private SpriteFactory()
         {
         compassFrames = new List<Texture2D>[4];
+        heartFrames = new List<Texture2D>[4];
+        keyFrames = new List<Texture2D>[4];
         mapFrames = new List<Texture2D>[4];
+        rupiesFrames = new List<Texture2D>[4];
+        swordFrames = new List<Texture2D>[4];
         barrierFrames = new List<Texture2D>[4];
         bushFrames = new List<Texture2D>[4];
+        defaultFloorFrames = new List<Texture2D>[4];
+        dungeonStairsFrames = new List<Texture2D>[4];
+        gravestoneFrames = new List<Texture2D>[4];
+        waterFrames = new List<Texture2D>[4];
+
         linkFrames = new List<Texture2D>[16];
         linkLeft = new List<Texture2D>();
         linkRight = new List<Texture2D>();
@@ -89,9 +114,17 @@ public sealed class SpriteFactory : IFactory
         arrowUp = new List<Texture2D>();
         arrowDown = new List<Texture2D>();
         compass = new List<Texture2D>();
+        heart = new List<Texture2D>();
+        key =  new List<Texture2D>();
         map = new List<Texture2D>();
+        rupies = new List<Texture2D>();
+        sword = new List<Texture2D>();
         bush = new List<Texture2D>();
         barrier = new List<Texture2D>();
+        defaultFloor = new List<Texture2D>();
+        dungeonStairs = new List<Texture2D>();
+        gravestone = new List<Texture2D>();
+        water = new List<Texture2D>();
 
     }
 
@@ -109,17 +142,37 @@ public sealed class SpriteFactory : IFactory
 
         // Load tiles in
         compass.Add(content.Load<Texture2D>("ItemSprites/Compass"));
+        key.Add(content.Load<Texture2D>("ItemSprites/Key"));
         map.Add(content.Load<Texture2D>("ItemSprites/Map"));
+        rupies.Add(content.Load<Texture2D>("ItemSprites/5Rupies"));
+        sword.Add(content.Load<Texture2D>("ItemSprites/Sword"));
         bush.Add(content.Load<Texture2D>("TileSprites/Bush"));
         barrier.Add(content.Load<Texture2D>("TileSprites/Barrier"));
+        defaultFloor.Add(content.Load<Texture2D>("TileSprites/DefaultFloor"));
+        dungeonStairs.Add(content.Load<Texture2D>("TileSprites/DungeonStairs"));
+        gravestone.Add(content.Load<Texture2D>("TileSprites/Gravestone"));
+        water.Add(content.Load<Texture2D>("TileSprites/WaterMiddle"));
 
         for (int i = 0; i < 4; i++)
         {
             bushFrames[i] = bush;
             barrierFrames[i] = barrier;
+            defaultFloorFrames[i] = defaultFloor;
+            dungeonStairsFrames[i] = dungeonStairs;
+            gravestoneFrames[i] = gravestone;
+            waterFrames[i] = water;
+
             compassFrames[i] = compass;
+            keyFrames[i] = key;
             mapFrames[i] = map;
+            rupiesFrames[i] = rupies;
+            swordFrames[i] = sword;
         }
+
+        /*Testing for heart*/
+        heart.Add(content.Load<Texture2D>("ItemSprites/Heart1"));
+        heart.Add(content.Load<Texture2D>("ItemSprites/Heart2"));
+        heartFrames[0] = heart;
 
         for (int i = 1; i <= 2; i++)
         {
@@ -218,14 +271,54 @@ public sealed class SpriteFactory : IFactory
         return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), bushFrames);
     }
 
+    public ISprite CreateDefaultFloorTile()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), defaultFloorFrames);
+    }
+
+    public ISprite CreateDungeonStairsTile()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), dungeonStairsFrames);
+    }
+
+    public ISprite CreateGravestoneTile()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), gravestoneFrames);
+    }
+
+    public ISprite CreateWaterTile()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), waterFrames);
+    }
+
     public ISprite CreateCompassItem()
     {
         return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), compassFrames); 
     }
 
+    public ISprite CreateHeartItem()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), heartFrames);
+    }
+
+    public ISprite CreateKeyItem()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), keyFrames);
+    }
+
     public ISprite CreateMapItem()
     {
         return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), mapFrames);
+    }
+
+    public ISprite CreateRupiesItem()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), rupiesFrames);
+    }
+
+    public ISprite CreateSwordItem()
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), swordFrames);
     }
 
     public IItem CreateArrowSprite()
