@@ -56,7 +56,7 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> oktorokUp;
     private List<Texture2D> oktorokDown;
     private List<Texture2D>[] peahatFrames;
-    // necessary?
+    
     private List<Texture2D> peahatRight;
     private List<Texture2D> peahatLeft;
     private List<Texture2D> peahatUp;
