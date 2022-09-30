@@ -1,0 +1,15 @@
+﻿Readability review
+Author: Zach Kallmeyer
+Date: 9-26-22
+Sprint #2
+File being reviewed: ConcreteItem.cs
+Author of file being reviewed: Kyle Hoefker
+Code review took 15 minutes
+
+Code is easily readable. All variables are declared at the top of the class and
+initialized right below in the first method. Variables have clear names and
+meanings which can easily be deciphered. Each method is cohesive and concise
+with very specific intentions/behavior, so this file has high cohesion. You can
+set and return each variable for the items, and it is clear which methods
+accomplish which task. Well done!
+
