@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    public class ConcreteSprite: AbstractSprite, IConcreteSprite
+public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
 
     /*Intialize the states*/
@@ -14,6 +14,8 @@ using System.Threading.Tasks;
     public ISpriteState moving { get; set; }
     public ISpriteState damaged { get; set; }
     public ISpriteState dead { get; set; }
+
+
     private IDraw drawSprite = DrawSprite.GetInstance;
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
 
@@ -29,8 +31,13 @@ using System.Threading.Tasks;
    
     public void SetSpriteState(SpriteAction action, ISpriteState state)
     {
+        if (this.state != state)
+        {
+            this.state = state;
+        }
         SetSpriteAction(action);
-        this.state = state;
+
+
     }
     public override void Update()
     {
