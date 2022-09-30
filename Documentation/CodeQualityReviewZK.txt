@@ -1,0 +1,27 @@
+﻿Code quality review
+Author: Zach Kallmeyer
+Date: 9-26-22
+Sprint #2
+File being reviewed: SpriteFactory.cs
+Author of file being reviewed: Nick Trambitas
+
+There are a lot of Lists and arrays of Lists being created here. They are all
+necessary for how our architecture is and how SpriteFactory works at the moment,
+but it looks like a lot of repeated code that we might be able to refactor out
+later. This could be an instance of the duplicated code smell, but I’m not sure
+if that’s possible for declarations. I don’t think that it is, but I just
+wanted to mention it as a possibility. Protection levels are good, with classes
+that are sealed or private and public methods. The methods are not too big,
+although we might want to factor out each type of sprite into their own
+GetNewSprite method (i.e. GetNewLinkSprite, GetNewGoriyaSprite, etc.). Method
+names are clear and concise.
+
+One change we could make to the game relating to SpriteFactory is to only load
+the desired sprites on call and not load every sprite in one LoadAllContent
+call. The current implementation could fairly easily support this change by
+factoring LoadAllContent into smaller methods which each load specific sprites
+or sets of sprites. However, I don’t think this would be a beneficial change at
+the moment, as we have it loading all content at once to purposely eliminate
+the need for multiple load calls. If memory space becomes an issue in the
+future, however, this could be something to look into.
+
