@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class DamagedState : ISpriteState
+public class AttackState : ISpriteState
 {
     private ISprite sprite;
     private IDraw drawSprite;
 
-    public DamagedState(ISprite sprite)
+    public AttackState(ISprite sprite)
     {
-        this.sprite = sprite;
         drawSprite = DrawStaticSprite.GetInstance;
+        this.sprite = SpriteFactory.Instance.CreateGoriyaSprite();
     }
 
     public void Update()
@@ -22,9 +22,10 @@ public class DamagedState : ISpriteState
 
     public void Draw()
     {
-        drawSprite.Draw(sprite, Color.Red);
-    }
+        drawSprite.Draw(sprite, Color.White);
 
+    }
+    
     public void SetPosition(SpriteAction action)
     {
         sprite.SetSpriteAction(action);

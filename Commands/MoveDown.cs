@@ -10,16 +10,14 @@ namespace CSE3902Project.Commands
 {
     public class MoveDown : ICommand
     {
-        private IConcreteSprite Link;
-        public MoveDown(ISprite link)
+        private IConcreteSprite sprite;
+        public MoveDown(ISprite sprite)
         {
-            this.Link = (IConcreteSprite)link;
+            this.sprite = (IConcreteSprite)sprite;
         }
         public void Execute()
         {
-            
-            Link.SetSpriteState(SpriteAction.moveDown, Link.moving);
-            Link.Update();
+            sprite.SetSpriteState(SpriteAction.moveDown, sprite.moving);
         }
     }
 }

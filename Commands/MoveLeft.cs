@@ -10,16 +10,14 @@ namespace CSE3902Project.Commands
 {
     public class MoveLeft : ICommand
     {
-        private IConcreteSprite Link;
-
-        public MoveLeft(ISprite link)
+        private IConcreteSprite sprite;
+        public MoveLeft(ISprite sprite)
         {
-            this.Link = (IConcreteSprite)link;
+            this.sprite = (IConcreteSprite)sprite;
         }
         public void Execute()
         {
-            Link.SetSpriteState(SpriteAction.moveLeft, Link.moving);
-            Link.Update();
+            sprite.SetSpriteState(SpriteAction.moveLeft, sprite.moving);
         }
     }
 }

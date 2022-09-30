@@ -4,6 +4,7 @@
     still = 0,
     attack = 1,
     damage = 2,
+    use = 3,
     
     //for sprites that can change how they're pointing in all 4 directions
     moveLeft = 0,

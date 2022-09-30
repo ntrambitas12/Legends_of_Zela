@@ -47,7 +47,9 @@ namespace CSE3902Project
         private MoveUp linkMoveUp;
         private MoveLeft linkMoveLeft;
         private MoveRight linkMoveRight;
-        private LinkTakeDamage linkDamage;
+        private TakeDamage linkDamage;
+        private Attack linkAttack;
+        private Use linkUse;
 
         private KeyboardController keyboard;
         private EnemyController enemyController;
@@ -147,7 +149,9 @@ namespace CSE3902Project
             linkMoveUp = new MoveUp(link);
             linkMoveRight = new MoveRight(link);
             linkMoveLeft = new MoveLeft(link);
-            linkDamage = new LinkTakeDamage(link);
+            linkDamage = new TakeDamage(link);
+            linkAttack = new Attack(link);
+            linkUse = new Use(link);
 
             //Add link's keys to the list
             linkKeys.Add(Keys.Left);
@@ -159,7 +163,10 @@ namespace CSE3902Project
             linkKeys.Add(Keys.S);
             linkKeys.Add(Keys.D);
             linkKeys.Add(Keys.E);
-
+            linkKeys.Add(Keys.Z);
+            linkKeys.Add(Keys.N);
+            /* temp use key */
+            linkKeys.Add(Keys.H);
 
             // Add to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireProjectile);
@@ -173,6 +180,9 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.Down, linkMoveDown);
             keyboard.RegisterCommand(Keys.S, linkMoveDown);
             keyboard.RegisterCommand(Keys.E, linkDamage);
+            keyboard.RegisterCommand(Keys.Z, linkAttack);
+            keyboard.RegisterCommand(Keys.N, linkAttack);
+            keyboard.RegisterCommand(Keys.H, linkUse);
 
             keyboard.RegisterCommand(Keys.Y, nextTile);
             keyboard.RegisterCommand(Keys.T, previousTile);

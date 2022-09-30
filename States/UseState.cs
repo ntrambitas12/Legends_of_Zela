@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class DamagedState : ISpriteState
+public class UseState : ISpriteState
 {
     private ISprite sprite;
     private IDraw drawSprite;
 
-    public DamagedState(ISprite sprite)
+    public UseState(ISprite sprite)
     {
         this.sprite = sprite;
         drawSprite = DrawStaticSprite.GetInstance;
@@ -18,13 +18,15 @@ public class DamagedState : ISpriteState
 
     public void Update()
     {
+        //no updated needed; link is stationary when he is using an item
     }
 
     public void Draw()
     {
-        drawSprite.Draw(sprite, Color.Red);
-    }
+        drawSprite.Draw(sprite, Color.White);
 
+    }
+    
     public void SetPosition(SpriteAction action)
     {
         sprite.SetSpriteAction(action);
