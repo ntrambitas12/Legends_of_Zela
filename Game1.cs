@@ -1,4 +1,5 @@
 ﻿using CSE3902Project.Controllers;
+using CSE3902Project.Commands;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,11 +18,13 @@ namespace CSE3902Project
        
         private List<IItem> items;
         private List<IController> controllers;
+        private List<Keys> linkKeys;
     
         private ISprite enemy1;
         private ISprite enemy2;
         private ISprite enemy3;
 
+        private ISprite link;
         private ISprite barrierTile;
         private ISprite bushTile;
         private ISprite compassItem;
@@ -39,6 +42,12 @@ namespace CSE3902Project
         private PreviousSprite previousItem;
         private NextSprite nextTile;
         private PreviousSprite previousTile;
+
+        private MoveDown linkMoveDown;
+        private MoveUp linkMoveUp;
+        private MoveLeft linkMoveLeft;
+        private MoveRight linkMoveRight;
+        private LinkTakeDamage linkDamage;
 
         private KeyboardController keyboard;
         private EnemyController enemyController;
@@ -63,6 +72,7 @@ namespace CSE3902Project
             exitGame = new ExitCommand(this);
             restartGame = new RestartCommand(this);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            linkKeys = new List<Keys>();
 
             // Create the controllers
             enemyController = EnemyController.GetInstance;
@@ -91,6 +101,9 @@ namespace CSE3902Project
             enemy3 = SpriteFactory.Instance.CreatePeahatSprite();
    
 
+            // Create link
+            link = SpriteFactory.Instance.CreateLinkSprite();
+   
             // Create tiles
             barrierTile = SpriteFactory.Instance.CreateBarrierTile();
             bushTile = SpriteFactory.Instance.CreateBushTile();
@@ -130,21 +143,51 @@ namespace CSE3902Project
             previousItem = new PreviousSprite(itemController);
             nextItem = new NextSprite(itemController);
 
+            linkMoveDown = new MoveDown(link);
+            linkMoveUp = new MoveUp(link);
+            linkMoveRight = new MoveRight(link);
+            linkMoveLeft = new MoveLeft(link);
+            linkDamage = new LinkTakeDamage(link);
+
+            //Add link's keys to the list
+            linkKeys.Add(Keys.Left);
+            linkKeys.Add(Keys.Right);
+            linkKeys.Add(Keys.Up);
+            linkKeys.Add(Keys.Down);
+            linkKeys.Add(Keys.W);
+            linkKeys.Add(Keys.A);
+            linkKeys.Add(Keys.S);
+            linkKeys.Add(Keys.D);
+            linkKeys.Add(Keys.E);
+
+
             // Add to keyboard controller
-            keyboard.RegisterCommand(Keys.D1, fireProjectile, true);
+            keyboard.RegisterCommand(Keys.D1, fireProjectile);
 
-            keyboard.RegisterCommand(Keys.Y, nextTile, true);
-            keyboard.RegisterCommand(Keys.T, previousTile, true);
+            keyboard.RegisterCommand(Keys.Up, linkMoveUp);
+            keyboard.RegisterCommand(Keys.W, linkMoveUp);
+            keyboard.RegisterCommand(Keys.Left, linkMoveLeft);
+            keyboard.RegisterCommand(Keys.A, linkMoveLeft);
+            keyboard.RegisterCommand(Keys.Right, linkMoveRight);
+            keyboard.RegisterCommand(Keys.D, linkMoveRight);
+            keyboard.RegisterCommand(Keys.Down, linkMoveDown);
+            keyboard.RegisterCommand(Keys.S, linkMoveDown);
+            keyboard.RegisterCommand(Keys.E, linkDamage);
 
-            keyboard.RegisterCommand(Keys.U, previousItem, true);
-            keyboard.RegisterCommand(Keys.I, nextItem, true);
+            keyboard.RegisterCommand(Keys.Y, nextTile);
+            keyboard.RegisterCommand(Keys.T, previousTile);
+
+            keyboard.RegisterCommand(Keys.U, previousItem);
+            keyboard.RegisterCommand(Keys.I, nextItem);
 
 
-            keyboard.RegisterCommand(Keys.Q, exitGame, true);
-            keyboard.RegisterCommand(Keys.R, restartGame, true);
+            keyboard.RegisterCommand(Keys.Q, exitGame);
+            keyboard.RegisterCommand(Keys.R, restartGame);
 
-            keyboard.RegisterCommand(Keys.P, nextEnemy, true);
-            keyboard.RegisterCommand(Keys.O, previousEnemy, true);
+            keyboard.RegisterCommand(Keys.P, nextEnemy);
+            keyboard.RegisterCommand(Keys.O, previousEnemy);
+
+            keyboard.AddPlayableSprite(link, linkKeys);
 
             // Set arrow command (After command is created)
             arrow.SetFireCommand(fireProjectile);
@@ -182,6 +225,9 @@ namespace CSE3902Project
                 item.Update();
             }
 
+            //Update link
+            link.Update();
+
             base.Update(gameTime);
         }
 
@@ -200,6 +246,9 @@ namespace CSE3902Project
             {
                 item.Draw();
             }
+
+            //Draw Link
+            link.Draw();
                         
             _spriteBatch.End();
 

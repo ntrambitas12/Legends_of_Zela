@@ -19,12 +19,12 @@ public class MovingState : ISpriteState
     }
     public void Draw()
     {
-        drawSprite.Draw((ISprite)sprite, Color.White);
+        drawSprite.Draw(sprite, Color.White);
     }
 
     public void Update()
     {
-        position.Update((ISprite)sprite);
+        position.Update(sprite);
     }
 
     public void SetPosition(SpriteAction action)

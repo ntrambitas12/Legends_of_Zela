@@ -7,9 +7,9 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using CSE3902Project.Commands;
 
-
-    public sealed class SpriteFactory : IFactory
+public sealed class SpriteFactory : IFactory
     {
     private List<Texture2D>[] compassFrames;
     private List<Texture2D> compass;
@@ -24,6 +24,11 @@ using System.Threading.Tasks;
     private List<Texture2D> linkLeft;
     private List<Texture2D> linkUp;
     private List<Texture2D> linkDown;
+    private List<Texture2D> linkUse;
+    private List<Texture2D> linkUseLeft;
+    private List<Texture2D> linkUseRight;
+    private List<Texture2D> linkUseUp;
+    private List<Texture2D> linkUseDown;
     private List<Texture2D>[] goriyaFrames;
     private List<Texture2D> goriyaRight;
     private List<Texture2D> goriyaLeft;
@@ -54,11 +59,15 @@ using System.Threading.Tasks;
         mapFrames = new List<Texture2D>[4];
         barrierFrames = new List<Texture2D>[4];
         bushFrames = new List<Texture2D>[4];
-        linkFrames = new List<Texture2D>[4];
+        linkFrames = new List<Texture2D>[16];
         linkLeft = new List<Texture2D>();
         linkRight = new List<Texture2D>();
         linkDown = new List<Texture2D>();
         linkUp = new List<Texture2D>();
+        linkUseLeft = new List<Texture2D>();
+        linkUseRight = new List<Texture2D>();
+        linkUseUp = new List<Texture2D>();
+        linkUseDown = new List<Texture2D>();
         goriyaFrames = new List<Texture2D>[4];
         goriyaLeft = new List<Texture2D>();
         goriyaRight = new List<Texture2D>();
@@ -119,6 +128,10 @@ using System.Threading.Tasks;
             linkLeft.Add(content.Load<Texture2D>("LinkSprites/linkLeft" + i));
             linkUp.Add(content.Load<Texture2D>("LinkSprites/linkUp" + i));
             linkDown.Add(content.Load<Texture2D>("LinkSprites/linkDown" + i));
+            linkUseRight.Add(content.Load<Texture2D>("LinkSprites/LinkRightUse"));
+            linkUseLeft.Add(content.Load<Texture2D>("LinkSprites/LinkLeftUse"));
+            linkUseUp.Add(content.Load<Texture2D>("LinkSprites/LinkUpUse"));
+            linkUseDown.Add(content.Load<Texture2D>("LinkSprites/LinkDownUse"));
 
             goriyaRight.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedRight" + i));
             goriyaLeft.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedLeft" + i));
@@ -147,6 +160,10 @@ using System.Threading.Tasks;
         linkFrames[(int)SpriteAction.moveRight] = linkRight;
         linkFrames[(int)SpriteAction.moveUp] = linkUp;
         linkFrames[(int)SpriteAction.moveDown] = linkDown;
+        linkFrames[(int)SpriteAction.useLeft] = linkUseLeft;
+        linkFrames[(int)SpriteAction.useRight] = linkUseRight;
+        linkFrames[(int)SpriteAction.useUp] = linkUseUp;
+        linkFrames[(int)SpriteAction.useDown] = linkUseDown;
 
         // Add example enemy frames to the list
         goriyaFrames[(int)SpriteAction.moveLeft] = goriyaLeft;

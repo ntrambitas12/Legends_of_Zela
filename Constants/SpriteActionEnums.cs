@@ -18,4 +18,8 @@
     damageRight = 9,
     damageUp = 10,
     damageDown = 11,
+    useLeft = 12,
+    useRight = 13, 
+    useUp = 14,
+    useDown = 15,
 }
