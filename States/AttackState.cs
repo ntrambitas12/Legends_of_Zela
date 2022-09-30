@@ -7,17 +7,30 @@ using System.Threading.Tasks;
 
 public class AttackState : ISpriteState
 {
-    private ISprite sprite;
+    private IConcreteSprite sprite;
     private IDraw drawSprite;
+    private SpriteAction prevAction;
+    private ISpriteState prevState;
+   
+
+    //naive approach to regulating frame rate. figure better way in the future
+    private int counter = 0;
 
     public AttackState(ISprite sprite)
     {
-        drawSprite = DrawStaticSprite.GetInstance;
-        this.sprite = SpriteFactory.Instance.CreateGoriyaSprite();
+        drawSprite = DrawSprite.GetInstance;
+        this.sprite = (IConcreteSprite)sprite;
     }
 
     public void Update()
     {
+        if (counter > 12)
+        {
+            counter = 0;
+            sprite.SetSpriteState(prevAction, prevState);
+            
+        }
+        counter++;
     }
 
     public void Draw()
@@ -29,6 +42,12 @@ public class AttackState : ISpriteState
     public void SetPosition(SpriteAction action)
     {
         sprite.SetSpriteAction(action);
+    }
+
+    public void SetPreviousState(ISpriteState state)
+    {
+        prevAction = (SpriteAction)sprite.spritePos;
+        prevState = state;
     }
 }
 

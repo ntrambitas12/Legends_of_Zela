@@ -31,6 +31,11 @@ public class UseState : ISpriteState
     {
         sprite.SetSpriteAction(action);
     }
+
+    public void SetPreviousState(ISpriteState state)
+    {
+       //implement if needed
+    }
 }
 
 

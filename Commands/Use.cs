@@ -41,7 +41,7 @@ namespace CSE3902Project.Commands
                     break;
 
             }
-            sprite.SetSpriteState(this.spritePos, sprite.still);
+            sprite.SetSpriteState(this.spritePos, sprite.attack);
         }
     }
 }
