@@ -120,7 +120,6 @@ public sealed class SpriteFactory : IFactory
 
         // Load tiles in
         compass.Add(content.Load<Texture2D>("ItemSprites/Compass"));
-        heart.Add(content.Load<Texture2D>("ItemSprites/HeartContainer"));
         key.Add(content.Load<Texture2D>("ItemSprites/Key"));
         map.Add(content.Load<Texture2D>("ItemSprites/Map"));
         rupies.Add(content.Load<Texture2D>("ItemSprites/5Rupies"));
@@ -142,12 +141,16 @@ public sealed class SpriteFactory : IFactory
             waterFrames[i] = water;
 
             compassFrames[i] = compass;
-            heartFrames[i] = heart;
             keyFrames[i] = key;
             mapFrames[i] = map;
             rupiesFrames[i] = rupies;
             swordFrames[i] = sword;
         }
+
+        /*Testing for heart*/
+        heart.Add(content.Load<Texture2D>("ItemSprites/Heart1"));
+        heart.Add(content.Load<Texture2D>("ItemSprites/Heart2"));
+        heartFrames[0] = heart;
 
         for (int i = 1; i <= 2; i++)
         {

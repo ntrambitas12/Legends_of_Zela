@@ -31,7 +31,7 @@ using System.Threading.Tasks;
         this.textures = textures;
         //needed to get code to intialize
         _spritePos = 999;
-        SetSpriteAction(SpriteAction.moveDown);
+        SetSpriteAction(SpriteAction.still);
         
 
     }

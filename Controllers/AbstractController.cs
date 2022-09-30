@@ -77,9 +77,9 @@ namespace CSE3902Project.Controllers
             currentSprite.SetSpriteState(SpriteAction.moveLeft, currentSprite.dead);
         }
 
-        protected void initSprite()
+        protected virtual void initSprite()
         {
-            currentSprite.SetSpriteState(SpriteAction.moveLeft, currentSprite.still);
+            currentSprite.SetSpriteState(SpriteAction.still, currentSprite.still);
         }
 
     }
