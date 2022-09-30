@@ -22,6 +22,8 @@ namespace CSE3902Project
     
         private ISprite enemy1;
         private ISprite enemy2;
+        private ISprite enemy3;
+
         private ISprite link;
         private ISprite barrierTile;
         private ISprite bushTile;
@@ -95,7 +97,9 @@ namespace CSE3902Project
         {
             // Create enemies
             enemy1 = SpriteFactory.Instance.CreateGoriyaSprite();
-            enemy2 = SpriteFactory.Instance.CreateGoriyaSprite();
+            enemy2 = SpriteFactory.Instance.CreateOktorokSprite();
+            enemy3 = SpriteFactory.Instance.CreatePeahatSprite();
+   
 
             // Create link
             link = SpriteFactory.Instance.CreateLinkSprite();
@@ -128,6 +132,7 @@ namespace CSE3902Project
             // Add enemies to the enemy controller
             enemyController.AddSprite(enemy1);
             enemyController.AddSprite(enemy2);
+            enemyController.AddSprite(enemy3);
 
             // Create Commands
             fireProjectile = new FireProjectile(arrow);

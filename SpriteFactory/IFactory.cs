@@ -16,6 +16,8 @@ public interface IFactory
     public ISprite CreateBarrierTile();
     public ISprite CreateBushTile();
     public ISprite CreateCompassItem();
+    public ISprite CreatePeahatSprite();
+    public ISprite CreateOktorokSprite();
     public ISprite CreateMapItem();
     public IItem CreateArrowSprite();
 
