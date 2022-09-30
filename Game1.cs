@@ -43,6 +43,9 @@ namespace CSE3902Project
         private IItem magicBoomerangLink;
         private IItem bombLink;
         private IItem fireLink;
+        private IItem boomerangEnemy1;
+        private IItem magicBoomerangEnemy2;
+        private IItem fireEnemy3;
 
         private FireProjectile fireArrowLink;
         private FireProjectile fireSilverArrowLink;
@@ -50,6 +53,9 @@ namespace CSE3902Project
         private FireProjectile fireMagicBoomerangLink;
         private FireProjectile fireBombLink;
         private FireProjectile fireFireLink;
+        private FireProjectile fireBoomerangEnemy1;
+        private FireProjectile fireMagicBoomerangEnemy2;
+        private FireProjectile fireFireEnemy3;
 
         private ICommand exitGame;
         private ICommand restartGame;
@@ -185,6 +191,21 @@ namespace CSE3902Project
             fireLink.SetProjectileType(new ArrowType(fireLink));
             fireLink.SetOwner(link);
 
+            boomerangEnemy1 = SpriteFactory.Instance.CreateBoomerangSprite();
+            boomerangEnemy1.SetDistance(100);
+            boomerangEnemy1.SetProjectileType(new BoomerangType(boomerangEnemy1));
+            boomerangEnemy1.SetOwner(enemy1);
+
+            magicBoomerangEnemy2 = SpriteFactory.Instance.CreateMagicBoomerangSprite();
+            magicBoomerangEnemy2.SetDistance(140);
+            magicBoomerangEnemy2.SetProjectileType(new BoomerangType(magicBoomerangEnemy2));
+            magicBoomerangEnemy2.SetOwner(enemy2);
+
+            fireEnemy3 = SpriteFactory.Instance.CreateFireSprite();
+            fireEnemy3.SetDistance(50);
+            fireEnemy3.SetProjectileType(new ArrowType(fireEnemy3));
+            fireEnemy3.SetOwner(enemy3);
+
             // Add items to command lists
             items.Add(arrowLink);
             items.Add(silverArrowLink);
@@ -192,11 +213,9 @@ namespace CSE3902Project
             items.Add(magicBoomerangLink);
             items.Add(bombLink);
             items.Add(fireLink);
-
-            // Add enemies to the enemy controller
-            enemyController.AddSprite(enemy1);
-            enemyController.AddSprite(enemy2);
-            enemyController.AddSprite(enemy3);
+            items.Add(boomerangEnemy1);
+            items.Add(magicBoomerangEnemy2);
+            items.Add(fireEnemy3);
 
             // Create Commands
             fireArrowLink = new FireProjectile(arrowLink);
@@ -205,6 +224,9 @@ namespace CSE3902Project
             fireMagicBoomerangLink = new FireProjectile(magicBoomerangLink);
             fireBombLink = new FireProjectile(bombLink);
             fireFireLink = new FireProjectile(fireLink);
+            fireBoomerangEnemy1 = new FireProjectile(boomerangEnemy1);
+            fireMagicBoomerangEnemy2 = new FireProjectile(magicBoomerangEnemy2);
+            fireFireEnemy3 = new FireProjectile(fireEnemy3);
             previousEnemy = new PreviousSprite(enemyController);
             nextEnemy = new NextSprite(enemyController);
             previousTile = new PreviousSprite(tileController);
@@ -217,6 +239,17 @@ namespace CSE3902Project
             linkMoveRight = new MoveRight(link);
             linkMoveLeft = new MoveLeft(link);
             linkDamage = new LinkTakeDamage(link);
+
+            // Set projectile commands (After commands are created)
+            arrowLink.SetFireCommand(fireArrowLink);
+            silverArrowLink.SetFireCommand(fireSilverArrowLink);
+            boomerangLink.SetFireCommand(fireBoomerangLink);
+            magicBoomerangLink.SetFireCommand(fireMagicBoomerangLink);
+            bombLink.SetFireCommand(fireBombLink);
+            fireLink.SetFireCommand(fireFireLink);
+            boomerangEnemy1.SetFireCommand(fireBoomerangEnemy1);
+            magicBoomerangEnemy2.SetFireCommand(fireMagicBoomerangEnemy2);
+            fireEnemy3.SetFireCommand(fireFireEnemy3);
 
             //Add link's keys to the list
             linkKeys.Add(Keys.Left);
@@ -263,13 +296,10 @@ namespace CSE3902Project
 
             keyboard.AddPlayableSprite(link, linkKeys);
 
-            // Set arrow command (After command is created)
-            arrowLink.SetFireCommand(fireArrowLink);
-            silverArrowLink.SetFireCommand(fireSilverArrowLink);
-            boomerangLink.SetFireCommand(fireBoomerangLink);
-            magicBoomerangLink.SetFireCommand(fireMagicBoomerangLink);
-            bombLink.SetFireCommand(fireBombLink);
-            fireLink.SetFireCommand(fireFireLink);
+            // Add enemies to the enemy controller (with their items)
+            enemyController.AddSprite(enemy1, boomerangEnemy1);
+            enemyController.AddSprite(enemy2, magicBoomerangEnemy2);
+            enemyController.AddSprite(enemy3, fireEnemy3);
         }
 
         public void resetGame()

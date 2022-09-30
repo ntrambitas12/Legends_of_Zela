@@ -9,13 +9,31 @@ namespace CSE3902Project.Controllers
     public abstract class AbstractController : IController
     {
         protected List<IConcreteSprite> sprites;
+        protected List<IItem> projectiles;
         protected IConcreteSprite currentSprite;
+        protected IItem currentProjectile;
 
         public AbstractController()
         {
             sprites = new List<IConcreteSprite>();
+            projectiles = new List<IItem>();
             currentSprite = null;
+            currentProjectile = null;
         }
+
+        public void AddSprite(ISprite sprite, IItem projectile)
+        {
+            // kill the current sprite before adding a new sprite to the list
+            if (currentSprite != null) killSprite();
+            sprites.Add((IConcreteSprite)sprite);
+            currentSprite = (IConcreteSprite)sprite;
+            initSprite();
+            if (currentProjectile != null) killProjectile();
+            projectiles.Add(projectile);
+            currentProjectile = projectile;
+            initProjectile();
+        }
+
         public void AddSprite(ISprite sprite)
         {
             // kill the current sprite before adding a new sprite to the list
@@ -23,7 +41,6 @@ namespace CSE3902Project.Controllers
             sprites.Add((IConcreteSprite)sprite);
             currentSprite = (IConcreteSprite)sprite;
             initSprite();
-
         }
 
         public abstract void Update();
@@ -45,7 +62,9 @@ namespace CSE3902Project.Controllers
                 killSprite();
                 currentSprite = sprites[currentIndex];
                 initSprite();
-
+                killProjectile();
+                currentProjectile = projectiles[currentIndex];
+                initProjectile();
             }
 
         }
@@ -59,6 +78,9 @@ namespace CSE3902Project.Controllers
                 killSprite();
                 currentSprite = sprites[currentIndex];
                 initSprite();
+                killProjectile();
+                currentProjectile = projectiles[currentIndex];
+                initProjectile();
             }
 
         }
@@ -70,6 +92,11 @@ namespace CSE3902Project.Controllers
                 sprite.SetSpriteState(SpriteAction.moveLeft, sprite.dead);
             }
             sprites.Clear();
+            foreach (var projectile in projectiles)
+            {
+                projectile.SetShouldDraw(false);
+            }
+            projectiles.Clear();
         }
 
         protected void killSprite()
@@ -77,9 +104,19 @@ namespace CSE3902Project.Controllers
             currentSprite.SetSpriteState(SpriteAction.moveLeft, currentSprite.dead);
         }
 
+        protected void killProjectile()
+        {
+            currentProjectile.SetShouldDraw(false);
+        }
+
         protected virtual void initSprite()
         {
             currentSprite.SetSpriteState(SpriteAction.still, currentSprite.still);
+        }
+
+        protected virtual void initProjectile()
+        {
+            currentProjectile.SetShouldDraw(true);
         }
 
     }

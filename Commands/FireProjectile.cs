@@ -6,7 +6,7 @@ public class FireProjectile : ICommand
 {
     private IItem projectile;
     private ISprite shooter;
-    private int counter;
+    public int counter;
     private Vector2 newCord;
     public int distance;
 

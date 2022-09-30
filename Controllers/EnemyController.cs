@@ -53,6 +53,7 @@ public sealed class EnemyController : AbstractController
             else
             {
                 currentSprite.SetSpriteState(action, currentSprite.still);
+                currentProjectile.FireCommand().Execute(); // Coupling
             }
 
             // reset the counter and flip if enemy will move or not
