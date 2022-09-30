@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    public sealed class EnemyController: AbstractController
-    {
+public sealed class EnemyController : AbstractController
+{
 
     private int counter;
     private Random rand;
@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
     private EnemyController() : base()
     {
-       
+
         counter = 0;
         rand = new Random();
         isMoving = false;
@@ -48,11 +48,12 @@ using System.Threading.Tasks;
 
             if (isMoving)
             {
-                currentSprite.SetSpriteState(action, currentSprite.moving);  
+                currentSprite.SetSpriteState(action, currentSprite.moving);
             }
             else
             {
                 currentSprite.SetSpriteState(action, currentSprite.still);
+                currentProjectile.FireCommand().Execute(); // Coupling
             }
 
             // reset the counter and flip if enemy will move or not
@@ -60,12 +61,13 @@ using System.Threading.Tasks;
             isMoving = !isMoving;
         }
 
-            // update the enemy
-            currentSprite.Update();
-            counter++;
+        // update the enemy
+        currentSprite.Update();
+        counter++;
 
-        }
-   
+    }
+
 }
-    
+
+
 

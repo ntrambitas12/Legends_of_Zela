@@ -67,6 +67,33 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> arrowRight;
     private List<Texture2D> arrowUp;
     private List<Texture2D> arrowDown;
+    private List<Texture2D>[] silverArrowFrames;
+    private List<Texture2D> silverArrowLeft;
+    private List<Texture2D> silverArrowRight;
+    private List<Texture2D> silverArrowUp;
+    private List<Texture2D> silverArrowDown;
+    private List<Texture2D>[] boomerangFrames;
+    private List<Texture2D> boomerangLeft;
+    private List<Texture2D> boomerangRight;
+    private List<Texture2D> boomerangUp;
+    private List<Texture2D> boomerangDown;
+    private List<Texture2D>[] magicBoomerangFrames;
+    private List<Texture2D> magicBoomerangLeft;
+    private List<Texture2D> magicBoomerangRight;
+    private List<Texture2D> magicBoomerangUp;
+    private List<Texture2D> magicBoomerangDown;
+    private List<Texture2D>[] bombFrames;
+    private List<Texture2D> bombLeft;
+    private List<Texture2D> bombRight;
+    private List<Texture2D> bombUp;
+    private List<Texture2D> bombDown;
+    private List<Texture2D>[] fireFrames;
+    private List<Texture2D> fireLeft;
+    private List<Texture2D> fireRight;
+    private List<Texture2D> fireUp;
+    private List<Texture2D> fireDown;
+
+
 
     private SpriteBatch _spriteBatch;
     private SpriteFactory()
@@ -113,6 +140,31 @@ public sealed class SpriteFactory : IFactory
         arrowRight = new List<Texture2D>();
         arrowUp = new List<Texture2D>();
         arrowDown = new List<Texture2D>();
+        silverArrowFrames = new List<Texture2D>[4];
+        silverArrowLeft = new List<Texture2D>();
+        silverArrowRight = new List<Texture2D>();
+        silverArrowUp = new List<Texture2D>();
+        silverArrowDown = new List<Texture2D>();
+        boomerangFrames = new List<Texture2D>[4];
+        boomerangLeft = new List<Texture2D>();
+        boomerangRight = new List<Texture2D>();
+        boomerangUp = new List<Texture2D>();
+        boomerangDown = new List<Texture2D>();
+        magicBoomerangFrames = new List<Texture2D>[4];
+        magicBoomerangLeft = new List<Texture2D>();
+        magicBoomerangRight = new List<Texture2D>();
+        magicBoomerangUp = new List<Texture2D>();
+        magicBoomerangDown = new List<Texture2D>();
+        bombFrames = new List<Texture2D>[4];
+        bombLeft = new List<Texture2D>();
+        bombRight = new List<Texture2D>();
+        bombUp = new List<Texture2D>();
+        bombDown = new List<Texture2D>();
+        fireFrames = new List<Texture2D>[4];
+        fireLeft = new List<Texture2D>();
+        fireRight = new List<Texture2D>();
+        fireUp = new List<Texture2D>();
+        fireDown = new List<Texture2D>();
         compass = new List<Texture2D>();
         heart = new List<Texture2D>();
         key =  new List<Texture2D>();
@@ -202,11 +254,35 @@ public sealed class SpriteFactory : IFactory
             peahatDown.Add(content.Load<Texture2D>("EnemySprites/Peahat" + i));
         }
 
-        // Assign textures to arrow directions
+        // Assign textures to projectile directions
         arrowLeft.Add(content.Load<Texture2D>("ItemSprites/ArrowLeft"));
         arrowRight.Add(content.Load<Texture2D>("ItemSprites/ArrowRight"));
         arrowUp.Add(content.Load<Texture2D>("ItemSprites/ArrowUp"));
         arrowDown.Add(content.Load<Texture2D>("ItemSprites/ArrowDown"));
+        silverArrowLeft.Add(content.Load<Texture2D>("ItemSprites/SilverArrow"));
+        silverArrowRight.Add(content.Load<Texture2D>("ItemSprites/SilverArrow"));
+        silverArrowUp.Add(content.Load<Texture2D>("ItemSprites/SilverArrow"));
+        silverArrowDown.Add(content.Load<Texture2D>("ItemSprites/SilverArrow"));
+        boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/Boomerang"));
+        boomerangRight.Add(content.Load<Texture2D>("ItemSprites/Boomerang"));
+        boomerangUp.Add(content.Load<Texture2D>("ItemSprites/Boomerang"));
+        boomerangDown.Add(content.Load<Texture2D>("ItemSprites/Boomerang"));
+        magicBoomerangLeft.Add(content.Load<Texture2D>("ItemSprites/MagicBoomerang"));
+        magicBoomerangRight.Add(content.Load<Texture2D>("ItemSprites/MagicBoomerang"));
+        magicBoomerangUp.Add(content.Load<Texture2D>("ItemSprites/MagicBoomerang"));
+        magicBoomerangDown.Add(content.Load<Texture2D>("ItemSprites/MagicBoomerang"));
+        bombLeft.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
+        bombRight.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
+        bombUp.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
+        bombDown.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
+        fireLeft.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
+        fireRight.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
+        fireUp.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
+        fireDown.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
+        fireLeft.Add(content.Load<Texture2D>("ItemSprites/Fire2"));
+        fireRight.Add(content.Load<Texture2D>("ItemSprites/Fire2"));
+        fireUp.Add(content.Load<Texture2D>("ItemSprites/Fire2"));
+        fireDown.Add(content.Load<Texture2D>("ItemSprites/Fire2"));
 
         // Add the link frames to the list
         linkFrames[(int)SpriteAction.moveLeft] = linkLeft;
@@ -239,6 +315,31 @@ public sealed class SpriteFactory : IFactory
         arrowFrames[(int)SpriteAction.moveRight] = arrowRight;
         arrowFrames[(int)SpriteAction.moveUp] = arrowUp;
         arrowFrames[(int)SpriteAction.moveDown] = arrowDown;
+
+        silverArrowFrames[(int)SpriteAction.moveLeft] = silverArrowLeft;
+        silverArrowFrames[(int)SpriteAction.moveRight] = silverArrowRight;
+        silverArrowFrames[(int)SpriteAction.moveUp] = silverArrowUp;
+        silverArrowFrames[(int)SpriteAction.moveDown] = silverArrowDown;
+
+        boomerangFrames[(int)SpriteAction.moveLeft] = boomerangLeft;
+        boomerangFrames[(int)SpriteAction.moveRight] = boomerangRight;
+        boomerangFrames[(int)SpriteAction.moveUp] = boomerangUp;
+        boomerangFrames[(int)SpriteAction.moveDown] = boomerangDown;
+
+        magicBoomerangFrames[(int)SpriteAction.moveLeft] = magicBoomerangLeft;
+        magicBoomerangFrames[(int)SpriteAction.moveRight] = magicBoomerangRight;
+        magicBoomerangFrames[(int)SpriteAction.moveUp] = magicBoomerangUp;
+        magicBoomerangFrames[(int)SpriteAction.moveDown] = magicBoomerangDown;
+
+        bombFrames[(int)SpriteAction.moveLeft] = bombLeft;
+        bombFrames[(int)SpriteAction.moveRight] = bombRight;
+        bombFrames[(int)SpriteAction.moveUp] = bombUp;
+        bombFrames[(int)SpriteAction.moveDown] = bombDown;
+
+        fireFrames[(int)SpriteAction.moveLeft] = fireLeft;
+        fireFrames[(int)SpriteAction.moveRight] = fireRight;
+        fireFrames[(int)SpriteAction.moveUp] = fireUp;
+        fireFrames[(int)SpriteAction.moveDown] = fireDown;
     }
 
     public ISprite CreateGoriyaSprite()
@@ -324,6 +425,31 @@ public sealed class SpriteFactory : IFactory
     public IItem CreateArrowSprite()
     {
         return new ConcreteItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
+    }
+
+    public IItem CreateSilverArrowSprite()
+    {
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), silverArrowFrames);
+    }
+
+    public IItem CreateBoomerangSprite()
+    {
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), boomerangFrames);
+    }
+
+    public IItem CreateMagicBoomerangSprite()
+    {
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), magicBoomerangFrames);
+    }
+
+    public IItem CreateBombSprite()
+    {
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), bombFrames);
+    }
+
+    public IItem CreateFireSprite()
+    {
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), fireFrames);
     }
 }
 
