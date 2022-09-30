@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ public class DamagedState : ISpriteState
 
     public void Draw()
     {
-        drawSprite.Draw(sprite);
+        drawSprite.Draw(sprite, Color.Red);
     }
 
     public void SetPosition(SpriteAction action)

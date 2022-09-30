@@ -27,7 +27,11 @@ using System.Threading.Tasks;
 
     public void RegisterCommand(Keys key, ICommand command, bool runOnce)
     {
+        // make sure the same key does not get added!
+        if (!controllerMappings.ContainsKey(key))
+        {
             controllerMappings.Add(key, (command, runOnce));
+        }
     }
 
     public void Update()
@@ -58,6 +62,11 @@ using System.Threading.Tasks;
                 }
             }
         }
+    }
+
+    public void resetController()
+    {
+        controllerMappings.Clear();
     }
 }
 

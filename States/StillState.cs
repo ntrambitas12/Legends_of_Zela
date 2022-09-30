@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 
     public class StillState:ISpriteState
     {
@@ -14,7 +15,7 @@
 
     public void Draw()
     {
-        drawSprite.Draw(sprite);
+        drawSprite.Draw(sprite, Color.White);
 
     }
 

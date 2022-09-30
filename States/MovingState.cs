@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ public class MovingState : ISpriteState
     }
     public void Draw()
     {
-        drawSprite.Draw((ISprite)sprite);
+        drawSprite.Draw((ISprite)sprite, Color.White);
     }
 
     public void Update()
