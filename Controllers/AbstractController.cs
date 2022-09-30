@@ -62,9 +62,12 @@ namespace CSE3902Project.Controllers
                 killSprite();
                 currentSprite = sprites[currentIndex];
                 initSprite();
-                killProjectile();
-                currentProjectile = projectiles[currentIndex];
-                initProjectile();
+                if (currentProjectile != null)
+                {
+                    killProjectile();
+                    currentProjectile = projectiles[currentIndex];
+                    initProjectile();
+                }
             }
 
         }
@@ -78,9 +81,12 @@ namespace CSE3902Project.Controllers
                 killSprite();
                 currentSprite = sprites[currentIndex];
                 initSprite();
-                killProjectile();
-                currentProjectile = projectiles[currentIndex];
-                initProjectile();
+                if (currentProjectile != null)
+                {
+                    killProjectile();
+                    currentProjectile = projectiles[currentIndex];
+                    initProjectile();
+                }
             }
 
         }
