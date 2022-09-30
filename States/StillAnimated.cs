@@ -1,34 +1,34 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
-public class MovingState : ISpriteState
+public class StillAnimated : ISpriteState
 {
-    private IConcreteSprite sprite;
-    private IPosition position;
+    private ConcreteSprite sprite;
     private IDraw drawSprite;
 
-    public MovingState(IConcreteSprite sprite)
+    public StillAnimated(ConcreteSprite sprite)
     {
         this.sprite = sprite;
-        position = UpdateSpritePos.GetInstance;
         drawSprite = DrawSprite.GetInstance;
     }
+
+
     public void Draw()
     {
         drawSprite.Draw(sprite, Color.White);
+
     }
 
     public void Update()
     {
-        position.Update(sprite);
-    }
+        //No update code needed for still state
 
+
+    }
     public void SetPosition(SpriteAction action)
     {
         sprite.SetSpriteAction(action);
     }
+
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CSE3902Project.Commands;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,15 @@ using System.Threading.Tasks;
 
     public sealed class KeyboardController: IController
     {
-    private Dictionary<Keys, (ICommand, bool)> controllerMappings;
+    private Dictionary<Keys, ICommand> controllerMappings;
+    private List<(List<Keys> keys, ICommand still)> sprites;
+
     private KeyboardState currentKeyState;
     private KeyboardState previousKeyState;
-
     private KeyboardController()
     {
-        controllerMappings = new Dictionary<Keys, (ICommand, bool)>();
+        controllerMappings = new Dictionary<Keys, ICommand>();
+        sprites = new List<(List<Keys> keys, ICommand still)> ();
     }
     private static readonly KeyboardController instance = new KeyboardController();
     public static KeyboardController GetInstance
@@ -25,48 +28,68 @@ using System.Threading.Tasks;
         }
     }
 
-    public void RegisterCommand(Keys key, ICommand command, bool runOnce)
+    public void RegisterCommand(Keys key, ICommand command)
     {
         // make sure the same key does not get added!
         if (!controllerMappings.ContainsKey(key))
         {
-            controllerMappings.Add(key, (command, runOnce));
+            controllerMappings.Add(key, command);
         }
     }
 
+    /*
+     This method is needed to be able to switch back to the still state
+    whenever the keys that control the user playable sprite are released
+     */
+    public void AddPlayableSprite (ISprite sprite, List<Keys> spriteKeys)
+    {
+        sprites.Add((spriteKeys, new StillSprite(sprite)));
+    }
     public void Update()
     {
         previousKeyState = currentKeyState;
         currentKeyState = Keyboard.GetState();
+        
+        //reset link to still state
+        spriteReset();
 
         Keys[] pressedKeys = currentKeyState.GetPressedKeys();
+       
 
         foreach (Keys key in pressedKeys)
         {
 
-        
             if (controllerMappings.ContainsKey(key))
-            { //if runOnce is false
-                if (!controllerMappings[key].Item2) {
-                    controllerMappings[key].Item1.Execute();
-                }
-
-                //if runOnce is true
-                else
-                {
+            { 
                     //make sure to check previous state to run only once on key press
                     if (currentKeyState.IsKeyDown(key) && !previousKeyState.IsKeyDown(key))
                     {
-                        controllerMappings[key].Item1.Execute();
-                    }
-                }
+                        controllerMappings[key].Execute();
+                    }  
             }
         }
+    }
+
+    public void Draw()
+    {
+        //not implemented
     }
 
     public void resetController()
     {
         controllerMappings.Clear();
+        sprites.Clear();
+    }
+
+    private void spriteReset()
+    {
+        foreach (var sprite in sprites)
+        {
+            foreach(var key in sprite.keys)
+            if (previousKeyState.IsKeyUp(key) != currentKeyState.IsKeyUp(key)) {
+                    sprite.still.Execute();
+            }
+        }
     }
 }
 
