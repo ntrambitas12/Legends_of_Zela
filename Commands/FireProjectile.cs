@@ -32,20 +32,20 @@ public class FireProjectile : ICommand
                 // Probably want sprite to hold info about where to start each
                 // shot, can use that info here
                 case 0: // left
-                    newCord.X = shooter.screenCord.X + 20;
-                    newCord.Y = shooter.screenCord.Y + 20;
+                    newCord.X = shooter.screenCord.X + 5;
+                    newCord.Y = shooter.screenCord.Y + 5;
                     break;
                 case 1: // right
-                    newCord.X = shooter.screenCord.X + 20;
-                    newCord.Y = shooter.screenCord.Y + 20;
+                    newCord.X = shooter.screenCord.X + 13;
+                    newCord.Y = shooter.screenCord.Y + 3;
                     break;
                 case 2: // up
-                    newCord.X = shooter.screenCord.X + 20;
-                    newCord.Y = shooter.screenCord.Y + 20;
+                    newCord.X = shooter.screenCord.X + 5;
+                    newCord.Y = shooter.screenCord.Y;
                     break;
                 case 3: // down
-                    newCord.X = shooter.screenCord.X + 20;
-                    newCord.Y = shooter.screenCord.Y + 20;
+                    newCord.X = shooter.screenCord.X + 5;
+                    newCord.Y = shooter.screenCord.Y + 11;
                     break;
                 default:
                     break;
