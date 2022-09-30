@@ -1,23 +1,23 @@
-﻿using System;
+﻿using CSE3902Project.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 
-    public sealed class EnemyController: IController
+    public sealed class EnemyController: AbstractController
     {
-    private List<IConcreteSprite> enemies;
-    private IConcreteSprite currentEnemy;
+
     private int counter;
     private Random rand;
     private bool isMoving;
     private List<SpriteAction> actions;
     private SpriteAction action;
 
-    private EnemyController()
+    private EnemyController() : base()
     {
-        enemies = new List<IConcreteSprite>();
+       
         counter = 0;
         rand = new Random();
         isMoving = false;
@@ -36,17 +36,7 @@ using System.Threading.Tasks;
         }
     }
 
-    public void AddEnemy(IConcreteSprite enemy)
-    {
-        // kill the current enemy before adding a new enemy to the list
-        if (currentEnemy != null) killEnemy();
-        enemies.Add(enemy);
-        currentEnemy = enemy;
-        initEnemy();
-            
-    }
-
-    public void Update()
+    public override void Update()
     {
         /*set a random state for the enemy 
        Update counter every 100 frames
@@ -58,11 +48,11 @@ using System.Threading.Tasks;
 
             if (isMoving)
             {
-                currentEnemy.SetSpriteState(action, currentEnemy.moving);  
+                currentSprite.SetSpriteState(action, currentSprite.moving);  
             }
             else
             {
-                currentEnemy.SetSpriteState(action, currentEnemy.still);
+                currentSprite.SetSpriteState(action, currentSprite.still);
             }
 
             // reset the counter and flip if enemy will move or not
@@ -71,57 +61,11 @@ using System.Threading.Tasks;
         }
 
             // update the enemy
-            currentEnemy.Update();
+            currentSprite.Update();
             counter++;
 
         }
-        
-    public void nextEnemy()
-    {
-        int listSize = enemies.Count;
-        int currentIndex = enemies.IndexOf(currentEnemy) + 1;
-
-        if(currentIndex < listSize)
-        {
-            killEnemy();
-            currentEnemy = enemies[currentIndex];
-            initEnemy();
-            
-        }
-       
-    }
-
-    public void previousEnemy()
-    {
-        int currentIndex = enemies.IndexOf(currentEnemy) - 1;
-
-        if (currentIndex >= 0)
-        {
-            killEnemy();
-            currentEnemy = enemies[currentIndex];
-            initEnemy();
-        }
-
-    }
-
-    public void resetController()
-    {
-        foreach (var enemy in enemies)
-        {
-            enemy.SetSpriteState(action, enemy.dead);
-        }
-        enemies.Clear();
-    }
-
-    private void killEnemy()
-    {
-        currentEnemy.SetSpriteState(action, currentEnemy.dead);
-    }
-
-    private void initEnemy()
-    {
-        currentEnemy.SetSpriteState(SpriteAction.moveLeft, currentEnemy.still);
-    }
+   
 }
     
 
