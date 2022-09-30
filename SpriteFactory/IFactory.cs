@@ -15,6 +15,12 @@ public interface IFactory
     public ISprite CreateLinkSprite();
     public ISprite CreateBarrierTile();
     public ISprite CreateBushTile();
+    public ISprite CreateDefaultFloorTile();
+    public ISprite CreateDungeonStairsTile();
+    public ISprite CreateGravestoneTile();
+    public ISprite CreateWaterTile();
+    public ISprite CreateHeartItem();
+    public ISprite CreateKeyItem();
     public ISprite CreateCompassItem();
     public ISprite CreatePeahatSprite();
     public ISprite CreateOktorokSprite();

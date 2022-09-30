@@ -1,4 +1,4 @@
-﻿using CSE3902Project.Controllers;
+using CSE3902Project.Controllers;
 using CSE3902Project.Commands;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,11 +15,11 @@ namespace CSE3902Project
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-       
+
         private List<IItem> items;
         private List<IController> controllers;
         private List<Keys> linkKeys;
-    
+
         private ISprite enemy1;
         private ISprite enemy2;
         private ISprite enemy3;
@@ -27,11 +27,35 @@ namespace CSE3902Project
         private ISprite link;
         private ISprite barrierTile;
         private ISprite bushTile;
+        private ISprite defaultFloorTile;
+        private ISprite dungeonStairsTile;
+        private ISprite gravestoneTile;
+        private ISprite waterTile;
         private ISprite compassItem;
+        private ISprite heartItem;
+        private ISprite keyItem;
         private ISprite mapItem;
-        private IItem arrow;
+        private ISprite rupiesItem;
+        private ISprite swordItem;
+        private IItem arrowLink;
+        private IItem silverArrowLink;
+        private IItem boomerangLink;
+        private IItem magicBoomerangLink;
+        private IItem bombLink;
+        private IItem fireLink;
+        private IItem boomerangEnemy1;
+        private IItem magicBoomerangEnemy2;
+        private IItem fireEnemy3;
 
-        private FireProjectile fireProjectile;
+        private FireProjectile fireArrowLink;
+        private FireProjectile fireSilverArrowLink;
+        private FireProjectile fireBoomerangLink;
+        private FireProjectile fireMagicBoomerangLink;
+        private FireProjectile fireBombLink;
+        private FireProjectile fireFireLink;
+        private FireProjectile fireBoomerangEnemy1;
+        private FireProjectile fireMagicBoomerangEnemy2;
+        private FireProjectile fireFireEnemy3;
 
         private ICommand exitGame;
         private ICommand restartGame;
@@ -101,43 +125,110 @@ namespace CSE3902Project
             enemy1 = SpriteFactory.Instance.CreateGoriyaSprite();
             enemy2 = SpriteFactory.Instance.CreateOktorokSprite();
             enemy3 = SpriteFactory.Instance.CreatePeahatSprite();
-   
+
 
             // Create link
             link = SpriteFactory.Instance.CreateLinkSprite();
-   
+
             // Create tiles
             barrierTile = SpriteFactory.Instance.CreateBarrierTile();
             bushTile = SpriteFactory.Instance.CreateBushTile();
+            defaultFloorTile = SpriteFactory.Instance.CreateDefaultFloorTile();
+            dungeonStairsTile = SpriteFactory.Instance.CreateDungeonStairsTile();
+            gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile();
+            waterTile = SpriteFactory.Instance.CreateWaterTile();
 
             // Create items
             compassItem = SpriteFactory.Instance.CreateCompassItem();
+            heartItem = SpriteFactory.Instance.CreateHeartItem();
+            keyItem = SpriteFactory.Instance.CreateKeyItem();
             mapItem = SpriteFactory.Instance.CreateMapItem();
+            rupiesItem = SpriteFactory.Instance.CreateRupiesItem();
+            swordItem = SpriteFactory.Instance.CreateSwordItem();
 
             // Add tiles to tile controller
             tileController.AddSprite(barrierTile);
             tileController.AddSprite(bushTile);
+            tileController.AddSprite(defaultFloorTile);
+            tileController.AddSprite(dungeonStairsTile);
+            tileController.AddSprite(gravestoneTile);
+            tileController.AddSprite(waterTile);
 
             //Add items to the item controller
             itemController.AddSprite(compassItem);
+            itemController.AddSprite(heartItem);
+            itemController.AddSprite(keyItem);
             itemController.AddSprite(mapItem);
+            itemController.AddSprite(rupiesItem);
+            itemController.AddSprite(swordItem);
 
-            // Create Arrow (Before command is created)
-            arrow = SpriteFactory.Instance.CreateArrowSprite();
-            arrow.SetDistance(100);
-            arrow.SetProjectileType(new BoomerangType(arrow));
-            arrow.SetOwner(enemy1);
+            // Create Projectiles (Before command is created)
+            arrowLink = SpriteFactory.Instance.CreateArrowSprite();
+            arrowLink.SetDistance(60);
+            arrowLink.SetProjectileType(new ArrowType(arrowLink));
+            arrowLink.SetOwner(link);
+
+            silverArrowLink = SpriteFactory.Instance.CreateSilverArrowSprite();
+            silverArrowLink.SetDistance(80);
+            silverArrowLink.SetProjectileType(new ArrowType(silverArrowLink));
+            silverArrowLink.SetOwner(link);
+
+            boomerangLink = SpriteFactory.Instance.CreateBoomerangSprite();
+            boomerangLink.SetDistance(100);
+            boomerangLink.SetProjectileType(new BoomerangType(boomerangLink));
+            boomerangLink.SetOwner(link);
+
+            magicBoomerangLink = SpriteFactory.Instance.CreateMagicBoomerangSprite();
+            magicBoomerangLink.SetDistance(140);
+            magicBoomerangLink.SetProjectileType(new BoomerangType(magicBoomerangLink));
+            magicBoomerangLink.SetOwner(link);
+
+            bombLink = SpriteFactory.Instance.CreateBombSprite();
+            bombLink.SetDistance(100); // How long it is on the ground
+            bombLink.SetProjectileType(new BombType(bombLink));
+            bombLink.SetOwner(link);
+
+            fireLink = SpriteFactory.Instance.CreateFireSprite();
+            fireLink.SetDistance(50);
+            fireLink.SetProjectileType(new ArrowType(fireLink));
+            fireLink.SetOwner(link);
+
+            boomerangEnemy1 = SpriteFactory.Instance.CreateBoomerangSprite();
+            boomerangEnemy1.SetDistance(100);
+            boomerangEnemy1.SetProjectileType(new BoomerangType(boomerangEnemy1));
+            boomerangEnemy1.SetOwner(enemy1);
+
+            magicBoomerangEnemy2 = SpriteFactory.Instance.CreateMagicBoomerangSprite();
+            magicBoomerangEnemy2.SetDistance(140);
+            magicBoomerangEnemy2.SetProjectileType(new BoomerangType(magicBoomerangEnemy2));
+            magicBoomerangEnemy2.SetOwner(enemy2);
+
+            fireEnemy3 = SpriteFactory.Instance.CreateFireSprite();
+            fireEnemy3.SetDistance(50);
+            fireEnemy3.SetProjectileType(new ArrowType(fireEnemy3));
+            fireEnemy3.SetOwner(enemy3);
 
             // Add items to command lists
-            items.Add(arrow);
-
-            // Add enemies to the enemy controller
-            enemyController.AddSprite(enemy1);
-            enemyController.AddSprite(enemy2);
-            enemyController.AddSprite(enemy3);
+            items.Add(arrowLink);
+            items.Add(silverArrowLink);
+            items.Add(boomerangLink);
+            items.Add(magicBoomerangLink);
+            items.Add(bombLink);
+            items.Add(fireLink);
+            items.Add(boomerangEnemy1);
+            items.Add(magicBoomerangEnemy2);
+            items.Add(fireEnemy3);
 
             // Create Commands
-            fireProjectile = new FireProjectile(arrow);
+            fireArrowLink = new FireProjectile(arrowLink);
+            fireSilverArrowLink = new FireProjectile(silverArrowLink);
+            fireBoomerangLink = new FireProjectile(boomerangLink);
+            fireMagicBoomerangLink = new FireProjectile(magicBoomerangLink);
+            fireBombLink = new FireProjectile(bombLink);
+            fireFireLink = new FireProjectile(fireLink);
+            fireBoomerangEnemy1 = new FireProjectile(boomerangEnemy1);
+            fireMagicBoomerangEnemy2 = new FireProjectile(magicBoomerangEnemy2);
+            fireFireEnemy3 = new FireProjectile(fireEnemy3);
             previousEnemy = new PreviousSprite(enemyController);
             nextEnemy = new NextSprite(enemyController);
             previousTile = new PreviousSprite(tileController);
@@ -152,6 +243,17 @@ namespace CSE3902Project
             linkDamage = new TakeDamage(link);
             linkAttack = new Attack(link);
             linkUse = new Use(link);
+
+            // Set projectile commands (After commands are created)
+            arrowLink.SetFireCommand(fireArrowLink);
+            silverArrowLink.SetFireCommand(fireSilverArrowLink);
+            boomerangLink.SetFireCommand(fireBoomerangLink);
+            magicBoomerangLink.SetFireCommand(fireMagicBoomerangLink);
+            bombLink.SetFireCommand(fireBombLink);
+            fireLink.SetFireCommand(fireFireLink);
+            boomerangEnemy1.SetFireCommand(fireBoomerangEnemy1);
+            magicBoomerangEnemy2.SetFireCommand(fireMagicBoomerangEnemy2);
+            fireEnemy3.SetFireCommand(fireFireEnemy3);
 
             //Add link's keys to the list
             linkKeys.Add(Keys.Left);
@@ -169,7 +271,12 @@ namespace CSE3902Project
            // linkKeys.Add(Keys.H);
 
             // Add to keyboard controller
-            keyboard.RegisterCommand(Keys.D1, fireProjectile);
+            keyboard.RegisterCommand(Keys.D1, fireArrowLink);
+            keyboard.RegisterCommand(Keys.D2, fireSilverArrowLink);
+            keyboard.RegisterCommand(Keys.D3, fireBoomerangLink);
+            keyboard.RegisterCommand(Keys.D4, fireMagicBoomerangLink);
+            keyboard.RegisterCommand(Keys.D5, fireBombLink);
+            keyboard.RegisterCommand(Keys.D6, fireFireLink);
 
             keyboard.RegisterCommand(Keys.Up, linkMoveUp);
             keyboard.RegisterCommand(Keys.W, linkMoveUp);
@@ -199,8 +306,10 @@ namespace CSE3902Project
 
             keyboard.AddPlayableSprite(link, linkKeys);
 
-            // Set arrow command (After command is created)
-            arrow.SetFireCommand(fireProjectile);
+            // Add enemies to the enemy controller (with their items)
+            enemyController.AddSprite(enemy1, boomerangEnemy1);
+            enemyController.AddSprite(enemy2, magicBoomerangEnemy2);
+            enemyController.AddSprite(enemy3, fireEnemy3);
         }
 
         public void resetGame()
@@ -215,13 +324,13 @@ namespace CSE3902Project
             this.LoadContent();
         }
 
-        
+
 
         protected override void Update(GameTime gameTime)
         {
-          
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
-           
+
 
             // Update all controllers
             foreach (var controller in controllers)
@@ -247,7 +356,7 @@ namespace CSE3902Project
             _spriteBatch.Begin();
 
             //Call each controller to draw
-            foreach(var controller in controllers)
+            foreach (var controller in controllers)
             {
                 controller.Draw();
             }
@@ -259,10 +368,10 @@ namespace CSE3902Project
 
             //Draw Link
             link.Draw();
-                        
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
         }
     }
-} 
+}

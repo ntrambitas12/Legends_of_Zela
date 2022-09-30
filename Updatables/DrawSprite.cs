@@ -13,11 +13,11 @@ using System.Threading.Tasks;
     private SpriteBatch spriteBatch;
     private List<Texture2D> textureToDraw;
     private Vector2 screenCord;
-    private int counter;
+    int counter = 0;
+   
 
     private DrawSprite()
     {
-        counter = 0;
     }
 
     private static readonly DrawSprite instance = new DrawSprite();
@@ -41,9 +41,12 @@ using System.Threading.Tasks;
         // Draw the sprite
         spriteBatch.Draw(textureToDraw[currentFrame], screenCord, color);//color is data driven
 
-        counter++;
+
+
         //update and save the frames
-        if (counter == 10)
+        
+
+        if (counter > 10)
         {
             counter = 0;
             currentFrame++;
@@ -51,7 +54,11 @@ using System.Threading.Tasks;
             {
                 currentFrame = 0;
             }
+           
         }
+        counter++;
+       
+        
 
         //update the instance variables for the sprite
         sprite.currentFrame = currentFrame;
@@ -70,9 +77,8 @@ using System.Threading.Tasks;
         // Draw the sprite
         spriteBatch.Draw(textureToDraw[currentFrame], screenCord, Color.White);
 
-        counter++;
         //update and save the frames
-        if (counter == 10)
+        if (counter > 10)
         {
             counter = 0;
             currentFrame++;
@@ -81,7 +87,7 @@ using System.Threading.Tasks;
                 currentFrame = 0;
             }
         }
-
+        counter++;
         //update the instance variables for the sprite
         sprite.currentFrame = currentFrame;
 
