@@ -40,11 +40,14 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> linkLeft;
     private List<Texture2D> linkUp;
     private List<Texture2D> linkDown;
-    private List<Texture2D> linkUse;
     private List<Texture2D> linkUseLeft;
     private List<Texture2D> linkUseRight;
     private List<Texture2D> linkUseUp;
     private List<Texture2D> linkUseDown;
+    private List<Texture2D> linkAttackLeft;
+    private List<Texture2D> linkAttackRight;
+    private List<Texture2D> linkAttackUp;
+    private List<Texture2D> linkAttackDown;
     private List<Texture2D>[] goriyaFrames;
     private List<Texture2D> goriyaRight;
     private List<Texture2D> goriyaLeft;
@@ -120,6 +123,10 @@ public sealed class SpriteFactory : IFactory
         linkUseRight = new List<Texture2D>();
         linkUseUp = new List<Texture2D>();
         linkUseDown = new List<Texture2D>();
+        linkAttackLeft = new List<Texture2D>();
+        linkAttackRight = new List<Texture2D>();
+        linkAttackUp = new List<Texture2D>();
+        linkAttackDown = new List<Texture2D>();
         goriyaFrames = new List<Texture2D>[4];
         goriyaLeft = new List<Texture2D>();
         goriyaRight = new List<Texture2D>();
@@ -237,6 +244,11 @@ public sealed class SpriteFactory : IFactory
             linkUseLeft.Add(content.Load<Texture2D>("LinkSprites/LinkLeftUse"));
             linkUseUp.Add(content.Load<Texture2D>("LinkSprites/LinkUpUse"));
             linkUseDown.Add(content.Load<Texture2D>("LinkSprites/LinkDownUse"));
+            linkAttackRight.Add(content.Load<Texture2D>("LinkSprites/LinkRightSword"));
+            linkAttackLeft.Add(content.Load<Texture2D>("LinkSprites/LinkLeftSword"));
+            linkAttackUp.Add(content.Load<Texture2D>("LinkSprites/LinkUpSword"));
+            linkAttackDown.Add(content.Load<Texture2D>("LinkSprites/LinkDownSword"));
+
 
             goriyaRight.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedRight" + i));
             goriyaLeft.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedLeft" + i));
@@ -293,6 +305,17 @@ public sealed class SpriteFactory : IFactory
         linkFrames[(int)SpriteAction.useRight] = linkUseRight;
         linkFrames[(int)SpriteAction.useUp] = linkUseUp;
         linkFrames[(int)SpriteAction.useDown] = linkUseDown;
+        linkFrames[(int)SpriteAction.attackLeft] = linkAttackLeft;
+        linkFrames[(int)SpriteAction.attackRight] = linkAttackRight;
+        linkFrames[(int)SpriteAction.attackUp] = linkAttackUp;
+        linkFrames[(int)SpriteAction.attackDown] = linkAttackDown;
+        linkFrames[(int)SpriteAction.damageLeft] = linkLeft;
+        linkFrames[(int)SpriteAction.damageRight] = linkRight;
+        linkFrames[(int)SpriteAction.damageUp] = linkUp;
+        linkFrames[(int)SpriteAction.damageDown] = linkDown;
+
+
+
 
         // Add example enemy frames to the list
         goriyaFrames[(int)SpriteAction.moveLeft] = goriyaLeft;

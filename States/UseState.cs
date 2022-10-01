@@ -5,28 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class MovingState : ISpriteState
+public class UseState : ISpriteState
 {
-    private IConcreteSprite sprite;
-    private IPosition position;
+    private ISprite sprite;
     private IDraw drawSprite;
 
-    public MovingState(IConcreteSprite sprite)
+    public UseState(ISprite sprite)
     {
         this.sprite = sprite;
-        position = UpdateSpritePos.GetInstance;
-        drawSprite = DrawSprite.GetInstance;
-    }
-    public void Draw()
-    {
-        drawSprite.Draw(sprite, Color.White);
+        drawSprite = DrawStaticSprite.GetInstance;
     }
 
     public void Update()
     {
-        position.Update(sprite);
+        //no updated needed; link is stationary when he is using an item
     }
 
+    public void Draw()
+    {
+        drawSprite.Draw(sprite, Color.White);
+
+    }
+    
     public void SetPosition(SpriteAction action)
     {
         sprite.SetSpriteAction(action);
@@ -34,6 +34,8 @@ public class MovingState : ISpriteState
 
     public void SetPreviousState(ISpriteState state)
     {
-        //implement if needed
+       //implement if needed
     }
 }
+
+

@@ -1,5 +1,4 @@
-﻿using CSE3902Project;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +10,14 @@ namespace CSE3902Project.Commands
 {
     public class MoveUp : ICommand
     {
-        private IConcreteSprite Link;
-
-        public MoveUp(ISprite link)
+        private IConcreteSprite sprite;
+        public MoveUp(ISprite sprite)
         {
-            this.Link = (IConcreteSprite)link;
-            
+            this.sprite = (IConcreteSprite)sprite;
         }
         public void Execute()
         {
-            Link.SetSpriteState(SpriteAction.moveUp, Link.moving);
-            Link.Update();
+            sprite.SetSpriteState(SpriteAction.moveUp, sprite.moving);
         }
     }
 }

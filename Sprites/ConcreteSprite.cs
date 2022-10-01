@@ -16,17 +16,20 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public ISpriteState dead { get; set; }
     public ISpriteState stillAnimated { get; set; }
 
+    public ISpriteState attack { get; set; }
+
 
     private IDraw drawSprite = DrawSprite.GetInstance;
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
 
     /*Variable that holds the current state*/
-    public ISpriteState state;
+    private ISpriteState state;
     public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures) {
         still = new StillState(this);
         stillAnimated = new StillAnimated(this);
         moving = new MovingState(this);
         damaged = new DamagedState(this);
+        attack = new AttackState(this); 
         dead = new DeadState();
 
         state = still;
@@ -34,10 +37,13 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
    
     public void SetSpriteState(SpriteAction action, ISpriteState state)
     {
-        if (this.state != state)
-        {
+        //if (this.state != state)
+        //{
+        //set the previous state
+        state.SetPreviousState(this.state);
+        //change to the new state
             this.state = state;
-        }
+       // }
         SetSpriteAction(action);
 
 

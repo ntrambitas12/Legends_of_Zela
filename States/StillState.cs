@@ -1,15 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 
-    public class StillState:ISpriteState
+    public class StillState : ISpriteState
     {
     private ConcreteSprite sprite;
     private IDraw drawSprite;
 
         public StillState(ConcreteSprite sprite)
         {
-        this.sprite = sprite;
-        drawSprite = DrawStaticSprite.GetInstance;
+            this.sprite = sprite;
+            drawSprite = DrawStaticSprite.GetInstance;
         }
 
 
@@ -29,6 +29,10 @@ using System;
         sprite.SetSpriteAction(action);
     }
 
+    public void SetPreviousState(ISpriteState state)
+    {
+        //implement if needed
+    }
 }
 
 

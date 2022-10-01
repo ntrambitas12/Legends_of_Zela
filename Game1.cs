@@ -71,7 +71,9 @@ namespace CSE3902Project
         private MoveUp linkMoveUp;
         private MoveLeft linkMoveLeft;
         private MoveRight linkMoveRight;
-        private LinkTakeDamage linkDamage;
+        private TakeDamage linkDamage;
+        private Attack linkAttack;
+        private Use linkUse;
 
         private KeyboardController keyboard;
         private EnemyController enemyController;
@@ -218,15 +220,19 @@ namespace CSE3902Project
             items.Add(fireEnemy3);
 
             // Create Commands
+            linkUse = new Use(link);
+
             fireArrowLink = new FireProjectile(arrowLink);
             fireSilverArrowLink = new FireProjectile(silverArrowLink);
             fireBoomerangLink = new FireProjectile(boomerangLink);
             fireMagicBoomerangLink = new FireProjectile(magicBoomerangLink);
             fireBombLink = new FireProjectile(bombLink);
             fireFireLink = new FireProjectile(fireLink);
+
             fireBoomerangEnemy1 = new FireProjectile(boomerangEnemy1);
             fireMagicBoomerangEnemy2 = new FireProjectile(magicBoomerangEnemy2);
             fireFireEnemy3 = new FireProjectile(fireEnemy3);
+
             previousEnemy = new PreviousSprite(enemyController);
             nextEnemy = new NextSprite(enemyController);
             previousTile = new PreviousSprite(tileController);
@@ -238,7 +244,9 @@ namespace CSE3902Project
             linkMoveUp = new MoveUp(link);
             linkMoveRight = new MoveRight(link);
             linkMoveLeft = new MoveLeft(link);
-            linkDamage = new LinkTakeDamage(link);
+            linkDamage = new TakeDamage(link);
+            linkAttack = new Attack(link);
+           
 
             // Set projectile commands (After commands are created)
             arrowLink.SetFireCommand(fireArrowLink);
@@ -260,8 +268,7 @@ namespace CSE3902Project
             linkKeys.Add(Keys.A);
             linkKeys.Add(Keys.S);
             linkKeys.Add(Keys.D);
-            linkKeys.Add(Keys.E);
-
+           
 
             // Add to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireArrowLink);
@@ -280,7 +287,8 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.Down, linkMoveDown);
             keyboard.RegisterCommand(Keys.S, linkMoveDown);
             keyboard.RegisterCommand(Keys.E, linkDamage);
-
+            keyboard.RegisterCommand(Keys.Z, linkAttack);
+        
             keyboard.RegisterCommand(Keys.Y, nextTile);
             keyboard.RegisterCommand(Keys.T, previousTile);
 

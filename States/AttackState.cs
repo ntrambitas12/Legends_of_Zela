@@ -5,40 +5,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class DamagedState : ISpriteState
+public class AttackState : ISpriteState
 {
     private IConcreteSprite sprite;
     private IDraw drawSprite;
-
     private SpriteAction prevAction;
     private ISpriteState prevState;
-
+   
 
     //naive approach to regulating frame rate. figure better way in the future
     private int counter = 0;
 
-    public DamagedState(ISprite sprite)
+    public AttackState(ISprite sprite)
     {
+        drawSprite = DrawSprite.GetInstance;
         this.sprite = (IConcreteSprite)sprite;
-        drawSprite = DrawStaticSprite.GetInstance;
     }
 
     public void Update()
     {
-        if (counter > 22)
+        if (counter > 20)
         {
             counter = 0;
             sprite.SetSpriteState(prevAction, prevState);
-
+            
         }
         counter++;
     }
 
     public void Draw()
     {
-        drawSprite.Draw(sprite, Color.Red);
-    }
+        drawSprite.Draw(sprite, Color.White);
 
+    }
+    
     public void SetPosition(SpriteAction action)
     {
         sprite.SetSpriteAction(action);
