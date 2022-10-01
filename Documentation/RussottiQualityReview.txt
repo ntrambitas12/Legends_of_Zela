@@ -1,0 +1,11 @@
+Author of the code review: Matt Russotti
+Date of the code review: 9/30
+Sprint number: 2
+Name of the .cs file being reviewed: EnemyController.cs
+Author of the .cs file being reviewed: Nick Trambitas
+Number of minutes taken to complete the review: 25
+A hypothetical change to make to the game related to file being reviewed 
+and how the current implementation could or could not easily support that change:
+A hypothetical change to this would be to data drive the AI based on how difficult you want the enemy to be
+this change would require an overhaul to the update method (or multiple update methods?). It would be a bit of work
+but most certainly is possible.
