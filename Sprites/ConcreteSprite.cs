@@ -37,13 +37,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
    
     public void SetSpriteState(SpriteAction action, ISpriteState state)
     {
-        //if (this.state != state)
-        //{
-        //set the previous state
         state.SetPreviousState(this.state);
-        //change to the new state
             this.state = state;
-       // }
         SetSpriteAction(action);
 
 
