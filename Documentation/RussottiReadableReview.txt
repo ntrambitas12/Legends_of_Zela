@@ -1,0 +1,12 @@
+Author of the code review: Matt Russotti
+Date of the code review: 9/30
+Sprint number: 2
+Name of the .cs file being reviewed: ConcreteItem.cs
+Author of the .cs file being reviewed: Kyle Hoefker
+Number of minutes taken to complete the review: 20
+Specific comments on what is readable and what is not:
+- All methods are short and data driven
+- Variables are labeled meaningfully
+- Methods are labeled accuratly
+- No comments but none are really needed
+- I wouldn't say anything is unreadable. This is very well done
