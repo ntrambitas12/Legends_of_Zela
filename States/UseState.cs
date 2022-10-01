@@ -13,7 +13,7 @@ public class UseState : ISpriteState
     public UseState(ISprite sprite)
     {
         this.sprite = sprite;
-        drawSprite = DrawStaticSprite.GetInstance;
+        drawSprite = DrawSprite.GetInstance;
     }
 
     public void Update()
@@ -23,7 +23,7 @@ public class UseState : ISpriteState
 
     public void Draw()
     {
-        drawSprite.Draw(sprite, Color.White);
+        drawSprite.Draw(sprite, Color.White, false);
 
     }
     

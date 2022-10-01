@@ -14,7 +14,7 @@ public class FireProjectile : ICommand
     {
         this.projectile = projectile;
         shooter = (IConcreteSprite)projectile.Owner();
-        counter = -1;
+        counter = 0;
         newCord = new Vector2(0,0);
         distance = projectile.Distance();
     }

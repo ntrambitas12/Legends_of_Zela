@@ -16,7 +16,7 @@ public class StillAnimated : ISpriteState
 
     public void Draw()
     {
-        drawSprite.Draw(sprite, Color.White);
+        drawSprite.Draw(sprite, Color.White, true);
 
     }
 

@@ -9,13 +9,13 @@ using System;
         public StillState(ConcreteSprite sprite)
         {
             this.sprite = sprite;
-            drawSprite = DrawStaticSprite.GetInstance;
+            drawSprite = DrawSprite.GetInstance;
         }
 
 
     public void Draw()
     {
-        drawSprite.Draw(sprite, Color.White);
+        drawSprite.Draw(sprite, Color.White, false);
 
     }
 
