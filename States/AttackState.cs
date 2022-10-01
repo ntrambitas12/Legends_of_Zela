@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,19 +25,21 @@ public class AttackState : ISpriteState
 
     public void Update()
     {
-        if (counter > 20)
+
+        
+        if (counter > 17)
         {
             counter = 0;
             sprite.SetSpriteState(prevAction, prevState);
-            
+
         }
         counter++;
+
     }
 
     public void Draw()
     {
-        drawSprite.Draw(sprite, Color.White);
-
+        drawSprite.Draw(sprite, Color.White, true);
     }
     
     public void SetPosition(SpriteAction action)

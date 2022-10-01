@@ -38,10 +38,6 @@ namespace CSE3902Project.Commands
                 case 3:
                     this.spritePos = SpriteAction.attackDown;
                     break;
-                default:
-                    //this.spritePos = (SpriteAction)sprite.spritePos;
-                    break;
-
             }
             sprite.SetSpriteState(this.spritePos, sprite.attack);
         }

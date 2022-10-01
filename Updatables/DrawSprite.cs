@@ -16,7 +16,10 @@ using System.Threading.Tasks;
     private Vector2 screenCord;
     int counter = 0;
 
-    private DrawSprite() { }
+    private DrawSprite() {
+        currentFrame = 0;
+        totalFrames = 0;
+    }
 
     private static readonly DrawSprite instance = new DrawSprite();
     public static DrawSprite GetInstance
@@ -27,11 +30,19 @@ using System.Threading.Tasks;
         }
     }
 
-    public void Draw(ISprite sprite, Color color)
+    public void Draw(ISprite sprite, Color color, bool animated)
     {
         // Get the current frames from the sprite instance variables
-        currentFrame = sprite.currentFrame;
-        totalFrames = sprite.totalFrames;
+        if (animated)
+        {
+            currentFrame = sprite.currentFrame;
+            totalFrames = sprite.totalFrames;
+        }
+        else
+        {
+            currentFrame = 0;
+            totalFrames = 0;
+        }
         spriteBatch = sprite.spriteBatch;
         textureToDraw = sprite.textureToDraw;
         screenCord = sprite.screenCord;
@@ -51,36 +62,13 @@ using System.Threading.Tasks;
            
         }
         counter++;
-       
-        // Update the instance variables for the sprite
-        sprite.currentFrame = currentFrame;
-    }
 
-    public void Draw(ISprite sprite)
-    {
-        // Get the current frames from the sprite instance variables
-        currentFrame = sprite.currentFrame;
-        totalFrames = sprite.totalFrames;
-        spriteBatch = sprite.spriteBatch;
-        textureToDraw = sprite.textureToDraw;
-        screenCord = sprite.screenCord;
-
-        // Draw the sprite
-        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, Color.White);
-
-        // Update and save the frames
-        if (counter > 10)
+        if (animated)
         {
-            counter = 0;
-            currentFrame++;
-            if (currentFrame == totalFrames)
-            {
-                currentFrame = 0;
-            }
+            // Update the instance variables for the sprite
+            sprite.currentFrame = currentFrame;
         }
-        counter++;
-        //update the instance variables for the sprite
-        sprite.currentFrame = currentFrame;
     }
+   
 }
 

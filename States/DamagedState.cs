@@ -14,13 +14,13 @@ public class DamagedState : ISpriteState
     private ISpriteState prevState;
 
 
-    //naive approach to regulating frame rate. figure better way in the future
+    //naive approach to controlling how long to keep in damaged state
     private int counter = 0;
 
     public DamagedState(ISprite sprite)
     {
         this.sprite = (IConcreteSprite)sprite;
-        drawSprite = DrawStaticSprite.GetInstance;
+        drawSprite = DrawSprite.GetInstance;
     }
 
     public void Update()
@@ -36,7 +36,7 @@ public class DamagedState : ISpriteState
 
     public void Draw()
     {
-        drawSprite.Draw(sprite, Color.Red);
+        drawSprite.Draw(sprite, Color.Red, false);
     }
 
     public void SetPosition(SpriteAction action)

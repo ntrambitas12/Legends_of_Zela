@@ -19,7 +19,7 @@ public class MovingState : ISpriteState
     }
     public void Draw()
     {
-        drawSprite.Draw(sprite, Color.White);
+        drawSprite.Draw(sprite, Color.White, true);
     }
 
     public void Update()

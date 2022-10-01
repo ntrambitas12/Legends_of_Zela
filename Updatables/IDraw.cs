@@ -7,6 +7,6 @@ using Microsoft.Xna.Framework;
 
     public interface IDraw
     {
-    public void Draw(ISprite sprite, Color color);
+    public void Draw(ISprite sprite, Color color, bool animated);
     }
 

@@ -32,7 +32,7 @@ public class ConcreteItem : AbstractSprite, IItem
     {
         if (shouldDraw)
         {
-            drawSprite.Draw(this, Color.White);
+            drawSprite.Draw(this, Color.White, true);
         }
     }
 
