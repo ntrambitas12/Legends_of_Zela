@@ -24,7 +24,7 @@ public class AttackState : ISpriteState
 
     public void Update()
     {
-        if (counter > 12)
+        if (counter > 20)
         {
             counter = 0;
             sprite.SetSpriteState(prevAction, prevState);

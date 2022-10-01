@@ -220,15 +220,19 @@ namespace CSE3902Project
             items.Add(fireEnemy3);
 
             // Create Commands
+            linkUse = new Use(link);
+
             fireArrowLink = new FireProjectile(arrowLink);
             fireSilverArrowLink = new FireProjectile(silverArrowLink);
             fireBoomerangLink = new FireProjectile(boomerangLink);
             fireMagicBoomerangLink = new FireProjectile(magicBoomerangLink);
             fireBombLink = new FireProjectile(bombLink);
             fireFireLink = new FireProjectile(fireLink);
+
             fireBoomerangEnemy1 = new FireProjectile(boomerangEnemy1);
             fireMagicBoomerangEnemy2 = new FireProjectile(magicBoomerangEnemy2);
             fireFireEnemy3 = new FireProjectile(fireEnemy3);
+
             previousEnemy = new PreviousSprite(enemyController);
             nextEnemy = new NextSprite(enemyController);
             previousTile = new PreviousSprite(tileController);
@@ -242,7 +246,7 @@ namespace CSE3902Project
             linkMoveLeft = new MoveLeft(link);
             linkDamage = new TakeDamage(link);
             linkAttack = new Attack(link);
-            linkUse = new Use(link);
+           
 
             // Set projectile commands (After commands are created)
             arrowLink.SetFireCommand(fireArrowLink);

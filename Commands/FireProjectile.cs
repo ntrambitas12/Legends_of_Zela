@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 public class FireProjectile : ICommand
 {
     private IItem projectile;
-    private ISprite shooter;
+    private IConcreteSprite shooter;
     public int counter;
     private Vector2 newCord;
     public int distance;
@@ -13,8 +13,8 @@ public class FireProjectile : ICommand
     public FireProjectile(IItem projectile)
     {
         this.projectile = projectile;
-        shooter = projectile.Owner();
-        counter = 0;
+        shooter = (IConcreteSprite)projectile.Owner();
+        counter = -1;
         newCord = new Vector2(0,0);
         distance = projectile.Distance();
     }
@@ -23,10 +23,14 @@ public class FireProjectile : ICommand
     {
         if (counter == 0)
         {
-            shooter = projectile.Owner();
+            shooter = (IConcreteSprite)projectile.Owner();
             projectile.SetSpriteAction((SpriteAction)shooter.spritePos);
             projectile.SetDirection(shooter.spritePos);
             newCord = projectile.screenCord;
+
+            shooter.SetSpriteState((SpriteAction)shooter.spritePos, shooter.attack);
+
+
             switch (shooter.spritePos)
             {
                 // Probably want sprite to hold info about where to start each
