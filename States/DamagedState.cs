@@ -25,7 +25,7 @@ public class DamagedState : ISpriteState
 
     public void Update()
     {
-        if (counter > 100)
+        if (counter > 22)
         {
             counter = 0;
             sprite.SetSpriteState(prevAction, prevState);

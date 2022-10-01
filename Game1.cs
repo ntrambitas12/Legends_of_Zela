@@ -268,11 +268,7 @@ namespace CSE3902Project
             linkKeys.Add(Keys.A);
             linkKeys.Add(Keys.S);
             linkKeys.Add(Keys.D);
-           // linkKeys.Add(Keys.E);
-           // linkKeys.Add(Keys.Z);
-            //linkKeys.Add(Keys.N);
-            /* temp use key */
-           // linkKeys.Add(Keys.H);
+           
 
             // Add to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireArrowLink);
@@ -293,8 +289,6 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.E, linkDamage);
             keyboard.RegisterCommand(Keys.Z, linkAttack);
         
-            keyboard.RegisterCommand(Keys.H, linkUse);
-
             keyboard.RegisterCommand(Keys.Y, nextTile);
             keyboard.RegisterCommand(Keys.T, previousTile);
 
