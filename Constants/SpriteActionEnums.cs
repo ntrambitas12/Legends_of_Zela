@@ -23,4 +23,7 @@
     useRight = 13, 
     useUp = 14,
     useDown = 15,
+
+    // For bomb
+    bombCloud = 4,
 }

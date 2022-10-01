@@ -21,9 +21,9 @@ public class BombType : IProjectileType
         counter = fireProjectile.Counter();
         distance = projectile.Distance();
 
-        if (counter == distance / 4)
+        if (counter == distance - 25)
         {
-            // Animate the bomb
+            projectile.SetSpriteAction(SpriteAction.bombCloud);
         }
 
         if (shouldDraw)
