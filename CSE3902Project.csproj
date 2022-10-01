@@ -16,6 +16,18 @@
     <None Remove="Items\" />
     <None Remove="States\" />
     <None Remove="Content\ZeldaSpriteArrowL.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-1.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-0.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-2.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-3.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-7.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-6.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-4.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-5.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-8.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-9.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-11.png" />
+    <None Remove="Content\MiscSprites\02fc0a5982e64acfc1268798cdb97975mIqV5QRXbx5OHh6L-10.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

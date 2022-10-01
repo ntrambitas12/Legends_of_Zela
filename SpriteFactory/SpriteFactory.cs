@@ -90,6 +90,7 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> bombRight;
     private List<Texture2D> bombUp;
     private List<Texture2D> bombDown;
+    private List<Texture2D> bombCloud;
     private List<Texture2D>[] fireFrames;
     private List<Texture2D> fireLeft;
     private List<Texture2D> fireRight;
@@ -162,11 +163,12 @@ public sealed class SpriteFactory : IFactory
         magicBoomerangRight = new List<Texture2D>();
         magicBoomerangUp = new List<Texture2D>();
         magicBoomerangDown = new List<Texture2D>();
-        bombFrames = new List<Texture2D>[4];
+        bombFrames = new List<Texture2D>[5];
         bombLeft = new List<Texture2D>();
         bombRight = new List<Texture2D>();
         bombUp = new List<Texture2D>();
         bombDown = new List<Texture2D>();
+        bombCloud = new List<Texture2D>();
         fireFrames = new List<Texture2D>[4];
         fireLeft = new List<Texture2D>();
         fireRight = new List<Texture2D>();
@@ -287,6 +289,7 @@ public sealed class SpriteFactory : IFactory
         bombRight.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
         bombUp.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
         bombDown.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
+        for (int i = 1; i <= 4; i++) bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud" + i));
         fireLeft.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
         fireRight.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
         fireUp.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
@@ -358,6 +361,7 @@ public sealed class SpriteFactory : IFactory
         bombFrames[(int)SpriteAction.moveRight] = bombRight;
         bombFrames[(int)SpriteAction.moveUp] = bombUp;
         bombFrames[(int)SpriteAction.moveDown] = bombDown;
+        bombFrames[(int)SpriteAction.bombCloud] = bombCloud;
 
         fireFrames[(int)SpriteAction.moveLeft] = fireLeft;
         fireFrames[(int)SpriteAction.moveRight] = fireRight;
