@@ -15,8 +15,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public ISpriteState damaged { get; set; }
     public ISpriteState dead { get; set; }
     public ISpriteState stillAnimated { get; set; }
-
     public ISpriteState attack { get; set; }
+    public int health { get; set; }
 
 
     private IDraw drawSprite = DrawSprite.GetInstance;

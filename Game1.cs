@@ -12,9 +12,9 @@ namespace CSE3902Project
 {
     public class Game1 : Game
     {
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
 
         private List<IItem> items;
         private List<IController> controllers;
@@ -73,13 +73,11 @@ namespace CSE3902Project
         private MoveRight linkMoveRight;
         private TakeDamage linkDamage;
         private Attack linkAttack;
-        private Use linkUse;
 
         private KeyboardController keyboard;
         private EnemyController enemyController;
         private TileController tileController;
         private ItemController itemController;
-
 
         public Game1()
         {
@@ -90,8 +88,6 @@ namespace CSE3902Project
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             // Instantiate lists and commands
             items = new List<IItem>();
             controllers = new List<IController>();
@@ -105,7 +101,6 @@ namespace CSE3902Project
             tileController = TileController.GetInstance;
             itemController = ItemController.GetInstance;
             keyboard = KeyboardController.GetInstance;
-
 
             // Add all controllers to controller lists
             controllers.Add(keyboard);
@@ -125,7 +120,6 @@ namespace CSE3902Project
             enemy1 = SpriteFactory.Instance.CreateGoriyaSprite();
             enemy2 = SpriteFactory.Instance.CreateOktorokSprite();
             enemy3 = SpriteFactory.Instance.CreatePeahatSprite();
-
 
             // Create link
             link = SpriteFactory.Instance.CreateLinkSprite();
@@ -220,8 +214,6 @@ namespace CSE3902Project
             items.Add(fireEnemy3);
 
             // Create Commands
-            linkUse = new Use(link);
-
             fireArrowLink = new FireProjectile(arrowLink);
             fireSilverArrowLink = new FireProjectile(silverArrowLink);
             fireBoomerangLink = new FireProjectile(boomerangLink);
@@ -270,7 +262,7 @@ namespace CSE3902Project
             linkKeys.Add(Keys.D);
            
 
-            // Add to keyboard controller
+            // Add item use to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireArrowLink);
             keyboard.RegisterCommand(Keys.D2, fireSilverArrowLink);
             keyboard.RegisterCommand(Keys.D3, fireBoomerangLink);
@@ -278,6 +270,7 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.D5, fireBombLink);
             keyboard.RegisterCommand(Keys.D6, fireFireLink);
 
+            // Add link movements and actions to keyboard controller
             keyboard.RegisterCommand(Keys.Up, linkMoveUp);
             keyboard.RegisterCommand(Keys.W, linkMoveUp);
             keyboard.RegisterCommand(Keys.Left, linkMoveLeft);
@@ -288,20 +281,21 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.S, linkMoveDown);
             keyboard.RegisterCommand(Keys.E, linkDamage);
             keyboard.RegisterCommand(Keys.Z, linkAttack);
-        
+            keyboard.RegisterCommand(Keys.N, linkAttack);
+
+            // Add tile switching/item/enemy switching commands to keyboard controller
             keyboard.RegisterCommand(Keys.Y, nextTile);
             keyboard.RegisterCommand(Keys.T, previousTile);
-
             keyboard.RegisterCommand(Keys.U, previousItem);
             keyboard.RegisterCommand(Keys.I, nextItem);
-
-
-            keyboard.RegisterCommand(Keys.Q, exitGame);
-            keyboard.RegisterCommand(Keys.R, restartGame);
-
             keyboard.RegisterCommand(Keys.P, nextEnemy);
             keyboard.RegisterCommand(Keys.O, previousEnemy);
 
+            // Add restart and exit commands to keyboard
+            keyboard.RegisterCommand(Keys.Q, exitGame);
+            keyboard.RegisterCommand(Keys.R, restartGame);
+
+            // Add link with his keys to playable sprite
             keyboard.AddPlayableSprite(link, linkKeys);
 
             // Add enemies to the enemy controller (with their items)
@@ -336,7 +330,7 @@ namespace CSE3902Project
                 controller.Update();
             }
 
-
+            //Update all items
             foreach (IItem item in items)
             {
                 item.Update();
@@ -350,7 +344,6 @@ namespace CSE3902Project
 
         protected override void Draw(GameTime gameTime)
         {
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
 
             //Call each controller to draw
@@ -359,6 +352,7 @@ namespace CSE3902Project
                 controller.Draw();
             }
 
+            //Draw all items
             foreach (IItem item in items)
             {
                 item.Draw();

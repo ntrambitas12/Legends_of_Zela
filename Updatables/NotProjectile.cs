@@ -1,13 +1,9 @@
 ﻿using System;
 public class NotProjectile : IProjectileType
 {
-    public NotProjectile()
-    {
-    }
+    public NotProjectile() { }
 
-    public void Update()
-    {
-    }
+    public void Update() { }
 }
 
 

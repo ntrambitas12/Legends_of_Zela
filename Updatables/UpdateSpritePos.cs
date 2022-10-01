@@ -11,7 +11,9 @@ public sealed class UpdateSpritePos : IPosition
     private int spritePos;
 
     private UpdateSpritePos(){}
+
     private static readonly UpdateSpritePos instance = new UpdateSpritePos();
+
     public static UpdateSpritePos GetInstance
     {
         get
@@ -26,7 +28,7 @@ public sealed class UpdateSpritePos : IPosition
 
         switch(spritePos)
         {
-            /*move sprite to the left*/
+            /* Move sprite to the left */
             case 0:
                 if (screenCord.X >= 0 && screenCord.X <= 800)
                 {
@@ -38,7 +40,7 @@ public sealed class UpdateSpritePos : IPosition
                 }
                 sprite.screenCord = screenCord;
                 break;
-           /*move sprite to the right*/
+           /* Move sprite to the right */
             case 1:
                 if (screenCord.X >= 0 && screenCord.X <= 800)
                 {
@@ -50,7 +52,7 @@ public sealed class UpdateSpritePos : IPosition
                 }
                 sprite.screenCord = screenCord;
                 break;
-            /*move sprite up*/
+            /* Move sprite up */
             case 2:
                 if (screenCord.Y >= 0 && screenCord.Y <= 480)
                 {
@@ -62,7 +64,7 @@ public sealed class UpdateSpritePos : IPosition
                 }
                 sprite.screenCord = screenCord;
                 break;
-            /*move sprite down*/
+            /* Move sprite down */
             case 3:
                 if (screenCord.Y >= 0 && screenCord.Y <= 480)
                 {
@@ -75,7 +77,7 @@ public sealed class UpdateSpritePos : IPosition
                 sprite.screenCord = screenCord;
                 break;
             default:
-                /*If none, don't change the orientation of the sprite on the screen*/
+                /* If none, don't change the orientation of the sprite on the screen */
                 break;
         }
     }

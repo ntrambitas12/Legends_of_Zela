@@ -1,0 +1,13 @@
+﻿Readability review
+Author: Ben Keip
+Date: 9-26-22
+Sprint #2
+File being reviewed: DrawSprite.cs
+Author of file being reviewed: Matt Russotti and Nick Trambitas
+Code review took 10 minutes
+
+Overall, DrawSprite is very easily readable. The variables are declared right under the class declaration, and
+all fields are practical in terms of their naming. The spacing throughout the document, however, is a bit odd,
+and leaves a little bit to be desired. Comments are provided where clarity is needed, but the difference between
+the two draw methods should be more explicitly stated. Coupling is tight. Great job!
+

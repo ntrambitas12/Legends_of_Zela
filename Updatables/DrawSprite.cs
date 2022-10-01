@@ -8,17 +8,15 @@ using System.Threading.Tasks;
 
     public sealed class DrawSprite: IDraw
     {
+
     private int currentFrame;
     private int totalFrames;
     private SpriteBatch spriteBatch;
     private List<Texture2D> textureToDraw;
     private Vector2 screenCord;
     int counter = 0;
-   
 
-    private DrawSprite()
-    {
-    }
+    private DrawSprite() { }
 
     private static readonly DrawSprite instance = new DrawSprite();
     public static DrawSprite GetInstance
@@ -31,7 +29,7 @@ using System.Threading.Tasks;
 
     public void Draw(ISprite sprite, Color color)
     {
-        //get the current frames from the sprite instance variables
+        // Get the current frames from the sprite instance variables
         currentFrame = sprite.currentFrame;
         totalFrames = sprite.totalFrames;
         spriteBatch = sprite.spriteBatch;
@@ -39,13 +37,9 @@ using System.Threading.Tasks;
         screenCord = sprite.screenCord;
 
         // Draw the sprite
-        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, color);//color is data driven
+        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, color); /* Color here is data driven */
 
-
-
-        //update and save the frames
-        
-
+        // Update and save the frames
         if (counter > 10)
         {
             counter = 0;
@@ -58,16 +52,13 @@ using System.Threading.Tasks;
         }
         counter++;
        
-        
-
-        //update the instance variables for the sprite
+        // Update the instance variables for the sprite
         sprite.currentFrame = currentFrame;
-        
     }
 
     public void Draw(ISprite sprite)
     {
-        //get the current frames from the sprite instance variables
+        // Get the current frames from the sprite instance variables
         currentFrame = sprite.currentFrame;
         totalFrames = sprite.totalFrames;
         spriteBatch = sprite.spriteBatch;
@@ -77,7 +68,7 @@ using System.Threading.Tasks;
         // Draw the sprite
         spriteBatch.Draw(textureToDraw[currentFrame], screenCord, Color.White);
 
-        //update and save the frames
+        // Update and save the frames
         if (counter > 10)
         {
             counter = 0;
@@ -90,8 +81,6 @@ using System.Threading.Tasks;
         counter++;
         //update the instance variables for the sprite
         sprite.currentFrame = currentFrame;
-
     }
-
 }
 
