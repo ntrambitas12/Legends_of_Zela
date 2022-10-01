@@ -1,0 +1,16 @@
+﻿Code Quality Review
+Author: Nick Trambitas
+Date: 9-26-22
+Sprint #2
+File being reviewed: ConcreteItem
+Author of file being reviewed:Kyle Hoefker
+
+One improvement that I've noticed over the course of the sprint was the consolidation of all the item classes
+for each different item down into reusuable class. I am very happy to see that. The methods are short and sweet
+and simple to read and understand. Overall, the class seems to be following high quality code standards and
+has very high cohesion in its methods and almost no coupling. Good work! :)
+
+
+I can't think of any changes that I would do off the top of my head. I wouldn't be able to code it better than 
+how it's written. Looks like it's maintainable. 
+If anything comes up in future sprints, we can address it but good work! 

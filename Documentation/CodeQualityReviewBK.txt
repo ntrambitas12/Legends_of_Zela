@@ -1,0 +1,20 @@
+﻿Code Quality Review
+Author: Ben Keip
+Date: 9-26-22
+Sprint #2
+File being reviewed: AbstractController.cs
+Author of file being reviewed: Nick Trambitas and Kyle Hoefker
+
+Code quality here is very strong. You can tell that the code was thought very well due to
+the methods all having their own specific purpose, and handling different cases which
+may occur in the game. For example, instead of simply haivng a way to add sprites to the
+game with the method AddSprite, there is also a way to clean the sprite up by "killing" it.
+This allows for easier trackage of objects in the game. There are only four fields declared in the class,
+and all of them have the appropriate level of access declared as well as each having its own very
+specific purpose.
+
+One potential change I could see being made to the game is if you wanted to add a sprite that
+attacked the player by hurling themselves at the player. Which AddSprite method would be used here, the one
+with two parameters or one? There could easily be further examples of non-trivial enemies, and having to write
+different AddSprite methods for each of these could be a bit tedious depending on if you needed to
+pass in more paramaters of information you needed to know.
