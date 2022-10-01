@@ -1,0 +1,18 @@
+﻿Readability review
+Author: Nick Trambitas
+Date: 9-27-22
+Sprint #2
+File being reviewed: KeyboardController.cs
+Author of file being reviewed: Matt Russotti
+Code review took 15 minutes
+
+Code is easily readable. All variables are declared at the top of the class and
+initialized right below in the first method. Variables have clear names and
+meanings which can easily be deciphered. Each method is cohesive and concise
+with very specific intentions/behavior, so this file has high cohesion. You can
+set and return each variable for the items, and it is clear which methods
+accomplish which task. The only thing I noticed that might be a potential for issues
+is that the keyboard controller has a draw method that doesn't do anything. It's 
+there but not implemented. Looks like it's there to make the interface complete.
+Might not be the best idea/design choice but it will work for now. Overall,
+good work!
