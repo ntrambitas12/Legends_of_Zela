@@ -1,0 +1,19 @@
+﻿Code Quality Review
+Author: Kyle Hoefker
+Date: 9-28-22
+Sprint #2
+File being reviewed: DrawSprite.cs / DrawStaticSprite.cs
+Author of file being reviewed: Matt Russotti and Nick Trambitas
+
+The code quality in these files is high and well thought out. There was one
+place for improvement in code reusability. One of the modifications made was to
+change the draw method to have a color parameter, but so far most of the calls
+to this method in our code base use the default color. A suggestion could be to
+keep the original draw method and overload it instead to address the cases that
+aren't the default color.
+
+When considering coupling, it is very loose in both of these files. This is a
+class that just takes in a sprite and draws it to the screen, so it is a good
+job keeping the task specific. This leads into cohesion. Since the classes are
+only meant to draw, there is very high cohesion. All variables and methods show
+a clear role in how they help to draw the sprite.
