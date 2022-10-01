@@ -33,8 +33,7 @@ public class FireProjectile : ICommand
 
             switch (shooter.spritePos)
             {
-                // Probably want sprite to hold info about where to start each
-                // shot, can use that info here
+                /* Controls which direction the projectile moves in */
                 case 0: // left
                     newCord.X = shooter.screenCord.X + 5;
                     newCord.Y = shooter.screenCord.Y + 5;

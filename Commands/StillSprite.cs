@@ -21,6 +21,8 @@ namespace CSE3902Project.Commands
         }
         public void Execute()
         {
+
+            /* Control which direction the sprite is facing when they are told to stand still */
             int spritePos = sprite.spritePos; 
             switch(spritePos)
             {
@@ -37,12 +39,13 @@ namespace CSE3902Project.Commands
                     this.spritePos = SpriteAction.moveDown;
                     break;          
                     default:
-                    this.spritePos = SpriteAction.moveLeft;
+                    //this.spritePos = (SpriteAction)sprite.spritePos;
                     break;
 
             }
+
+            /* This allows us to retain directional data, but stop the sprite from moving */
             sprite.SetSpriteState(this.spritePos, sprite.still);
-            sprite.Update();
         }
     }
 }

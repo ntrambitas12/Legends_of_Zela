@@ -21,6 +21,8 @@ namespace CSE3902Project.Commands
 
         public void Execute()
         {
+
+            /* Attack based on which direction the sprite is facing */
             int spritePos = sprite.spritePos;
             switch (spritePos)
             {
@@ -37,7 +39,7 @@ namespace CSE3902Project.Commands
                     this.spritePos = SpriteAction.attackDown;
                     break;
                 default:
-                    this.spritePos = SpriteAction.attackDown;
+                    //this.spritePos = (SpriteAction)sprite.spritePos;
                     break;
 
             }

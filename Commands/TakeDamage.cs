@@ -19,6 +19,11 @@ namespace CSE3902Project.Commands
 
         public void Execute()
         {
+
+            /* Decrement the sprites health field */
+            sprite.health--;
+
+            /* Keep the sprite facing in the same direction when they take damage */
             int spritePos = sprite.spritePos;
             switch (spritePos)
             {
@@ -35,7 +40,7 @@ namespace CSE3902Project.Commands
                     this.spritePos = SpriteAction.damageDown;
                     break;
                 default:
-                    this.spritePos = SpriteAction.damageDown;
+                    //this.spritePos = (SpriteAction)sprite.spritePos;
                     break;
 
             }

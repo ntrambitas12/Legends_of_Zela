@@ -14,10 +14,10 @@ using System.Reflection;
     private List<Texture2D> textureToDraw;
     private Vector2 screenCord;
 
-    private DrawStaticSprite()
-    { }
+    private DrawStaticSprite() { }
 
     private static readonly DrawStaticSprite instance = new DrawStaticSprite();
+
     public static DrawStaticSprite GetInstance
     {
         get
@@ -25,27 +25,27 @@ using System.Reflection;
             return instance;
         }
     }
+
     public void Draw(ISprite sprite, Color color)
     {
-        //get the current frame from the sprite instance variables
+        /* Get the current frame from the sprite instance variables */
         spriteBatch = sprite.spriteBatch;
         textureToDraw = sprite.textureToDraw;
         screenCord = sprite.screenCord;
 
-        // Draw the sprite
-        spriteBatch.Draw(textureToDraw[0], screenCord, color);//color is data driven
-
+        /* Draw the sprite */
+        spriteBatch.Draw(textureToDraw[0], screenCord, color); /* Color here is data driven */
     }
+
     public void Draw(ISprite sprite)
     {
-        //get the current frame from the sprite instance variables
+        /* Get the current frame from the sprite instance variables */
         spriteBatch = sprite.spriteBatch;
         textureToDraw = sprite.textureToDraw;
         screenCord = sprite.screenCord;
 
-        // Draw the sprite
-        spriteBatch.Draw(textureToDraw[0], screenCord, Color.White);//color is data driven
-
+        /* Draw the sprite */
+        spriteBatch.Draw(textureToDraw[0], screenCord, Color.White); /* Color here is data driven */
     }
 }
 

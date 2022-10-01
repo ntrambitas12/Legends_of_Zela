@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace CSE3902Project.Commands
 {
+
+    /* This use command was more or less for demonstration/testing purposes. It was absorbed into UseState.cs */
     public class Use : ICommand
     {
         private IConcreteSprite sprite;
@@ -37,7 +39,7 @@ namespace CSE3902Project.Commands
                     this.spritePos = SpriteAction.useDown;
                     break;          
                 default:
-                    this.spritePos = SpriteAction.useDown;
+                    //this.spritePos = (SpriteAction)sprite.spritePos;
                     break;
 
             }
