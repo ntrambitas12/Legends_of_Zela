@@ -2,6 +2,8 @@
 This is the repository for Team Magenta's CSE 3902 Project.
 We are working on recreating a replica of Zelda from scratch.
 
+TASK TRACKING: https://dev.azure.com/CSE3902Magenta/CSE%203902/_workitems
+
 Currently, there are no bugs in our code (or we have yet to discover any). 
 All the intended functionality from sprint 2 is included as of the time of 
 this writing. In future sprints, we want to reorganize our Game1.cs and add
