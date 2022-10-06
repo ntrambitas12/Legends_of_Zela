@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-     interface IController
+public interface IController
     {
    
     public void Update();
