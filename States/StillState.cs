@@ -24,10 +24,6 @@ using System;
         //No update code needed for still state
 
     }
-    public void SetPosition(SpriteAction action)
-    {
-        sprite.SetSpriteAction(action);
-    }
 
     public void SetPreviousState(ISpriteState state)
     {

@@ -22,10 +22,6 @@ using System.Threading.Tasks;
             drawSprite.Draw(sprite, Color.White, true);
         }
 
-        public void SetPosition(SpriteAction action)//do we need this?
-        {
-            sprite.SetSpriteAction(action);
-        }
 
         public void SetPreviousState(ISpriteState state)
         {

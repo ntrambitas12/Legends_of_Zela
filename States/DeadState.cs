@@ -11,11 +11,6 @@ public class DeadState : ISpriteState
         //no need to draw, sprite is not active
     }
 
-    public void SetPosition(SpriteAction action)
-    {
-        //no need to set position, sprite is inactive
-    }
-
     public void SetPreviousState(ISpriteState state)
     {
        // implement if needed

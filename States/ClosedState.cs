@@ -23,11 +23,6 @@ using System.Threading.Tasks;
             drawSprite.Draw(sprite, Color.White, true);
         }
 
-        public void SetPosition(SpriteAction action)
-        {
-            sprite.SetSpriteAction(action);
-        }
-
         public void SetPreviousState(ISpriteState state)
         {
             //implement if needed

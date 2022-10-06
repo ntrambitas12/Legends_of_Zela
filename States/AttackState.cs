@@ -42,15 +42,14 @@ public class AttackState : ISpriteState
         drawSprite.Draw(sprite, Color.White, true);
     }
     
-    public void SetPosition(SpriteAction action)
-    {
-        sprite.SetSpriteAction(action);
-    }
-
     public void SetPreviousState(ISpriteState state)
     {
-        prevAction = (SpriteAction)sprite.spritePos;
-        prevState = state;
+
+        if (counter < 2)
+        {
+            prevAction = (SpriteAction)sprite.spritePos;
+            prevState = state;
+        }
     }
 }
 

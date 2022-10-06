@@ -39,10 +39,6 @@ public class DamagedState : ISpriteState
         drawSprite.Draw(sprite, Color.Red, false);
     }
 
-    public void SetPosition(SpriteAction action)
-    {
-        sprite.SetSpriteAction(action);
-    }
 
     public void SetPreviousState(ISpriteState state)
     {
