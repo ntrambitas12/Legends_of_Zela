@@ -26,4 +26,8 @@
 
     // For bomb
     bombCloud = 4,
+
+    //doors
+    doorOpen=0,
+    doorClosed = 1,
 }

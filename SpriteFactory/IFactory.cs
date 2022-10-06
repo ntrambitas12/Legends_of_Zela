@@ -26,6 +26,7 @@ public interface IFactory
     public ISprite CreateOktorokSprite();
     public ISprite CreateMapItem();
     public IItem CreateArrowSprite();
+    public ISprite CreateDoorSprite(bool isOpen);
 
 }
 
