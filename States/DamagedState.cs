@@ -42,8 +42,11 @@ public class DamagedState : ISpriteState
 
     public void SetPreviousState(ISpriteState state)
     {
-        prevAction = (SpriteAction)sprite.spritePos;
-        prevState = state;
+        if (counter < 2)
+        {
+            prevAction = (SpriteAction)sprite.spritePos;
+            prevState = state;
+        }
     }
 }
 
