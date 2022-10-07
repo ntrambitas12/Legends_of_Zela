@@ -174,6 +174,8 @@ public class GameObject : IGameObject
             // delete item from the list
             list.Remove(item.Item1);
         }
+        //after iterating the delete list, clear it!
+        toBeDeleted.Clear();
     }
 
 }
