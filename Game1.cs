@@ -37,15 +37,16 @@ namespace CSE3902Project
         private ISprite mapItem;
         private ISprite rupiesItem;
         private ISprite swordItem;
-        private IItem arrowLink;
-        private IItem silverArrowLink;
-        private IItem boomerangLink;
-        private IItem magicBoomerangLink;
-        private IItem bombLink;
-        private IItem fireLink;
-        private IItem boomerangEnemy1;
-        private IItem magicBoomerangEnemy2;
-        private IItem fireEnemy3;
+        private IDrop keyDrop;
+        private IProjectile arrowLink;
+        private IProjectile silverArrowLink;
+        private IProjectile boomerangLink;
+        private IProjectile magicBoomerangLink;
+        private IProjectile bombLink;
+        private IProjectile fireLink;
+        private IProjectile boomerangEnemy1;
+        private IProjectile magicBoomerangEnemy2;
+        private IProjectile fireEnemy3;
 
         private FireProjectile fireArrowLink;
         private FireProjectile fireSilverArrowLink;
@@ -208,6 +209,7 @@ namespace CSE3902Project
         private void addToItemList()
         {
             // Add items to command lists
+            items.Add(keyDrop);
             items.Add(arrowLink);
             items.Add(silverArrowLink);
             items.Add(boomerangLink);
@@ -262,6 +264,10 @@ namespace CSE3902Project
             mapItem = SpriteFactory.Instance.CreateMapItem();
             rupiesItem = SpriteFactory.Instance.CreateRupiesItem();
             swordItem = SpriteFactory.Instance.CreateSwordItem();
+
+            keyDrop = SpriteFactory.Instance.CreateKeyDrop();
+            keyDrop.SetItemType(new DropType());
+            keyDrop.SetShouldDraw(true);
         }
         private void setProjectileCommands()
         {
@@ -279,47 +285,47 @@ namespace CSE3902Project
         {
             arrowLink = SpriteFactory.Instance.CreateArrowSprite();
             arrowLink.SetDistance(60);
-            arrowLink.SetProjectileType(new ArrowType(arrowLink));
+            arrowLink.SetItemType(new ArrowType(arrowLink));
             arrowLink.SetOwner(link);
 
             silverArrowLink = SpriteFactory.Instance.CreateSilverArrowSprite();
             silverArrowLink.SetDistance(80);
-            silverArrowLink.SetProjectileType(new ArrowType(silverArrowLink));
+            silverArrowLink.SetItemType(new ArrowType(silverArrowLink));
             silverArrowLink.SetOwner(link);
 
             boomerangLink = SpriteFactory.Instance.CreateBoomerangSprite();
             boomerangLink.SetDistance(100);
-            boomerangLink.SetProjectileType(new BoomerangType(boomerangLink));
+            boomerangLink.SetItemType(new BoomerangType(boomerangLink));
             boomerangLink.SetOwner(link);
 
             magicBoomerangLink = SpriteFactory.Instance.CreateMagicBoomerangSprite();
             magicBoomerangLink.SetDistance(140);
-            magicBoomerangLink.SetProjectileType(new BoomerangType(magicBoomerangLink));
+            magicBoomerangLink.SetItemType(new BoomerangType(magicBoomerangLink));
             magicBoomerangLink.SetOwner(link);
 
             bombLink = SpriteFactory.Instance.CreateBombSprite();
             bombLink.SetDistance(100); // How long it is on the ground
-            bombLink.SetProjectileType(new BombType(bombLink));
+            bombLink.SetItemType(new BombType(bombLink));
             bombLink.SetOwner(link);
 
             fireLink = SpriteFactory.Instance.CreateFireSprite();
             fireLink.SetDistance(50);
-            fireLink.SetProjectileType(new ArrowType(fireLink));
+            fireLink.SetItemType(new ArrowType(fireLink));
             fireLink.SetOwner(link);
 
             boomerangEnemy1 = SpriteFactory.Instance.CreateBoomerangSprite();
             boomerangEnemy1.SetDistance(100);
-            boomerangEnemy1.SetProjectileType(new BoomerangType(boomerangEnemy1));
+            boomerangEnemy1.SetItemType(new BoomerangType(boomerangEnemy1));
             boomerangEnemy1.SetOwner(enemy1);
 
             magicBoomerangEnemy2 = SpriteFactory.Instance.CreateMagicBoomerangSprite();
             magicBoomerangEnemy2.SetDistance(140);
-            magicBoomerangEnemy2.SetProjectileType(new BoomerangType(magicBoomerangEnemy2));
+            magicBoomerangEnemy2.SetItemType(new BoomerangType(magicBoomerangEnemy2));
             magicBoomerangEnemy2.SetOwner(enemy2);
 
             fireEnemy3 = SpriteFactory.Instance.CreateFireSprite();
             fireEnemy3.SetDistance(50);
-            fireEnemy3.SetProjectileType(new ArrowType(fireEnemy3));
+            fireEnemy3.SetItemType(new ArrowType(fireEnemy3));
             fireEnemy3.SetOwner(enemy3);
         }
         private void createCommands()

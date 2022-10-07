@@ -9,19 +9,19 @@ namespace CSE3902Project.Controllers
     public abstract class AbstractController : IController
     {
         protected List<IConcreteSprite> sprites;
-        protected List<IItem> projectiles;
+        protected List<IProjectile> projectiles;
         protected IConcreteSprite currentSprite;
-        protected IItem currentProjectile;
+        protected IProjectile currentProjectile;
 
         public AbstractController()
         {
             sprites = new List<IConcreteSprite>();
-            projectiles = new List<IItem>();
+            projectiles = new List<IProjectile>();
             currentSprite = null;
             currentProjectile = null;
         }
 
-        public void AddSprite(ISprite sprite, IItem projectile)
+        public void AddSprite(ISprite sprite, IProjectile projectile)
         {
             // kill the current sprite before adding a new sprite to the list
             if (currentSprite != null) killSprite();

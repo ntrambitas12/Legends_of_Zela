@@ -1,15 +1,15 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-public class BombType : IProjectileType
+public class BombType : IItemType
 {
-    private IItem projectile;
+    private IProjectile projectile;
     private FireProjectile fireProjectile;
     private bool shouldDraw;
     private int counter;
     private int distance;
 
-    public BombType(IItem projectile)
+    public BombType(IProjectile projectile)
     {
         this.projectile = projectile;
     }

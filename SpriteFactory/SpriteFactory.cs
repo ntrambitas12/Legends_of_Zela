@@ -449,34 +449,39 @@ public sealed class SpriteFactory : IFactory
         return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), swordFrames);
     }
 
-    public IItem CreateArrowSprite()
+    public IDrop CreateKeyDrop()
     {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
+        return new Drop(_spriteBatch, new Vector2(50, 50), keyFrames);
     }
 
-    public IItem CreateSilverArrowSprite()
+    public IProjectile CreateArrowSprite()
     {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), silverArrowFrames);
+        return new Projectile(_spriteBatch, new Vector2(50, 50), arrowFrames);
     }
 
-    public IItem CreateBoomerangSprite()
+    public IProjectile CreateSilverArrowSprite()
     {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), boomerangFrames);
+        return new Projectile(_spriteBatch, new Vector2(50, 50), silverArrowFrames);
     }
 
-    public IItem CreateMagicBoomerangSprite()
+    public IProjectile CreateBoomerangSprite()
     {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), magicBoomerangFrames);
+        return new Projectile(_spriteBatch, new Vector2(50, 50), boomerangFrames);
     }
 
-    public IItem CreateBombSprite()
+    public IProjectile CreateMagicBoomerangSprite()
     {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), bombFrames);
+        return new Projectile(_spriteBatch, new Vector2(50, 50), magicBoomerangFrames);
     }
 
-    public IItem CreateFireSprite()
+    public IProjectile CreateBombSprite()
     {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), fireFrames);
+        return new Projectile(_spriteBatch, new Vector2(50, 50), bombFrames);
+    }
+
+    public IProjectile CreateFireSprite()
+    {
+        return new Projectile(_spriteBatch, new Vector2(50, 50), fireFrames);
     }
 }
 

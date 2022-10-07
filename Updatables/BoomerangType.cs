@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-public class BoomerangType : IProjectileType
+public class BoomerangType : IItemType
 {
-    private IItem projectile;
+    private IProjectile projectile;
     private int direction;
     private FireProjectile fireProjectile;
     private bool shouldDraw;
@@ -11,7 +11,7 @@ public class BoomerangType : IProjectileType
     private int counter;
     private int distance;
 
-    public BoomerangType(IItem projectile)
+    public BoomerangType(IProjectile projectile)
     {
         this.projectile = projectile;
     }
