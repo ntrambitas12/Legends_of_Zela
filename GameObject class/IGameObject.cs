@@ -13,8 +13,10 @@ public enum GameObjectTypes
     typeEnemy = 2,
     typeEnemyProjectile = 3,
     typeTileStatic = 4,
-    typePickup = 5,
-    typeCollisionBox = 6,
+    typeTileDynamic = 5,
+    typePickup = 6,
+    typeCollisionBox = 7,
+    typeTopLayerNonCollidible = 8,
 }
 
 //handles lists for all game objects of all types.
@@ -59,6 +61,9 @@ public interface IGameObject
     //which list depends on the enum passed as objectType
     public void AddGameObject(int objectType, ISprite gameObject);
 
+    //adds controllers to the list
+    public void AddController(IController controller);
+
     //adds objectType and gameObject into the private toBeDeleted list.
     //toBeDeleted is processed at the end of the this class's Update() method.
     //toBeDeleted list is declared as:
@@ -87,4 +92,6 @@ public interface IGameObject
     //  link
     //  top of doorways (so that it is on the top-most layer and Link disappears below it)
     public void Draw();
+
+    public void ResetControllers();
 }

@@ -16,8 +16,6 @@ namespace CSE3902Project
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private List<IItem> items;
-        private List<IController> controllers;
         private List<Keys> linkKeys;
 
         private ISprite enemy1;
@@ -79,6 +77,8 @@ namespace CSE3902Project
         private TileController tileController;
         private ItemController itemController;
 
+        private GameObject room1;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -88,9 +88,9 @@ namespace CSE3902Project
 
         protected override void Initialize()
         {
-            // Instantiate lists and commands
-            items = new List<IItem>();
-            controllers = new List<IController>();
+            //create the game object
+            room1 = new GameObject();
+
             exitGame = new ExitCommand(this);
             restartGame = new RestartCommand(this);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -102,11 +102,12 @@ namespace CSE3902Project
             itemController = ItemController.GetInstance;
             keyboard = KeyboardController.GetInstance;
 
-            // Add all controllers to controller lists
-            controllers.Add(keyboard);
-            controllers.Add(enemyController);
-            controllers.Add(tileController);
-            controllers.Add(itemController);
+            // Add all controllers to the room
+
+            room1.AddController(keyboard);
+            room1.AddController(enemyController);
+            room1.AddController(tileController);
+            room1.AddController(itemController);
 
             //Load up the content for the sprite factory
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
@@ -145,13 +146,7 @@ namespace CSE3902Project
 
         public void resetGame()
         {
-            foreach (var controller in controllers)
-            {
-                controller.resetController();
-            }
-
-            items.Clear();
-
+            room1.ResetControllers();
             this.LoadContent();
         }
 
@@ -164,20 +159,7 @@ namespace CSE3902Project
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
 
-            // Update all controllers
-            foreach (var controller in controllers)
-            {
-                controller.Update();
-            }
-
-            //Update all items
-            foreach (IItem item in items)
-            {
-                item.Update();
-            }
-
-            //Update link
-            link.Update();
+            room1.Update();
 
             base.Update(gameTime);
         }
@@ -186,20 +168,7 @@ namespace CSE3902Project
         {
             _spriteBatch.Begin();
 
-            //Call each controller to draw
-            foreach (var controller in controllers)
-            {
-                controller.Draw();
-            }
-
-            //Draw all items
-            foreach (IItem item in items)
-            {
-                item.Draw();
-            }
-
-            //Draw Link
-            link.Draw();
+            room1.Draw();
 
             _spriteBatch.End();
 
@@ -208,15 +177,17 @@ namespace CSE3902Project
         private void addToItemList()
         {
             // Add items to command lists
-            items.Add(arrowLink);
-            items.Add(silverArrowLink);
-            items.Add(boomerangLink);
-            items.Add(magicBoomerangLink);
-            items.Add(bombLink);
-            items.Add(fireLink);
-            items.Add(boomerangEnemy1);
-            items.Add(magicBoomerangEnemy2);
-            items.Add(fireEnemy3);
+            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, arrowLink);
+            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, silverArrowLink);
+            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, boomerangLink);
+            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, magicBoomerangLink);
+            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, bombLink);
+            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, fireLink);
+            room1.AddGameObject((int)GameObjectTypes.typeEnemyProjectile, boomerangEnemy1);
+            room1.AddGameObject((int)GameObjectTypes.typeEnemyProjectile, magicBoomerangEnemy2);
+            room1.AddGameObject((int)GameObjectTypes.typeEnemyProjectile, fireEnemy3);
+
+            room1.Link = link;
         }
         
         private void addToControllers()
