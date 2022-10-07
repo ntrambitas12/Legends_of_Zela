@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,9 @@ public interface ICollision
     //e.g. Link and enemies call UpdateCollision(Game.gameObjects.CollidibleList.get()) to set isColliding against all collidibles
     public void UpdateCollision(List<ISprite> collidibleList);
 
-    //returns true if this rectangle is intersecting with rectangles of entity(s) inside list
+    //returns the object that this rectangle has intersected with. returns null otherwise
     //does NOT require UpdateCollision() to be called
     //a light-weight method for projectiles and items that do not need complex logic for movement
-    public Boolean isIntersecting(List<ISprite> collidibleList);
+    public ISprite isIntersecting(List<ISprite> collidibleList);
+
 }
