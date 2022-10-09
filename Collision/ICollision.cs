@@ -24,11 +24,14 @@ public interface ICollision
     public Boolean isCollidingLeft { get; set; }
     public Boolean isCollidingRight { get; set; }
 
+    //collider rectangle, used internally
+    public Rectangle rect { get; set; }
+
     //sets the various isColliding booleans against collidibleList
     //e.g. Link and enemies call UpdateCollision(Game.gameObjects.CollidibleList.get()) to set isColliding against all collidibles
     public void UpdateCollision(List<ISprite> collidibleList);
 
-    //returns the object that this rectangle has intersected with. returns null otherwise
+    //returns the object that this.rect has intersected with. returns null if not intersecting with anything in list
     //does NOT require UpdateCollision() to be called
     //a light-weight method for projectiles and items that do not need complex logic for movement
     public ISprite isIntersecting(List<ISprite> collidibleList);

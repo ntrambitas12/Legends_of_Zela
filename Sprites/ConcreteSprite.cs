@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
 
-    /*Intialize the states*/
+    /*Declare state variables*/
     public ISpriteState still { get; set; }
     public ISpriteState moving { get; set; }
     public ISpriteState damaged { get; set; }
@@ -17,7 +17,6 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public ISpriteState stillAnimated { get; set; }
     public ISpriteState attack { get; set; }
     public int health { get; set; }
-
 
     private IDraw drawSprite = DrawSprite.GetInstance;
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
