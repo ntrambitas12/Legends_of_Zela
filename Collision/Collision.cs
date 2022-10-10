@@ -5,9 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSE3902Project.Collision
-{
-    internal class Collision : ICollision
+    public class Collision : ICollision
     {
         //--------------------------------VARIABLES--------------------------------
         //the entity this is for
@@ -30,7 +28,7 @@ namespace CSE3902Project.Collision
 
         //--------------------------------INITIALIZER--------------------------------
         //must be passed an entity for 'this' to be attached to, and size of collider 'colliderDimensions'
-        Collision(ISprite entity, Rectangle colliderDimensions)
+       public Collision(ISprite entity, Rectangle colliderDimensions)
         {
             this.entity = entity;
             this.colliderDimensions = colliderDimensions;
@@ -101,4 +99,3 @@ namespace CSE3902Project.Collision
             return null;
         }
     }
-}
