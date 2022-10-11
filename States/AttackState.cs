@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ public class AttackState : ISpriteState
     private SpriteAction prevAction;
     private ISpriteState prevState;
     private float timeElapsed;
+    private int counter = 0;
 
 
     public AttackState(ISprite sprite)
@@ -26,12 +28,13 @@ public class AttackState : ISpriteState
     {
 
         timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+        counter++;
 
         if (timeElapsed > .2)
         {
             timeElapsed = 0;
             sprite.SetSpriteState(prevAction, prevState);
+            counter = 0;
 
         }
         
@@ -45,9 +48,11 @@ public class AttackState : ISpriteState
     
     public void SetPreviousState(ISpriteState state)
     {
+        if (counter < 2)
+        {
             prevAction = (SpriteAction)sprite.spritePos;
             prevState = state;
-       
+        }
     }
 }
 
