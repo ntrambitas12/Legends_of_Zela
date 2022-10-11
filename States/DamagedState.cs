@@ -23,7 +23,7 @@ public class DamagedState : ISpriteState
         drawSprite = DrawSprite.GetInstance;
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         if (counter > 22)
         {

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 public interface IItemType
 {
-    public void Update();
+    public void Update(GameTime gameTime);
 }
 

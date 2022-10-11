@@ -45,7 +45,7 @@ using System.Threading.Tasks;
     {
         sprites.Add((spriteKeys, new StillSprite(sprite)));
     }
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         previousKeyState = currentKeyState;
         currentKeyState = Keyboard.GetState();

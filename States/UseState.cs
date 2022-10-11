@@ -16,7 +16,7 @@ public class UseState : ISpriteState
         drawSprite = DrawSprite.GetInstance;
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         //no updated needed; link is stationary when he is using an item
     }

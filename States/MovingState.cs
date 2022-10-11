@@ -22,7 +22,7 @@ public class MovingState : ISpriteState
         drawSprite.Draw(sprite, Color.White, true);
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         position.Update(sprite);
     }

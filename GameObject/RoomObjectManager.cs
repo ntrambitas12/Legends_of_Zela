@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +46,9 @@ public class RoomObjectManager : IRoomObjectManager
         _currentRoom = (IRoomObject)roomList[roomId];
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
-       _currentRoom.Update();
+       _currentRoom.Update(gameTime);
     }
 
     public void DeleteGameObject(int objectType, ISprite gameObject)

@@ -30,9 +30,9 @@ public abstract class AbstractItem : AbstractSprite, IItem
         }
     }
 
-    public override void Update()
+    public override void Update(GameTime gameTime)
     {
-        itemType.Update();
+        itemType.Update(gameTime);
     }
 
     public bool ShouldDraw()

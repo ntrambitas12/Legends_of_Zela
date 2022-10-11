@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,43 +65,43 @@ public class RoomObject : IRoomObject
         toBeDeleted.Add((gameObject, objectType));
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         //update all controllers
         foreach(var controller in ControllerList)
         {
-            controller.Update();
+            controller.Update(gameTime);
         }
 
-        Link.Update();
+        Link.Update(gameTime);
 
         //update all enemies
         foreach(var enemy in EnemyList)
         {
-            enemy.Update();
+            enemy.Update(gameTime);
         }
 
         //update projectiles
         foreach(var linkProjectile in LinkProjectileList)
         {
-            linkProjectile.Update();
+            linkProjectile.Update(gameTime);
         }
 
         foreach(var enemyProjectile in EnemyProjectileList)
         {
-            enemyProjectile.Update();
+            enemyProjectile.Update(gameTime);
         }
 
         //update pickup items
         foreach(var item in PickupList)
         {
-            item.Update();
+            item.Update(gameTime);
         }
 
         //update dynamic tiles
         foreach(var tile in DynamicTileList)
         {
-            tile.Update();
+            tile.Update(gameTime);
         }
 
         Delete();

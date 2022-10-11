@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 public class DropType : IItemType
 {
@@ -6,7 +7,7 @@ public class DropType : IItemType
     {
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         // Nothing for now, can change for collisions maybe
     }

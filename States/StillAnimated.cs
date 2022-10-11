@@ -20,7 +20,7 @@ public class StillAnimated : ISpriteState
 
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         //No update code needed for still state
 

@@ -63,9 +63,9 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
 
     }
-    public override void Update()
+    public override void Update(GameTime gameTime)
     {
-       state.Update();
+       state.Update(gameTime);
     }
 
     public override void Draw()

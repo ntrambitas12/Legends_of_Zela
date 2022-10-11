@@ -165,7 +165,7 @@ namespace CSE3902Project
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
 
-            roomObjectManager.Update();
+            roomObjectManager.Update(gameTime);
 
             base.Update(gameTime);
         }

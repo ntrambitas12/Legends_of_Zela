@@ -16,7 +16,7 @@ using System.Threading.Tasks;
     public Vector2 screenCord { get; set; }
     public List<Texture2D> textureToDraw { get; set; }
     void Draw();
-    void Update();
+    void Update(GameTime gameTime);
     void SetSpriteAction(SpriteAction action);
     }
     

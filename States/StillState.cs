@@ -13,13 +13,13 @@ using System;
         }
 
 
-    public void Draw()
+    public void Draw() 
     {
         drawSprite.Draw(sprite, Color.White, false);
 
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         //No update code needed for still state
 

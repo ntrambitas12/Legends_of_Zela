@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ public class DeadState : ISpriteState
        // implement if needed
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         //no need to update, sprite is not active
     }

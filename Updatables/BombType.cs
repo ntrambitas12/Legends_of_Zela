@@ -14,7 +14,7 @@ public class BombType : IItemType
         this.projectile = projectile;
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         fireProjectile = projectile.FireCommand();
         shouldDraw = projectile.ShouldDraw();

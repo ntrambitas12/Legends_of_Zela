@@ -23,7 +23,7 @@ public class AttackState : ISpriteState
         this.sprite = (IConcreteSprite)sprite;
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
 
         

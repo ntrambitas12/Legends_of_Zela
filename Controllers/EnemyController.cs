@@ -1,4 +1,5 @@
 ﻿using CSE3902Project.Controllers;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ public sealed class EnemyController : AbstractController
         }
     }
 
-    public override void Update()
+    public override void Update(GameTime gameTime)
     {
         /*set a random state for the enemy 
        Update counter every 100 frames
@@ -62,7 +63,7 @@ public sealed class EnemyController : AbstractController
         }
 
         // update the enemy
-        currentSprite.Update();
+        currentSprite.Update(gameTime);
         counter++;
 
     }

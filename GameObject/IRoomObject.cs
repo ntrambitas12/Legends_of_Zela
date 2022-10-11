@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -80,7 +81,7 @@ public interface IRoomObject
     //  dynamic tiles
     //after updating game objects, goes into 'delete step', and deletes game objects held in private toBeDeleted list
     //clears toBeDeleted once all objects in it have been deleted from Game Object's various lists
-    public void Update();
+    public void Update(GameTime gameTime);
 
     //is called by the Game class, Game1, in its Draw() method.
     //draws all drawables IN THIS SPECIFIC ORDER, includes

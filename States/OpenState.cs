@@ -28,7 +28,7 @@ using System.Threading.Tasks;
             //implement if needed
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
         // need collidable stuff
         }

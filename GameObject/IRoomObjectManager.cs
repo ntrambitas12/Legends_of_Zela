@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq; 
 using System.Text;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
     public IRoomObject currentRoom();
     public void Reset();
     public void Draw();
-    public void Update();
+    public void Update(GameTime gameTime);
     public void DeleteGameObject(int objectType, ISprite gameObject);
 }
 
