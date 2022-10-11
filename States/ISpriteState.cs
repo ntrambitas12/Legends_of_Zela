@@ -8,8 +8,7 @@ using System.Threading.Tasks;
     {
     public void Update();
     public void Draw();
-
     public void SetPreviousState(ISpriteState state);
-    public void SetPosition(SpriteAction action);
+   
 }
 
