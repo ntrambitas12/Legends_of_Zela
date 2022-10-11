@@ -77,7 +77,8 @@ namespace CSE3902Project
         private TileController tileController;
         private ItemController itemController;
 
-        private GameObject room1;
+        private RoomObject room1;
+        private IRoomObjectManager roomObjectManager;
 
         public Game1()
         {
@@ -89,7 +90,8 @@ namespace CSE3902Project
         protected override void Initialize()
         {
             //create the game object
-            room1 = new GameObject();
+            room1 = new RoomObject();
+            roomObjectManager = new RoomObjectManager();
 
             exitGame = new ExitCommand(this);
             restartGame = new RestartCommand(this);
@@ -142,11 +144,14 @@ namespace CSE3902Project
             enemyController.AddSprite(enemy1, boomerangEnemy1);
             enemyController.AddSprite(enemy2, magicBoomerangEnemy2);
             enemyController.AddSprite(enemy3, fireEnemy3);
+
+            //add the room to the roomObjectManager
+            roomObjectManager.addRoom(room1);
         }
 
         public void resetGame()
         {
-            room1.ResetControllers();
+            roomObjectManager.Reset();
             this.LoadContent();
         }
 
@@ -159,7 +164,7 @@ namespace CSE3902Project
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
 
-            room1.Update();
+            roomObjectManager.Update();
 
             base.Update(gameTime);
         }
@@ -168,7 +173,7 @@ namespace CSE3902Project
         {
             _spriteBatch.Begin();
 
-            room1.Draw();
+            roomObjectManager.Draw();
 
             _spriteBatch.End();
 
@@ -177,15 +182,15 @@ namespace CSE3902Project
         private void addToItemList()
         {
             // Add items to command lists
-            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, arrowLink);
-            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, silverArrowLink);
-            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, boomerangLink);
-            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, magicBoomerangLink);
-            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, bombLink);
-            room1.AddGameObject((int)GameObjectTypes.typeLinkProjectile, fireLink);
-            room1.AddGameObject((int)GameObjectTypes.typeEnemyProjectile, boomerangEnemy1);
-            room1.AddGameObject((int)GameObjectTypes.typeEnemyProjectile, magicBoomerangEnemy2);
-            room1.AddGameObject((int)GameObjectTypes.typeEnemyProjectile, fireEnemy3);
+            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, arrowLink);
+            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, silverArrowLink);
+            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, boomerangLink);
+            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, magicBoomerangLink);
+            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, bombLink);
+            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, fireLink);
+            room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, boomerangEnemy1);
+            room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, magicBoomerangEnemy2);
+            room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, fireEnemy3);
 
             room1.Link = link;
         }

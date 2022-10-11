@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 //used for specifying which list to add/remove
-public enum GameObjectTypes
+public enum RoomObjectTypes
 {
     typeController = -1,
     typeLink = 0,
@@ -22,7 +22,7 @@ public enum GameObjectTypes
 //handles lists for all game objects of all types.
 //ONLY GAME OBJECTS THAT ARE DRAWN AND/OR UPDATED ARE IN THESE LISTS.
 //  this should include ONLY the game objects in the CURRENT room.
-public interface IGameObject
+public interface IRoomObject
 {
     //the controllers list
     //includes keyboardController, mouseController, gamepadController(?)

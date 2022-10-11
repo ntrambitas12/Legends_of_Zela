@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-public class GameObject : IGameObject
+public class RoomObject : IRoomObject
 {
     public List<IController> ControllerList { get; set; }
     public ISprite Link { get; set; }
@@ -19,7 +19,7 @@ public class GameObject : IGameObject
     private List<(ISprite, int)> toBeDeleted;
     private Dictionary<int, List<ISprite>> listDict;
 
-    public GameObject()
+    public RoomObject()
     {
         //intialize sprite and controller lists
         ControllerList = new List<IController>();
@@ -37,13 +37,13 @@ public class GameObject : IGameObject
         toBeDeleted = new List<(ISprite, int)>();
 
         //set up toBeAdded dictionary
-        listDict.Add((int)GameObjectTypes.typeLinkProjectile, LinkProjectileList);
-        listDict.Add((int)GameObjectTypes.typeEnemyProjectile, EnemyProjectileList);
-        listDict.Add((int)GameObjectTypes.typeTileStatic, StaticTileList);
-        listDict.Add((int)GameObjectTypes.typeTileDynamic, DynamicTileList);
-        listDict.Add((int)GameObjectTypes.typePickup, PickupList);
-        listDict.Add((int)GameObjectTypes.typeCollisionBox, CollidibleList);
-        listDict.Add((int)GameObjectTypes.typeTopLayerNonCollidible, TopLayerNonCollidibleList);
+        listDict.Add((int)RoomObjectTypes.typeLinkProjectile, LinkProjectileList);
+        listDict.Add((int)RoomObjectTypes.typeEnemyProjectile, EnemyProjectileList);
+        listDict.Add((int)RoomObjectTypes.typeTileStatic, StaticTileList);
+        listDict.Add((int)RoomObjectTypes.typeTileDynamic, DynamicTileList);
+        listDict.Add((int)RoomObjectTypes.typePickup, PickupList);
+        listDict.Add((int)RoomObjectTypes.typeCollisionBox, CollidibleList);
+        listDict.Add((int)RoomObjectTypes.typeTopLayerNonCollidible, TopLayerNonCollidibleList);
 
 
     }
