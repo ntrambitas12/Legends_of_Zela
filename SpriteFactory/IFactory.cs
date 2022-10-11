@@ -25,8 +25,12 @@ public interface IFactory
     public ISprite CreatePeahatSprite();
     public ISprite CreateOktorokSprite();
     public ISprite CreateMapItem();
-    public IItem CreateArrowSprite();
     public ISprite CreateDoorSprite(bool isOpen);
-
+    public IProjectile CreateArrowSprite();
+    public IProjectile CreateSilverArrowSprite();
+    public IProjectile CreateBoomerangSprite();
+    public IProjectile CreateMagicBoomerangSprite();
+    public IProjectile CreateBombSprite();
+    public IProjectile CreateFireSprite();
 }
 

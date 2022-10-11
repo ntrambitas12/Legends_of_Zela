@@ -4,13 +4,13 @@ using Microsoft.Xna.Framework;
 
 public class FireProjectile : ICommand
 {
-    private IItem projectile;
+    private IProjectile projectile;
     private IConcreteSprite shooter;
     public int counter;
     private Vector2 newCord;
     public int distance;
 
-    public FireProjectile(IItem projectile)
+    public FireProjectile(IProjectile projectile)
     {
         this.projectile = projectile;
         shooter = (IConcreteSprite)projectile.Owner();

@@ -1,6 +1,6 @@
 ﻿using System;
 
-public interface IProjectileType
+public interface IItemType
 {
     public void Update();
 }
