@@ -14,7 +14,7 @@ public class UseState : ISpriteState
     public UseState(ISprite sprite)
     {
         this.sprite = sprite;
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
     }
 
     public void Update(GameTime gameTime)

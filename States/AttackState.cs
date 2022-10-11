@@ -17,7 +17,7 @@ public class AttackState : ISpriteState
 
     public AttackState(ISprite sprite)
     {
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
         this.sprite = (IConcreteSprite)sprite;
         timeElapsed = 0;
     }

@@ -15,7 +15,7 @@ public abstract class AbstractItem : AbstractSprite, IItem
 
     public AbstractItem(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures)
     {
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
         posUpdate = UpdateSpritePos.GetInstance;
         itemType = null;
         changeCord = this.screenCord;

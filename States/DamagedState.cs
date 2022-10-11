@@ -21,7 +21,7 @@ public class DamagedState : ISpriteState
     public DamagedState(ISprite sprite)
     {
         this.sprite = (IConcreteSprite)sprite;
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
         timeElapsed = 0;
     }
 

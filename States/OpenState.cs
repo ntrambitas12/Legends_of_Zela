@@ -13,7 +13,7 @@ using System.Threading.Tasks;
         private IDraw drawSprite;
     public OpenState(ISprite sprite)
     {
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
         this.sprite = (IConcreteSprite)sprite;
     }
     //Draw door open sprite

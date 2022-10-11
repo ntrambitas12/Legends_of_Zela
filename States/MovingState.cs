@@ -15,7 +15,7 @@ public class MovingState : ISpriteState
     {
         this.sprite = sprite;
         position = UpdateSpritePos.GetInstance;
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
     }
     public void Draw(GameTime gameTime)
     {

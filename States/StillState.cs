@@ -9,7 +9,7 @@ using System;
         public StillState(ConcreteSprite sprite)
         {
             this.sprite = sprite;
-            drawSprite = DrawSprite.GetInstance;
+            drawSprite = new DrawSprite();
         }
 
 

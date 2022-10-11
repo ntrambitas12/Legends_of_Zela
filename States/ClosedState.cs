@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
     public ClosedState(ISprite sprite)
     {
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
         this.sprite = (IConcreteSprite)sprite;
     }
     //Draw door closed sprite
