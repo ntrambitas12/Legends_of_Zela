@@ -12,44 +12,42 @@ public class AttackState : ISpriteState
     private IDraw drawSprite;
     private SpriteAction prevAction;
     private ISpriteState prevState;
-   
+    private float timeElapsed;
 
-    //naive approach to regulating frame rate. figure better way in the future
-    private int counter = 0;
 
     public AttackState(ISprite sprite)
     {
         drawSprite = DrawSprite.GetInstance;
         this.sprite = (IConcreteSprite)sprite;
+        timeElapsed = 0;
     }
 
     public void Update(GameTime gameTime)
     {
 
-        
-        if (counter > 17)
+        timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+
+        if (timeElapsed > .2)
         {
-            counter = 0;
+            timeElapsed = 0;
             sprite.SetSpriteState(prevAction, prevState);
 
         }
-        counter++;
+        
 
     }
 
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
-        drawSprite.Draw(sprite, Color.White, true);
+        drawSprite.Draw(sprite, Color.White, true, gameTime);
     }
     
     public void SetPreviousState(ISpriteState state)
     {
-
-        if (counter < 2)
-        {
             prevAction = (SpriteAction)sprite.spritePos;
             prevState = state;
-        }
+       
     }
 }
 

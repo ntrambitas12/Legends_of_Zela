@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 public sealed class EnemyController : AbstractController
 {
-
-    private int counter;
+    private int prevTime;
+    private int deltaT;
     private Random rand;
     private bool isMoving;
     private List<SpriteAction> actions;
@@ -18,8 +18,8 @@ public sealed class EnemyController : AbstractController
 
     private EnemyController() : base()
     {
-
-        counter = 0;
+        prevTime = 0;
+        deltaT = 0;
         rand = new Random();
         isMoving = false;
         actions = new List<SpriteAction>();
@@ -39,11 +39,13 @@ public sealed class EnemyController : AbstractController
 
     public override void Update(GameTime gameTime)
     {
-        /*set a random state for the enemy 
-       Update counter every 100 frames
-       */
 
-        if (counter == 100)
+        /*set a random state for the enemy 
+        every 4 secomds
+       */
+        calcDelta(gameTime);
+
+        if ( deltaT > 2)
         {
             action = actions[rand.Next(4)];
 
@@ -57,15 +59,27 @@ public sealed class EnemyController : AbstractController
                 currentProjectile.FireCommand().Execute(); // Coupling
             }
 
-            // reset the counter and flip if enemy will move or not
-            counter = 0;
+            //flip if enemy will move or not
             isMoving = !isMoving;
+
+            resetDelta(gameTime);
+            
         }
 
         // update the enemy
         currentSprite.Update(gameTime);
-        counter++;
 
+    }
+
+    private void calcDelta(GameTime gameTime)
+    {
+        deltaT = gameTime.TotalGameTime.Seconds - prevTime;
+    }
+
+    private void resetDelta(GameTime gameTime)
+    {
+        prevTime = gameTime.TotalGameTime.Seconds;
+        deltaT = 0;
     }
 
 }

@@ -12,31 +12,37 @@ public class DamagedState : ISpriteState
 
     private SpriteAction prevAction;
     private ISpriteState prevState;
-
-
-    //naive approach to controlling how long to keep in damaged state
+    private float timeElapsed;
     private int counter = 0;
+
+
+   
 
     public DamagedState(ISprite sprite)
     {
         this.sprite = (IConcreteSprite)sprite;
         drawSprite = DrawSprite.GetInstance;
+        timeElapsed = 0;
     }
 
     public void Update(GameTime gameTime)
     {
-        if (counter > 22)
+
+        timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        counter++;
+
+        if (timeElapsed > 2)
         {
-            counter = 0;
+            timeElapsed = 0;
             sprite.SetSpriteState(prevAction, prevState);
+            counter = 0;
 
         }
-        counter++;
     }
 
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
-        drawSprite.Draw(sprite, Color.Red, false);
+        drawSprite.Draw(sprite, Color.Red, false, gameTime);
     }
 
 

@@ -18,9 +18,9 @@ using System.Threading.Tasks;
         this.sprite = (IConcreteSprite)sprite;
     }
     //Draw door closed sprite
-    public void Draw()
+    public void Draw(GameTime gameTime)
         {
-            drawSprite.Draw(sprite, Color.White, true);
+            drawSprite.Draw(sprite, Color.White, true, gameTime);
         }
 
         public void SetPreviousState(ISpriteState state)

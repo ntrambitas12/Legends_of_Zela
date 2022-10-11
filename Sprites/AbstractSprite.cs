@@ -35,7 +35,7 @@ using System.Threading.Tasks;
         
 
     }
-    public abstract void Draw();
+    public abstract void Draw(GameTime gameTime);
     
     public abstract void Update(GameTime gameTime);
 

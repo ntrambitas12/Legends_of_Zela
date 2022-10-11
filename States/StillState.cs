@@ -13,14 +13,15 @@ using System;
         }
 
 
-    public void Draw() 
+    public void Draw(GameTime gameTime) 
     {
-        drawSprite.Draw(sprite, Color.White, false);
+        drawSprite.Draw(sprite, Color.White, false, gameTime);
 
     }
 
     public void Update(GameTime gameTime)
     {
+
         //No update code needed for still state
 
     }

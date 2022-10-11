@@ -46,11 +46,11 @@ namespace CSE3902Project.Controllers
 
         public abstract void Update(GameTime gameTime);
 
-        public void Draw()
+        public void Draw(GameTime gameTime)
         {
             foreach (var sprite in sprites)
             {
-                sprite.Draw();
+                sprite.Draw(gameTime);
             }
         }
         public void nextSprite()

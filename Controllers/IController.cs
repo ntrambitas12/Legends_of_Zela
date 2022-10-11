@@ -12,7 +12,7 @@ public interface IController
     {
    
     public void Update(GameTime gameTime);
-    public void Draw();
+    public void Draw(GameTime gameTime);
     public void resetController();
 
 

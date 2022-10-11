@@ -25,11 +25,11 @@ public class RoomObjectManager : IRoomObjectManager
         return _currentRoom;
     }
 
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
         /*In the future, this will draw all the rooms.
          * Camera will be focued only on the current room*/
-        _currentRoom.Draw();
+        _currentRoom.Draw(gameTime);
     }
 
     public void Reset()

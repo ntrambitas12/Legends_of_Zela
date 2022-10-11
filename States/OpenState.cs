@@ -17,9 +17,9 @@ using System.Threading.Tasks;
         this.sprite = (IConcreteSprite)sprite;
     }
     //Draw door open sprite
-    public void Draw()
+    public void Draw(GameTime gameTime)
         {
-            drawSprite.Draw(sprite, Color.White, true);
+            drawSprite.Draw(sprite, Color.White, true, gameTime);
         }
 
 
@@ -30,6 +30,7 @@ using System.Threading.Tasks;
 
         public void Update(GameTime gameTime)
         {
+    
         // need collidable stuff
         }
     }

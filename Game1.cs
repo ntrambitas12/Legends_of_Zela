@@ -174,7 +174,7 @@ namespace CSE3902Project
         {
             _spriteBatch.Begin();
 
-            roomObjectManager.Draw();
+            roomObjectManager.Draw(gameTime);
 
             _spriteBatch.End();
 

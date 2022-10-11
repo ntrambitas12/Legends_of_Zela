@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 public class DeadState : ISpriteState
 {
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
         //no need to draw, sprite is not active
     }

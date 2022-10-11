@@ -8,7 +8,7 @@ using System.Threading.Tasks;
    public interface ISpriteState
 {
     public void Update(GameTime gameTime);
-    public void Draw();
+    public void Draw(GameTime gameTime);
     public void SetPreviousState(ISpriteState state);
    
 }

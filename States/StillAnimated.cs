@@ -7,6 +7,7 @@ public class StillAnimated : ISpriteState
     private ConcreteSprite sprite;
     private IDraw drawSprite;
 
+
     public StillAnimated(ConcreteSprite sprite)
     {
         this.sprite = sprite;
@@ -14,9 +15,9 @@ public class StillAnimated : ISpriteState
     }
 
 
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
-        drawSprite.Draw(sprite, Color.White, true);
+        drawSprite.Draw(sprite, Color.White, true, gameTime);
 
     }
 

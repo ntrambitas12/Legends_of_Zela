@@ -12,7 +12,7 @@ using System.Threading.Tasks;
     public void setRoom(int roomId);
     public IRoomObject currentRoom();
     public void Reset();
-    public void Draw();
+    public void Draw(GameTime gameTime);
     public void Update(GameTime gameTime);
     public void DeleteGameObject(int objectType, ISprite gameObject);
 }

@@ -92,7 +92,7 @@ public interface IRoomObject
     //  enemies
     //  link
     //  top of doorways (so that it is on the top-most layer and Link disappears below it)
-    public void Draw();
+    public void Draw(GameTime gameTime);
 
     public void ResetControllers();
 }

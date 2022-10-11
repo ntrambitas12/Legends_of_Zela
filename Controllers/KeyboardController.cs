@@ -70,7 +70,7 @@ using System.Threading.Tasks;
         }
     }
 
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
         //not implemented
     }
