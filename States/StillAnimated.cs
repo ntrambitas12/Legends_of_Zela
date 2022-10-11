@@ -26,10 +26,6 @@ public class StillAnimated : ISpriteState
 
 
     }
-    public void SetPosition(SpriteAction action)
-    {
-        sprite.SetSpriteAction(action);
-    }
 
     public void SetPreviousState(ISpriteState state)
     {

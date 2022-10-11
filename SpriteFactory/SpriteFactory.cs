@@ -96,6 +96,13 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> fireRight;
     private List<Texture2D> fireUp;
     private List<Texture2D> fireDown;
+    //door stuff
+    private List<Texture2D> doorOpen;
+    private List<Texture2D> doorClosed;
+    private List<Texture2D>[] doorFrames;
+
+
+
 
 
 
@@ -187,9 +194,13 @@ public sealed class SpriteFactory : IFactory
         gravestone = new List<Texture2D>();
         water = new List<Texture2D>();
 
+        doorOpen = new List<Texture2D>();
+        doorClosed = new List<Texture2D>();
+
+
     }
 
-        private static readonly SpriteFactory instance = new SpriteFactory();
+    private static readonly SpriteFactory instance = new SpriteFactory();
         public static SpriteFactory Instance
         {
             get { return instance; }
@@ -482,6 +493,11 @@ public sealed class SpriteFactory : IFactory
     public IProjectile CreateFireSprite()
     {
         return new Projectile(_spriteBatch, new Vector2(50, 50), fireFrames);
+    }
+
+    public ISprite CreateDoorSprite(bool isOpen)
+    {
+        return new ConcreteSprite(_spriteBatch, new Vector2(420, 69), doorFrames, isOpen);//need someone to create door frames and load them into game
     }
 }
 
