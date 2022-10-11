@@ -25,7 +25,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public int health { get; set; }
 
 
-    private IDraw drawSprite = DrawSprite.GetInstance;
+    private IDraw drawSprite = new DrawSprite();
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
 
     /*Variable that holds the current state*/
@@ -63,14 +63,14 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
 
     }
-    public override void Update()
+    public override void Update(GameTime gameTime)
     {
-       state.Update();
+       state.Update(gameTime);
     }
 
-    public override void Draw()
+    public override void Draw(GameTime gameTime)
     {    
-       state.Draw();
+       state.Draw(gameTime);
     }
 }
 

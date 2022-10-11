@@ -1,4 +1,5 @@
 ﻿using CSE3902Project.Controllers;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ public sealed class TileController : AbstractController
         }
     }
 
-    public override void Update()
+    public override void Update(GameTime gameTime)
     { 
         //tiles don't have any update logic
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,13 +44,13 @@ namespace CSE3902Project.Controllers
             initSprite();
         }
 
-        public abstract void Update();
+        public abstract void Update(GameTime gameTime);
 
-        public void Draw()
+        public void Draw(GameTime gameTime)
         {
             foreach (var sprite in sprites)
             {
-                sprite.Draw();
+                sprite.Draw(gameTime);
             }
         }
         public void nextSprite()

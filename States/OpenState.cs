@@ -13,13 +13,13 @@ using System.Threading.Tasks;
         private IDraw drawSprite;
     public OpenState(ISprite sprite)
     {
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
         this.sprite = (IConcreteSprite)sprite;
     }
     //Draw door open sprite
-    public void Draw()
+    public void Draw(GameTime gameTime)
         {
-            drawSprite.Draw(sprite, Color.White, true);
+            drawSprite.Draw(sprite, Color.White, true, gameTime);
         }
 
 
@@ -28,8 +28,9 @@ using System.Threading.Tasks;
             //implement if needed
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
+    
         // need collidable stuff
         }
     }

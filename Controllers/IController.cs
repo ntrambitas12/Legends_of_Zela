@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 public interface IController
     {
    
-    public void Update();
-    public void Draw();
+    public void Update(GameTime gameTime);
+    public void Draw(GameTime gameTime);
     public void resetController();
 
 

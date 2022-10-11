@@ -10,20 +10,21 @@ public class UseState : ISpriteState
     private ISprite sprite;
     private IDraw drawSprite;
 
+
     public UseState(ISprite sprite)
     {
         this.sprite = sprite;
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         //no updated needed; link is stationary when he is using an item
     }
 
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
-        drawSprite.Draw(sprite, Color.White, false);
+        drawSprite.Draw(sprite, Color.White, false, gameTime);
 
     }
     

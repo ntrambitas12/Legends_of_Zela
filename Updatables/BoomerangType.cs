@@ -16,7 +16,7 @@ public class BoomerangType : IItemType
         this.projectile = projectile;
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         direction = projectile.Direction();
         fireProjectile = projectile.FireCommand();

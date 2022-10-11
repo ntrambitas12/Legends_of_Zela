@@ -11,10 +11,11 @@ public abstract class AbstractItem : AbstractSprite, IItem
     private Vector2 changeCord;
     private Boolean shouldDraw;
     private ISprite owner;
+    private GameTime gameTime;
 
     public AbstractItem(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures)
     {
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
         posUpdate = UpdateSpritePos.GetInstance;
         itemType = null;
         changeCord = this.screenCord;
@@ -22,17 +23,18 @@ public abstract class AbstractItem : AbstractSprite, IItem
         owner = null;
     }
 
-    public override void Draw()
+    public override void Draw(GameTime gameTime)
     {
         if (shouldDraw)
         {
-            drawSprite.Draw(this, Color.White, true);
+            drawSprite.Draw(this, Color.White, true, gameTime);
         }
     }
 
-    public override void Update()
+    public override void Update(GameTime gameTime)
     {
-        itemType.Update();
+        this.gameTime = gameTime;
+        itemType.Update(gameTime);
     }
 
     public bool ShouldDraw()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,93 +65,93 @@ public class RoomObject : IRoomObject
         toBeDeleted.Add((gameObject, objectType));
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         //update all controllers
         foreach(var controller in ControllerList)
         {
-            controller.Update();
+            controller.Update(gameTime);
         }
 
-        Link.Update();
+        Link.Update(gameTime);
 
         //update all enemies
         foreach(var enemy in EnemyList)
         {
-            enemy.Update();
+            enemy.Update(gameTime);
         }
 
         //update projectiles
         foreach(var linkProjectile in LinkProjectileList)
         {
-            linkProjectile.Update();
+            linkProjectile.Update(gameTime);
         }
 
         foreach(var enemyProjectile in EnemyProjectileList)
         {
-            enemyProjectile.Update();
+            enemyProjectile.Update(gameTime);
         }
 
         //update pickup items
         foreach(var item in PickupList)
         {
-            item.Update();
+            item.Update(gameTime);
         }
 
         //update dynamic tiles
         foreach(var tile in DynamicTileList)
         {
-            tile.Update();
+            tile.Update(gameTime);
         }
 
         Delete();
     }
 
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
         //  background
         /* ADD CODE HERE ONCE BACKGROUND EXISTS*/
 
         foreach (var controller in ControllerList)
         {
-            controller.Draw();
+            controller.Draw(gameTime);
         }
         //  tiles (both types)
         foreach (var tile in DynamicTileList)
         {
-            tile.Draw();
+            tile.Draw(gameTime);
         }
 
         foreach (var tile in StaticTileList)
         {
-            tile.Draw();
+            tile.Draw(gameTime);
         }
         //  projectiles (both types)
         foreach (var linkProjectile in LinkProjectileList)
         {
-            linkProjectile.Draw();
+            linkProjectile.Draw(gameTime);
         }
 
         foreach (var enemyProjectile in EnemyProjectileList)
         {
-            enemyProjectile.Draw();
+            enemyProjectile.Draw(gameTime);
         }
         //  pickup items
         foreach (var item in PickupList)
         {
-            item.Draw();
+            item.Draw(gameTime);
         }
         //  enemies
         foreach (var enemy in EnemyList)
         {
-            enemy.Draw();
+            enemy.Draw(gameTime);
         }
         //  link
-        Link.Draw();
+        Link.Draw(gameTime);
         //  top of doorways (so that it is on the top-most layer and Link disappears below it)
         foreach (var item in TopLayerNonCollidibleList)
         {
-            item.Draw();
+            item.Draw(gameTime);
         }
     }
     public void ResetControllers()

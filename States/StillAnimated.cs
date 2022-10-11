@@ -7,20 +7,21 @@ public class StillAnimated : ISpriteState
     private ConcreteSprite sprite;
     private IDraw drawSprite;
 
+
     public StillAnimated(ConcreteSprite sprite)
     {
         this.sprite = sprite;
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
     }
 
 
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
-        drawSprite.Draw(sprite, Color.White, true);
+        drawSprite.Draw(sprite, Color.White, true, gameTime);
 
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         //No update code needed for still state
 

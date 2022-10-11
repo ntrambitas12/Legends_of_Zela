@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 
     public ClosedState(ISprite sprite)
     {
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
         this.sprite = (IConcreteSprite)sprite;
     }
     //Draw door closed sprite
-    public void Draw()
+    public void Draw(GameTime gameTime)
         {
-            drawSprite.Draw(sprite, Color.White, true);
+            drawSprite.Draw(sprite, Color.White, true, gameTime);
         }
 
         public void SetPreviousState(ISpriteState state)
@@ -28,7 +28,7 @@ using System.Threading.Tasks;
             //implement if needed
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
         //add collideable object
         }
