@@ -24,7 +24,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public ISpriteState attack { get; set; }
     public int health { get; set; }
 
-    private IDraw drawSprite = DrawSprite.GetInstance;
+    private IDraw drawSprite = new DrawSprite();
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
 
     /*Variable that holds the current state*/
