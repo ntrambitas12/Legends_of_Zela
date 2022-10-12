@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics; 
 
-public class ArrowType : IProjectileType
+public class ArrowType : IItemType
 {
-    private IItem projectile;
+    private IProjectile projectile;
     private int direction;
     private ICommand fireProjectile;
     private bool shouldDraw;
     private Vector2 changeCord;
 
-    public ArrowType(IItem projectile)
+    public ArrowType(IProjectile projectile)
     {
         this.projectile = projectile;
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         direction = projectile.Direction();
         fireProjectile = projectile.FireCommand();

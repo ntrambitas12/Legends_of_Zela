@@ -15,21 +15,17 @@ public class MovingState : ISpriteState
     {
         this.sprite = sprite;
         position = UpdateSpritePos.GetInstance;
-        drawSprite = DrawSprite.GetInstance;
+        drawSprite = new DrawSprite();
     }
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
-        drawSprite.Draw(sprite, Color.White, true);
+        drawSprite.Draw(sprite, Color.White, true, gameTime);
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         position.Update(sprite);
-    }
-
-    public void SetPosition(SpriteAction action)
-    {
-        sprite.SetSpriteAction(action);
+ 
     }
 
     public void SetPreviousState(ISpriteState state)

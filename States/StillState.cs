@@ -9,24 +9,21 @@ using System;
         public StillState(ConcreteSprite sprite)
         {
             this.sprite = sprite;
-            drawSprite = DrawSprite.GetInstance;
+            drawSprite = new DrawSprite();
         }
 
 
-    public void Draw()
+    public void Draw(GameTime gameTime) 
     {
-        drawSprite.Draw(sprite, Color.White, false);
+        drawSprite.Draw(sprite, Color.White, false, gameTime);
 
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
+
         //No update code needed for still state
 
-    }
-    public void SetPosition(SpriteAction action)
-    {
-        sprite.SetSpriteAction(action);
     }
 
     public void SetPreviousState(ISpriteState state)

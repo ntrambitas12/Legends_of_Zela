@@ -38,9 +38,9 @@ using System.Threading.Tasks;
         
 
     }
-    public abstract void Draw();
+    public abstract void Draw(GameTime gameTime);
     
-    public abstract void Update();
+    public abstract void Update(GameTime gameTime);
 
     /* This method, SetSpriteAction, sets the correct set of textures to draw, based on the desired action of the sprite.
      * Examples include: set the texture for the sprite moving left, set the texture for sprite moving right,
