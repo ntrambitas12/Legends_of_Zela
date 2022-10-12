@@ -10,7 +10,7 @@ using Microsoft.VisualBasic;
 public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
 
-    /*Intialize the states*/
+    /*Declare state variables*/
     public ISpriteState still { get; set; }
 
     public ISpriteState OpenDoor { get; set; }
@@ -24,8 +24,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public ISpriteState attack { get; set; }
     public int health { get; set; }
 
-
-    private IDraw drawSprite = new DrawSprite();
+    private IDraw drawSprite = DrawSprite.GetInstance;
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
 
     /*Variable that holds the current state*/

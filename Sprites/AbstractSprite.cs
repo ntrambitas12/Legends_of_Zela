@@ -16,6 +16,9 @@ using System.Threading.Tasks;
     public SpriteBatch spriteBatch { get { return _spriteBatch; } set {} }
     public List<Texture2D> textureToDraw { get { return _textureToDraw; } set {} }
 
+    /*Declare collider variable*/
+    public ICollision collider { get; set; }
+
     private int _currentFrame;
     private int _totalFrames;
     private int _spritePos;
