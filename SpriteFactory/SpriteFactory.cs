@@ -8,10 +8,6 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using CSE3902Project.Commands;
-using System.Xml;
-using System.IO;
-using System.Data.SqlTypes;
-using System.Runtime.InteropServices;
 
 public sealed class SpriteFactory : IFactory
     {
@@ -101,7 +97,6 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> fireUp;
     private List<Texture2D> fireDown;
 
-    XmlReader reader;
 
 
     private SpriteBatch _spriteBatch;
@@ -192,20 +187,18 @@ public sealed class SpriteFactory : IFactory
         gravestone = new List<Texture2D>();
         water = new List<Texture2D>();
 
-        reader = XmlReader.Create(new StringReader("ArtificalTestLevel.xml")); //in quotes will be name of xml file with data to load
-
     }
 
-    private static readonly SpriteFactory instance = new SpriteFactory();
-    public static SpriteFactory Instance
-    {
-        get { return instance; }
-    }
+        private static readonly SpriteFactory instance = new SpriteFactory();
+        public static SpriteFactory Instance
+        {
+            get { return instance; }
+        }
 
        
 
-    public void LoadAllContent(ContentManager content, SpriteBatch spriteBatch)
-    {
+        public void LoadAllContent(ContentManager content, SpriteBatch spriteBatch)
+        {
         _spriteBatch = spriteBatch;
 
         // Load tiles in
@@ -376,140 +369,114 @@ public sealed class SpriteFactory : IFactory
         fireFrames[(int)SpriteAction.moveDown] = fireDown;
     }
 
-    public Vector2 parseVectorFromString(String vectorString)
-    {
-        string[] temp = vectorString.Split(", ");
-        float x = System.Convert.ToSingle(temp[0]);
-        float y = System.Convert.ToSingle(temp[1]);
-        Vector2 vector = new Vector2(x, y);
-        return vector;
-    }
-
-    public Vector2 GetXMLSpriteLocation(String spriteName)
-    {
-        Vector2 spriteLocation = new Vector2();
-        while (reader.Read())
-        {
-            if (reader.IsStartElement())
-            {
-                if (reader.Name.Equals(spriteName))
-                {
-                    String sLocation = reader.GetAttribute("Location");
-                    spriteLocation = parseVectorFromString(sLocation);
-                }
-            }
-        }
-        return spriteLocation;
-    }
-
     public ISprite CreateGoriyaSprite()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Goriya"), goriyaFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(250, 340), goriyaFrames);
     }
 
     public ISprite CreateOktorokSprite()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Oktorok"), oktorokFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(175, 140), oktorokFrames);
     }
 
     public ISprite CreatePeahatSprite()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Peahat"), peahatFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(350, 140), peahatFrames);
     }
 
     public ISprite CreateLinkSprite()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Link"), linkFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(250, 220), linkFrames);
     }
 
     public ISprite CreateBarrierTile()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Barrier"), barrierFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), barrierFrames);
     }
 
     public ISprite CreateBushTile()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Bush"), bushFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), bushFrames);
     }
 
     public ISprite CreateDefaultFloorTile()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Floor"), defaultFloorFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), defaultFloorFrames);
     }
 
     public ISprite CreateDungeonStairsTile()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Dungeon Stairs"), dungeonStairsFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), dungeonStairsFrames);
     }
 
     public ISprite CreateGravestoneTile()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Gravestone"), gravestoneFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), gravestoneFrames);
     }
 
     public ISprite CreateWaterTile()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Water"), waterFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), waterFrames);
     }
 
     public ISprite CreateCompassItem()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Compass"), compassFrames); 
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), compassFrames); 
     }
 
     public ISprite CreateHeartItem()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Heart"), heartFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), heartFrames);
     }
 
     public ISprite CreateKeyItem()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Key"), keyFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), keyFrames);
     }
 
     public ISprite CreateMapItem()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Map"), mapFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), mapFrames);
     }
 
     public ISprite CreateRupiesItem()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Rupies"), rupiesFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), rupiesFrames);
     }
 
     public ISprite CreateSwordItem()
     {
-        return new ConcreteSprite(_spriteBatch, GetXMLSpriteLocation("Sword"), swordFrames);
+        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), swordFrames);
     }
 
     public IItem CreateArrowSprite()
     {
-        return new ConcreteItem(_spriteBatch, GetXMLSpriteLocation("Arrow"), arrowFrames);
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
     }
 
     public IItem CreateSilverArrowSprite()
     {
-        return new ConcreteItem(_spriteBatch, GetXMLSpriteLocation("Silver Arrow"), silverArrowFrames);
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), silverArrowFrames);
     }
 
     public IItem CreateBoomerangSprite()
     {
-        return new ConcreteItem(_spriteBatch, GetXMLSpriteLocation("Boomerang"), boomerangFrames);
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), boomerangFrames);
     }
 
     public IItem CreateMagicBoomerangSprite()
     {
-        return new ConcreteItem(_spriteBatch, GetXMLSpriteLocation("Magic Boomerang"), magicBoomerangFrames);
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), magicBoomerangFrames);
     }
 
     public IItem CreateBombSprite()
     {
-        return new ConcreteItem(_spriteBatch, GetXMLSpriteLocation("Bomb"), bombFrames);
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), bombFrames);
     }
 
     public IItem CreateFireSprite()
     {
-        return new ConcreteItem(_spriteBatch, GetXMLSpriteLocation("Fire"), fireFrames);
+        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), fireFrames);
     }
 }
 
