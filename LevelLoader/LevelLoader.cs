@@ -17,7 +17,7 @@ public class LevelLoader
         settings = new XmlReaderSettings();
         constructer = new Dictionary<String, Delegate>();
         settings.IgnoreWhitespace = true;
-        reader = XmlReader.Create("C:\\Users\\ntram\\source\\repos\\CSE3902Project\\LevelLoader\\RoomTest.xml");
+        reader = XmlReader.Create("C:\\Users\\Ben\\source\\repos\\CSE3902Project\\LevelLoader\\RoomTest.xml");
         parseTypes = new List<(string, string)>()
         {
             ("Blocks", "Block"),
@@ -62,7 +62,7 @@ public class LevelLoader
                 reader.Read();
 
                     /* This is where you call the corresponding method from spritefactory
-                      * and add that ISprite to the roomobject into correct list using add
+                     * and add that ISprite to the roomobject into correct list using add
                      */
                      if(constructer.TryGetValue(name, out Delegate value))
                     {
@@ -75,21 +75,6 @@ public class LevelLoader
         }
        }
     }
-
-    /*
-     * Stuff that needs to be in XML:
-     * ---------------
-     * Object types:
-     *  Link
-     *  Background
-     *  Collideable wall
-     *  Enemies
-     * ---------------
-     * Location
-     * ---------------
-     * Object Name
-     * 
-     */
 
     private void BuildRoom()
     {

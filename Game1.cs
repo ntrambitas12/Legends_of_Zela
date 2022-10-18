@@ -82,7 +82,11 @@ namespace CSE3902Project
         private IRoomObjectManager roomObjectManager;
         private LevelLoader level;
 
+        //Move to spritefactory later
         private Texture2D background;
+
+        //Delete prior to sprint submission; for sprite pos testing
+        private Texture2D door;
 
         public Game1()
         {
@@ -120,16 +124,16 @@ namespace CSE3902Project
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
             background = Content.Load<Texture2D>("DungeonSprites/DungeonFloor");
 
+            //Delete prior to sprint submission; was used for testing
+            door = Content.Load<Texture2D>("DungeonSprites/DoorTopOpen");
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             //Turn these into one parse method
-            //level.ParseBlocks();
-            //level.ParseEnemies();
-            //level.ParseItems();
-            //level.ParseLink();
+            //level.ParseProjectiles
             level.ParseRoom();
 
             //create the sprites
@@ -184,7 +188,10 @@ namespace CSE3902Project
         protected override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin();
-            _spriteBatch.Draw(background, new Vector2(144,114), null, Color.White, 0, new Vector2(0,0), 2, SpriteEffects.None, (float)0);
+            _spriteBatch.Draw(background, new Vector2(144,114), null, Color.White, 0, new Vector2(0,0), 2, SpriteEffects.None, 0);
+
+            //Delete this before sprint submisison; was used for testing sprite locations
+            //_spriteBatch.Draw(door, new Vector2(368, 114), null, Color.White, 0, new Vector2(0,0), 2, SpriteEffects.None, 0);
 
             roomObjectManager.Draw(gameTime);
 
@@ -229,6 +236,7 @@ namespace CSE3902Project
         }
         private void createSprites()
         {
+<<<<<<< Updated upstream
             // Create enemies
             enemy1 = SpriteFactory.Instance.CreateGoriyaSprite(new Vector2(0,0));
             enemy2 = SpriteFactory.Instance.CreateOktorokSprite(new Vector2(0, 0));
@@ -256,6 +264,35 @@ namespace CSE3902Project
             keyDrop = SpriteFactory.Instance.CreateKeyDrop(new Vector2(0, 0));
             keyDrop.SetItemType(new DropType());
             keyDrop.SetShouldDraw(true);
+=======
+            //// Create enemies
+            //enemy1 = SpriteFactory.Instance.CreateGoriyaSprite();
+            //enemy2 = SpriteFactory.Instance.CreateOktorokSprite();
+            //enemy3 = SpriteFactory.Instance.CreatePeahatSprite();
+
+            //// Create link
+            //link = SpriteFactory.Instance.CreateLinkSprite();
+
+            //// Create tiles
+            //barrierTile = SpriteFactory.Instance.CreateBarrierTile();
+            //bushTile = SpriteFactory.Instance.CreateBushTile();
+            //defaultFloorTile = SpriteFactory.Instance.CreateDefaultFloorTile();
+            //dungeonStairsTile = SpriteFactory.Instance.CreateDungeonStairsTile();
+            //gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile();
+            //waterTile = SpriteFactory.Instance.CreateWaterTile();
+
+            //// Create items
+            //compassItem = SpriteFactory.Instance.CreateCompassItem();
+            //heartItem = SpriteFactory.Instance.CreateHeartItem();
+            //keyItem = SpriteFactory.Instance.CreateKeyItem();
+            //mapItem = SpriteFactory.Instance.CreateMapItem();
+            //rupiesItem = SpriteFactory.Instance.CreateRupiesItem();
+            //swordItem = SpriteFactory.Instance.CreateSwordItem();
+
+            //keyDrop = SpriteFactory.Instance.CreateKeyDrop();
+            //keyDrop.SetItemType(new DropType());
+            //keyDrop.SetShouldDraw(true);
+>>>>>>> Stashed changes
         }
         private void setProjectileCommands()
         {
@@ -271,6 +308,7 @@ namespace CSE3902Project
         }
         private void createProjectiles()
         {
+<<<<<<< Updated upstream
             arrowLink = SpriteFactory.Instance.CreateArrowSprite(new Vector2(0, 0));
             arrowLink.SetDistance(60);
             arrowLink.SetItemType(new ArrowType(arrowLink));
@@ -315,6 +353,52 @@ namespace CSE3902Project
             fireEnemy3.SetDistance(50);
             fireEnemy3.SetItemType(new ArrowType(fireEnemy3));
             fireEnemy3.SetOwner(enemy3);
+=======
+            //arrowLink = SpriteFactory.Instance.CreateArrowSprite();
+            //arrowLink.SetDistance(60);
+            //arrowLink.SetItemType(new ArrowType(arrowLink));
+            //arrowLink.SetOwner(link);
+
+            //silverArrowLink = SpriteFactory.Instance.CreateSilverArrowSprite();
+            //silverArrowLink.SetDistance(80);
+            //silverArrowLink.SetItemType(new ArrowType(silverArrowLink));
+            //silverArrowLink.SetOwner(link);
+
+            //boomerangLink = SpriteFactory.Instance.CreateBoomerangSprite();
+            //boomerangLink.SetDistance(100);
+            //boomerangLink.SetItemType(new BoomerangType(boomerangLink));
+            //boomerangLink.SetOwner(link);
+
+            //magicBoomerangLink = SpriteFactory.Instance.CreateMagicBoomerangSprite();
+            //magicBoomerangLink.SetDistance(140);
+            //magicBoomerangLink.SetItemType(new BoomerangType(magicBoomerangLink));
+            //magicBoomerangLink.SetOwner(link);
+
+            //bombLink = SpriteFactory.Instance.CreateBombSprite();
+            //bombLink.SetDistance(100); // How long it is on the ground
+            //bombLink.SetItemType(new BombType(bombLink));
+            //bombLink.SetOwner(link);
+
+            //fireLink = SpriteFactory.Instance.CreateFireSprite();
+            //fireLink.SetDistance(50);
+            //fireLink.SetItemType(new ArrowType(fireLink));
+            //fireLink.SetOwner(link);
+
+            //boomerangEnemy1 = SpriteFactory.Instance.CreateBoomerangSprite();
+            //boomerangEnemy1.SetDistance(100);
+            //boomerangEnemy1.SetItemType(new BoomerangType(boomerangEnemy1));
+            //boomerangEnemy1.SetOwner(enemy1);
+
+            //magicBoomerangEnemy2 = SpriteFactory.Instance.CreateMagicBoomerangSprite();
+            //magicBoomerangEnemy2.SetDistance(140);
+            //magicBoomerangEnemy2.SetItemType(new BoomerangType(magicBoomerangEnemy2));
+            //magicBoomerangEnemy2.SetOwner(enemy2);
+
+            //fireEnemy3 = SpriteFactory.Instance.CreateFireSprite();
+            //fireEnemy3.SetDistance(50);
+            //fireEnemy3.SetItemType(new ArrowType(fireEnemy3));
+            //fireEnemy3.SetOwner(enemy3);
+>>>>>>> Stashed changes
         }
         private void createCommands()
         {
