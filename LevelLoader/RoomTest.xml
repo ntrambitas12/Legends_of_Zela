@@ -3,9 +3,9 @@
 
 	<Blocks>
 		<Block>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name> DungeonFloor </Name>
+			<xPos> 14 </xPos>
+			<yPos> 220 </yPos>
+			<Name>Goriya</Name>
 			<RoomObjectType> 4 </RoomObjectType>
 		</Block>
 		<Block>

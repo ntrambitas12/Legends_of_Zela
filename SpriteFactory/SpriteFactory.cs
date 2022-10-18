@@ -380,124 +380,124 @@ public sealed class SpriteFactory : IFactory
         fireFrames[(int)SpriteAction.moveDown] = fireDown;
     }
 
-    public ISprite CreateGoriyaSprite()
+    public ISprite CreateGoriyaSprite(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(250, 340), goriyaFrames);
+        return new ConcreteSprite(_spriteBatch, pos, goriyaFrames);
     }
 
-    public ISprite CreateOktorokSprite()
+    public ISprite CreateOktorokSprite(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(175, 140), oktorokFrames);
+        return new ConcreteSprite(_spriteBatch, pos, oktorokFrames);
     }
 
-    public ISprite CreatePeahatSprite()
+    public ISprite CreatePeahatSprite(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(350, 140), peahatFrames);
+        return new ConcreteSprite(_spriteBatch, pos, peahatFrames);
     }
 
-    public ISprite CreateLinkSprite()
+    public ISprite CreateLinkSprite(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(250, 220), linkFrames);
+        return new ConcreteSprite(_spriteBatch, pos, linkFrames);
     }
 
-    public ISprite CreateBarrierTile()
+    public ISprite CreateBarrierTile(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), barrierFrames);
+        return new ConcreteSprite(_spriteBatch, pos, barrierFrames);
     }
 
-    public ISprite CreateBushTile()
+    public ISprite CreateBushTile(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), bushFrames);
+        return new ConcreteSprite(_spriteBatch, pos, bushFrames);
     }
 
-    public ISprite CreateDefaultFloorTile()
+    public ISprite CreateDefaultFloorTile(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), defaultFloorFrames);
+        return new ConcreteSprite(_spriteBatch, pos, defaultFloorFrames);
     }
 
-    public ISprite CreateDungeonStairsTile()
+    public ISprite CreateDungeonStairsTile(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), dungeonStairsFrames);
+        return new ConcreteSprite(_spriteBatch, pos, dungeonStairsFrames);
     }
 
-    public ISprite CreateGravestoneTile()
+    public ISprite CreateGravestoneTile(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), gravestoneFrames);
+        return new ConcreteSprite(_spriteBatch, pos, gravestoneFrames);
     }
 
-    public ISprite CreateWaterTile()
+    public ISprite CreateWaterTile(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), waterFrames);
+        return new ConcreteSprite(_spriteBatch, pos, waterFrames);
     }
 
-    public ISprite CreateCompassItem()
+    public ISprite CreateCompassItem(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), compassFrames); 
+        return new ConcreteSprite(_spriteBatch, pos, compassFrames); 
     }
 
-    public ISprite CreateHeartItem()
+    public ISprite CreateHeartItem(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), heartFrames);
+        return new ConcreteSprite(_spriteBatch, pos, heartFrames);
     }
 
-    public ISprite CreateKeyItem()
+    public ISprite CreateKeyItem(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), keyFrames);
+        return new ConcreteSprite(_spriteBatch, pos, keyFrames);
     }
 
-    public ISprite CreateMapItem()
+    public ISprite CreateMapItem(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), mapFrames);
+        return new ConcreteSprite(_spriteBatch, pos, mapFrames);
     }
 
-    public ISprite CreateRupiesItem()
+    public ISprite CreateRupiesItem(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), rupiesFrames);
+        return new ConcreteSprite(_spriteBatch, pos, rupiesFrames);
     }
 
-    public ISprite CreateSwordItem()
+    public ISprite CreateSwordItem(Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), swordFrames);
+        return new ConcreteSprite(_spriteBatch, pos, swordFrames);
     }
 
-    public IDrop CreateKeyDrop()
+    public IDrop CreateKeyDrop(Vector2 pos)
     {
-        return new Drop(_spriteBatch, new Vector2(50, 50), keyFrames);
+        return new Drop(_spriteBatch, pos, keyFrames);
     }
 
-    public IProjectile CreateArrowSprite()
+    public IProjectile CreateArrowSprite(Vector2 pos)
     {
-        return new Projectile(_spriteBatch, new Vector2(50, 50), arrowFrames);
+        return new Projectile(_spriteBatch, pos, arrowFrames);
     }
 
-    public IProjectile CreateSilverArrowSprite()
+    public IProjectile CreateSilverArrowSprite(Vector2 pos)
     {
-        return new Projectile(_spriteBatch, new Vector2(50, 50), silverArrowFrames);
+        return new Projectile(_spriteBatch, pos, silverArrowFrames);
     }
 
-    public IProjectile CreateBoomerangSprite()
+    public IProjectile CreateBoomerangSprite(Vector2 pos)
     {
-        return new Projectile(_spriteBatch, new Vector2(50, 50), boomerangFrames);
+        return new Projectile(_spriteBatch, pos, boomerangFrames);
     }
 
-    public IProjectile CreateMagicBoomerangSprite()
+    public IProjectile CreateMagicBoomerangSprite(Vector2 pos)
     {
-        return new Projectile(_spriteBatch, new Vector2(50, 50), magicBoomerangFrames);
+        return new Projectile(_spriteBatch, pos, magicBoomerangFrames);
     }
 
-    public IProjectile CreateBombSprite()
+    public IProjectile CreateBombSprite(Vector2 pos)
     {
-        return new Projectile(_spriteBatch, new Vector2(50, 50), bombFrames);
+        return new Projectile(_spriteBatch, pos, bombFrames);
     }
 
-    public IProjectile CreateFireSprite()
+    public IProjectile CreateFireSprite(Vector2 pos)
     {
-        return new Projectile(_spriteBatch, new Vector2(50, 50), fireFrames);
+        return new Projectile(_spriteBatch, pos, fireFrames);
     }
 
-    public ISprite CreateDoorSprite(bool isOpen)
+    public ISprite CreateDoorSprite(bool isOpen, Vector2 pos)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(420, 69), doorFrames, isOpen);//need someone to create door frames and load them into game
+        return new ConcreteSprite(_spriteBatch, pos, doorFrames, isOpen);//need someone to create door frames and load them into game
     }
 }
 

@@ -230,30 +230,30 @@ namespace CSE3902Project
         private void createSprites()
         {
             // Create enemies
-            enemy1 = SpriteFactory.Instance.CreateGoriyaSprite();
-            enemy2 = SpriteFactory.Instance.CreateOktorokSprite();
-            enemy3 = SpriteFactory.Instance.CreatePeahatSprite();
+            enemy1 = SpriteFactory.Instance.CreateGoriyaSprite(new Vector2(0,0));
+            enemy2 = SpriteFactory.Instance.CreateOktorokSprite(new Vector2(0, 0));
+            enemy3 = SpriteFactory.Instance.CreatePeahatSprite(new Vector2(0, 0));
 
             // Create link
-            link = SpriteFactory.Instance.CreateLinkSprite();
+            link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(0, 0));
 
             // Create tiles
-            barrierTile = SpriteFactory.Instance.CreateBarrierTile();
-            bushTile = SpriteFactory.Instance.CreateBushTile();
-            defaultFloorTile = SpriteFactory.Instance.CreateDefaultFloorTile();
-            dungeonStairsTile = SpriteFactory.Instance.CreateDungeonStairsTile();
-            gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile();
-            waterTile = SpriteFactory.Instance.CreateWaterTile();
+            barrierTile = SpriteFactory.Instance.CreateBarrierTile(new Vector2(0, 0));
+            bushTile = SpriteFactory.Instance.CreateBushTile(new Vector2(0, 0));
+            defaultFloorTile = SpriteFactory.Instance.CreateDefaultFloorTile(new Vector2(0, 0));
+            dungeonStairsTile = SpriteFactory.Instance.CreateDungeonStairsTile(new Vector2(0, 0));
+            gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile(new Vector2(0, 0));
+            waterTile = SpriteFactory.Instance.CreateWaterTile(new Vector2(0, 0));
 
             // Create items
-            compassItem = SpriteFactory.Instance.CreateCompassItem();
-            heartItem = SpriteFactory.Instance.CreateHeartItem();
-            keyItem = SpriteFactory.Instance.CreateKeyItem();
-            mapItem = SpriteFactory.Instance.CreateMapItem();
-            rupiesItem = SpriteFactory.Instance.CreateRupiesItem();
-            swordItem = SpriteFactory.Instance.CreateSwordItem();
+            compassItem = SpriteFactory.Instance.CreateCompassItem(new Vector2(0, 0));
+            heartItem = SpriteFactory.Instance.CreateHeartItem(new Vector2(0, 0));
+            keyItem = SpriteFactory.Instance.CreateKeyItem(new Vector2(0, 0));
+            mapItem = SpriteFactory.Instance.CreateMapItem(new Vector2(0, 0));
+            rupiesItem = SpriteFactory.Instance.CreateRupiesItem(new Vector2(0, 0));
+            swordItem = SpriteFactory.Instance.CreateSwordItem(new Vector2(0, 0));
 
-            keyDrop = SpriteFactory.Instance.CreateKeyDrop();
+            keyDrop = SpriteFactory.Instance.CreateKeyDrop(new Vector2(0, 0));
             keyDrop.SetItemType(new DropType());
             keyDrop.SetShouldDraw(true);
         }
@@ -271,47 +271,47 @@ namespace CSE3902Project
         }
         private void createProjectiles()
         {
-            arrowLink = SpriteFactory.Instance.CreateArrowSprite();
+            arrowLink = SpriteFactory.Instance.CreateArrowSprite(new Vector2(0, 0));
             arrowLink.SetDistance(60);
             arrowLink.SetItemType(new ArrowType(arrowLink));
             arrowLink.SetOwner(link);
 
-            silverArrowLink = SpriteFactory.Instance.CreateSilverArrowSprite();
+            silverArrowLink = SpriteFactory.Instance.CreateSilverArrowSprite(new Vector2(0, 0));
             silverArrowLink.SetDistance(80);
             silverArrowLink.SetItemType(new ArrowType(silverArrowLink));
             silverArrowLink.SetOwner(link);
 
-            boomerangLink = SpriteFactory.Instance.CreateBoomerangSprite();
+            boomerangLink = SpriteFactory.Instance.CreateBoomerangSprite(new Vector2(0, 0));
             boomerangLink.SetDistance(100);
             boomerangLink.SetItemType(new BoomerangType(boomerangLink));
             boomerangLink.SetOwner(link);
 
-            magicBoomerangLink = SpriteFactory.Instance.CreateMagicBoomerangSprite();
+            magicBoomerangLink = SpriteFactory.Instance.CreateMagicBoomerangSprite(new Vector2(0, 0));
             magicBoomerangLink.SetDistance(140);
             magicBoomerangLink.SetItemType(new BoomerangType(magicBoomerangLink));
             magicBoomerangLink.SetOwner(link);
 
-            bombLink = SpriteFactory.Instance.CreateBombSprite();
+            bombLink = SpriteFactory.Instance.CreateBombSprite(new Vector2(0, 0));
             bombLink.SetDistance(100); // How long it is on the ground
             bombLink.SetItemType(new BombType(bombLink));
             bombLink.SetOwner(link);
 
-            fireLink = SpriteFactory.Instance.CreateFireSprite();
+            fireLink = SpriteFactory.Instance.CreateFireSprite(new Vector2(0, 0));
             fireLink.SetDistance(50);
             fireLink.SetItemType(new ArrowType(fireLink));
             fireLink.SetOwner(link);
 
-            boomerangEnemy1 = SpriteFactory.Instance.CreateBoomerangSprite();
+            boomerangEnemy1 = SpriteFactory.Instance.CreateBoomerangSprite(new Vector2(0, 0));
             boomerangEnemy1.SetDistance(100);
             boomerangEnemy1.SetItemType(new BoomerangType(boomerangEnemy1));
             boomerangEnemy1.SetOwner(enemy1);
 
-            magicBoomerangEnemy2 = SpriteFactory.Instance.CreateMagicBoomerangSprite();
+            magicBoomerangEnemy2 = SpriteFactory.Instance.CreateMagicBoomerangSprite(new Vector2(0, 0));
             magicBoomerangEnemy2.SetDistance(140);
             magicBoomerangEnemy2.SetItemType(new BoomerangType(magicBoomerangEnemy2));
             magicBoomerangEnemy2.SetOwner(enemy2);
 
-            fireEnemy3 = SpriteFactory.Instance.CreateFireSprite();
+            fireEnemy3 = SpriteFactory.Instance.CreateFireSprite(new Vector2(0, 0));
             fireEnemy3.SetDistance(50);
             fireEnemy3.SetItemType(new ArrowType(fireEnemy3));
             fireEnemy3.SetOwner(enemy3);
