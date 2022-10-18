@@ -29,10 +29,10 @@ public class LevelLoader
         int roomObjectType;
         bool read = false;
 
-        // foreach (var parseType in parseTypes)
-        //{
-        reader.ReadToFollowing("Blocks");
-        read = reader.ReadToDescendant("Block");
+         foreach (var parseType in parseTypes)
+        {
+        reader.ReadToFollowing(parseType.Item1);
+        read = reader.ReadToDescendant(parseType.Item2);
 
         if (read)
         {
@@ -47,54 +47,15 @@ public class LevelLoader
                 reader.ReadToNextSibling("RoomObjectType");
                 roomObjectType = reader.ReadElementContentAsInt();
                 reader.Read();
-            }
-            while (reader.ReadToNextSibling("Block"));
+
+                    /* This is where you call the corresponding method from spritefactory
+                      * and add that ISprite to the roomobject into correct list using add
+                     */
+
+                }
+                while (reader.ReadToNextSibling(parseType.Item2));
         }
-        /* This is where you call the corresponding method from spritefactory
-        * and add that ISprite to the roomobject into correct list using add
-        */
-
-        reader.ReadToFollowing("Enemies");
-       read = reader.ReadToDescendant("Enemy");
-        if (read)
-        {
-            do
-            {
-                reader.ReadToDescendant("xPos");
-                xPos = reader.ReadElementContentAsInt();
-                reader.ReadToNextSibling("yPos");
-                yPos = reader.ReadElementContentAsInt();
-                reader.ReadToNextSibling("Name");
-                name = reader.ReadElementContentAsString();
-                reader.ReadToNextSibling("RoomObjectType");
-                roomObjectType = reader.ReadElementContentAsInt();
-                reader.Read();
-            }
-            while (reader.ReadToNextSibling("Enemy"));
-        }
-
-
-        reader.ReadToFollowing("Items");
-        read = reader.ReadToDescendant("Item");
-        if (read)
-        {
-            do
-            {
-                reader.ReadToDescendant("xPos");
-                xPos = reader.ReadElementContentAsInt();
-                reader.ReadToNextSibling("yPos");
-                yPos = reader.ReadElementContentAsInt();
-                reader.ReadToNextSibling("Name");
-                name = reader.ReadElementContentAsString();
-                reader.ReadToNextSibling("RoomObjectType");
-                roomObjectType = reader.ReadElementContentAsInt();
-                reader.Read();
-            }
-            while (reader.ReadToNextSibling("Item"));
-        }
-
-
-        //}
+       }
     }
 
     /*

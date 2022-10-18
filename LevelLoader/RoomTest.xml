@@ -36,10 +36,10 @@
 
 	<Playables>
 		<Link>
-			<xPos></xPos>
-			<yPos></yPos>
-			<Name></Name>
-			<RoomObjectType></RoomObjectType>
+			<xPos>1</xPos>
+			<yPos>2</yPos>
+			<Name>Linker</Name>
+			<RoomObjectType>1</RoomObjectType>
 		</Link>
 	</Playables>
 
