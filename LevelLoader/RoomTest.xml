@@ -13,7 +13,7 @@
 			<yPos> 0 </yPos>
 			<Name> Water </Name>
 			<RoomObjectType> 4 </RoomObjectType>
-		</Block>
+		</Block>	
 	</Blocks>
 
 	<Enemies>
@@ -27,10 +27,10 @@
 
 	<Items>
 		<Item>
-			<xPos></xPos>
-			<yPos></yPos>
-			<Name></Name>
-			<RoomObjectType></RoomObjectType>
+			<xPos>0</xPos>
+			<yPos>0</yPos>
+			<Name>Thicc Item</Name>
+			<RoomObjectType>2</RoomObjectType>
 		</Item>
 	</Items>
 
