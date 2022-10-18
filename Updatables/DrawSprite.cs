@@ -39,7 +39,7 @@ using System.Threading.Tasks;
         screenCord = sprite.screenCord;
 
         // Draw the sprite
-        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, color); /* Color here is data driven */
+        spriteBatch.Draw(textureToDraw[currentFrame], screenCord, null, color, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0); /* Color here is data driven */
 
         // Update and save the frames
         if (animated && timeElapsed > .1) {

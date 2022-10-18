@@ -80,6 +80,9 @@ namespace CSE3902Project
 
         private RoomObject room1;
         private IRoomObjectManager roomObjectManager;
+        private LevelLoader level;
+
+        private Texture2D background;
 
         public Game1()
         {
@@ -93,6 +96,7 @@ namespace CSE3902Project
             //create the game object
             room1 = new RoomObject();
             roomObjectManager = new RoomObjectManager();
+            level = new LevelLoader();
 
             exitGame = new ExitCommand(this);
             restartGame = new RestartCommand(this);
@@ -114,12 +118,20 @@ namespace CSE3902Project
 
             //Load up the content for the sprite factory
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
+            background = Content.Load<Texture2D>("DungeonSprites/DungeonFloor");
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            //Turn these into one parse method
+            //level.ParseBlocks();
+            //level.ParseEnemies();
+            //level.ParseItems();
+            //level.ParseLink();
+            level.ParseRoom();
+
             //create the sprites
             createSprites();
 
@@ -162,8 +174,7 @@ namespace CSE3902Project
         protected override void Update(GameTime gameTime)
         {
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            GraphicsDevice.Clear(Color.Black);
 
             roomObjectManager.Update(gameTime);
 
@@ -173,6 +184,7 @@ namespace CSE3902Project
         protected override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin();
+            _spriteBatch.Draw(background, new Vector2(144,114), null, Color.White, 0, new Vector2(0,0), 2, SpriteEffects.None, (float)0);
 
             roomObjectManager.Draw(gameTime);
 

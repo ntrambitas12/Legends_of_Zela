@@ -1,76 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml;
 
-namespace CSE3902Project.LevelLoader
+public class LevelLoader
 {
+    public XmlReader reader;
+    public XmlReaderSettings settings;
+    private List<(string, string)> parseTypes;
 
-    public class LevelLoader
+    public LevelLoader()
     {
-        string winDir = System.Environment.GetEnvironmentVariable("windir");
-
-        public LevelLoader()
+        settings = new XmlReaderSettings();
+        settings.IgnoreWhitespace = true;
+        reader = XmlReader.Create("C:\\Users\\Ben\\source\\repos\\CSE3902Project\\LevelLoader\\RoomTest.xml");
+        parseTypes = new List<(string, string)>()
         {
-            LoadXML();
-        }
+            ("Blocks", "Block"),
+            ("Enemies", "Enemy"),
+            ("Items", "Item"),
+            ("Playables", "Link")
+        };
+    }
+    public void ParseRoom()
+    {
+        int xPos;
+        int yPos;
+        String name;
+        int roomObjectType;
 
-        /*
-         * Stuff that needs to be in XML:
-         * ---------------
-         * Object types:
-         *  Link
-         *  Background
-         *  Collideable wall
-         *  Enemies
-         * ---------------
-         * Location
-         * ---------------
-         * Object Name
-         * 
-         */
-
-        //Takes entire xml and sends each line to ParseLine
-        //floor xml contains room xml files. seprate xml for rooms
-        private void LoadXML()
+        foreach (var parseType in parseTypes)
         {
-            StreamReader reader = new StreamReader(winDir + "\\system.ini");//filepath of xml file. Make name of level1.xml, level2.xml, level3.xml, etc. so you can make the filepath a variable
-            try
+            reader.ReadToFollowing(parseType.Item1);
+
+            while (reader.ReadToFollowing(parseType.Item2))
             {
-                do
-                {
-                    ParseLine(reader.ReadLine());//test it by printing every line
-                }
-                while (reader.Peek() != -1);
-            }
-            catch
-            {
-                ParseLine("File is empty");//can remove this
-            }
-            finally
-            {
-                reader.Close();
+                reader.ReadToDescendant("xPos");
+                xPos = reader.ReadElementContentAsInt();
+                reader.ReadToNextSibling("yPos");
+                yPos = reader.ReadElementContentAsInt();
+                reader.ReadToNextSibling("Name");
+                name = reader.ReadElementContentAsString();
+                reader.ReadToNextSibling("RoomObjectType");
+                roomObjectType = reader.ReadElementContentAsInt();
+                /* This is where you call the corresponding method from spritefactory
+                * and add that ISprite to the roomobject into correct list using add
+                */
             }
         }
+    }
 
-        //Deals with individual lines of xml in string format
-        //line will have obj type, location, and 
-        private void ParseLine(string line)
-        {
-            //Determine what object type it is and tells sprite factory
-            //tells game object manager where to put the sprite it got from factory, do not make levelLoader the GOM
-            //GOM puts sprites where they need to go
-        }
+    /*
+     * Stuff that needs to be in XML:
+     * ---------------
+     * Object types:
+     *  Link
+     *  Background
+     *  Collideable wall
+     *  Enemies
+     * ---------------
+     * Location
+     * ---------------
+     * Object Name
+     * 
+     */
 
-        //Separate methods to parse each thing?
-        
-        //will build a room and return a room object?
-        private void BuildRoom()
-        {
+    private void BuildRoom()
+    {
 
-        }
     }
 }

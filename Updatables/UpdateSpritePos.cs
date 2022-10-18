@@ -32,7 +32,7 @@ public sealed class UpdateSpritePos : IPosition
             case 0:
                 if (screenCord.X >= 0 && screenCord.X <= 800)
                 {
-                    screenCord.X--;
+                    screenCord.X-=2;
                 }
                 else
                 {
@@ -44,7 +44,7 @@ public sealed class UpdateSpritePos : IPosition
             case 1:
                 if (screenCord.X >= 0 && screenCord.X <= 800)
                 {
-                    screenCord.X++;
+                    screenCord.X+=2;
                 }
                 else
                 {
@@ -56,7 +56,7 @@ public sealed class UpdateSpritePos : IPosition
             case 2:
                 if (screenCord.Y >= 0 && screenCord.Y <= 480)
                 {
-                    screenCord.Y--;
+                    screenCord.Y-=2;
                 }
                 else
                 {
@@ -68,7 +68,7 @@ public sealed class UpdateSpritePos : IPosition
             case 3:
                 if (screenCord.Y >= 0 && screenCord.Y <= 480)
                 {
-                    screenCord.Y++;
+                    screenCord.Y+=2;
                 }
                 else
                 {
