@@ -149,7 +149,7 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> bombRight;
     private List<Texture2D> bombUp;
     private List<Texture2D> bombDown;
-    private List<Texture2D> bombCloud;
+    //private List<Texture2D> bombCloud;
 
 
     private SpriteBatch _spriteBatch;

@@ -85,10 +85,6 @@
     <None Remove="Content\ItemSprites\Boomerang.png" />
     <None Remove="Content\ItemSprites\CandleBlue.png" />
     <None Remove="Content\ItemSprites\CandleRed.png" />
-    <None Remove="Content\ItemSprites\Cloud1.png" />
-    <None Remove="Content\ItemSprites\Cloud2.png" />
-    <None Remove="Content\ItemSprites\Cloud3.png" />
-    <None Remove="Content\ItemSprites\Cloud4.png" />
     <None Remove="Content\ItemSprites\Fairy1.png" />
     <None Remove="Content\ItemSprites\Fairy2.png" />
     <None Remove="Content\ItemSprites\Food.png" />
@@ -108,6 +104,10 @@
     <None Remove="Content\ItemSprites\RingRed.png" />
     <None Remove="Content\ItemSprites\SilverArrow.png" />
     <None Remove="Content\ItemSprites\WhiteSword.png" />
+    <None Remove="Content\obj\DesktopGL\net6.0\Content\ItemSprites\Cloud1.mgcontent" />
+    <None Remove="Content\obj\DesktopGL\net6.0\Content\ItemSprites\Cloud2.mgcontent" />
+    <None Remove="Content\obj\DesktopGL\net6.0\Content\ItemSprites\Cloud3.mgcontent" />
+    <None Remove="Content\obj\DesktopGL\net6.0\Content\ItemSprites\Cloud4.mgcontent" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
     <None Remove="Items\" />
