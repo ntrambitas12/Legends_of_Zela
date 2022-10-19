@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+	<!-- ROOM COMPLETE -->
+	
+	<Blocks>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>114</yPos>
+			<Name>WallTop</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>402</yPos>
+			<Name>WallBottom</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>144</xPos>
+			<yPos>114</yPos>
+			<Name>WallLeft</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>114</yPos>
+			<Name>WallRight1</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>322</yPos>
+			<Name>WallRight2</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>258</yPos>
+			<Name>DoorRightOpen</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+	</Blocks>
+
+
+	<Enemies>
+		<Enemy>
+			<xPos>240</xPos>
+			<yPos>250</yPos>
+			<Name>Keese</Name>
+			<RoomObjectType>2</RoomObjectType>
+		</Enemy>
+		<Enemy>
+			<xPos>368</xPos>
+			<yPos>314</yPos>
+			<Name>Keese</Name>
+			<RoomObjectType>2</RoomObjectType>
+		</Enemy>
+		<Enemy>
+			<xPos>432</xPos>
+			<yPos>282</yPos>
+			<Name>Keese</Name>
+			<RoomObjectType>2</RoomObjectType>
+		</Enemy>
+	</Enemies>
+
+
+	<Items>
+		<Item>
+			<xPos>312</xPos>
+			<yPos>274</yPos>
+			<Name>Key</Name>
+			<RoomObjectType>6</RoomObjectType>
+		</Item>
+	</Items>
+	
+</XnaContent>
