@@ -53,7 +53,7 @@ using System.Threading.Tasks;
         if ((int)action != _spritePos)
         {
             _spritePos = (int)action;
-            _textureToDraw = textures[_spritePos];
+             _textureToDraw = textures[_spritePos];
             _totalFrames = textureToDraw.Count;
             _currentFrame = 0;
        }
