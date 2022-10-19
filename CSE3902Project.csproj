@@ -64,7 +64,9 @@
     <None Remove="Content\DungeonSprites\WallBottom.png" />
     <None Remove="Content\DungeonSprites\WallBottomBombed.png" />
     <None Remove="Content\DungeonSprites\WallBottomDoor.png" />
+    <None Remove="Content\DungeonSprites\WallLeft0.png" />
     <None Remove="Content\DungeonSprites\WallLeftDoor.png" />
+    <None Remove="Content\DungeonSprites\WallRight0.png" />
     <None Remove="Content\DungeonSprites\WallRightDoor.png" />
     <None Remove="Content\DungeonSprites\WallTop.png" />
     <None Remove="Content\DungeonSprites\WallTopBombed.png" />
@@ -112,10 +114,6 @@
     <None Remove="Content\ItemSprites\RingRed.png" />
     <None Remove="Content\ItemSprites\SilverArrow.png" />
     <None Remove="Content\ItemSprites\WhiteSword.png" />
-    <None Remove="Content\obj\DesktopGL\net6.0\Content\ItemSprites\Cloud1.mgcontent" />
-    <None Remove="Content\obj\DesktopGL\net6.0\Content\ItemSprites\Cloud2.mgcontent" />
-    <None Remove="Content\obj\DesktopGL\net6.0\Content\ItemSprites\Cloud3.mgcontent" />
-    <None Remove="Content\obj\DesktopGL\net6.0\Content\ItemSprites\Cloud4.mgcontent" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
     <None Remove="Items\" />
