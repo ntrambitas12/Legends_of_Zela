@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CSE3902Project;
+using CSE3902Project.Commands;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Xml;
@@ -11,13 +14,22 @@ public class LevelLoader
     private delegate ISprite ConcreteEntities(Vector2 pos); 
 
     private Dictionary<String, Delegate> constructer;
+    private RoomObject room1;
+    private IRoomObjectManager roomObjectManager;
 
-    public LevelLoader()
+    //Things needed for keyboard controller
+    private List<Keys> linkKeys;
+    private KeyboardController keyboard;
+    private ISprite Link;
+ 
+
+    public LevelLoader(IRoomObjectManager roomObjectManager)
     {
         settings = new XmlReaderSettings();
         constructer = new Dictionary<String, Delegate>();
+        linkKeys = new List<Keys>();
         settings.IgnoreWhitespace = true;
-        reader = XmlReader.Create("C:\\Users\\Ben\\source\\repos\\CSE3902Project\\LevelLoader\\RoomTest.xml");
+        reader = XmlReader.Create("C:\\Users\\ntram\\source\\repos\\CSE3902Project\\LevelLoader\\RoomTest.xml");
         parseTypes = new List<(string, string)>()
         {
             ("Blocks", "Block"),
@@ -27,12 +39,87 @@ public class LevelLoader
         };
 
         populateDictionary();
+        this.roomObjectManager = roomObjectManager;
+        room1 = new RoomObject();
+        
     }
 
     private void populateDictionary()
     {
         constructer.Add("Goriya", new ConcreteEntities(SpriteFactory.Instance.CreateGoriyaSprite));
+        //constructer.Add("Keese", new ConcreteEntities(SpriteFactory.Instance.CreateKeeseSprite));
+        //constructer.Add("Stalfos", new ConcreteEntities(SpriteFactory.Instance.CreateStalfosSprite));
+       // constructer.Add("Gel", new ConcreteEntities(SpriteFactory.Instance.CreateGelSprite));
+       // constructer.Add("Aquamentus", new ConcreteEntities(SpriteFactory.Instance.CreateAquamentusSprite));
+       // constructer.Add("BladeTraps", new ConcreteEntities(SpriteFactory.Instance.CreateBladeTrapsSprite));
+        //constructer.Add("Wallmaster", new ConcreteEntities(SpriteFactory.Instance.CreateWallmasterSprite));
+        constructer.Add("Barrier", new ConcreteEntities(SpriteFactory.Instance.CreateBarrierTile));
+        constructer.Add("Stairs", new ConcreteEntities(SpriteFactory.Instance.CreateDungeonStairsTile));
+        constructer.Add("Water", new ConcreteEntities(SpriteFactory.Instance.CreateWaterTile));
+        constructer.Add("Compass", new ConcreteEntities(SpriteFactory.Instance.CreateCompassItem));
+        constructer.Add("Map", new ConcreteEntities(SpriteFactory.Instance.CreateMapItem));
+        constructer.Add("HeartContainer", new ConcreteEntities(SpriteFactory.Instance.CreateHeartItem));
+        constructer.Add("Key", new ConcreteEntities(SpriteFactory.Instance.CreateKeyItem));
 
+
+
+
+
+    }
+
+    public void CreateLink()
+    {
+        /*
+         * Link only needs to be created once.
+         * Add him to the starting room only.
+         * Colisions will be responsible for moving him between rooms.
+         */
+
+        Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(120, 120));
+        room1.Link = Link;
+    }
+    public void CreateKeyboard(Game1 game1)
+    {
+       keyboard = KeyboardController.GetInstance;
+
+        ConfigureKeyboardKeys(game1);
+
+        // Add link with his keys to playable sprite
+        keyboard.AddPlayableSprite(Link, linkKeys);
+
+        //Add keyboard to !!ALL!! rooms read in
+        room1.AddController(keyboard);
+    }
+
+    private void ConfigureKeyboardKeys(Game1 game1)
+    {
+        //Add link's keys to the list
+        linkKeys.Add(Keys.Left);
+        linkKeys.Add(Keys.Right);
+        linkKeys.Add(Keys.Up);
+        linkKeys.Add(Keys.Down);
+        linkKeys.Add(Keys.W);
+        linkKeys.Add(Keys.A);
+        linkKeys.Add(Keys.S);
+        linkKeys.Add(Keys.D);
+
+        // Add link movements and actions to keyboard controller
+        keyboard.RegisterCommand(Keys.Up, new MoveUp(Link));
+        keyboard.RegisterCommand(Keys.W, new MoveUp(Link));
+        keyboard.RegisterCommand(Keys.Left, new MoveLeft(Link));
+        keyboard.RegisterCommand(Keys.A, new MoveLeft(Link));
+        keyboard.RegisterCommand(Keys.Right, new MoveRight(Link));
+        keyboard.RegisterCommand(Keys.D, new MoveRight(Link));
+        keyboard.RegisterCommand(Keys.Down, new MoveDown(Link));
+        keyboard.RegisterCommand(Keys.S, new MoveDown(Link));
+        keyboard.RegisterCommand(Keys.E, new TakeDamage(Link));
+        keyboard.RegisterCommand(Keys.Z, new Attack(Link));
+
+        // Add restart and exit commands to keyboard
+        keyboard.RegisterCommand(Keys.Q, new ExitCommand(game1));
+        
+        //doesnt work, needs refactoring
+        //keyboard.RegisterCommand(Keys.R, new RestartCommand(game1));
     }
     public void ParseRoom()
     {
@@ -67,6 +154,7 @@ public class LevelLoader
                      if(constructer.TryGetValue(name, out Delegate value))
                     {
                         ISprite sprite = (ISprite)value.DynamicInvoke(new Vector2(xPos, yPos));
+                        room1.AddGameObject(roomObjectType, sprite);
                         
                     }
 
@@ -74,10 +162,13 @@ public class LevelLoader
                 while (reader.ReadToNextSibling(parseType.Item2));
         }
        }
+
+        //Build the Room
+        BuildRoom();
     }
 
     private void BuildRoom()
     {
-
+        roomObjectManager.addRoom(room1);
     }
 }

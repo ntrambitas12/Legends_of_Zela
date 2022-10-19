@@ -16,18 +16,15 @@ namespace CSE3902Project
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private List<Keys> linkKeys;
+       
 
-        private ISprite enemy1;
-        private ISprite enemy2;
-        private ISprite enemy3;
 
-        private ISprite link;
+       // private ISprite link;
         private ISprite barrierTile;
-        private ISprite bushTile;
-        private ISprite defaultFloorTile;
+       // private ISprite bushTile;
+        //private ISprite defaultFloorTile;
         private ISprite dungeonStairsTile;
-        private ISprite gravestoneTile;
+        //private ISprite gravestoneTile;
         private ISprite waterTile;
         private ISprite compassItem;
         private ISprite heartItem;
@@ -56,29 +53,16 @@ namespace CSE3902Project
         private FireProjectile fireMagicBoomerangEnemy2;
         private FireProjectile fireFireEnemy3;
 
-        private ICommand exitGame;
-        private ICommand restartGame;
+      
 
-        private NextSprite nextEnemy;
-        private PreviousSprite previousEnemy;
+      
         private NextSprite nextItem;
         private PreviousSprite previousItem;
         private NextSprite nextTile;
         private PreviousSprite previousTile;
 
-        private MoveDown linkMoveDown;
-        private MoveUp linkMoveUp;
-        private MoveLeft linkMoveLeft;
-        private MoveRight linkMoveRight;
-        private TakeDamage linkDamage;
-        private Attack linkAttack;
-
-        private KeyboardController keyboard;
-        private EnemyController enemyController;
-        private TileController tileController;
-        private ItemController itemController;
-
-        private RoomObject room1;
+       
+     
         private IRoomObjectManager roomObjectManager;
         private LevelLoader level;
 
@@ -97,28 +81,9 @@ namespace CSE3902Project
 
         protected override void Initialize()
         {
-            //create the game object
-            room1 = new RoomObject();
             roomObjectManager = new RoomObjectManager();
-            level = new LevelLoader();
-
-            exitGame = new ExitCommand(this);
-            restartGame = new RestartCommand(this);
+            level = new LevelLoader(roomObjectManager);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            linkKeys = new List<Keys>();
-
-            // Create the controllers
-            enemyController = EnemyController.GetInstance;
-            tileController = TileController.GetInstance;
-            itemController = ItemController.GetInstance;
-            keyboard = KeyboardController.GetInstance;
-
-            // Add all controllers to the room
-
-            room1.AddController(keyboard);
-            room1.AddController(enemyController);
-            room1.AddController(tileController);
-            room1.AddController(itemController);
 
             //Load up the content for the sprite factory
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
@@ -132,38 +97,28 @@ namespace CSE3902Project
 
         protected override void LoadContent()
         {
+            //levelLoader methods:
+
             //Turn these into one parse method
-            //level.ParseProjectiles
             level.ParseRoom();
-
-            //create the sprites
-            createSprites();
-
-            //add to controllers
-            addToControllers();
+            level.CreateLink();
+            level.CreateKeyboard(this);
+            
 
             // Create Projectiles (Before command is created)
-            createProjectiles();
+            //createProjectiles();
 
             // Add items to command lists
-            addToItemList();
+           // addToItemList();
 
             // Create Commands
-            createCommands();
+           // createCommands();
 
             // Set projectile commands (After commands are created)
-            setProjectileCommands();
+            //setProjectileCommands();
 
-            //register commands with key presses
-            registerKeyboard();
-           
-            // Add enemies to the enemy controller (with their items)
-            enemyController.AddSprite(enemy1, boomerangEnemy1);
-            enemyController.AddSprite(enemy2, magicBoomerangEnemy2);
-            enemyController.AddSprite(enemy3, fireEnemy3);
-
-            //add the room to the roomObjectManager
-            roomObjectManager.addRoom(room1);
+          
+          
         }
 
         public void resetGame()
@@ -202,55 +157,33 @@ namespace CSE3902Project
         private void addToItemList()
         {
             // Add items to command lists
-            room1.AddGameObject((int)RoomObjectTypes.typePickup, keyDrop);
-            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, arrowLink);
-            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, silverArrowLink);
-            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, boomerangLink);
-            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, magicBoomerangLink);
-            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, bombLink);
-            room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, fireLink);
-            room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, boomerangEnemy1);
-            room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, magicBoomerangEnemy2);
-            room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, fireEnemy3);
+           // room1.AddGameObject((int)RoomObjectTypes.typePickup, keyDrop);
+            //room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, arrowLink);
+            //room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, silverArrowLink);
+            //room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, boomerangLink);
+            //room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, magicBoomerangLink);
+           // room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, bombLink);
+           // room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, fireLink);
+           // room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, boomerangEnemy1);
+           // room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, magicBoomerangEnemy2);
+          //  room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, fireEnemy3);
 
-            room1.Link = link;
+         //   room1.Link = link;
         }
         
-        private void addToControllers()
-        {
-            // Add tiles to tile controller
-            tileController.AddSprite(barrierTile);
-            tileController.AddSprite(bushTile);
-            tileController.AddSprite(defaultFloorTile);
-            tileController.AddSprite(dungeonStairsTile);
-            tileController.AddSprite(gravestoneTile);
-            tileController.AddSprite(waterTile);
-
-            //Add items to the item controller
-            itemController.AddSprite(compassItem);
-            itemController.AddSprite(heartItem);
-            itemController.AddSprite(keyItem);
-            itemController.AddSprite(mapItem);
-            itemController.AddSprite(rupiesItem);
-            itemController.AddSprite(swordItem);
-        }
+        
         private void createSprites()
         {
-<<<<<<< Updated upstream
-            // Create enemies
-            enemy1 = SpriteFactory.Instance.CreateGoriyaSprite(new Vector2(0,0));
-            enemy2 = SpriteFactory.Instance.CreateOktorokSprite(new Vector2(0, 0));
-            enemy3 = SpriteFactory.Instance.CreatePeahatSprite(new Vector2(0, 0));
 
-            // Create link
-            link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(0, 0));
+       
+            
 
             // Create tiles
             barrierTile = SpriteFactory.Instance.CreateBarrierTile(new Vector2(0, 0));
-            bushTile = SpriteFactory.Instance.CreateBushTile(new Vector2(0, 0));
-            defaultFloorTile = SpriteFactory.Instance.CreateDefaultFloorTile(new Vector2(0, 0));
+            //bushTile = SpriteFactory.Instance.CreateBushTile(new Vector2(0, 0));
+            //defaultFloorTile = SpriteFactory.Instance.CreateDefaultFloorTile(new Vector2(0, 0));
             dungeonStairsTile = SpriteFactory.Instance.CreateDungeonStairsTile(new Vector2(0, 0));
-            gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile(new Vector2(0, 0));
+           // gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile(new Vector2(0, 0));
             waterTile = SpriteFactory.Instance.CreateWaterTile(new Vector2(0, 0));
 
             // Create items
@@ -264,35 +197,8 @@ namespace CSE3902Project
             keyDrop = SpriteFactory.Instance.CreateKeyDrop(new Vector2(0, 0));
             keyDrop.SetItemType(new DropType());
             keyDrop.SetShouldDraw(true);
-=======
-            //// Create enemies
-            //enemy1 = SpriteFactory.Instance.CreateGoriyaSprite();
-            //enemy2 = SpriteFactory.Instance.CreateOktorokSprite();
-            //enemy3 = SpriteFactory.Instance.CreatePeahatSprite();
 
-            //// Create link
-            //link = SpriteFactory.Instance.CreateLinkSprite();
 
-            //// Create tiles
-            //barrierTile = SpriteFactory.Instance.CreateBarrierTile();
-            //bushTile = SpriteFactory.Instance.CreateBushTile();
-            //defaultFloorTile = SpriteFactory.Instance.CreateDefaultFloorTile();
-            //dungeonStairsTile = SpriteFactory.Instance.CreateDungeonStairsTile();
-            //gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile();
-            //waterTile = SpriteFactory.Instance.CreateWaterTile();
-
-            //// Create items
-            //compassItem = SpriteFactory.Instance.CreateCompassItem();
-            //heartItem = SpriteFactory.Instance.CreateHeartItem();
-            //keyItem = SpriteFactory.Instance.CreateKeyItem();
-            //mapItem = SpriteFactory.Instance.CreateMapItem();
-            //rupiesItem = SpriteFactory.Instance.CreateRupiesItem();
-            //swordItem = SpriteFactory.Instance.CreateSwordItem();
-
-            //keyDrop = SpriteFactory.Instance.CreateKeyDrop();
-            //keyDrop.SetItemType(new DropType());
-            //keyDrop.SetShouldDraw(true);
->>>>>>> Stashed changes
         }
         private void setProjectileCommands()
         {
@@ -308,97 +214,52 @@ namespace CSE3902Project
         }
         private void createProjectiles()
         {
-<<<<<<< Updated upstream
+
             arrowLink = SpriteFactory.Instance.CreateArrowSprite(new Vector2(0, 0));
             arrowLink.SetDistance(60);
             arrowLink.SetItemType(new ArrowType(arrowLink));
-            arrowLink.SetOwner(link);
+            //arrowLink.SetOwner(link);
 
             silverArrowLink = SpriteFactory.Instance.CreateSilverArrowSprite(new Vector2(0, 0));
             silverArrowLink.SetDistance(80);
             silverArrowLink.SetItemType(new ArrowType(silverArrowLink));
-            silverArrowLink.SetOwner(link);
+           // silverArrowLink.SetOwner(link);
 
             boomerangLink = SpriteFactory.Instance.CreateBoomerangSprite(new Vector2(0, 0));
             boomerangLink.SetDistance(100);
             boomerangLink.SetItemType(new BoomerangType(boomerangLink));
-            boomerangLink.SetOwner(link);
+           // boomerangLink.SetOwner(link);
 
             magicBoomerangLink = SpriteFactory.Instance.CreateMagicBoomerangSprite(new Vector2(0, 0));
             magicBoomerangLink.SetDistance(140);
             magicBoomerangLink.SetItemType(new BoomerangType(magicBoomerangLink));
-            magicBoomerangLink.SetOwner(link);
+          //  magicBoomerangLink.SetOwner(link);
 
             bombLink = SpriteFactory.Instance.CreateBombSprite(new Vector2(0, 0));
             bombLink.SetDistance(100); // How long it is on the ground
             bombLink.SetItemType(new BombType(bombLink));
-            bombLink.SetOwner(link);
+           // bombLink.SetOwner(link);
 
             fireLink = SpriteFactory.Instance.CreateFireSprite(new Vector2(0, 0));
             fireLink.SetDistance(50);
             fireLink.SetItemType(new ArrowType(fireLink));
-            fireLink.SetOwner(link);
+          //  fireLink.SetOwner(link);
 
             boomerangEnemy1 = SpriteFactory.Instance.CreateBoomerangSprite(new Vector2(0, 0));
             boomerangEnemy1.SetDistance(100);
             boomerangEnemy1.SetItemType(new BoomerangType(boomerangEnemy1));
-            boomerangEnemy1.SetOwner(enemy1);
+            //boomerangEnemy1.SetOwner(enemy1);
 
             magicBoomerangEnemy2 = SpriteFactory.Instance.CreateMagicBoomerangSprite(new Vector2(0, 0));
             magicBoomerangEnemy2.SetDistance(140);
             magicBoomerangEnemy2.SetItemType(new BoomerangType(magicBoomerangEnemy2));
-            magicBoomerangEnemy2.SetOwner(enemy2);
+           // magicBoomerangEnemy2.SetOwner(enemy2);
 
             fireEnemy3 = SpriteFactory.Instance.CreateFireSprite(new Vector2(0, 0));
             fireEnemy3.SetDistance(50);
             fireEnemy3.SetItemType(new ArrowType(fireEnemy3));
-            fireEnemy3.SetOwner(enemy3);
-=======
-            //arrowLink = SpriteFactory.Instance.CreateArrowSprite();
-            //arrowLink.SetDistance(60);
-            //arrowLink.SetItemType(new ArrowType(arrowLink));
-            //arrowLink.SetOwner(link);
-
-            //silverArrowLink = SpriteFactory.Instance.CreateSilverArrowSprite();
-            //silverArrowLink.SetDistance(80);
-            //silverArrowLink.SetItemType(new ArrowType(silverArrowLink));
-            //silverArrowLink.SetOwner(link);
-
-            //boomerangLink = SpriteFactory.Instance.CreateBoomerangSprite();
-            //boomerangLink.SetDistance(100);
-            //boomerangLink.SetItemType(new BoomerangType(boomerangLink));
-            //boomerangLink.SetOwner(link);
-
-            //magicBoomerangLink = SpriteFactory.Instance.CreateMagicBoomerangSprite();
-            //magicBoomerangLink.SetDistance(140);
-            //magicBoomerangLink.SetItemType(new BoomerangType(magicBoomerangLink));
-            //magicBoomerangLink.SetOwner(link);
-
-            //bombLink = SpriteFactory.Instance.CreateBombSprite();
-            //bombLink.SetDistance(100); // How long it is on the ground
-            //bombLink.SetItemType(new BombType(bombLink));
-            //bombLink.SetOwner(link);
-
-            //fireLink = SpriteFactory.Instance.CreateFireSprite();
-            //fireLink.SetDistance(50);
-            //fireLink.SetItemType(new ArrowType(fireLink));
-            //fireLink.SetOwner(link);
-
-            //boomerangEnemy1 = SpriteFactory.Instance.CreateBoomerangSprite();
-            //boomerangEnemy1.SetDistance(100);
-            //boomerangEnemy1.SetItemType(new BoomerangType(boomerangEnemy1));
-            //boomerangEnemy1.SetOwner(enemy1);
-
-            //magicBoomerangEnemy2 = SpriteFactory.Instance.CreateMagicBoomerangSprite();
-            //magicBoomerangEnemy2.SetDistance(140);
-            //magicBoomerangEnemy2.SetItemType(new BoomerangType(magicBoomerangEnemy2));
-            //magicBoomerangEnemy2.SetOwner(enemy2);
-
-            //fireEnemy3 = SpriteFactory.Instance.CreateFireSprite();
-            //fireEnemy3.SetDistance(50);
-            //fireEnemy3.SetItemType(new ArrowType(fireEnemy3));
             //fireEnemy3.SetOwner(enemy3);
->>>>>>> Stashed changes
+
         }
         private void createCommands()
         {
@@ -413,33 +274,14 @@ namespace CSE3902Project
             fireMagicBoomerangEnemy2 = new FireProjectile(magicBoomerangEnemy2);
             fireFireEnemy3 = new FireProjectile(fireEnemy3);
 
-            previousEnemy = new PreviousSprite(enemyController);
-            nextEnemy = new NextSprite(enemyController);
-            previousTile = new PreviousSprite(tileController);
-            nextTile = new NextSprite(tileController);
-            previousItem = new PreviousSprite(itemController);
-            nextItem = new NextSprite(itemController);
-
-            linkMoveDown = new MoveDown(link);
-            linkMoveUp = new MoveUp(link);
-            linkMoveRight = new MoveRight(link);
-            linkMoveLeft = new MoveLeft(link);
-            linkDamage = new TakeDamage(link);
-            linkAttack = new Attack(link);
+          
+        
         }
 
         private void registerKeyboard()
-        { //Add link's keys to the list
-            linkKeys.Add(Keys.Left);
-            linkKeys.Add(Keys.Right);
-            linkKeys.Add(Keys.Up);
-            linkKeys.Add(Keys.Down);
-            linkKeys.Add(Keys.W);
-            linkKeys.Add(Keys.A);
-            linkKeys.Add(Keys.S);
-            linkKeys.Add(Keys.D);
+        {
 
-
+            /*
             // Add item use to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireArrowLink);
             keyboard.RegisterCommand(Keys.D2, fireSilverArrowLink);
@@ -447,34 +289,9 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.D4, fireMagicBoomerangLink);
             keyboard.RegisterCommand(Keys.D5, fireBombLink);
             keyboard.RegisterCommand(Keys.D6, fireFireLink);
+            */
 
-            // Add link movements and actions to keyboard controller
-            keyboard.RegisterCommand(Keys.Up, linkMoveUp);
-            keyboard.RegisterCommand(Keys.W, linkMoveUp);
-            keyboard.RegisterCommand(Keys.Left, linkMoveLeft);
-            keyboard.RegisterCommand(Keys.A, linkMoveLeft);
-            keyboard.RegisterCommand(Keys.Right, linkMoveRight);
-            keyboard.RegisterCommand(Keys.D, linkMoveRight);
-            keyboard.RegisterCommand(Keys.Down, linkMoveDown);
-            keyboard.RegisterCommand(Keys.S, linkMoveDown);
-            keyboard.RegisterCommand(Keys.E, linkDamage);
-            keyboard.RegisterCommand(Keys.Z, linkAttack);
-            keyboard.RegisterCommand(Keys.N, linkAttack);
-
-            // Add tile switching/item/enemy switching commands to keyboard controller
-            keyboard.RegisterCommand(Keys.Y, nextTile);
-            keyboard.RegisterCommand(Keys.T, previousTile);
-            keyboard.RegisterCommand(Keys.U, previousItem);
-            keyboard.RegisterCommand(Keys.I, nextItem);
-            keyboard.RegisterCommand(Keys.P, nextEnemy);
-            keyboard.RegisterCommand(Keys.O, previousEnemy);
-
-            // Add restart and exit commands to keyboard
-            keyboard.RegisterCommand(Keys.Q, exitGame);
-            keyboard.RegisterCommand(Keys.R, restartGame);
-
-            // Add link with his keys to playable sprite
-            keyboard.AddPlayableSprite(link, linkKeys);
+            
         }
     }
 }

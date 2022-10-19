@@ -5,32 +5,39 @@
 		<Block>
 			<xPos> 14 </xPos>
 			<yPos> 220 </yPos>
-			<Name>Goriya</Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<Name>Blocky</Name>
+			<RoomObjectType>2</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name> Water </Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<xPos>323</xPos>
+			<yPos>242</yPos>
+			<Name>Water</Name>
+			<RoomObjectType> 5 </RoomObjectType>
 		</Block>	
 	</Blocks>
 
 	<Enemies>
 		<Enemy>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name> Keese </Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<xPos> 140 </xPos>
+			<yPos> 220 </yPos>
+			<Name>Goriya</Name>
+			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
+		<Enemy>
+			<xPos> 40 </xPos>
+			<yPos> 20 </yPos>
+			<Name>Goriya</Name>
+			<RoomObjectType>2</RoomObjectType>
+		</Enemy>
+		
 	</Enemies>
 
 	<Items>
 		<Item>
-			<xPos>0</xPos>
-			<yPos>0</yPos>
-			<Name>Thicc Item</Name>
-			<RoomObjectType>2</RoomObjectType>
+			<xPos>1</xPos>
+			<yPos>5</yPos>
+			<Name>Compass</Name>
+			<RoomObjectType>6</RoomObjectType>
 		</Item>
 	</Items>
 

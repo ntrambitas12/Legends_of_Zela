@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
+
 public class RoomObject : IRoomObject
 {
     public List<IController> ControllerList { get; set; }
@@ -19,6 +21,12 @@ public class RoomObject : IRoomObject
 
     private List<(ISprite, int)> toBeDeleted;
     private Dictionary<int, List<ISprite>> listDict;
+    
+    //enemy AI related data
+    private List<SpriteAction> enemyActions;
+    private SpriteAction enemyAction;
+    private Random rand;
+
 
     public RoomObject()
     {
@@ -39,12 +47,22 @@ public class RoomObject : IRoomObject
 
         //set up toBeAdded dictionary
         listDict.Add((int)RoomObjectTypes.typeLinkProjectile, LinkProjectileList);
+        listDict.Add((int)RoomObjectTypes.typeEnemy, EnemyList);
         listDict.Add((int)RoomObjectTypes.typeEnemyProjectile, EnemyProjectileList);
         listDict.Add((int)RoomObjectTypes.typeTileStatic, StaticTileList);
         listDict.Add((int)RoomObjectTypes.typeTileDynamic, DynamicTileList);
         listDict.Add((int)RoomObjectTypes.typePickup, PickupList);
         listDict.Add((int)RoomObjectTypes.typeCollisionBox, CollidibleList);
         listDict.Add((int)RoomObjectTypes.typeTopLayerNonCollidible, TopLayerNonCollidibleList);
+
+        //set up the logic for the enemy AI
+        rand = new Random();
+        enemyActions = new List<SpriteAction>();
+        enemyActions.Add(SpriteAction.moveDown);
+        enemyActions.Add(SpriteAction.moveLeft);
+        enemyActions.Add(SpriteAction.moveRight);
+        enemyActions.Add(SpriteAction.moveUp);
+
 
 
     }
@@ -76,9 +94,37 @@ public class RoomObject : IRoomObject
         Link.Update(gameTime);
 
         //update all enemies
-        foreach(var enemy in EnemyList)
+        foreach(IConcreteSprite enemy in EnemyList)
         {
+
+            /*
+             * Using rand.next as a mechanism to "randomly" 
+             * have each enemy change its state.
+             * Couldnt think of a better ai, this will do
+             * for now.
+           */
+
+            if (rand.Next(25) == 5)
+            {
+                enemyAction = enemyActions[rand.Next(4)];
+
+                //if 0, then enemy will move
+                if (rand.Next(2) == 0)
+                {
+                    enemy.SetSpriteState(enemyAction, enemy.moving);
+                }
+                //if 1, enemy will stay still
+                else
+                {
+                    enemy.SetSpriteState(enemyAction, enemy.still);
+                }
+
+                
+
+            }
+
             enemy.Update(gameTime);
+         
         }
 
         //update projectiles
@@ -178,6 +224,7 @@ public class RoomObject : IRoomObject
         //after iterating the delete list, clear it!
         toBeDeleted.Clear();
     }
+
 
 }
 
