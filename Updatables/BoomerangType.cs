@@ -10,6 +10,7 @@ public class BoomerangType : IItemType
     private Vector2 changeCord;
     private int counter;
     private int distance;
+    private int speed;
 
     public BoomerangType(IProjectile projectile)
     {
@@ -24,8 +25,9 @@ public class BoomerangType : IItemType
         changeCord = projectile.Position();
         counter = fireProjectile.Counter();
         distance = projectile.Distance();
+        speed = 5;
 
-        if (counter == distance / 2)
+        if (counter == distance / 3)
         {
             switch (direction)
             {
@@ -46,20 +48,22 @@ public class BoomerangType : IItemType
             }
         }
 
+        if (counter >= distance / 3) speed = 3;
+
         direction = projectile.Direction();
         switch (direction)
         {
             case 0:
-                changeCord.X -= 4;
+                changeCord.X -= speed;
                 break;
             case 1:
-                changeCord.X += 4;
+                changeCord.X += speed;
                 break;
             case 2:
-                changeCord.Y -= 4;
+                changeCord.Y -= speed;
                 break;
             case 3:
-                changeCord.Y += 4;
+                changeCord.Y += speed;
                 break;
             default:
                 break;

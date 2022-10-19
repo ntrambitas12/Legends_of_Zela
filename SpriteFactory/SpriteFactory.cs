@@ -293,6 +293,7 @@ public sealed class SpriteFactory : IFactory
         bombUp = new List<Texture2D>();
         bombDown = new List<Texture2D>();
         bombCloud = new List<Texture2D>();
+
     }
 
     private static readonly SpriteFactory instance = new SpriteFactory();
@@ -399,6 +400,7 @@ public sealed class SpriteFactory : IFactory
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud2"));
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud3"));
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud4"));
+
 
 
         //Populate Blocks and Items

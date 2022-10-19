@@ -16,15 +16,9 @@ namespace CSE3902Project
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-       
-
-
-       // private ISprite link;
+        //Will end up deleting most of this prior to sprint 3 submission
         private ISprite barrierTile;
-       // private ISprite bushTile;
-        //private ISprite defaultFloorTile;
         private ISprite dungeonStairsTile;
-        //private ISprite gravestoneTile;
         private ISprite waterTile;
         private ISprite compassItem;
         private ISprite heartItem;
@@ -34,43 +28,32 @@ namespace CSE3902Project
         private ISprite swordItem;
         private IDrop keyDrop;
         private IProjectile arrowLink;
-        private IProjectile silverArrowLink;
         private IProjectile boomerangLink;
-        private IProjectile magicBoomerangLink;
         private IProjectile bombLink;
-        private IProjectile fireLink;
+        private IProjectile fireballLink;
         private IProjectile boomerangEnemy1;
-        private IProjectile magicBoomerangEnemy2;
-        private IProjectile fireEnemy3;
+        private IProjectile fireballEnemy3;
 
         private FireProjectile fireArrowLink;
-        private FireProjectile fireSilverArrowLink;
         private FireProjectile fireBoomerangLink;
-        private FireProjectile fireMagicBoomerangLink;
         private FireProjectile fireBombLink;
-        private FireProjectile fireFireLink;
+        private FireProjectile fireFireballLink;
         private FireProjectile fireBoomerangEnemy1;
-        private FireProjectile fireMagicBoomerangEnemy2;
-        private FireProjectile fireFireEnemy3;
+        private FireProjectile fireFireballEnemy3;
 
-      
-
-      
         private NextSprite nextItem;
         private PreviousSprite previousItem;
         private NextSprite nextTile;
         private PreviousSprite previousTile;
-
-       
      
         private IRoomObjectManager roomObjectManager;
         private LevelLoader level;
 
         //Move to spritefactory later
         private Texture2D background;
-
         //Delete prior to sprint submission; for sprite pos testing
         private Texture2D door;
+
 
         public Game1()
         {
@@ -78,6 +61,7 @@ namespace CSE3902Project
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
+
 
         protected override void Initialize()
         {
@@ -95,29 +79,25 @@ namespace CSE3902Project
             base.Initialize();
         }
 
+
         protected override void LoadContent()
         {
             //levelLoader methods:
 
             //Turn these into one parse method
             level.ParseRoom();
-           
-            
 
-            // Create Projectiles (Before command is created)
+            //Create Projectiles (Before command is created)
             //createProjectiles();
 
-            // Add items to command lists
-           // addToItemList();
+            //Add items to command lists
+            //addToItemList();
 
-            // Create Commands
-           // createCommands();
+            //Create Commands
+            //createCommands();
 
-            // Set projectile commands (After commands are created)
+            //Set projectile commands (After commands are created)
             //setProjectileCommands();
-
-          
-          
         }
 
         public void resetGame()
@@ -125,8 +105,6 @@ namespace CSE3902Project
             roomObjectManager.Reset();
             this.LoadContent();
         }
-
-
 
 
         protected override void Update(GameTime gameTime)
@@ -153,126 +131,103 @@ namespace CSE3902Project
 
             base.Draw(gameTime);
         }
+
+
         private void addToItemList()
         {
-            // Add items to command lists
-           // room1.AddGameObject((int)RoomObjectTypes.typePickup, keyDrop);
+            //Add items to command lists (LIKELY DELETING BEFORE SPRINT 3 SUMBISSION)
+            //room1.AddGameObject((int)RoomObjectTypes.typePickup, keyDrop);
             //room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, arrowLink);
-            //room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, silverArrowLink);
             //room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, boomerangLink);
-            //room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, magicBoomerangLink);
-           // room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, bombLink);
-           // room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, fireLink);
-           // room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, boomerangEnemy1);
-           // room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, magicBoomerangEnemy2);
-          //  room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, fireEnemy3);
+            //room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, bombLink);
+            //room1.AddGameObject((int)RoomObjectTypes.typeLinkProjectile, fireballLink);
+            //room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, boomerangEnemy1);
+            //room1.AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, fireballEnemy3);
 
-         //   room1.Link = link;
+            //room1.Link = link;
         }
         
         
         private void createSprites()
         {
-
-       
-            
-
-            // Create tiles
-           // barrierTile = SpriteFactory.Instance.CreateBarrierTile(new Vector2(0, 0));
+            //Create tiles (LIKELY DELETING BEFORE SPRINT 3 SUBMISSION)
+            //barrierTile = SpriteFactory.Instance.CreateBarrierTile(new Vector2(0, 0));
             //bushTile = SpriteFactory.Instance.CreateBushTile(new Vector2(0, 0));
             //defaultFloorTile = SpriteFactory.Instance.CreateDefaultFloorTile(new Vector2(0, 0));
-           // dungeonStairsTile = SpriteFactory.Instance.CreateDungeonStairsTile(new Vector2(0, 0));
-           // gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile(new Vector2(0, 0));
+            //dungeonStairsTile = SpriteFactory.Instance.CreateDungeonStairsTile(new Vector2(0, 0));
+            //gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile(new Vector2(0, 0));
             //waterTile = SpriteFactory.Instance.CreateWaterTile(new Vector2(0, 0));
 
-
-           // keyDrop = SpriteFactory.Instance.CreateKeyDrop(new Vector2(0, 0));
+            //keyDrop = SpriteFactory.Instance.CreateKeyDrop(new Vector2(0, 0));
             keyDrop.SetItemType(new DropType());
             keyDrop.SetShouldDraw(true);
 
 
         }
+
+
         private void setProjectileCommands()
         {
             arrowLink.SetFireCommand(fireArrowLink);
-            silverArrowLink.SetFireCommand(fireSilverArrowLink);
             boomerangLink.SetFireCommand(fireBoomerangLink);
-            magicBoomerangLink.SetFireCommand(fireMagicBoomerangLink);
             bombLink.SetFireCommand(fireBombLink);
-            fireLink.SetFireCommand(fireFireLink);
+            fireballLink.SetFireCommand(fireFireballLink);
             boomerangEnemy1.SetFireCommand(fireBoomerangEnemy1);
-            magicBoomerangEnemy2.SetFireCommand(fireMagicBoomerangEnemy2);
-            fireEnemy3.SetFireCommand(fireFireEnemy3);
+            fireballEnemy3.SetFireCommand(fireFireballEnemy3);
         }
+
+
         private void createProjectiles()
         {
-
-           // arrowLink = SpriteFactory.Instance.CreateArrowSprite(new Vector2(0, 0));
-          //  arrowLink.SetDistance(60);
-           // arrowLink.SetItemType(new ArrowType(arrowLink));
+            //(LIKELY DELETING PRIOR TO SPRINT 3 SUBMISSION)
+            //arrowLink = SpriteFactory.Instance.CreateArrowSprite(new Vector2(0, 0));
+            //arrowLink.SetDistance(60);
+            //arrowLink.SetItemType(new ArrowType(arrowLink));
             //arrowLink.SetOwner(link);
 
-          //  silverArrowLink = SpriteFactory.Instance.CreateSilverArrowSprite(new Vector2(0, 0));
-          ///  silverArrowLink.SetDistance(80);
-          //  silverArrowLink.SetItemType(new ArrowType(silverArrowLink));
-           // silverArrowLink.SetOwner(link);
+            //boomerangLink = SpriteFactory.Instance.CreateBoomerangSprite(new Vector2(0, 0));
+            //boomerangLink.SetDistance(100);
+            //boomerangLink.SetItemType(new BoomerangType(boomerangLink));
+            //boomerangLink.SetOwner(link);
 
-           // boomerangLink = SpriteFactory.Instance.CreateBoomerangSprite(new Vector2(0, 0));
-           // boomerangLink.SetDistance(100);
-           // boomerangLink.SetItemType(new BoomerangType(boomerangLink));
-           // boomerangLink.SetOwner(link);
+            //bombLink = SpriteFactory.Instance.CreateBombSprite(new Vector2(0, 0));
+            //bombLink.SetDistance(100); // How long it is on the ground
+            //bombLink.SetItemType(new BombType(bombLink));
+            //bombLink.SetOwner(link);
 
-          //  magicBoomerangLink = SpriteFactory.Instance.CreateMagicBoomerangSprite(new Vector2(0, 0));
-          //  magicBoomerangLink.SetDistance(140);
-          //  magicBoomerangLink.SetItemType(new BoomerangType(magicBoomerangLink));
-          //  magicBoomerangLink.SetOwner(link);
+            //fireLink = SpriteFactory.Instance.CreateFireSprite(new Vector2(0, 0));
+            //fireLink.SetDistance(50);
+            //fireLink.SetItemType(new ArrowType(fireLink));
+            //fireLink.SetOwner(link);
 
-           // bombLink = SpriteFactory.Instance.CreateBombSprite(new Vector2(0, 0));
-           // bombLink.SetDistance(100); // How long it is on the ground
-          //  bombLink.SetItemType(new BombType(bombLink));
-           // bombLink.SetOwner(link);
-
-           // fireLink = SpriteFactory.Instance.CreateFireSprite(new Vector2(0, 0));
-           // fireLink.SetDistance(50);
-           // fireLink.SetItemType(new ArrowType(fireLink));
-          //  fireLink.SetOwner(link);
-
-          //  boomerangEnemy1 = SpriteFactory.Instance.CreateBoomerangSprite(new Vector2(0, 0));
-          //  boomerangEnemy1.SetDistance(100);
-          //  boomerangEnemy1.SetItemType(new BoomerangType(boomerangEnemy1));
+            //boomerangEnemy1 = SpriteFactory.Instance.CreateBoomerangSprite(new Vector2(0, 0));
+            //boomerangEnemy1.SetDistance(100);
+            //boomerangEnemy1.SetItemType(new BoomerangType(boomerangEnemy1));
             //boomerangEnemy1.SetOwner(enemy1);
 
-           // magicBoomerangEnemy2 = SpriteFactory.Instance.CreateMagicBoomerangSprite(new Vector2(0, 0));
-          //  magicBoomerangEnemy2.SetDistance(140);
-          //  magicBoomerangEnemy2.SetItemType(new BoomerangType(magicBoomerangEnemy2));
-           // magicBoomerangEnemy2.SetOwner(enemy2);
-
-           // fireEnemy3 = SpriteFactory.Instance.CreateFireSprite(new Vector2(0, 0));
-           // fireEnemy3.SetDistance(50);
-           // fireEnemy3.SetItemType(new ArrowType(fireEnemy3));
+            //Change to fireball
+            //fireEnemy3 = SpriteFactory.Instance.CreateFireSprite(new Vector2(0, 0));
+            //fireEnemy3.SetDistance(50);
+            //fireEnemy3.SetItemType(new ArrowType(fireEnemy3));
             //fireEnemy3.SetOwner(enemy3);
 
         }
+
+
         private void createCommands()
         {
             fireArrowLink = new FireProjectile(arrowLink);
-            fireSilverArrowLink = new FireProjectile(silverArrowLink);
             fireBoomerangLink = new FireProjectile(boomerangLink);
-            fireMagicBoomerangLink = new FireProjectile(magicBoomerangLink);
             fireBombLink = new FireProjectile(bombLink);
-            fireFireLink = new FireProjectile(fireLink);
-
+            fireFireballLink = new FireProjectile(fireballLink);
             fireBoomerangEnemy1 = new FireProjectile(boomerangEnemy1);
-            fireMagicBoomerangEnemy2 = new FireProjectile(magicBoomerangEnemy2);
-            fireFireEnemy3 = new FireProjectile(fireEnemy3);
-
-          
-        
+            fireFireballEnemy3 = new FireProjectile(fireballEnemy3);
         }
+
 
         private void registerKeyboard()
         {
-
+            //(LIKELY DELETING PRIOR TO SPRINT 3 SUBMISSION)
             /*
             // Add item use to keyboard controller
             keyboard.RegisterCommand(Keys.D1, fireArrowLink);
@@ -282,8 +237,6 @@ namespace CSE3902Project
             keyboard.RegisterCommand(Keys.D5, fireBombLink);
             keyboard.RegisterCommand(Keys.D6, fireFireLink);
             */
-
-            
         }
     }
 }

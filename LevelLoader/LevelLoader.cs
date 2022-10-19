@@ -86,13 +86,11 @@ public class LevelLoader
         IProjectile Arrow = (IProjectile) SpriteFactory.Instance.CreateArrowProjectile(new Vector2(0, 0), 60, Link);
         IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(new Vector2(0, 0), 100, Link);
         IProjectile Boomerang = (IProjectile)SpriteFactory.Instance.CreateBoomerangProjectile(new Vector2(0, 0), 100, Link);
-        IProjectile Fire = (IProjectile)SpriteFactory.Instance.CreateFireProjectile(new Vector2(0, 0), 50, Link);
 
         // Add projectiles to Link
         ((ConcreteSprite)Link).AddProjectile(Arrow, ArrayIndex.arrow);
         ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);
         ((ConcreteSprite)Link).AddProjectile(Boomerang, ArrayIndex.boomerang);
-        ((ConcreteSprite)Link).AddProjectile(Fire, ArrayIndex.fire);
     }
     private void CreateKeyboard()
     {
