@@ -14,9 +14,14 @@ public interface IConcreteSprite : ISprite
     public ISpriteState dead { get; set; }
     public ISpriteState stillAnimated { get; set; }
     public ISpriteState attack { get; set; }
+    public ISpriteState use { get; set; }
     public int health { get; set; }
+    public IProjectile[] projectiles { get; set; }
 
     void SetSpriteState(SpriteAction action, ISpriteState spriteState);
 
+    public void AddProjectile(IProjectile projectile, ArrayIndex i);
+    public void SetProjectileIndex(ArrayIndex i);
+    public void ProjectileAttack();
 }
 

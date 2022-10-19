@@ -63,8 +63,6 @@ public class RoomObject : IRoomObject
         enemyActions.Add(SpriteAction.moveRight);
         enemyActions.Add(SpriteAction.moveUp);
 
-
-
     }
     public void AddController(IController controller)
     {
@@ -92,6 +90,7 @@ public class RoomObject : IRoomObject
         }
 
         Link.Update(gameTime);
+
 
         //update all enemies
         foreach(IConcreteSprite enemy in EnemyList)
@@ -128,10 +127,14 @@ public class RoomObject : IRoomObject
         }
 
         //update projectiles
-        foreach (var linkProjectile in LinkProjectileList)
+        foreach(IProjectile projectile in ((ConcreteSprite)Link).projectiles)
         {
-            linkProjectile.Update(gameTime);
+            if (projectile != null) projectile.Update(gameTime);
         }
+        //foreach (var linkProjectile in LinkProjectileList)
+        //{
+        //    linkProjectile.Update(gameTime);
+        //}
 
         foreach (var enemyProjectile in EnemyProjectileList)
         {
@@ -173,10 +176,14 @@ public class RoomObject : IRoomObject
             tile.Draw(gameTime);
         }
         //  projectiles (both types)
-        foreach (var linkProjectile in LinkProjectileList)
+        foreach (IProjectile projectile in ((ConcreteSprite)Link).projectiles)
         {
-            linkProjectile.Draw(gameTime);
+            if (projectile != null) projectile.Draw(gameTime);
         }
+        //foreach (var linkProjectile in LinkProjectileList)
+        //{
+        //    linkProjectile.Draw(gameTime);
+        //}
 
         foreach (var enemyProjectile in EnemyProjectileList)
         {

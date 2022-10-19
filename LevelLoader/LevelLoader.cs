@@ -82,6 +82,11 @@ public class LevelLoader
 
         Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(120, 120));
         room.Link = Link;
+        // Create projectiles
+        IProjectile Arrow = (IProjectile) SpriteFactory.Instance.CreateArrowProjectile(new Vector2(0, 0), 60, Link);
+
+        // Add projectiles to Link
+        ((ConcreteSprite)Link).AddProjectile(Arrow, ArrayIndex.arrow);
     }
     private void CreateKeyboard()
     {
@@ -119,6 +124,7 @@ public class LevelLoader
         keyboard.RegisterCommand(Keys.S, new MoveDown(Link));
         keyboard.RegisterCommand(Keys.E, new TakeDamage(Link));
         keyboard.RegisterCommand(Keys.Z, new Attack(Link));
+        keyboard.RegisterCommand(Keys.Space, new ProjectileAttack(Link));
 
         // Add restart and exit commands to keyboard
         keyboard.RegisterCommand(Keys.Q, new ExitCommand(game1));
