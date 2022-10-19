@@ -18,6 +18,8 @@ public enum RoomObjectTypes
     typePickup = 6,
     typeCollisionBox = 7,
     typeTopLayerNonCollidible = 8,
+    typeReplacesFloor = 9,
+    typeFloor = 10,
 }
 
 //handles lists for all game objects of all types.
@@ -57,6 +59,14 @@ public interface IRoomObject
     //list for non-collidible sprites and tiles (top of doorways etc.)
     //Link and enemies will disappear under these
     public List<ISprite> TopLayerNonCollidibleList { get; set; }
+
+    //list for specific blocks that replace the floor
+    //Everything is drawn on top of these, WITH THE EXCEPTION of the base floor
+    public List<ISprite> replacesFloorList { get; set; }
+
+    //list for the base floor texture
+    //Absolutely everything is drawn on top of this
+    public List<ISprite> floorList { get; set; }
 
     //adds gameObject into its lists
     //which list depends on the enum passed as objectType

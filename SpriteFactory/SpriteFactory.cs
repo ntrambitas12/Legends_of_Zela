@@ -24,20 +24,37 @@ public sealed class SpriteFactory : IFactory
 
     private List<Texture2D>[] doorUpOpenFrames;
     private List<Texture2D> doorUpOpen;
-    private List<Texture2D>[] doorUpClosedFrames;
-    private List<Texture2D> doorUpClosed;
     private List<Texture2D>[] doorDownOpenFrames;
     private List<Texture2D> doorDownOpen;
-    private List<Texture2D>[] doorDownClosedFrames;
-    private List<Texture2D> doorDownClosed;
     private List<Texture2D>[] doorRightOpenFrames;
     private List<Texture2D> doorRightOpen;
-    private List<Texture2D>[] doorRightClosedFrames;
-    private List<Texture2D> doorRightClosed;
     private List<Texture2D>[] doorLeftOpenFrames;
     private List<Texture2D> doorLeftOpen;
+    private List<Texture2D>[] doorUpClosedFrames;
+    private List<Texture2D> doorUpClosed;
+    private List<Texture2D>[] doorDownClosedFrames;
+    private List<Texture2D> doorDownClosed;
+    private List<Texture2D>[] doorRightClosedFrames;
+    private List<Texture2D> doorRightClosed;
     private List<Texture2D>[] doorLeftClosedFrames;
     private List<Texture2D> doorLeftClosed;
+
+    private List<Texture2D>[] bombedUpFrames;
+    private List<Texture2D> bombedUp;
+    private List<Texture2D>[] bombedDownFrames;
+    private List<Texture2D> bombedDown;
+    private List<Texture2D>[] bombedRightFrames;
+    private List<Texture2D> bombedRight;
+    private List<Texture2D>[] bombedLeftFrames;
+    private List<Texture2D> bombedLeft;
+    private List<Texture2D>[] unbombedUpFrames;
+    private List<Texture2D> unbombedUp;
+    private List<Texture2D>[] unbombedDownFrames;
+    private List<Texture2D> unbombedDown;
+    private List<Texture2D>[] unbombedRightFrames;
+    private List<Texture2D> unbombedRight;
+    private List<Texture2D>[] unbombedLeftFrames;
+    private List<Texture2D> unbombedLeft;
 
     private List<Texture2D>[] wallTopFrames;
     private List<Texture2D> wallTop;
@@ -162,6 +179,7 @@ public sealed class SpriteFactory : IFactory
         statueLeftFrames = new List<Texture2D>[4];
         statueRightFrames = new List<Texture2D>[4];
         roughFloorFrames = new List<Texture2D>[4];
+
         wallTopFrames = new List<Texture2D>[4];
         wallTop1Frames = new List<Texture2D>[4];
         wallTop2Frames = new List<Texture2D>[4];
@@ -174,22 +192,41 @@ public sealed class SpriteFactory : IFactory
         wallLeftFrames = new List<Texture2D>[4];
         wallLeft1Frames = new List<Texture2D>[4];
         wallLeft2Frames = new List<Texture2D>[4];
+
         doorUpOpenFrames = new List<Texture2D>[4];
-        doorUpClosedFrames = new List<Texture2D>[4];
         doorDownOpenFrames = new List<Texture2D>[4];
-        doorDownClosedFrames = new List<Texture2D>[4];
-        doorLeftOpenFrames = new List<Texture2D>[4];
-        doorLeftClosedFrames = new List<Texture2D>[4];
         doorRightOpenFrames = new List<Texture2D>[4];
-        doorRightClosedFrames = new List<Texture2D> [4];
+        doorLeftOpenFrames = new List<Texture2D>[4];
+        doorUpClosedFrames = new List<Texture2D>[4];
+        doorDownClosedFrames = new List<Texture2D>[4];
+        doorRightClosedFrames = new List<Texture2D>[4];
+        doorLeftClosedFrames = new List<Texture2D>[4];
+        bombedUpFrames = new List<Texture2D>[4];
+        bombedDownFrames = new List<Texture2D>[4];
+        bombedRightFrames = new List<Texture2D>[4];
+        bombedLeftFrames = new List<Texture2D>[4];
+        unbombedUpFrames = new List<Texture2D>[4];
+        unbombedDownFrames = new List<Texture2D>[4];
+        unbombedRightFrames = new List<Texture2D>[4];
+        unbombedLeftFrames = new List<Texture2D>[4];
+
         doorUpOpen = new List<Texture2D>();
-        doorUpClosed = new List<Texture2D>();
         doorDownOpen = new List<Texture2D>();
-        doorDownClosed = new List<Texture2D>();
         doorRightOpen = new List<Texture2D>();
-        doorRightClosed = new List<Texture2D>();
         doorLeftOpen = new List<Texture2D>();
+        doorUpClosed = new List<Texture2D>();
+        doorDownClosed = new List<Texture2D>();
+        doorRightClosed = new List<Texture2D>();
         doorLeftClosed = new List<Texture2D>();
+        bombedUp = new List<Texture2D>();
+        bombedDown = new List<Texture2D>();
+        bombedRight = new List<Texture2D>();
+        bombedLeft = new List<Texture2D>();
+        unbombedUp = new List<Texture2D>();
+        unbombedDown = new List<Texture2D>();
+        unbombedRight = new List<Texture2D>();
+        unbombedLeft = new List<Texture2D>();
+
         wallTop = new List<Texture2D>();
         wallTop1 = new List<Texture2D>();
         wallTop2 = new List<Texture2D>();
@@ -202,12 +239,14 @@ public sealed class SpriteFactory : IFactory
         wallLeft = new List<Texture2D>();
         wallLeft1 = new List<Texture2D>();
         wallLeft2 = new List<Texture2D>();
+
         roughFloor = new List<Texture2D>();
         barrier = new List<Texture2D>();
         stairs = new List<Texture2D>();
         water = new List<Texture2D>();
         statueRight = new List<Texture2D>();
         statueLeft = new List<Texture2D>();
+
 
         //Enemies
         goriyaFrames = new List<Texture2D>[4];
@@ -251,6 +290,8 @@ public sealed class SpriteFactory : IFactory
         swordFrames = new List<Texture2D>[4];
         sword = new List<Texture2D>();
 
+
+        //Animated Items
         fireFrames = new List<Texture2D>[4];
         fire = new List<Texture2D>();
         heartFrames = new List<Texture2D>[4];
@@ -293,7 +334,6 @@ public sealed class SpriteFactory : IFactory
         bombUp = new List<Texture2D>();
         bombDown = new List<Texture2D>();
         bombCloud = new List<Texture2D>();
-
     }
 
     private static readonly SpriteFactory instance = new SpriteFactory();
@@ -314,6 +354,14 @@ public sealed class SpriteFactory : IFactory
         doorDownOpen.Add(content.Load<Texture2D>("DungeonSprites/DoorBottomOpen"));
         doorRightOpen.Add(content.Load<Texture2D>("DungeonSprites/DoorRightOpen"));
         doorLeftOpen.Add(content.Load<Texture2D>("DungeonSprites/DoorLeftOpen"));
+        bombedUp.Add(content.Load<Texture2D>("DungeonSprites/DoorTopBombed"));
+        bombedDown.Add(content.Load<Texture2D>("DungeonSprites/DoorBottomBombed"));
+        bombedRight.Add(content.Load<Texture2D>("DungeonSprites/DoorRightBombed"));
+        bombedLeft.Add(content.Load<Texture2D>("DungeonSprites/DoorLeftBombed"));
+        unbombedUp.Add(content.Load<Texture2D>("DungeonSprites/DoorTopUnbombed"));
+        unbombedDown.Add(content.Load<Texture2D>("DungeonSprites/DoorBottomUnbombed"));
+        unbombedRight.Add(content.Load<Texture2D>("DungeonSprites/DoorRightUnbombed"));
+        unbombedLeft.Add(content.Load<Texture2D>("DungeonSprites/DoorLeftUnbombed"));
         doorUpClosed.Add(content.Load<Texture2D>("DungeonSprites/DoorTopClosed"));
         doorDownClosed.Add(content.Load<Texture2D>("DungeonSprites/DoorBottomClosed"));
         doorRightClosed.Add(content.Load<Texture2D>("DungeonSprites/DoorRightClosed"));
@@ -324,10 +372,10 @@ public sealed class SpriteFactory : IFactory
         wallBottom.Add(content.Load<Texture2D>("DungeonSprites/WallBottom0"));
         wallBottom1.Add(content.Load<Texture2D>("DungeonSprites/WallBottom1"));
         wallBottom2.Add(content.Load<Texture2D>("DungeonSprites/WallBottom2"));
-        wallRight.Add(content.Load<Texture2D>("DungeonSprites/WallRight"));
+        wallRight.Add(content.Load<Texture2D>("DungeonSprites/WallRight0"));
         wallRight1.Add(content.Load<Texture2D>("DungeonSprites/WallRight1"));
         wallRight2.Add(content.Load<Texture2D>("DungeonSprites/WallRight2"));
-        wallLeft.Add(content.Load<Texture2D>("DungeonSprites/WallLeft"));
+        wallLeft.Add(content.Load<Texture2D>("DungeonSprites/WallLeft0"));
         wallLeft1.Add(content.Load<Texture2D>("DungeonSprites/WallLeft1"));
         wallLeft2.Add(content.Load<Texture2D>("DungeonSprites/WallLeft2"));
 
@@ -370,7 +418,6 @@ public sealed class SpriteFactory : IFactory
 
 
         //Projectiles
-        // Assign textures to projectile directions
         arrowLeft.Add(content.Load<Texture2D>("ItemSprites/ArrowLeft"));
         arrowRight.Add(content.Load<Texture2D>("ItemSprites/ArrowRight"));
         arrowUp.Add(content.Load<Texture2D>("ItemSprites/ArrowUp"));
@@ -391,7 +438,6 @@ public sealed class SpriteFactory : IFactory
         boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
         boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangUp"));
         boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
-        //Bomb needs reworked for animation...
         bombLeft.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
         bombRight.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
         bombUp.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
@@ -400,8 +446,7 @@ public sealed class SpriteFactory : IFactory
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud2"));
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud3"));
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud4"));
-
-
+        
 
         //Populate Blocks and Items
         for (int i = 0; i < 4; i++)
@@ -411,6 +456,7 @@ public sealed class SpriteFactory : IFactory
             waterFrames[i] = water;
             statueRightFrames[i] = statueRight;
             statueLeftFrames[i] = statueLeft;
+
             wallTopFrames[i] = wallTop;
             wallTop1Frames[i] = wallTop1;
             wallTop2Frames[i] = wallTop2;
@@ -423,14 +469,19 @@ public sealed class SpriteFactory : IFactory
             wallLeftFrames[i] = wallLeft;
             wallLeft1Frames[i] = wallLeft1;
             wallLeft2Frames[i] = wallLeft2;
-            doorUpClosedFrames[i] = doorUpClosed;
+
             doorUpOpenFrames[i] = doorUpOpen;
-            doorDownClosedFrames[i] = doorDownClosed;
             doorDownOpenFrames[i] = doorDownOpen;
-            doorRightClosedFrames[i] = doorRightClosed;
             doorRightOpenFrames[i] = doorRightOpen;
-            doorLeftClosedFrames[i] = doorLeftClosed;
             doorLeftOpenFrames[i] = doorLeftOpen;
+            bombedUpFrames[i] = bombedUp;
+            bombedDownFrames[i] = bombedDown;
+            bombedRightFrames[i] = bombedRight;
+            bombedLeftFrames[i] = bombedLeft;
+            doorUpClosedFrames[i] = doorUpClosed;
+            doorDownClosedFrames[i] = doorDownClosed;
+            doorRightClosedFrames[i] = doorRightClosed;
+            doorLeftClosedFrames[i] = doorLeftClosed;
 
             bowFrames[i] = bow;
             heartContainerFrames[i] = heartContainer;
@@ -613,46 +664,43 @@ public sealed class SpriteFactory : IFactory
     }
     public ISprite CreateDoorUpBlock(Vector2 location, bool isOpen)
     {
-        if (isOpen)
-        {
-            return new ConcreteSprite(_spriteBatch, location, doorUpOpenFrames);
-        } else
-        {
-            return new ConcreteSprite(_spriteBatch, location, doorUpClosedFrames);
-        }
+        if (isOpen) { return new ConcreteSprite(_spriteBatch, location, doorUpOpenFrames); } 
+        else { return new ConcreteSprite(_spriteBatch, location, doorUpClosedFrames); }
     }
     public ISprite CreateDoorDownBlock(Vector2 location, bool isOpen)
     {
-        if (isOpen)
-        {
-            return new ConcreteSprite(_spriteBatch, location, doorDownOpenFrames);
-        }
-        else
-        {
-            return new ConcreteSprite(_spriteBatch, location, doorDownClosedFrames);
-        }
+        if (isOpen) { return new ConcreteSprite(_spriteBatch, location, doorDownOpenFrames); }
+        else { return new ConcreteSprite(_spriteBatch, location, doorDownClosedFrames); }
     }
     public ISprite CreateDoorLeftBlock(Vector2 location, bool isOpen)
     {
-        if (isOpen)
-        {
-            return new ConcreteSprite(_spriteBatch, location, doorLeftOpenFrames);
-        }
-        else
-        {
-            return new ConcreteSprite(_spriteBatch, location, doorLeftClosedFrames);
-        }
+        if (isOpen) { return new ConcreteSprite(_spriteBatch, location, doorLeftOpenFrames); }
+        else { return new ConcreteSprite(_spriteBatch, location, doorLeftClosedFrames); }
     }
     public ISprite CreateDoorRightBlock(Vector2 location, bool isOpen)
     {
-        if (isOpen)
-        {
-            return new ConcreteSprite(_spriteBatch, location, doorRightOpenFrames);
-        }
-        else
-        {
-            return new ConcreteSprite(_spriteBatch, location, doorRightClosedFrames);
-        }
+        if (isOpen) { return new ConcreteSprite(_spriteBatch, location, doorRightOpenFrames); }
+        else { return new ConcreteSprite(_spriteBatch, location, doorRightClosedFrames); }
+    }
+    public ISprite CreateBombableUpBlock(Vector2 location, bool isBombed)
+    {
+        if (isBombed) { return new ConcreteSprite(_spriteBatch, location, bombedUpFrames); }
+        else { return new ConcreteSprite (_spriteBatch, location, unbombedUpFrames); }
+    }
+    public ISprite CreateBombableDownBlock(Vector2 location, bool isBombed)
+    {
+        if (isBombed) { return new ConcreteSprite(_spriteBatch, location, bombedDownFrames); }
+        else { return new ConcreteSprite(_spriteBatch, location, unbombedDownFrames); }
+    }
+    public ISprite CreateBombableRightBlock(Vector2 location, bool isBombed)
+    {
+        if (isBombed) { return new ConcreteSprite(_spriteBatch, location, bombedRightFrames); }
+        else { return new ConcreteSprite(_spriteBatch, location, unbombedRightFrames); }
+    }
+    public ISprite CreateBombableLeftBlock(Vector2 location, bool isBombed)
+    {
+        if (isBombed) { return new ConcreteSprite(_spriteBatch, location, bombedLeftFrames); }
+        else { return new ConcreteSprite(_spriteBatch, location, unbombedLeftFrames); }
     }
     public ISprite CreateFireBlock(Vector2 location)
     {
