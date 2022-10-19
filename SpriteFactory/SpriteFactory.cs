@@ -149,7 +149,7 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> bombRight;
     private List<Texture2D> bombUp;
     private List<Texture2D> bombDown;
-    //private List<Texture2D> bombCloud;
+    private List<Texture2D> bombCloud;
 
 
     private SpriteBatch _spriteBatch;
@@ -287,12 +287,13 @@ public sealed class SpriteFactory : IFactory
         boomerangRight = new List<Texture2D>();
         boomerangUp = new List<Texture2D>();
         boomerangDown = new List<Texture2D>();
-        bombFrames = new List<Texture2D>[4];
+        bombFrames = new List<Texture2D>[5];
         bombLeft = new List<Texture2D>();
         bombRight = new List<Texture2D>();
         bombUp = new List<Texture2D>();
         bombDown = new List<Texture2D>();
-        //bombCloud = new List<Texture2D>();
+        bombCloud = new List<Texture2D>();
+
     }
 
     private static readonly SpriteFactory instance = new SpriteFactory();
@@ -395,10 +396,11 @@ public sealed class SpriteFactory : IFactory
         bombRight.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
         bombUp.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
         bombDown.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
-        //bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud1"));
-        //bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud2"));
-        //bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud3"));
-        //bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud4"));
+        bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud1"));
+        bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud2"));
+        bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud3"));
+        bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud4"));
+
 
 
         //Populate Blocks and Items
@@ -532,7 +534,7 @@ public sealed class SpriteFactory : IFactory
         bombFrames[(int)SpriteAction.moveRight] = bombRight;
         bombFrames[(int)SpriteAction.moveUp] = bombUp;
         bombFrames[(int)SpriteAction.moveDown] = bombDown;
-        //bombFrames[(int)SpriteAction.bombCloud] = bombCloud;
+        bombFrames[(int)SpriteAction.bombCloud] = bombCloud;
     }
 
 
