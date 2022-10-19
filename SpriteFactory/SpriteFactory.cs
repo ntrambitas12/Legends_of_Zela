@@ -206,6 +206,8 @@ public sealed class SpriteFactory : IFactory
         barrier = new List<Texture2D>();
         stairs = new List<Texture2D>();
         water = new List<Texture2D>();
+        statueRight = new List<Texture2D>();
+        statueLeft = new List<Texture2D>();
 
         //Enemies
         goriyaFrames = new List<Texture2D>[4];
@@ -345,17 +347,17 @@ public sealed class SpriteFactory : IFactory
         heart.Add(content.Load<Texture2D>("ItemSprites/Heart1"));
         heart.Add(content.Load<Texture2D>("ItemSprites/Heart2"));
         heartFrames[0] = heart;
-        triforce.Add(content.Load<Texture2D>("ItemFrames/Triforce1"));
-        triforce.Add(content.Load<Texture2D>("ItemFrames/Triforce2"));
+        triforce.Add(content.Load<Texture2D>("ItemSprites/Triforce1"));
+        triforce.Add(content.Load<Texture2D>("ItemSprites/Triforce2"));
         triforceFrames[0] = triforce;
-        rupies.Add(content.Load<Texture2D>("ItemFrames/BlinkingRuby1"));
-        rupies.Add(content.Load<Texture2D>("ItemFrames/BlinkingRuby2"));
+        rupies.Add(content.Load<Texture2D>("ItemSprites/BlinkingRuby1"));
+        rupies.Add(content.Load<Texture2D>("ItemSprites/BlinkingRuby2"));
         rupiesFrames[0] = rupies;
-        fire.Add(content.Load<Texture2D>("ItemFrames/Fire1"));
-        fire.Add(content.Load<Texture2D>("ItemFrames/Fire2"));
+        fire.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
+        fire.Add(content.Load<Texture2D>("ItemSprites/Fire2"));
         fireFrames[0] = fire;
         //This second section is for items with only 1 frame of animation
-        heartContainer.Add(content.Load<Texture2D>("ItemFrames/HeartContainer"));
+        heartContainer.Add(content.Load<Texture2D>("ItemSprites/HeartContainer"));
         bow.Add(content.Load<Texture2D>("ItemSprites/Bow"));
         compass.Add(content.Load<Texture2D>("ItemSprites/Compass"));
         key.Add(content.Load<Texture2D>("ItemSprites/Key"));

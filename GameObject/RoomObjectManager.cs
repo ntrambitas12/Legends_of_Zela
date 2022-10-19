@@ -17,7 +17,10 @@ public class RoomObjectManager : IRoomObjectManager
     public void addRoom(IRoomObject room)
     {
         roomList.Add(room);
-        _currentRoom = room;
+        if (_currentRoom == null)
+        {
+            _currentRoom = room;
+        }
     }
 
     public IRoomObject currentRoom()
@@ -38,7 +41,7 @@ public class RoomObjectManager : IRoomObjectManager
         {
             room.ResetControllers();
         }
-        
+
     }
 
     public void setRoom(int roomId)
@@ -48,7 +51,7 @@ public class RoomObjectManager : IRoomObjectManager
 
     public void Update(GameTime gameTime)
     {
-       _currentRoom.Update(gameTime);
+        _currentRoom.Update(gameTime);
     }
 
     public void DeleteGameObject(int objectType, ISprite gameObject)
@@ -56,4 +59,3 @@ public class RoomObjectManager : IRoomObjectManager
         _currentRoom.DeleteGameObject(objectType, gameObject);
     }
 }
-
