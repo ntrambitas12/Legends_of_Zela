@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 public class LevelLoader
@@ -11,36 +12,40 @@ public class LevelLoader
     public XmlReader reader;
     public XmlReaderSettings settings;
     private List<(string, string)> parseTypes;
-    private delegate ISprite ConcreteEntities(Vector2 pos); 
+    private delegate ISprite ConcreteEntities(Vector2 pos);
+    private bool runOnce;
+
 
     private Dictionary<String, Delegate> constructer;
-    private RoomObject room1;
+    private RoomObject room;
     private IRoomObjectManager roomObjectManager;
 
     //Things needed for keyboard controller
     private List<Keys> linkKeys;
     private KeyboardController keyboard;
     private ISprite Link;
- 
+    private Game1 game1;
+  
 
-    public LevelLoader(IRoomObjectManager roomObjectManager)
+    public LevelLoader(IRoomObjectManager roomObjectManager, Game1 game1)
     {
         settings = new XmlReaderSettings();
         constructer = new Dictionary<String, Delegate>();
         linkKeys = new List<Keys>();
         settings.IgnoreWhitespace = true;
-        reader = XmlReader.Create("C:\\Users\\ntram\\source\\repos\\CSE3902Project\\LevelLoader\\RoomTest.xml");
+
+        
         parseTypes = new List<(string, string)>()
         {
             ("Blocks", "Block"),
             ("Enemies", "Enemy"),
             ("Items", "Item"),
-            ("Playables", "Link")
         };
 
         populateDictionary();
         this.roomObjectManager = roomObjectManager;
-        room1 = new RoomObject();
+        this.game1 = game1;
+        runOnce = false;
         
     }
 
@@ -67,7 +72,7 @@ public class LevelLoader
 
     }
 
-    public void CreateLink()
+    private void CreateLink()
     {
         /*
          * Link only needs to be created once.
@@ -76,9 +81,9 @@ public class LevelLoader
          */
 
         Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(120, 120));
-        room1.Link = Link;
+        room.Link = Link;
     }
-    public void CreateKeyboard(Game1 game1)
+    private void CreateKeyboard()
     {
        keyboard = KeyboardController.GetInstance;
 
@@ -88,7 +93,7 @@ public class LevelLoader
         keyboard.AddPlayableSprite(Link, linkKeys);
 
         //Add keyboard to !!ALL!! rooms read in
-        room1.AddController(keyboard);
+        room.AddController(keyboard);
     }
 
     private void ConfigureKeyboardKeys(Game1 game1)
@@ -123,52 +128,66 @@ public class LevelLoader
     }
     public void ParseRoom()
     {
-        int xPos;
-        int yPos;
-        String name;
-        int roomObjectType;
-        bool read = false;
-
-         foreach (var parseType in parseTypes)
+        var files = Directory.GetFiles(@"Rooms/", "*.xml");
+        
+        foreach (var file in files)
         {
-        reader.ReadToFollowing(parseType.Item1);
-        read = reader.ReadToDescendant(parseType.Item2);
+            reader = XmlReader.Create(file);
+            room = new RoomObject();
 
-        if (read)
-        {
-            do
+            if (!runOnce)
             {
-                reader.ReadToDescendant("xPos");
-                xPos = reader.ReadElementContentAsInt();
-                reader.ReadToNextSibling("yPos");
-                yPos = reader.ReadElementContentAsInt();
-                reader.ReadToNextSibling("Name");
-                name = reader.ReadElementContentAsString();
-                reader.ReadToNextSibling("RoomObjectType");
-                roomObjectType = reader.ReadElementContentAsInt();
-                reader.Read();
+                CreateLink();
+            }
+            CreateKeyboard();
+            int xPos;
+            int yPos;
+            String name;
+            int roomObjectType;
+            bool read = false;
 
-                    /* This is where you call the corresponding method from spritefactory
-                     * and add that ISprite to the roomobject into correct list using add
-                     */
-                     if(constructer.TryGetValue(name, out Delegate value))
+            foreach (var parseType in parseTypes)
+            {
+                reader.ReadToFollowing(parseType.Item1);
+                read = reader.ReadToDescendant(parseType.Item2);
+
+                if (read)
+                {
+                    do
                     {
-                        ISprite sprite = (ISprite)value.DynamicInvoke(new Vector2(xPos, yPos));
-                        room1.AddGameObject(roomObjectType, sprite);
-                        
+                        reader.ReadToDescendant("xPos");
+                        xPos = reader.ReadElementContentAsInt();
+                        reader.ReadToNextSibling("yPos");
+                        yPos = reader.ReadElementContentAsInt();
+                        reader.ReadToNextSibling("Name");
+                        name = reader.ReadElementContentAsString();
+                        reader.ReadToNextSibling("RoomObjectType");
+                        roomObjectType = reader.ReadElementContentAsInt();
+                        reader.Read();
+
+                        /* This is where you call the corresponding method from spritefactory
+                         * and add that ISprite to the roomobject into correct list using add
+                         */
+                        if (constructer.TryGetValue(name, out Delegate value))
+                        {
+                            ISprite sprite = (ISprite)value.DynamicInvoke(new Vector2(xPos, yPos));
+                            room.AddGameObject(roomObjectType, sprite);
+
+                        }
+
                     }
-
+                    while (reader.ReadToNextSibling(parseType.Item2));
                 }
-                while (reader.ReadToNextSibling(parseType.Item2));
-        }
-       }
+            }
 
-        //Build the Room
-        BuildRoom();
+            //Build the Room
+            BuildRoom();
+            runOnce = true;
+        }
     }
 
     private void BuildRoom()
     {
-        roomObjectManager.addRoom(room1);
+        roomObjectManager.addRoom(room);
     }
 }

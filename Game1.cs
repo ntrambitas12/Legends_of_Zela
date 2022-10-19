@@ -82,7 +82,7 @@ namespace CSE3902Project
         protected override void Initialize()
         {
             roomObjectManager = new RoomObjectManager();
-            level = new LevelLoader(roomObjectManager);
+            level = new LevelLoader(roomObjectManager, this);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Load up the content for the sprite factory
@@ -101,8 +101,7 @@ namespace CSE3902Project
 
             //Turn these into one parse method
             level.ParseRoom();
-            level.CreateLink();
-            level.CreateKeyboard(this);
+           
             
 
             // Create Projectiles (Before command is created)

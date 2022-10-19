@@ -17,7 +17,10 @@ public class RoomObjectManager : IRoomObjectManager
     public void addRoom(IRoomObject room)
     {
         roomList.Add(room);
-        _currentRoom = room;
+        if (_currentRoom == null)
+        {
+            _currentRoom = room;
+        }
     }
 
     public IRoomObject currentRoom()
