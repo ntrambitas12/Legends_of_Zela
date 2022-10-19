@@ -397,18 +397,6 @@
 /processorParam:TextureFormat=Color
 /build:DungeonSprites/WallBottom2.png
 
-#begin DungeonSprites/WallLeft.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:DungeonSprites/WallLeft.png
-
 #begin DungeonSprites/WallLeft1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -432,18 +420,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:DungeonSprites/WallLeft2.png
-
-#begin DungeonSprites/WallRight.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:DungeonSprites/WallRight.png
 
 #begin DungeonSprites/WallRight1.png
 /importer:TextureImporter

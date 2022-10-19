@@ -61,6 +61,14 @@
     <None Remove="Content\BlockSprites\WaterTopLeft.png" />
     <None Remove="Content\BlockSprites\WaterTopMiddle.png" />
     <None Remove="Content\BlockSprites\WaterTopRight.png" />
+    <None Remove="Content\DungeonSprites\WallBottom.png" />
+    <None Remove="Content\DungeonSprites\WallBottomBombed.png" />
+    <None Remove="Content\DungeonSprites\WallBottomDoor.png" />
+    <None Remove="Content\DungeonSprites\WallLeftDoor.png" />
+    <None Remove="Content\DungeonSprites\WallRightDoor.png" />
+    <None Remove="Content\DungeonSprites\WallTop.png" />
+    <None Remove="Content\DungeonSprites\WallTopBombed.png" />
+    <None Remove="Content\DungeonSprites\WallTopDoor.png" />
     <None Remove="Content\EnemySprites\ArmosDown1.png" />
     <None Remove="Content\EnemySprites\ArmosDown2.png" />
     <None Remove="Content\EnemySprites\ArmosUp1.png" />
