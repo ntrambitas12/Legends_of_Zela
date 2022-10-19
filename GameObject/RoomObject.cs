@@ -86,7 +86,7 @@ public class RoomObject : IRoomObject
     public void Update(GameTime gameTime)
     {
         //update all controllers
-        foreach(var controller in ControllerList)
+        foreach (var controller in ControllerList)
         {
             controller.Update(gameTime);
         }
@@ -128,24 +128,24 @@ public class RoomObject : IRoomObject
         }
 
         //update projectiles
-        foreach(var linkProjectile in LinkProjectileList)
+        foreach (var linkProjectile in LinkProjectileList)
         {
             linkProjectile.Update(gameTime);
         }
 
-        foreach(var enemyProjectile in EnemyProjectileList)
+        foreach (var enemyProjectile in EnemyProjectileList)
         {
             enemyProjectile.Update(gameTime);
         }
 
         //update pickup items
-        foreach(var item in PickupList)
+        foreach (var item in PickupList)
         {
             item.Update(gameTime);
         }
 
         //update dynamic tiles
-        foreach(var tile in DynamicTileList)
+        foreach (var tile in DynamicTileList)
         {
             tile.Update(gameTime);
         }

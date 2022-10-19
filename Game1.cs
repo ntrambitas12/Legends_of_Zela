@@ -126,7 +126,7 @@ namespace CSE3902Project
             this.LoadContent();
         }
 
-       
+
 
 
         protected override void Update(GameTime gameTime)
@@ -142,7 +142,7 @@ namespace CSE3902Project
         protected override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin();
-            _spriteBatch.Draw(background, new Vector2(144,114), null, Color.White, 0, new Vector2(0,0), 2, SpriteEffects.None, 0);
+            _spriteBatch.Draw(background, new Vector2(144, 114), null, Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
 
             //Delete this before sprint submisison; was used for testing sprite locations
             //_spriteBatch.Draw(door, new Vector2(368, 114), null, Color.White, 0, new Vector2(0,0), 2, SpriteEffects.None, 0);
@@ -185,13 +185,6 @@ namespace CSE3902Project
            // gravestoneTile = SpriteFactory.Instance.CreateGravestoneTile(new Vector2(0, 0));
             waterTile = SpriteFactory.Instance.CreateWaterTile(new Vector2(0, 0));
 
-            // Create items
-            compassItem = SpriteFactory.Instance.CreateCompassItem(new Vector2(0, 0));
-            heartItem = SpriteFactory.Instance.CreateHeartItem(new Vector2(0, 0));
-            keyItem = SpriteFactory.Instance.CreateKeyItem(new Vector2(0, 0));
-            mapItem = SpriteFactory.Instance.CreateMapItem(new Vector2(0, 0));
-            rupiesItem = SpriteFactory.Instance.CreateRupiesItem(new Vector2(0, 0));
-            swordItem = SpriteFactory.Instance.CreateSwordItem(new Vector2(0, 0));
 
             keyDrop = SpriteFactory.Instance.CreateKeyDrop(new Vector2(0, 0));
             keyDrop.SetItemType(new DropType());
