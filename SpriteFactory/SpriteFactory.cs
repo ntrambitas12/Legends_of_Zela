@@ -736,9 +736,9 @@ public sealed class SpriteFactory : IFactory
     }
 
     // Projectiles
-    public ISprite CreateArrowProjectile(Vector2 location, int distance, ISprite owner)
+    public ISprite CreateArrowProjectile(int distance, ISprite owner)
     {
-        IProjectile arrow = new Projectile(_spriteBatch, location, arrowFrames);
+        IProjectile arrow = new Projectile(_spriteBatch, new Vector2(0, 0), arrowFrames);
         arrow.SetDistance(distance);
         arrow.SetOwner(owner);
         arrow.SetItemType(new ArrowType(arrow));
@@ -746,9 +746,9 @@ public sealed class SpriteFactory : IFactory
         arrow.SetFireCommand(fireArrow);
         return arrow;
     }
-    public ISprite CreateBombProjectile(Vector2 location, int distance, ISprite owner)
+    public ISprite CreateBombProjectile(int distance, ISprite owner)
     {
-        IProjectile bomb = new Projectile(_spriteBatch, location, bombFrames);
+        IProjectile bomb = new Projectile(_spriteBatch, new Vector2(0, 0), bombFrames);
         bomb.SetDistance(distance);
         bomb.SetOwner(owner);
         bomb.SetItemType(new BombType(bomb));
@@ -756,9 +756,9 @@ public sealed class SpriteFactory : IFactory
         bomb.SetFireCommand(fireBomb);
         return bomb;
     }
-    public ISprite CreateBoomerangProjectile(Vector2 location, int distance, ISprite owner)
+    public ISprite CreateBoomerangProjectile(int distance, ISprite owner)
     {
-        IProjectile boomerang = new Projectile(_spriteBatch, location, boomerangFrames);
+        IProjectile boomerang = new Projectile(_spriteBatch, new Vector2(0, 0), boomerangFrames);
         boomerang.SetDistance(distance);
         boomerang.SetOwner(owner);
         boomerang.SetItemType(new BoomerangType(boomerang));
@@ -766,9 +766,9 @@ public sealed class SpriteFactory : IFactory
         boomerang.SetFireCommand(fireBoomerang);
         return boomerang;
     }
-    public ISprite CreateFireProjectile(Vector2 location, int distance, ISprite owner)
+    public ISprite CreateFireProjectile(int distance, ISprite owner)
     {
-        IProjectile fire = new Projectile(_spriteBatch, location, fireFrames);
+        IProjectile fire = new Projectile(_spriteBatch, new Vector2(0, 0), fireFrames);
         fire.SetDistance(distance);
         fire.SetOwner(owner);
         fire.SetItemType(new ArrowType(fire));

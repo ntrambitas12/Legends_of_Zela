@@ -62,9 +62,9 @@ public interface IFactory
     public ISprite CreateTriforceShardDrop(Vector2 location);
 
     // Projectile Methods
-    public ISprite CreateArrowProjectile(Vector2 location, int distance, ISprite owner);
-    public ISprite CreateBombProjectile(Vector2 location, int distance, ISprite owner);
-    public ISprite CreateBoomerangProjectile(Vector2 location, int distance, ISprite owner);
-    public ISprite CreateFireProjectile(Vector2 location, int distance, ISprite owner);
+    public ISprite CreateArrowProjectile(int distance, ISprite owner);
+    public ISprite CreateBombProjectile(int distance, ISprite owner);
+    public ISprite CreateBoomerangProjectile(int distance, ISprite owner);
+    public ISprite CreateFireProjectile(int distance, ISprite owner);
 }
 
