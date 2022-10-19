@@ -446,7 +446,7 @@ public sealed class SpriteFactory : IFactory
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud2"));
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud3"));
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud4"));
-
+        
 
         //Populate Blocks and Items
         for (int i = 0; i < 4; i++)
