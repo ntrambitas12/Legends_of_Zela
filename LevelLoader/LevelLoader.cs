@@ -61,10 +61,10 @@ public class LevelLoader
        // constructer.Add("Barrier", new ConcreteEntities(SpriteFactory.Instance.CreateBarrierTile));
       //  constructer.Add("Stairs", new ConcreteEntities(SpriteFactory.Instance.CreateDungeonStairsTile));
        constructer.Add("Water", new ConcreteEntities(SpriteFactory.Instance.CreateWaterBlock));
-        constructer.Add("Compass", new ConcreteEntities(SpriteFactory.Instance.CreateCompassItem));
-        constructer.Add("Map", new ConcreteEntities(SpriteFactory.Instance.CreateMapItem));
-        constructer.Add("HeartContainer", new ConcreteEntities(SpriteFactory.Instance.CreateHeartItem));
-        constructer.Add("Key", new ConcreteEntities(SpriteFactory.Instance.CreateKeyItem));
+        constructer.Add("Compass", new ConcreteEntities(SpriteFactory.Instance.CreateCompassDrop));
+        constructer.Add("Map", new ConcreteEntities(SpriteFactory.Instance.CreateMapDrop));
+        constructer.Add("HeartContainer", new ConcreteEntities(SpriteFactory.Instance.CreateHeartDrop));
+        constructer.Add("Key", new ConcreteEntities(SpriteFactory.Instance.CreateKeyDrop));
 
 
 

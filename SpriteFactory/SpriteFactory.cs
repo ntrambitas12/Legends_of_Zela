@@ -374,9 +374,21 @@ public sealed class SpriteFactory : IFactory
         arrowUp.Add(content.Load<Texture2D>("ItemSprites/ArrowUp"));
         arrowDown.Add(content.Load<Texture2D>("ItemSprites/ArrowDown"));
         boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
+        boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
+        boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
+        boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangUp"));
         boomerangRight.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
+        boomerangRight.Add(content.Load<Texture2D>("ItemSprites/BoomerangUp"));
+        boomerangRight.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
+        boomerangRight.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
         boomerangUp.Add(content.Load<Texture2D>("ItemSprites/BoomerangUp"));
+        boomerangUp.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
+        boomerangUp.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
+        boomerangUp.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
         boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
+        boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
+        boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangUp"));
+        boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
         //Bomb needs reworked for animation...
         bombLeft.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
         bombRight.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
@@ -633,6 +645,10 @@ public sealed class SpriteFactory : IFactory
             return new ConcreteSprite(_spriteBatch, location, doorRightClosedFrames);
         }
     }
+    public ISprite CreateFireBlock(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, fireFrames);
+    }
 
 
     //Enemies
@@ -666,68 +682,93 @@ public sealed class SpriteFactory : IFactory
     }
 
 
-    //Items and Projectiles
-    public ISprite CreateNickelRubyItem(Vector2 location)
+    //Drops
+    public ISprite CreateNickelRubyDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, nickelRupiesFrames);
     }
-    public ISprite CreateArrowSprite(Vector2 location)
-    {
-        return new ConcreteSprite(_spriteBatch, location, arrowFrames);
-    }
-    public ISprite CreateRubyItem(Vector2 location)
+    public ISprite CreateRubyDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, rupiesFrames);
     }
-    public ISprite CreateBombSprite(Vector2 location)
-    {
-        return new ConcreteSprite(_spriteBatch, location, bombFrames);
-    }
-    public ISprite CreateBoomerangSprite(Vector2 location)
-    {
-        return new ConcreteSprite(_spriteBatch, location, boomerangFrames);
-    }
-    public ISprite CreateBowItem(Vector2 location)
+    public ISprite CreateBowDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, bowFrames);
     }
-    public ISprite CreateClockSprite(Vector2 location)
+    public ISprite CreateClockDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, clockFrames);
     }
-    public ISprite CreateCompassItem(Vector2 location)
+    public ISprite CreateCompassDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, compassFrames);
     }
-    public ISprite CreateFireSprite(Vector2 location)
-    {
-        return new ConcreteSprite(_spriteBatch, location, fireFrames);
-    }
-    public ISprite CreateHeartItem(Vector2 location)
+    public ISprite CreateHeartDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, heartFrames);
     }
-    public ISprite CreateHeartContainerItem(Vector2 location)
+    public ISprite CreateHeartContainerDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, heartContainerFrames);
     }
-    public ISprite CreateKeyItem(Vector2 location)
+    public ISprite CreateKeyDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, keyFrames);
     }
-    public ISprite CreateMapItem(Vector2 location)
+    public ISprite CreateMapDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, mapFrames);
     }
-    public ISprite CreateSwordItem(Vector2 location)
+    public ISprite CreateSwordDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, swordFrames);
     }
-    public ISprite CreateTriforceShardItem(Vector2 location)
+    public ISprite CreateTriforceShardDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, triforceFrames);
     }
 
+    // Projectiles
+    public ISprite CreateArrowProjectile(Vector2 location, int distance, ISprite owner)
+    {
+        IProjectile arrow = new Projectile(_spriteBatch, location, arrowFrames);
+        arrow.SetDistance(distance);
+        arrow.SetOwner(owner);
+        arrow.SetItemType(new ArrowType(arrow));
+        FireProjectile fireArrow = new FireProjectile(arrow);
+        arrow.SetFireCommand(fireArrow);
+        return arrow;
+    }
+    public ISprite CreateBombProjectile(Vector2 location, int distance, ISprite owner)
+    {
+        IProjectile bomb = new Projectile(_spriteBatch, location, bombFrames);
+        bomb.SetDistance(distance);
+        bomb.SetOwner(owner);
+        bomb.SetItemType(new BombType(bomb));
+        FireProjectile fireBomb = new FireProjectile(bomb);
+        bomb.SetFireCommand(fireBomb);
+        return bomb;
+    }
+    public ISprite CreateBoomerangProjectile(Vector2 location, int distance, ISprite owner)
+    {
+        IProjectile boomerang = new Projectile(_spriteBatch, location, boomerangFrames);
+        boomerang.SetDistance(distance);
+        boomerang.SetOwner(owner);
+        boomerang.SetItemType(new BoomerangType(boomerang));
+        FireProjectile fireBoomerang = new FireProjectile(boomerang);
+        boomerang.SetFireCommand(fireBoomerang);
+        return boomerang;
+    }
+    public ISprite CreateFireProjectile(Vector2 location, int distance, ISprite owner)
+    {
+        IProjectile fire = new Projectile(_spriteBatch, location, fireFrames);
+        fire.SetDistance(distance);
+        fire.SetOwner(owner);
+        fire.SetItemType(new ArrowType(fire));
+        FireProjectile fireFire = new FireProjectile(fire);
+        fire.SetFireCommand(fireFire);
+        return fire;
+    }
 
     //Playables
     public ISprite CreateLinkSprite(Vector2 location)
