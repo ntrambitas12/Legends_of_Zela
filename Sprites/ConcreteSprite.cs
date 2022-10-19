@@ -51,6 +51,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         attack = new AttackState(this);
         dead = new DeadState();
 
+        health = 3;
+
         state = still;
     }
 

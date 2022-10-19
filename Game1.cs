@@ -58,6 +58,8 @@ namespace CSE3902Project
 
         private ICommand exitGame;
         private ICommand restartGame;
+        private ICommand nextRoom;
+        private ICommand previousRoom;
 
         private NextSprite nextEnemy;
         private PreviousSprite previousEnemy;
@@ -77,6 +79,7 @@ namespace CSE3902Project
         private EnemyController enemyController;
         private TileController tileController;
         private ItemController itemController;
+        private MouseController mouseController;
 
         private RoomObject room1;
         private IRoomObjectManager roomObjectManager;
@@ -96,6 +99,8 @@ namespace CSE3902Project
 
             exitGame = new ExitCommand(this);
             restartGame = new RestartCommand(this);
+            nextRoom = new NextRoom(this);
+            previousRoom = new PreviousRoom(this);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             linkKeys = new List<Keys>();
 
@@ -104,6 +109,7 @@ namespace CSE3902Project
             tileController = TileController.GetInstance;
             itemController = ItemController.GetInstance;
             keyboard = KeyboardController.GetInstance;
+            mouseController = MouseController.GetInstance;
 
             // Add all controllers to the room
 
@@ -111,6 +117,7 @@ namespace CSE3902Project
             room1.AddController(enemyController);
             room1.AddController(tileController);
             room1.AddController(itemController);
+            room1.AddController(mouseController);
 
             //Load up the content for the sprite factory
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
@@ -376,6 +383,10 @@ namespace CSE3902Project
             // Add restart and exit commands to keyboard
             keyboard.RegisterCommand(Keys.Q, exitGame);
             keyboard.RegisterCommand(Keys.R, restartGame);
+
+            // Add left and right click functionality to switch between rooms
+            mouseController.RegisterCommand(0, nextRoom);
+            mouseController.RegisterCommand(1, previousRoom);
 
             // Add link with his keys to playable sprite
             keyboard.AddPlayableSprite(link, linkKeys);

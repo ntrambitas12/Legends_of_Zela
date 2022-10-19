@@ -25,6 +25,11 @@ public class RoomObjectManager : IRoomObjectManager
         return _currentRoom;
     }
 
+    public int currentRoomID()
+    {
+        return roomList.IndexOf(_currentRoom);
+    }
+
     public void Draw(GameTime gameTime)
     {
         /*In the future, this will draw all the rooms.
