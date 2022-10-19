@@ -9,7 +9,8 @@ public class UseState : ISpriteState
 {
     private ISprite sprite;
     private IDraw drawSprite;
-
+    private SpriteAction prevAction;
+    private ISpriteState prevState;
 
     public UseState(ISprite sprite)
     {
@@ -19,7 +20,8 @@ public class UseState : ISpriteState
 
     public void Update(GameTime gameTime)
     {
-        //no updated needed; link is stationary when he is using an item
+        ((ConcreteSprite)sprite).ProjectileAttack();
+        ((ConcreteSprite)sprite).SetSpriteState(prevAction, prevState);
     }
 
     public void Draw(GameTime gameTime)
@@ -31,7 +33,8 @@ public class UseState : ISpriteState
 
     public void SetPreviousState(ISpriteState state)
     {
-       //implement if needed
+        prevAction = (SpriteAction)sprite.spritePos;
+        prevState = state;
     }
 }
 

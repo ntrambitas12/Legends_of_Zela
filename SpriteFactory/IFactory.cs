@@ -46,22 +46,25 @@ public interface IFactory
     public ISprite CreateWallLeftBlock(Vector2 location);
     public ISprite CreateWallLeft1Block(Vector2 location);
     public ISprite CreateWallLeft2Block(Vector2 location);
+    public ISprite CreateFireBlock(Vector2 location);
 
-    //Item Methods
-    public ISprite CreateNickelRubyItem(Vector2 location);
-    public ISprite CreateArrowSprite(Vector2 location);
-    public ISprite CreateRubyItem(Vector2 location);
-    public ISprite CreateBombSprite(Vector2 location);
-    public ISprite CreateBoomerangSprite(Vector2 location);
-    public ISprite CreateBowItem(Vector2 location);
-    public ISprite CreateClockSprite(Vector2 location);
-    public ISprite CreateCompassItem(Vector2 location);
-    public ISprite CreateFireSprite(Vector2 location);
-    public ISprite CreateHeartItem(Vector2 location);
-    public ISprite CreateHeartContainerItem(Vector2 location);
-    public ISprite CreateKeyItem(Vector2 location);
-    public ISprite CreateMapItem(Vector2 location);
-    public ISprite CreateSwordItem(Vector2 location);
-    public ISprite CreateTriforceShardItem(Vector2 location);
+    //Drop Methods
+    public ISprite CreateNickelRubyDrop(Vector2 location);
+    public ISprite CreateRubyDrop(Vector2 location);
+    public ISprite CreateBowDrop(Vector2 location);
+    public ISprite CreateClockDrop(Vector2 location);
+    public ISprite CreateCompassDrop(Vector2 location);
+    public ISprite CreateHeartDrop(Vector2 location);
+    public ISprite CreateHeartContainerDrop(Vector2 location);
+    public ISprite CreateKeyDrop(Vector2 location);
+    public ISprite CreateMapDrop(Vector2 location);
+    public ISprite CreateSwordDrop(Vector2 location);
+    public ISprite CreateTriforceShardDrop(Vector2 location);
+
+    // Projectile Methods
+    public ISprite CreateArrowProjectile(Vector2 location, int distance, ISprite owner);
+    public ISprite CreateBombProjectile(Vector2 location, int distance, ISprite owner);
+    public ISprite CreateBoomerangProjectile(Vector2 location, int distance, ISprite owner);
+    public ISprite CreateFireProjectile(Vector2 location, int distance, ISprite owner);
 }
 

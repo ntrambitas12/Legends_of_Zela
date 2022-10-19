@@ -50,16 +50,16 @@ public class BoomerangType : IItemType
         switch (direction)
         {
             case 0:
-                changeCord.X -= 2;
+                changeCord.X -= 4;
                 break;
             case 1:
-                changeCord.X += 2;
+                changeCord.X += 4;
                 break;
             case 2:
-                changeCord.Y -= 2;
+                changeCord.Y -= 4;
                 break;
             case 3:
-                changeCord.Y += 2;
+                changeCord.Y += 4;
                 break;
             default:
                 break;
