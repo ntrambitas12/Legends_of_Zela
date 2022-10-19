@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+
+	<Blocks>
+		<Block>
+			<xPos> 14 </xPos>
+			<yPos> 220 </yPos>
+			<Name>Blocky</Name>
+			<RoomObjectType>2</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>323</xPos>
+			<yPos>242</yPos>
+			<Name>Water</Name>
+			<RoomObjectType> 5 </RoomObjectType>
+		</Block>	
+	</Blocks>
+
+	<Enemies>
+		<Enemy>
+			<xPos> 140 </xPos>
+			<yPos> 220 </yPos>
+			<Name>Goriya</Name>
+			<RoomObjectType>2</RoomObjectType>
+		</Enemy>
+		<Enemy>
+			<xPos> 40 </xPos>
+			<yPos> 20 </yPos>
+			<Name>Goriya</Name>
+			<RoomObjectType>2</RoomObjectType>
+		</Enemy>
+		
+	</Enemies>
+
+	<Items>
+		<Item>
+			<xPos>1</xPos>
+			<yPos>5</yPos>
+			<Name>Compass</Name>
+			<RoomObjectType>6</RoomObjectType>
+		</Item>
+	</Items>
+
+	<Playables>
+		<Link>
+			<xPos>1</xPos>
+			<yPos>2</yPos>
+			<Name>Linker</Name>
+			<RoomObjectType>1</RoomObjectType>
+		</Link>
+	</Playables>
+
+</XnaContent>

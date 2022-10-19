@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+
+	<Blocks>
+		<Block>
+			<xPos> 144 </xPos>
+			<yPos> 114 </yPos>
+			<Name> WallTop </Name>
+			<RoomObjectType> 4 </RoomObjectType>
+		</Block>
+		<Block>
+			<xPos> 0 </xPos>
+			<yPos> 0 </yPos>
+			<Name> WallBottom </Name>
+			<RoomObjectType> 4 </RoomObjectType>
+		</Block>
+		<Block>
+			<xPos> 0 </xPos>
+			<yPos> 0 </yPos>
+			<Name> DoorTopOpen </Name>
+			<RoomObjectType> 4 </RoomObjectType>
+		</Block>
+		<Block>
+			<xPos> 0 </xPos>
+			<yPos> 0 </yPos>
+			<Name> DoorTopOpen </Name>
+			<RoomObjectType> 4 </RoomObjectType>
+		</Block>
+		<Block>
+			<xPos> 0 </xPos>
+			<yPos> 0 </yPos>
+			<Name> DoorTopOpen </Name>
+			<RoomObjectType> 4 </RoomObjectType>
+		</Block>
+		<Block>
+			<xPos> 0 </xPos>
+			<yPos> 0 </yPos>
+			<Name> DoorBottomOpen </Name>
+			<RoomObjectType> 4 </RoomObjectType>
+		</Block>
+		<Block>
+			<xPos> 0 </xPos>
+			<yPos> 0 </yPos>
+			<Name> DoorRightOpen </Name>
+			<RoomObjectType> 4 </RoomObjectType>
+		</Block>
+		<Block>
+			<xPos> 0 </xPos>
+			<yPos> 0 </yPos>
+			<Name> DoorLeftOpen </Name>
+			<RoomObjectType> 4 </RoomObjectType>
+		</Block>
+	</Blocks>
+
+	<Enemies>
+		<Enemy>
+			<xPos> 0 </xPos>
+			<yPos> 0 </yPos>
+			<Name> Keese </Name>
+			<RoomObjectType> 4 </RoomObjectType>
+		</Enemy>
+	</Enemies>
+
+	<Items>
+		<Item>
+			<xPos>0</xPos>
+			<yPos>0</yPos>
+			<Name>Thicc Item</Name>
+			<RoomObjectType>2</RoomObjectType>
+		</Item>
+	</Items>
+
+	<Playables>
+		<Link>
+			<xPos>1</xPos>
+			<yPos>2</yPos>
+			<Name>Linker</Name>
+			<RoomObjectType>1</RoomObjectType>
+		</Link>
+	</Playables>
+
+</XnaContent>

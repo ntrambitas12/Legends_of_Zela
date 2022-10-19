@@ -12,7 +12,7 @@ public sealed class EnemyController : AbstractController
     private int prevTime;
     private int deltaT;
     private Random rand;
-    private bool isMoving;
+    //private bool isMoving;
     private List<SpriteAction> actions;
     private SpriteAction action;
 
@@ -21,7 +21,7 @@ public sealed class EnemyController : AbstractController
         prevTime = 0;
         deltaT = 0;
         rand = new Random();
-        isMoving = false;
+        //isMoving = false;
         actions = new List<SpriteAction>();
         actions.Add(SpriteAction.moveDown);
         actions.Add(SpriteAction.moveLeft);
@@ -49,7 +49,7 @@ public sealed class EnemyController : AbstractController
         {
             action = actions[rand.Next(4)];
 
-            if (isMoving)
+            if (true)
             {
                 currentSprite.SetSpriteState(action, currentSprite.moving);
             }
@@ -60,7 +60,7 @@ public sealed class EnemyController : AbstractController
             }
 
             //flip if enemy will move or not
-            isMoving = !isMoving;
+            //isMoving = !isMoving;
 
             resetDelta(gameTime);
             
