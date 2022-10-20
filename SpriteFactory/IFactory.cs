@@ -55,6 +55,8 @@ public interface IFactory
     //Drop Methods
     public ISprite CreateNickelRubyDrop(Vector2 location);
     public ISprite CreateRubyDrop(Vector2 location);
+    public ISprite CreateBombDrop(Vector2 location);
+    public ISprite CreateBoomerangDrop(Vector2 location);
     public ISprite CreateBowDrop(Vector2 location);
     public ISprite CreateClockDrop(Vector2 location);
     public ISprite CreateCompassDrop(Vector2 location);

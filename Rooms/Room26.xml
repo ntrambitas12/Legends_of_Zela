@@ -39,16 +39,16 @@
 			<Name>WallBottom2</Name>
 			<RoomObjectType>7</RoomObjectType>
 		</Block>
-		<Block>
+		<Block isOpen='true'>
 			<xPos>368</xPos>
 			<yPos>114</yPos>
-			<Name>DoorUpOpen</Name>
+			<Name>DoorUp</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
-		<Block>
+		<Block isOpen='true'>
 			<xPos>368</xPos>
 			<yPos>402</yPos>
-			<Name>DoorDownOpen</Name>
+			<Name>DoorDown</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>
@@ -110,9 +110,5 @@
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 	</Enemies>
-
-
-	<Items>
-	</Items>
 	
 </XnaContent>

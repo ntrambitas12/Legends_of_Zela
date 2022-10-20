@@ -456,6 +456,7 @@ public sealed class SpriteFactory : IFactory
             waterFrames[i] = water;
             statueRightFrames[i] = statueRight;
             statueLeftFrames[i] = statueLeft;
+            roughFloorFrames[i] = roughFloor;
 
             wallTopFrames[i] = wallTop;
             wallTop1Frames[i] = wallTop1;
@@ -743,6 +744,14 @@ public sealed class SpriteFactory : IFactory
     public ISprite CreateNickelRubyDrop(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, nickelRupiesFrames);
+    }
+    public ISprite CreateBoomerangDrop(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, boomerangFrames);
+    }
+    public ISprite CreateBombDrop(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, bombFrames);
     }
     public ISprite CreateRubyDrop(Vector2 location)
     {

@@ -11,7 +11,7 @@
 		<Block isOpen='true'>
 			<xPos>323</xPos>
 			<yPos>242</yPos>
-			<Name>RightDoor</Name>
+			<Name>DoorRight</Name>
 			<RoomObjectType>5</RoomObjectType>
 		</Block>
 		<Block>
@@ -23,7 +23,7 @@
 		<Block isOpen='false'>
 			<xPos>33</xPos>
 			<yPos>24</yPos>
-			<Name>RightDoor</Name>
+			<Name>DoorRight</Name>
 			<RoomObjectType>5</RoomObjectType>
 		</Block>
 		
@@ -76,13 +76,5 @@
 		</Item>
 	</Items>
 
-	<Playables>
-		<Link>
-			<xPos>1</xPos>
-			<yPos>2</yPos>
-			<Name>Linker</Name>
-			<RoomObjectType>1</RoomObjectType>
-		</Link>
-	</Playables>
 
 </XnaContent>

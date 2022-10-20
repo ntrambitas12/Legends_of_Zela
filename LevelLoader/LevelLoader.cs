@@ -93,6 +93,10 @@ public class LevelLoader
         constructer.Add("Map", new ConcreteEntities(SpriteFactory.Instance.CreateMapDrop));
         constructer.Add("HeartContainer", new ConcreteEntities(SpriteFactory.Instance.CreateHeartContainerDrop));
         constructer.Add("Key", new ConcreteEntities(SpriteFactory.Instance.CreateKeyDrop));
+        constructer.Add("BoomerangDrop", new ConcreteEntities(SpriteFactory.Instance.CreateBoomerangDrop));
+        constructer.Add("BombDrop", new ConcreteEntities(SpriteFactory.Instance.CreateBombDrop));
+
+
 
         //Projectiles
         constructer.Add("Arrow", new Projectiles(SpriteFactory.Instance.CreateArrowProjectile));
@@ -243,5 +247,10 @@ public class LevelLoader
             roomObjectManager.addRoom(room);
             runOnce = true;
         }
+        /*DEBUG REMOVE FROM PRODUCTION CODE:
+         * Used for testing of drawing all the different rooms 
+         */
+       roomObjectManager.setRoom(8);
     }
+    
 }
