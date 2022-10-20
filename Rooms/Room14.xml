@@ -63,7 +63,7 @@
 			<Name>DoorUp</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
-		<Block>
+		<Block isOpen='true'>
 			<xPos>368</xPos>
 			<yPos>402</yPos>
 			<Name>BombedDown</Name>

@@ -13,43 +13,43 @@
 			<xPos>208</xPos>
 			<yPos>114</yPos>
 			<Name>WallTop</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>208</xPos>
 			<yPos>402</yPos>
 			<Name>WallBottom1</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>432</xPos>
 			<yPos>402</yPos>
 			<Name>WallBottom2</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>592</xPos>
 			<yPos>114</yPos>
 			<Name>WallRight1</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>592</xPos>
 			<yPos>322</yPos>
 			<Name>WallRight2</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>144</xPos>
 			<yPos>114</yPos>
 			<Name>WallLeft1</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>144</xPos>
 			<yPos>322</yPos>
 			<Name>WallLeft2</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>368</xPos>
@@ -57,22 +57,22 @@
 			<Name>Barrier</Name>
 			<RoomObjectType>5</RoomObjectType>
 		</Block>
-		<Block>
+		<Block isOpen='true'>
 			<xPos>368</xPos>
 			<yPos>402</yPos>
-			<Name>DoorDownOpen</Name>
+			<Name>DoorDown</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
-		<Block>
+		<Block isOpen='true'>
 			<xPos>592</xPos>
 			<yPos>258</yPos>
-			<Name>DoorRightOpen</Name>
+			<Name>DoorRight</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
-		<Block>
+		<Block isOpen='true'>
 			<xPos>144</xPos>
 			<yPos>258</yPos>
-			<Name>DoorLeftOpen</Name>
+			<Name>DoorLeft</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 	</Blocks>

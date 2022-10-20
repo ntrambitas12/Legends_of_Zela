@@ -18,6 +18,10 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> roughFloor;
     private List<Texture2D>[] dungeonFloorFrames;
     private List<Texture2D> dungeonFloor;
+    private List<Texture2D>[] alternateBackgroundFrames;
+    private List<Texture2D> alternateBackground;
+    private List<Texture2D>[] invisibleBarrierFrames;
+    private List<Texture2D> invisibleBarrier;
 
     private List<Texture2D>[] statueRightFrames;
     private List<Texture2D> statueRight;
@@ -185,6 +189,8 @@ public sealed class SpriteFactory : IFactory
         statueRightFrames = new List<Texture2D>[4];
         roughFloorFrames = new List<Texture2D>[4];
         dungeonFloorFrames = new List<Texture2D>[4];
+        alternateBackgroundFrames = new List<Texture2D>[4];
+        invisibleBarrierFrames = new List<Texture2D>[4];
 
         wallTopFrames = new List<Texture2D>[4];
         wallTop1Frames = new List<Texture2D>[4];
@@ -253,6 +259,8 @@ public sealed class SpriteFactory : IFactory
         water = new List<Texture2D>();
         statueRight = new List<Texture2D>();
         statueLeft = new List<Texture2D>();
+        alternateBackground = new List<Texture2D>();
+        invisibleBarrier = new List<Texture2D>();
 
 
         //Enemies
@@ -354,6 +362,8 @@ public sealed class SpriteFactory : IFactory
         _spriteBatch = spriteBatch;
 
         //Blocks
+        invisibleBarrier.Add(content.Load<Texture2D>("BlockSprites/InvisibleBarrier"));
+        alternateBackground.Add(content.Load<Texture2D>("DungeonSprites/Room07"));
         dungeonFloor.Add(content.Load<Texture2D>("DungeonSprites/DungeonFloor"));
         barrier.Add(content.Load<Texture2D>("BlockSprites/Barrier"));
         stairs.Add(content.Load<Texture2D>("BlockSprites/DungeonStairs"));
@@ -470,6 +480,8 @@ public sealed class SpriteFactory : IFactory
             statueRightFrames[i] = statueRight;
             statueLeftFrames[i] = statueLeft;
             roughFloorFrames[i] = roughFloor;
+            alternateBackgroundFrames[i] = alternateBackground;
+            invisibleBarrierFrames[i] = invisibleBarrier;
 
             wallTopFrames[i] = wallTop;
             wallTop1Frames[i] = wallTop1;
@@ -607,6 +619,14 @@ public sealed class SpriteFactory : IFactory
 
 
     //Blocks
+    public ISprite CreateAlternateBackgroundBlock(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, alternateBackgroundFrames);
+    }
+    public ISprite CreateInvisibleBarrierBlock(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, invisibleBarrierFrames);
+    }
     public ISprite CreateDungeonFloorBlock(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, dungeonFloorFrames);
