@@ -88,41 +88,39 @@
 			<xPos>274</xPos>
 			<yPos>178</yPos>
 			<Name>Goriya</Name>
+			<RoomObjectType>2</RoomObjectType>
 			<Projectile>
 				<Name>Boomerang</Name>
 				<Distance>100</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
-			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
 			<xPos>306</xPos>
 			<yPos>338</yPos>
 			<Name>Goriya</Name>
+			<RoomObjectType>2</RoomObjectType>
 			<Projectile>
 				<Name>Boomerang</Name>
 				<Distance>100</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
-			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
 			<xPos>562</xPos>
 			<yPos>306</yPos>
 			<Name>Goriya</Name>
+			<RoomObjectType>2</RoomObjectType>
 			<Projectile>
 				<Name>Boomerang</Name>
 				<Distance>100</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
-			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 	</Enemies>
 
 
 	<Items>
 	</Items>
-	
-	<!-- NEEDS PROJECTILES FOR 3 BOOMERANGS TIED TO GORIYAS-->
 	
 </XnaContent>
