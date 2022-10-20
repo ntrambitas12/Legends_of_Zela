@@ -57,6 +57,6 @@ using System.Threading.Tasks;
             _totalFrames = textureToDraw.Count;
             _currentFrame = 0;
        }
-    }
+    }//at FireProjectile.Execute() in /Users/kylehoefker/Desktop/CSE3902Project/Commands/FireProjectile.cs:line 27\n   at ConcreteSprite.ProjectileAttack() in /Users/kylehoefker/Desktop/CSE3902Project/Sprites/ConcreteSprite.cs:line 100\n   at UseState.Update(GameTime gameTime) in /Users/kylehoefker/Desktop/CSE3902Project/States/UseState.cs:line 52\n   at ConcreteSprite.Update(GameTime gameTime) in /Users/kylehoefker/Desktop/CSE3902Project/Sprites/ConcreteSprite.cs:line 80\n   at RoomObject.Update(GameTime gameTime) in /Users/kylehoefker/Desktop/CSE3902Project/GameObject/RoomObject.cs:line 92\n   at RoomObjectManager.Update(GameTime gameTime) in /Users/kylehoefker/Desktop/CSE3902Project/GameObject/RoomObjectManager.cs:line 54\n   at CSE3902Project.Game1.Update(GameTime gameTime) in /Users/kylehoefker/Desktop/CSE3902Project/Game1.cs:line 115\n   at Microsoft.Xna.Framework.Game.DoUpdate(GameTime gameTime)\n   at Microsoft.Xna.Framework.Game.Tick()\n   at Microsoft.Xna.Framework.SdlGamePlatform.RunLoop()\n   at Microsoft.Xna.Framework.Game.Run(GameRunBehavior runBehavior)\n   at Program.<Main>$(String[] args) in /Users/kylehoefker/Desktop/CSE3902Project/Program.cs:line 3"
     }
 

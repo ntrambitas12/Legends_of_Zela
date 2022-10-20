@@ -24,14 +24,14 @@ public class FireProjectile : ICommand
         if (counter == 0)
         {
             shooter = (IConcreteSprite)projectile.Owner();
-            projectile.SetSpriteAction((SpriteAction)shooter.spritePos);
-            projectile.SetDirection(shooter.spritePos);
+            projectile.SetSpriteAction((SpriteAction)(shooter.spritePos % 4));
+            projectile.SetDirection((shooter.spritePos % 4));
             newCord = projectile.screenCord;
 
             shooter.SetSpriteState((SpriteAction)shooter.spritePos, shooter.attack);
 
 
-            switch (shooter.spritePos)
+            switch ((shooter.spritePos % 4))
             {
                 /* Controls which direction the projectile moves in */
                 case 0: // left

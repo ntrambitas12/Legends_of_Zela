@@ -29,27 +29,6 @@ public class BoomerangType : IItemType
         distance = projectile.Distance();
         speed = 5;
 
-        //if (counter == distance / 2)
-        //{
-        //    switch (direction)
-        //    {
-        //        case 0: // left to right
-        //            projectile.SetDirection(1);
-        //            break;
-        //        case 1: // right to left
-        //            projectile.SetDirection(0);
-        //            break;
-        //        case 2: // up to down
-        //            projectile.SetDirection(3);
-        //            break;
-        //        case 3: // down to up
-        //            projectile.SetDirection(2);
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
-
         if (counter >= distance / 3)
         {
             speed = 3;
@@ -61,7 +40,6 @@ public class BoomerangType : IItemType
         }
         else
         {
-            //direction = projectile.Direction();
             switch (direction)
             {
                 case 0:
