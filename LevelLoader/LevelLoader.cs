@@ -257,7 +257,7 @@ public class LevelLoader
         /*DEBUG REMOVE FROM PRODUCTION CODE:
          * Used for testing of drawing all the different rooms 
          */
-       roomObjectManager.setRoom(15);
+       roomObjectManager.setRoom(6);
     }
     
 }
