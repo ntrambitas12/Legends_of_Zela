@@ -82,6 +82,7 @@ public class LevelLoader
         constructer.Add("Wallmaster", new ConcreteEntities(SpriteFactory.Instance.CreateWallmasterSprite));
 
         //Items 
+        //constructer.Add("ArrowDrop", new ConcreteEntities(SpriteFactory.Instance.CreateArrowDrop));
         constructer.Add("NickelRuby", new ConcreteEntities(SpriteFactory.Instance.CreateNickelRubyDrop));
         constructer.Add("Ruby", new ConcreteEntities(SpriteFactory.Instance.CreateRubyDrop));
         constructer.Add("Bow", new ConcreteEntities(SpriteFactory.Instance.CreateBowDrop));
@@ -250,7 +251,7 @@ public class LevelLoader
         /*DEBUG REMOVE FROM PRODUCTION CODE:
          * Used for testing of drawing all the different rooms 
          */
-       roomObjectManager.setRoom(3);
+       roomObjectManager.setRoom(6);
     }
     
 }

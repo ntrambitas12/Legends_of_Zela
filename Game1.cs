@@ -17,11 +17,8 @@ namespace CSE3902Project
         private SpriteBatch _spriteBatch;
         private IRoomObjectManager roomObjectManager;
         private LevelLoader level;
-
         //Move to spritefactory later
         private Texture2D background;
-        //Delete prior to sprint submission; for sprite pos testing
-        private Texture2D door;
 
 
         public Game1()
@@ -41,9 +38,6 @@ namespace CSE3902Project
             //Load up the content for the sprite factory
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
             background = Content.Load<Texture2D>("DungeonSprites/DungeonFloor");
-
-            //Delete prior to sprint submission; was used for testing
-            door = Content.Load<Texture2D>("DungeonSprites/DoorTopOpen");
 
             base.Initialize();
         }
@@ -80,9 +74,6 @@ namespace CSE3902Project
         {
             _spriteBatch.Begin();
             _spriteBatch.Draw(background, new Vector2(144, 114), null, Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
-
-            //Delete this before sprint submisison; was used for testing sprite locations
-            //_spriteBatch.Draw(door, new Vector2(368, 114), null, Color.White, 0, new Vector2(0,0), 2, SpriteEffects.None, 0);
 
             roomObjectManager.Draw(gameTime);
 

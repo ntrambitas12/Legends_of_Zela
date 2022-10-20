@@ -157,6 +157,30 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Rooms\Room08.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room10.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room11.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room12.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room13.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room14.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room15.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room16.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Rooms\Room19.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -175,8 +199,8 @@
     <None Update="Rooms\Room32.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="Rooms\Room.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Rooms\Room33.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
