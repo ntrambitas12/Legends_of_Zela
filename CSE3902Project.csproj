@@ -11,6 +11,109 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Content\TileSprites\**" />
+    <EmbeddedResource Remove="Content\TileSprites\**" />
+    <None Remove="Content\TileSprites\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Content\BlockSprites\BridgeHorizontal.png" />
+    <None Remove="Content\BlockSprites\BridgeVertical.png" />
+    <None Remove="Content\BlockSprites\Bush.png" />
+    <None Remove="Content\BlockSprites\DefaultFloor.png" />
+    <None Remove="Content\BlockSprites\DungeonEntranceBottomLeft.png" />
+    <None Remove="Content\BlockSprites\DungeonEntranceBottomRight.png" />
+    <None Remove="Content\BlockSprites\DungeonEntranceNarrow.png" />
+    <None Remove="Content\BlockSprites\DungeonEntranceTopLeft.png" />
+    <None Remove="Content\BlockSprites\DungeonEntranceTopRight.png" />
+    <None Remove="Content\BlockSprites\DungeonEntranceWide.png" />
+    <None Remove="Content\BlockSprites\DungeonWater.png" />
+    <None Remove="Content\BlockSprites\Gravestone.png" />
+    <None Remove="Content\BlockSprites\IslandBottomLeft.png" />
+    <None Remove="Content\BlockSprites\IslandBottomRight.png" />
+    <None Remove="Content\BlockSprites\IslandTopLeft.png" />
+    <None Remove="Content\BlockSprites\IslandTopRight.png" />
+    <None Remove="Content\BlockSprites\MountainBottomLeft.png" />
+    <None Remove="Content\BlockSprites\MountainBottomMiddle.png" />
+    <None Remove="Content\BlockSprites\MountainBottomRight.png" />
+    <None Remove="Content\BlockSprites\MountainTopLeft.png" />
+    <None Remove="Content\BlockSprites\MountainTopMiddle.png" />
+    <None Remove="Content\BlockSprites\MountainTopRight.png" />
+    <None Remove="Content\BlockSprites\Opening.png" />
+    <None Remove="Content\BlockSprites\OverworldLadder.png" />
+    <None Remove="Content\BlockSprites\OverworldStairs.png" />
+    <None Remove="Content\BlockSprites\OverworldStatue.png" />
+    <None Remove="Content\BlockSprites\Rock.png" />
+    <None Remove="Content\BlockSprites\Sand.png" />
+    <None Remove="Content\BlockSprites\SandSpeckled.png" />
+    <None Remove="Content\BlockSprites\TreeBottomLeft.png" />
+    <None Remove="Content\BlockSprites\TreeBottomRight.png" />
+    <None Remove="Content\BlockSprites\TreeDungeonEntrance.png" />
+    <None Remove="Content\BlockSprites\TreeTopLeft.png" />
+    <None Remove="Content\BlockSprites\TreeTopRight.png" />
+    <None Remove="Content\BlockSprites\WaterBottomLeft.png" />
+    <None Remove="Content\BlockSprites\WaterBottomMiddle.png" />
+    <None Remove="Content\BlockSprites\WaterBottomRight.png" />
+    <None Remove="Content\BlockSprites\Waterfall1.png" />
+    <None Remove="Content\BlockSprites\Waterfall2.png" />
+    <None Remove="Content\BlockSprites\WaterMiddle.png" />
+    <None Remove="Content\BlockSprites\WaterMiddleLeft.png" />
+    <None Remove="Content\BlockSprites\WaterMiddleRight.png" />
+    <None Remove="Content\BlockSprites\WaterTopLeft.png" />
+    <None Remove="Content\BlockSprites\WaterTopMiddle.png" />
+    <None Remove="Content\BlockSprites\WaterTopRight.png" />
+    <None Remove="Content\DungeonSprites\WallBottom.png" />
+    <None Remove="Content\DungeonSprites\WallBottomBombed.png" />
+    <None Remove="Content\DungeonSprites\WallBottomDoor.png" />
+    <None Remove="Content\DungeonSprites\WallLeft0.png" />
+    <None Remove="Content\DungeonSprites\WallLeftDoor.png" />
+    <None Remove="Content\DungeonSprites\WallRight0.png" />
+    <None Remove="Content\DungeonSprites\WallRightDoor.png" />
+    <None Remove="Content\DungeonSprites\WallTop.png" />
+    <None Remove="Content\DungeonSprites\WallTopBombed.png" />
+    <None Remove="Content\DungeonSprites\WallTopDoor.png" />
+    <None Remove="Content\EnemySprites\ArmosDown1.png" />
+    <None Remove="Content\EnemySprites\ArmosDown2.png" />
+    <None Remove="Content\EnemySprites\ArmosUp1.png" />
+    <None Remove="Content\EnemySprites\ArmosUp2.png" />
+    <None Remove="Content\EnemySprites\Merchant.png" />
+    <None Remove="Content\EnemySprites\OktorokBlueDown1.png" />
+    <None Remove="Content\EnemySprites\OktorokBlueDown2.png" />
+    <None Remove="Content\EnemySprites\OktorokBlueLeft1.png" />
+    <None Remove="Content\EnemySprites\OktorokBlueLeft2.png" />
+    <None Remove="Content\EnemySprites\OktorokBlueRight1.png" />
+    <None Remove="Content\EnemySprites\OktorokBlueRight2.png" />
+    <None Remove="Content\EnemySprites\OktorokBlueUp1.png" />
+    <None Remove="Content\EnemySprites\OktorokBlueUp2.png" />
+    <None Remove="Content\EnemySprites\Peahat1.png" />
+    <None Remove="Content\EnemySprites\Peahat2.png" />
+    <None Remove="Content\EnemySprites\WallmasterDLClosed.png" />
+    <None Remove="Content\EnemySprites\WallmasterDLOpen.png" />
+    <None Remove="Content\EnemySprites\WallmasterDRClosed.png" />
+    <None Remove="Content\EnemySprites\WallmasterDROpen.png" />
+    <None Remove="Content\EnemySprites\WallmasterURClosed.png" />
+    <None Remove="Content\EnemySprites\WallmasterUROpen.png" />
+    <None Remove="Content\ItemSprites\Boomerang.png" />
+    <None Remove="Content\ItemSprites\CandleBlue.png" />
+    <None Remove="Content\ItemSprites\CandleRed.png" />
+    <None Remove="Content\ItemSprites\Fairy1.png" />
+    <None Remove="Content\ItemSprites\Fairy2.png" />
+    <None Remove="Content\ItemSprites\Food.png" />
+    <None Remove="Content\ItemSprites\Ladder.png" />
+    <None Remove="Content\ItemSprites\Letter.png" />
+    <None Remove="Content\ItemSprites\MagicBook.png" />
+    <None Remove="Content\ItemSprites\MagicBoomerang.png" />
+    <None Remove="Content\ItemSprites\MagicKey.png" />
+    <None Remove="Content\ItemSprites\MagicRod.png" />
+    <None Remove="Content\ItemSprites\MagicShield.png" />
+    <None Remove="Content\ItemSprites\PotionBlue.png" />
+    <None Remove="Content\ItemSprites\PotionRed.png" />
+    <None Remove="Content\ItemSprites\PowerBracelet.png" />
+    <None Remove="Content\ItemSprites\Raft.png" />
+    <None Remove="Content\ItemSprites\Recorder.png" />
+    <None Remove="Content\ItemSprites\RingBlue.png" />
+    <None Remove="Content\ItemSprites\RingRed.png" />
+    <None Remove="Content\ItemSprites\SilverArrow.png" />
+    <None Remove="Content\ItemSprites\WhiteSword.png" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
     <None Remove="Items\" />
@@ -39,6 +142,69 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Updatables\IDropType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Rooms\Room08.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room10.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room11.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room12.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room13.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room14.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room15.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room16.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room19.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room20.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room21.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room26.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room31.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room32.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room33.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

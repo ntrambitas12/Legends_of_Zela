@@ -5,23 +5,27 @@ namespace CSE3902Project
     {
         private Game1 game;
         private RoomObjectManager room;
-        public PreviousRoom(Game1 game)
+        public PreviousRoom(Game1 game, RoomObjectManager room)
         {
             this.game = game;
+            this.room = room;
         }
         public void Execute()
         {
-            int initialRoomID = room.currentRoomID();
-            int nextRoomID = room.currentRoomID() - 1;
-            room.setRoom(nextRoomID);
-            while (room.currentRoom == null)
+            if (room != null)
             {
-                nextRoomID--;
+                int initialRoomID = room.currentRoomID();
+                int nextRoomID = room.currentRoomID() - 1;
                 room.setRoom(nextRoomID);
-                if (nextRoomID < 0)
+                while (room.currentRoom == null)
                 {
-                    room.setRoom(initialRoomID);
-                    break;
+                    nextRoomID--;
+                    room.setRoom(nextRoomID);
+                    if (nextRoomID < 0)
+                    {
+                        room.setRoom(initialRoomID);
+                        break;
+                    }
                 }
             }
         }

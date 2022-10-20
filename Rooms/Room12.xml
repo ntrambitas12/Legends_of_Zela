@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+	
+	<Blocks>
+		<!-- Important: No floor is drawn in this room -->
+		<Block>
+			<xPos>208</xPos>
+			<yPos>114</yPos>
+			<Name>WallTop</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>402</yPos>
+			<Name>WallBottom</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>144</xPos>
+			<yPos>114</yPos>
+			<Name>WallLeft</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>114</yPos>
+			<Name>WallRight1</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>322</yPos>
+			<Name>WallRight2</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>258</yPos>
+			<Name>DoorRightOpen</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>272</xPos>
+			<yPos>242</yPos>
+			<Name>FireBlock</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>496</xPos>
+			<yPos>242</yPos>
+			<Name>FireBlock</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>384</xPos>
+			<yPos>242</yPos>
+			<Name>OldMan</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+	</Blocks>
+
+
+	<Enemies>
+	</Enemies>
+
+
+	<Items>
+	</Items>
+	
+	<!-- TEXT NEEDS ADDED? -->
+	
+</XnaContent>

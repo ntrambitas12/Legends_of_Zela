@@ -36,23 +36,24 @@ using System.Threading.Tasks;
 
         public void Update(GameTime gametime)
         {
-            previousMouseState = currentMouseState;
+        
+        previousMouseState = currentMouseState;
             MouseState state = Mouse.GetState();
             foreach (var mappedState in mouseMappings)
             {
 
-                if (mouseMappings.ContainsKey(mappedState.Key))
-                {
-                    //make sure to check previous state to run only once on key press
-                    if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+             if (mouseMappings.ContainsKey(mappedState.Key))
+             {
+            //make sure to check previous state to run only once on key press
+             if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            {
+            mouseMappings[0].Execute();
+             }
+            if (currentMouseState.RightButton == ButtonState.Pressed && previousMouseState.RightButton == ButtonState.Released)
                     {
-                        mouseMappings[0].Execute();
+                      mouseMappings[1].Execute();
                     }
-                    if (currentMouseState.RightButton == ButtonState.Pressed && previousMouseState.RightButton == ButtonState.Released)
-                    {
-                        mouseMappings[1].Execute();
-                    }
-                }
+               }
             }
         }
 

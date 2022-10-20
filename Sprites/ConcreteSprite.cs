@@ -22,13 +22,22 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public ISpriteState dead { get; set; }
     public ISpriteState stillAnimated { get; set; }
     public ISpriteState attack { get; set; }
+    public ISpriteState use { get; set; }
     public int health { get; set; }
+
+    /*Projectile inventory
+     Use ArrayIndex enums*/
+    private int projectileIndex;
+    public IProjectile[] projectiles { get; set; }
 
     private IDraw drawSprite = new DrawSprite();
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
 
     /*Variable that holds the current state*/
     private ISpriteState state;
+
+    
+
     public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, bool isDoorOpen) : base(spriteBatch, position, textures) {
         OpenDoor = new OpenState(this);
         ClosedDoor = new ClosedState(this);
@@ -50,10 +59,14 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         damaged = new DamagedState(this);
         attack = new AttackState(this);
         dead = new DeadState();
+        use = new UseState(this);
 
         health = 3;
 
         state = still;
+
+        projectiles = new IProjectile[4];
+        projectileIndex = (int)ArrayIndex.arrow;
     }
 
     public void SetSpriteState(SpriteAction action, ISpriteState state)
@@ -72,6 +85,22 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public override void Draw(GameTime gameTime)
     {    
        state.Draw(gameTime);
+    }
+
+    public void AddProjectile(IProjectile projectile, ArrayIndex arrayIndex)
+    {
+        projectiles[(int)arrayIndex] = projectile;
+    }
+    public void SetProjectileIndex(ArrayIndex arrayIndex)
+    {
+        projectileIndex = (int)arrayIndex;
+    }
+    public void ProjectileAttack()
+    {
+        if (projectiles[projectileIndex] != null)
+        {
+            projectiles[projectileIndex].FireCommand().Execute();
+        }
     }
 }
 
