@@ -12,48 +12,48 @@
 			<xPos>208</xPos>
 			<yPos>114</yPos>
 			<Name>WallTop</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>208</xPos>
 			<yPos>402</yPos>
 			<Name>WallBottom</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>592</xPos>
 			<yPos>114</yPos>
 			<Name>WallRight1</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>592</xPos>
 			<yPos>322</yPos>
 			<Name>WallRight2</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>144</xPos>
 			<yPos>114</yPos>
 			<Name>WallLeft1</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>144</xPos>
 			<yPos>322</yPos>
 			<Name>WallLeft2</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
-		<Block>
+		<Block isOpen='true'>
 			<xPos>592</xPos>
 			<yPos>258</yPos>
-			<Name>DoorRightOpen</Name>
+			<Name>DoorRight</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
-		<Block>
+		<Block isOpen='true'>
 			<xPos>144</xPos>
 			<yPos>258</yPos>
-			<Name>DoorLeftOpen</Name>
+			<Name>DoorLeft</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>
@@ -88,18 +88,33 @@
 			<xPos>274</xPos>
 			<yPos>178</yPos>
 			<Name>Goriya</Name>
+			<Projectile>
+				<Name>Boomerang</Name>
+				<Distance>100</Distance>
+				<RoomObjectType>3</RoomObjectType>
+			</Projectile>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
 			<xPos>306</xPos>
 			<yPos>338</yPos>
 			<Name>Goriya</Name>
+			<Projectile>
+				<Name>Boomerang</Name>
+				<Distance>100</Distance>
+				<RoomObjectType>3</RoomObjectType>
+			</Projectile>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
 			<xPos>562</xPos>
 			<yPos>306</yPos>
 			<Name>Goriya</Name>
+			<Projectile>
+				<Name>Boomerang</Name>
+				<Distance>100</Distance>
+				<RoomObjectType>3</RoomObjectType>
+			</Projectile>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 	</Enemies>
