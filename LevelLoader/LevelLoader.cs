@@ -51,27 +51,60 @@ public class LevelLoader
 
     private void populateDictionary()
     {
+        //Blocks
+        constructer.Add("Barrier", new ConcreteEntities(SpriteFactory.Instance.CreateBarrierBlock));
+        constructer.Add("RoughFloor", new ConcreteEntities(SpriteFactory.Instance.CreateRoughFloorBlock));
+        constructer.Add("FireBlock", new ConcreteEntities(SpriteFactory.Instance.CreateFireBlock));
+        constructer.Add("Stairs", new ConcreteEntities(SpriteFactory.Instance.CreateStairsBlock));
+        constructer.Add("Water", new ConcreteEntities(SpriteFactory.Instance.CreateWaterBlock));
+        constructer.Add("StatueRight", new ConcreteEntities(SpriteFactory.Instance.CreateStatueRightBlock));
+        constructer.Add("StatueLeft", new ConcreteEntities(SpriteFactory.Instance.CreateStatueLeftBlock));
+        constructer.Add("WallTop", new ConcreteEntities(SpriteFactory.Instance.CreateWallTopBlock));
+        constructer.Add("WallTop1", new ConcreteEntities(SpriteFactory.Instance.CreateWallTop1Block));
+        constructer.Add("WallTop2", new ConcreteEntities(SpriteFactory.Instance.CreateWallTop2Block));
+        constructer.Add("WallBottom", new ConcreteEntities(SpriteFactory.Instance.CreateWallBottomBlock));
+        constructer.Add("WallBottom1", new ConcreteEntities(SpriteFactory.Instance.CreateWallBottom1Block));
+        constructer.Add("WallBottom2", new ConcreteEntities(SpriteFactory.Instance.CreateWallBottom2Block));
+        constructer.Add("WallRight", new ConcreteEntities(SpriteFactory.Instance.CreateWallRightBlock));
+        constructer.Add("WallRight1", new ConcreteEntities(SpriteFactory.Instance.CreateWallRight1Block));
+        constructer.Add("WallRight2", new ConcreteEntities(SpriteFactory.Instance.CreateWallRight2Block));
+        constructer.Add("WallLeft", new ConcreteEntities(SpriteFactory.Instance.CreateWallLeftBlock));
+        constructer.Add("WallLeft1", new ConcreteEntities(SpriteFactory.Instance.CreateWallLeft1Block));
+        constructer.Add("WallLeft2", new ConcreteEntities(SpriteFactory.Instance.CreateWallLeft2Block));
+
+        //Enemies
+        constructer.Add("Keese", new ConcreteEntities(SpriteFactory.Instance.CreateKeeseSprite));
+        constructer.Add("Stalfos", new ConcreteEntities(SpriteFactory.Instance.CreateStalfosSprite));
+        constructer.Add("Gel", new ConcreteEntities(SpriteFactory.Instance.CreateGelSprite));
         constructer.Add("Goriya", new ConcreteEntities(SpriteFactory.Instance.CreateGoriyaSprite));
-        //constructer.Add("Keese", new ConcreteEntities(SpriteFactory.Instance.CreateKeeseSprite));
-        //constructer.Add("Stalfos", new ConcreteEntities(SpriteFactory.Instance.CreateStalfosSprite));
-       // constructer.Add("Gel", new ConcreteEntities(SpriteFactory.Instance.CreateGelSprite));
-       // constructer.Add("Aquamentus", new ConcreteEntities(SpriteFactory.Instance.CreateAquamentusSprite));
-       // constructer.Add("BladeTraps", new ConcreteEntities(SpriteFactory.Instance.CreateBladeTrapsSprite));
-        //constructer.Add("Wallmaster", new ConcreteEntities(SpriteFactory.Instance.CreateWallmasterSprite));
-       // constructer.Add("Barrier", new ConcreteEntities(SpriteFactory.Instance.CreateBarrierTile));
-      //  constructer.Add("Stairs", new ConcreteEntities(SpriteFactory.Instance.CreateDungeonStairsTile));
-       constructer.Add("Water", new ConcreteEntities(SpriteFactory.Instance.CreateWaterBlock));
+        constructer.Add("Aquamentus", new ConcreteEntities(SpriteFactory.Instance.CreateAquamentusSprite));
+        constructer.Add("BladeTraps", new ConcreteEntities(SpriteFactory.Instance.CreateBladeTrapSprite));
+        constructer.Add("Wallmaster", new ConcreteEntities(SpriteFactory.Instance.CreateWallmasterSprite));
+
+        //Items 
+        constructer.Add("NickelRuby", new ConcreteEntities(SpriteFactory.Instance.CreateNickelRubyDrop));
+        constructer.Add("Ruby", new ConcreteEntities(SpriteFactory.Instance.CreateRubyDrop));
+        constructer.Add("Bow", new ConcreteEntities(SpriteFactory.Instance.CreateBowDrop));
+        constructer.Add("Clock", new ConcreteEntities(SpriteFactory.Instance.CreateClockDrop));
+        constructer.Add("Heart", new ConcreteEntities(SpriteFactory.Instance.CreateHeartDrop));
+        constructer.Add("Sword", new ConcreteEntities(SpriteFactory.Instance.CreateSwordDrop));
+        constructer.Add("TriforceShard", new ConcreteEntities(SpriteFactory.Instance.CreateTriforceShardDrop));
         constructer.Add("Compass", new ConcreteEntities(SpriteFactory.Instance.CreateCompassDrop));
         constructer.Add("Map", new ConcreteEntities(SpriteFactory.Instance.CreateMapDrop));
-        constructer.Add("HeartContainer", new ConcreteEntities(SpriteFactory.Instance.CreateHeartDrop));
+        constructer.Add("HeartContainer", new ConcreteEntities(SpriteFactory.Instance.CreateHeartContainerDrop));
         constructer.Add("Key", new ConcreteEntities(SpriteFactory.Instance.CreateKeyDrop));
+
+        //Projectiles
+        constructer.Add("Arrow", new Projectiles(SpriteFactory.Instance.CreateArrowProjectile));
+        constructer.Add("Bomb", new Projectiles(SpriteFactory.Instance.CreateBombProjectile));
         constructer.Add("Boomerang", new Projectiles(SpriteFactory.Instance.CreateBoomerangProjectile));
-        constructer.Add("RightDoor", new Doors(SpriteFactory.Instance.CreateDoorRightBlock));
+        constructer.Add("Fire", new Projectiles(SpriteFactory.Instance.CreateFireProjectile));
 
-
-
-
-
+        //Doors
+        constructer.Add("DoorRight", new Doors(SpriteFactory.Instance.CreateDoorRightBlock));
+        constructer.Add("DoorLeft", new Doors(SpriteFactory.Instance.CreateDoorLeftBlock));
+        constructer.Add("DoorUp", new Doors(SpriteFactory.Instance.CreateDoorUpBlock));
+        constructer.Add("DoorDown", new Doors(SpriteFactory.Instance.CreateDoorDownBlock));
     }
 
     private void CreateLink()
@@ -84,7 +117,9 @@ public class LevelLoader
 
         Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(120, 120));
         room.Link = Link;
-        // Create projectiles
+
+        /* Tempelate for creating and adding projectiles to link. Will be useful later*/
+        // Create projectiles for link
         IProjectile Arrow = (IProjectile) SpriteFactory.Instance.CreateArrowProjectile(60, Link);
         IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link);
         IProjectile Boomerang = (IProjectile)SpriteFactory.Instance.CreateBoomerangProjectile(100, Link);
