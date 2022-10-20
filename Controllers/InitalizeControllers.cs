@@ -53,7 +53,7 @@ using System.Threading.Tasks;
         keyboard.RegisterCommand(Keys.Q, new ExitCommand(game1));
 
         //doesnt work, needs refactoring
-        //keyboard.RegisterCommand(Keys.R, new RestartCommand(game1));
+        keyboard.RegisterCommand(Keys.R, new RestartCommand(game1));
 
         // Add link with his keys to playable sprite
         keyboard.AddPlayableSprite(Link, linkKeys);
