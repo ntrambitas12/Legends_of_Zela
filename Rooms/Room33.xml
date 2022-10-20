@@ -39,10 +39,10 @@
 			<Name>WallLeft2</Name>
 			<RoomObjectType>7</RoomObjectType>
 		</Block>
-		<Block>
+		<Block isOpen='true'>
 			<xPos>144</xPos>
 			<yPos>258</yPos>
-			<Name>DoorLeftOpen</Name>
+			<Name>DoorLeft</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>

@@ -142,8 +142,12 @@ public class RoomObject : IRoomObject
         //    linkProjectile.Update(gameTime);
         //}
 
-        foreach (var enemyProjectile in EnemyProjectileList)
+        foreach (IProjectile enemyProjectile in EnemyProjectileList)
         {
+            if (rand.Next(25) == 5)
+            {
+                enemyProjectile.FireCommand().Execute();
+            }
             enemyProjectile.Update(gameTime);
         }
 

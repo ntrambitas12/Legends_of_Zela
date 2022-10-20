@@ -46,7 +46,11 @@ public class RoomObjectManager : IRoomObjectManager
 
     public void setRoom(int roomId)
     {
+        var Link = _currentRoom.Link;
+        _currentRoom.Link = null;
         _currentRoom = (IRoomObject)roomList[roomId];
+        _currentRoom.Link = Link;
+        
     }
 
     public void Update(GameTime gameTime)
