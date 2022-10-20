@@ -10,13 +10,12 @@ public class RoomObject : IRoomObject
 {
     public List<IController> ControllerList { get; set; }
     public ISprite Link { get; set; }
-    public List<ISprite> LinkProjectileList { get; set; }
     public List<ISprite> EnemyList { get; set; }
     public List<ISprite> EnemyProjectileList { get; set; }
     public List<ISprite> StaticTileList { get; set; }
     public List<ISprite> DynamicTileList { get; set; }
     public List<ISprite> PickupList { get; set; }
-    public List<ISprite> CollidibleList { get; set; }
+    public List<ISprite>[] CollidibleList { get; set; }
     public List<ISprite> TopLayerNonCollidibleList { get; set; }
     public List<ISprite> replacesFloorList { get; set; }
     public List<ISprite> floorList { get; set; }
@@ -34,13 +33,16 @@ public class RoomObject : IRoomObject
     {
         //intialize sprite and controller lists
         ControllerList = new List<IController>();
-        LinkProjectileList = new List<ISprite>();
         EnemyList = new List<ISprite>();
         EnemyProjectileList = new List<ISprite>();
         StaticTileList = new List<ISprite>();
         DynamicTileList = new List<ISprite>();
         PickupList = new List<ISprite>();
-        CollidibleList = new List<ISprite>();
+
+        CollidibleList = new List<ISprite>[2];
+        CollidibleList[0] = StaticTileList;
+        CollidibleList[1] = DynamicTileList;
+
         TopLayerNonCollidibleList = new List<ISprite>();
         replacesFloorList = new List<ISprite>();
         floorList = new List<ISprite>();
@@ -50,13 +52,11 @@ public class RoomObject : IRoomObject
         toBeDeleted = new List<(ISprite, int)>();
 
         //set up toBeAdded dictionary
-        listDict.Add((int)RoomObjectTypes.typeLinkProjectile, LinkProjectileList);
         listDict.Add((int)RoomObjectTypes.typeEnemy, EnemyList);
         listDict.Add((int)RoomObjectTypes.typeEnemyProjectile, EnemyProjectileList);
         listDict.Add((int)RoomObjectTypes.typeTileStatic, StaticTileList);
         listDict.Add((int)RoomObjectTypes.typeTileDynamic, DynamicTileList);
         listDict.Add((int)RoomObjectTypes.typePickup, PickupList);
-        listDict.Add((int)RoomObjectTypes.typeCollisionBox, CollidibleList);
         listDict.Add((int)RoomObjectTypes.typeTopLayerNonCollidible, TopLayerNonCollidibleList);
         listDict.Add((int)RoomObjectTypes.typeReplacesFloor, replacesFloorList);
         listDict.Add((int)RoomObjectTypes.typeFloor, floorList);
@@ -96,10 +96,10 @@ public class RoomObject : IRoomObject
         }
 
         Link.Update(gameTime);
-
+        ((IConcreteSprite)Link).UpdateCollideWithWall(this);
 
         //update all enemies
-        foreach(IConcreteSprite enemy in EnemyList)
+        foreach (IConcreteSprite enemy in EnemyList)
         {
 
             /*
@@ -129,7 +129,8 @@ public class RoomObject : IRoomObject
             }
 
             enemy.Update(gameTime);
-         
+            ((IConcreteSprite)enemy).UpdateCollideWithWall(this);
+
         }
 
         //update projectiles

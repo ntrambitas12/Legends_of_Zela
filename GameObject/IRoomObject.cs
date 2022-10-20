@@ -10,13 +10,11 @@ public enum RoomObjectTypes
 {
     typeController = -1,
     typeLink = 0,
-    typeLinkProjectile = 1,
     typeEnemy = 2,
     typeEnemyProjectile = 3,
     typeTileStatic = 4,
     typeTileDynamic = 5,
     typePickup = 6,
-    typeCollisionBox = 7,
     typeTopLayerNonCollidible = 8,
     typeReplacesFloor = 9,
     typeFloor = 10,
@@ -33,9 +31,6 @@ public interface IRoomObject
 
     //the pointer for Link
     public ISprite Link { get; set; }
-
-    //list for all projectiles
-    public List<ISprite> LinkProjectileList { get; set; }
 
     //the list for enemies
     public List<ISprite> EnemyList { get; set; }
@@ -54,7 +49,7 @@ public interface IRoomObject
 
     //list for things that stop entity movement
     //note that this list also contains ALL TILES in, addition to invisible collision boxes
-    public List<ISprite> CollidibleList { get; set; }
+    public List<ISprite>[] CollidibleList { get; set; }
 
     //list for non-collidible sprites and tiles (top of doorways etc.)
     //Link and enemies will disappear under these

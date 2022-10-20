@@ -15,10 +15,10 @@ namespace CSE3902Project
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private IRoomObjectManager roomObjectManager;
         private LevelLoader level;
         //Move to spritefactory later
         private Texture2D background;
+        private IRoomObjectManager roomObjectManager;
 
 
         public Game1()
@@ -31,9 +31,9 @@ namespace CSE3902Project
 
         protected override void Initialize()
         {
-            roomObjectManager = new RoomObjectManager();
-            level = new LevelLoader(roomObjectManager, this);
+            level = new LevelLoader(this);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            roomObjectManager = RoomObjectManager.Instance;
 
             //Load up the content for the sprite factory
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);

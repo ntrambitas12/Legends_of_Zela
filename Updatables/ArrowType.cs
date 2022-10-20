@@ -46,6 +46,9 @@ public class ArrowType : IItemType
         {
             fireProjectile.Execute();
         }
+
+        //check for collisions and effects
+
     }
 }
 

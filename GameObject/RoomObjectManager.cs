@@ -6,14 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class RoomObjectManager : IRoomObjectManager
+public sealed class RoomObjectManager : IRoomObjectManager
 {
     private ArrayList roomList;
     private IRoomObject _currentRoom;
-    public RoomObjectManager()
+    private RoomObjectManager()
     {
         roomList = new ArrayList();
     }
+
+    private static readonly RoomObjectManager instance = new RoomObjectManager();
+    public static RoomObjectManager Instance { get { return instance; } }
+
     public void addRoom(IRoomObject room)
     {
         roomList.Add(room);

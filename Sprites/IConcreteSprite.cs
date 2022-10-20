@@ -23,5 +23,8 @@ public interface IConcreteSprite : ISprite
     public void AddProjectile(IProjectile projectile, ArrayIndex i);
     public void SetProjectileIndex(ArrayIndex i);
     public void ProjectileAttack();
+
+    //call so the entity gets repelled by walls
+    public void UpdateCollideWithWall(RoomObject roomObject);
 }
 

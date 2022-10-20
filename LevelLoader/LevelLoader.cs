@@ -28,12 +28,12 @@ public class LevelLoader
     private ISprite sprite;
   
 
-    public LevelLoader(IRoomObjectManager roomObjectManager, Game1 game1)
+    public LevelLoader(Game1 game1)
     {
         
         constructer = new Dictionary<String, Delegate>();
         initalizeControllers = new InitalizeControllers(game1);
-
+        roomObjectManager = RoomObjectManager.Instance;
         
         parseTypes = new List<(string, string)>()
         {
@@ -43,7 +43,6 @@ public class LevelLoader
         };
 
         populateDictionary();
-        this.roomObjectManager = roomObjectManager;
         this.game1 = game1;
         runOnce = false;
         
