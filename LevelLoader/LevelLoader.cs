@@ -194,13 +194,10 @@ public class LevelLoader
                                     projectile = null;
                                 }
 
-                            }
-
-
+                                 }
                             
-
                              }
-                            
+                           
                         }
                         room.AddGameObject(roomObjectType, sprite);
                     }
