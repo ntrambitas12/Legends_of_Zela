@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
-	<!-- ROOM COMPLETE -->
 	
 	<Blocks>
 		<Block>
@@ -12,25 +11,13 @@
 		<Block>
 			<xPos>208</xPos>
 			<yPos>114</yPos>
-			<Name>WallTop1</Name>
-			<RoomObjectType>7</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>432</xPos>
-			<yPos>114</yPos>
-			<Name>WallTop2</Name>
+			<Name>WallTop</Name>
 			<RoomObjectType>7</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>208</xPos>
 			<yPos>402</yPos>
-			<Name>WallBottom1</Name>
-			<RoomObjectType>7</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>432</xPos>
-			<yPos>402</yPos>
-			<Name>WallBottom2</Name>
+			<Name>WallBottom</Name>
 			<RoomObjectType>7</RoomObjectType>
 		</Block>
 		<Block>
@@ -56,18 +43,6 @@
 			<yPos>322</yPos>
 			<Name>WallLeft2</Name>
 			<RoomObjectType>7</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>368</xPos>
-			<yPos>114</yPos>
-			<Name>BombedUp</Name>
-			<RoomObjectType>8</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>368</xPos>
-			<yPos>402</yPos>
-			<Name>DoorDownOpen</Name>
-			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>592</xPos>
@@ -110,45 +85,29 @@
 
 	<Enemies>
 		<Enemy>
-			<xPos>304</xPos>
+			<xPos>274</xPos>
 			<yPos>178</yPos>
-			<Name>Stalfos</Name>
+			<Name>Goriya</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
-			<xPos>464</xPos>
-			<yPos>178</yPos>
-			<Name>Stalfos</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>528</xPos>
-			<yPos>178</yPos>
-			<Name>Stalfos</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>560</xPos>
-			<yPos>274</yPos>
-			<Name>Stalfos</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>432</xPos>
+			<xPos>306</xPos>
 			<yPos>338</yPos>
-			<Name>Stalfos</Name>
+			<Name>Goriya</Name>
+			<RoomObjectType>2</RoomObjectType>
+		</Enemy>
+		<Enemy>
+			<xPos>562</xPos>
+			<yPos>306</yPos>
+			<Name>Goriya</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 	</Enemies>
 
 
 	<Items>
-		<Item>
-			<xPos>376</xPos>
-			<yPos>274</yPos>
-			<Name>Key</Name>
-			<RoomObjectType>6</RoomObjectType>
-		</Item>
 	</Items>
+	
+	<!-- NEEDS PROJECTILES FOR 3 BOOMERANGS TIED TO GORIYAS-->
 	
 </XnaContent>

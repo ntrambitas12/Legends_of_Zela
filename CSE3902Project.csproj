@@ -160,7 +160,7 @@
     <None Update="Rooms\Room32.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room1.xml">
+    <None Update="Rooms\Room.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

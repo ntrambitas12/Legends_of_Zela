@@ -104,6 +104,8 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> gel;
     private List<Texture2D>[] trapFrames;
     private List<Texture2D> trap;
+    private List<Texture2D>[] oldManFrames;
+    private List<Texture2D> oldMan;
 
 
     //Items
@@ -270,6 +272,8 @@ public sealed class SpriteFactory : IFactory
         stalfos = new List<Texture2D>();
         trapFrames = new List<Texture2D>[4];
         trap = new List<Texture2D>();
+        oldManFrames = new List<Texture2D>[4];
+        oldMan = new List<Texture2D>();
 
 
         //Items
@@ -385,6 +389,7 @@ public sealed class SpriteFactory : IFactory
         gel.Add(content.Load<Texture2D>("EnemySprites/Gel2"));
         keese.Add(content.Load<Texture2D>("EnemySprites/Keese1"));
         keese.Add(content.Load<Texture2D>("EnemySprites/Keese2"));
+        oldMan.Add(content.Load<Texture2D>("EnemySprites/OldMan"));
         stalfos.Add(content.Load<Texture2D>("EnemySprites/Stalfos1"));
         stalfos.Add(content.Load<Texture2D>("EnemySprites/Stalfos2"));
         trap.Add(content.Load<Texture2D>("EnemySprites/Trap"));
@@ -491,6 +496,7 @@ public sealed class SpriteFactory : IFactory
             swordFrames[i] = sword;
             clockFrames[i] = clock;
             nickelRupiesFrames[i] = nickelRupies;
+            oldManFrames[i] = oldMan;
         }
 
 
@@ -736,6 +742,10 @@ public sealed class SpriteFactory : IFactory
     public ISprite CreateWallmasterSprite(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, wallmasterFrames);
+    }
+    public ISprite CreateOldManSprite(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, oldManFrames);
     }
 
 

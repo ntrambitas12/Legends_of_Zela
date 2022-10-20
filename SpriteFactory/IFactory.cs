@@ -19,6 +19,7 @@ public interface IFactory
     public ISprite CreateAquamentusSprite(Vector2 location);
     public ISprite CreateBladeTrapSprite(Vector2 location);
     public ISprite CreateWallmasterSprite(Vector2 location);
+    public ISprite CreateOldManSprite(Vector2 location);
 
     //Link methods
     public ISprite CreateLinkSprite(Vector2 location);

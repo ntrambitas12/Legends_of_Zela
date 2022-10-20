@@ -4,6 +4,12 @@
 	
 	<Blocks>
 		<Block>
+			<xPos>144</xPos>
+			<yPos>114</yPos>
+			<Name>DungeonFloor</Name>
+			<RoomObjectType>10</RoomObjectType>
+		</Block>
+		<Block>
 			<xPos>208</xPos>
 			<yPos>114</yPos>
 			<Name>WallTop1</Name>
