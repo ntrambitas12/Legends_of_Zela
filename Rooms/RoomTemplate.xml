@@ -8,6 +8,13 @@
 			<Name></Name>
 			<RoomObjectType></RoomObjectType>
 		</Block>
+		<!--Block for creating open/closed door-->
+		<Block isOpen='true'>
+			<xPos></xPos>
+			<yPos></yPos>
+			<Name>DoorUp</Name>
+			<RoomObjectType></RoomObjectType>
+		</Block>
 	</Blocks>
 
 
@@ -17,6 +24,18 @@
 			<yPos></yPos>
 			<Name></Name>
 			<RoomObjectType></RoomObjectType>
+		</Enemy>
+		<!--Enemy that has a projectile-->
+		<Enemy>
+			<xPos></xPos>
+			<yPos></yPos>
+			<Name></Name>
+			<RoomObjectType></RoomObjectType>
+			<Projectile>
+				<Name>__name__of__projectile</Name>
+				<Distance>__distance__of__projectile</Distance>
+				<RoomObjectType>3</RoomObjectType>
+			</Projectile>
 		</Enemy>
 	</Enemies>
 
