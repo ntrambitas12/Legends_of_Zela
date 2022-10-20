@@ -1,82 +1,268 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
-
+	<!-- ROOM COMPLETE -->
+	
 	<Blocks>
 		<Block>
-			<xPos> 144 </xPos>
-			<yPos> 114 </yPos>
-			<Name> WallTop </Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<xPos>208</xPos>
+			<yPos>114</yPos>
+			<Name>WallTop1</Name>
+			<RoomObjectType>7</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name> WallBottom </Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<xPos>432</xPos>
+			<yPos>114</yPos>
+			<Name>WallTop2</Name>
+			<RoomObjectType>7</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name> DoorTopOpen </Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<xPos>208</xPos>
+			<yPos>402</yPos>
+			<Name>WallBottom1</Name>
+			<RoomObjectType>7</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name> DoorTopOpen </Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<xPos>432</xPos>
+			<yPos>402</yPos>
+			<Name>WallBottom2</Name>
+			<RoomObjectType>7</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name> DoorTopOpen </Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<xPos>592</xPos>
+			<yPos>114</yPos>
+			<Name>WallRight1</Name>
+			<RoomObjectType>7</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name> DoorBottomOpen </Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<xPos>592</xPos>
+			<yPos>322</yPos>
+			<Name>WallRight2</Name>
+			<RoomObjectType>7</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name> DoorRightOpen </Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<xPos>144</xPos>
+			<yPos>114</yPos>
+			<Name>WallLeft1</Name>
+			<RoomObjectType>7</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name> DoorLeftOpen </Name>
-			<RoomObjectType> 4 </RoomObjectType>
+			<xPos>144</xPos>
+			<yPos>322</yPos>
+			<Name>WallLeft2</Name>
+			<RoomObjectType>7</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>114</yPos>
+			<Name>DoorUpOpen</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>402</yPos>
+			<Name>DoorDownOpen</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>258</yPos>
+			<Name>DoorRightOpen</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>144</xPos>
+			<yPos>258</yPos>
+			<Name>DoorLeftOpen</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>304</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>400</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>464</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>304</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>400</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>464</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>306</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>400</xPos>
+			<yPos>306</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>210</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>274</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>338</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>210</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>274</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>338</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>210</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>274</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>338</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>528</xPos>
+			<yPos>210</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>528</xPos>
+			<yPos>274</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>528</xPos>
+			<yPos>338</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 	</Blocks>
 
+	
 	<Enemies>
-		<Enemy>
-			<xPos> 0 </xPos>
-			<yPos> 0 </yPos>
-			<Name>Keese</Name>
-			<RoomObjectType> 4 </RoomObjectType>
-		</Enemy>
 	</Enemies>
 
+	
 	<Items>
 		<Item>
-			<xPos>0</xPos>
-			<yPos>0</yPos>
-			<Name>Thicc Item</Name>
-			<RoomObjectType>2</RoomObjectType>
+			<xPos>378</xPos>
+			<yPos>274</yPos>
+			<Name>Bow</Name>
+			<RoomObjectType>6</RoomObjectType>
+		</Item>
+		<Item>
+			<xPos>380</xPos>
+			<yPos>306</yPos>
+			<Name>ArrowUp</Name>
+			<RoomObjectType>6</RoomObjectType>
+		</Item>
+		<Item>
+			<xPos>412</xPos>
+			<yPos>282</yPos>
+			<Name>Boomerang</Name>
+			<RoomObjectType>6</RoomObjectType>
+		</Item>
+		<Item>
+			<xPos>408</xPos>
+			<yPos>308</yPos>
+			<Name>Bomb</Name>
+			<RoomObjectType>6</RoomObjectType>
 		</Item>
 	</Items>
-
-	<Playables>
-		<Link>
-			<xPos>1</xPos>
-			<yPos>2</yPos>
-			<Name>Linker</Name>
-			<RoomObjectType>1</RoomObjectType>
-		</Link>
-	</Playables>
-
+	
 </XnaContent>

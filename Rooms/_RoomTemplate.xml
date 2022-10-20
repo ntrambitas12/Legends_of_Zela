@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+
+	<Blocks>
+		<Block>
+			<xPos></xPos>
+			<yPos></yPos>
+			<Name></Name>
+			<RoomObjectType></RoomObjectType>
+		</Block>
+	</Blocks>
+
+
+	<Enemies>
+		<Enemy>
+			<xPos></xPos>
+			<yPos></yPos>
+			<Name></Name>
+			<RoomObjectType></RoomObjectType>
+		</Enemy>
+	</Enemies>
+
+
+	<Items>
+		<Item>
+			<xPos></xPos>
+			<yPos></yPos>
+			<Name></Name>
+			<RoomObjectType></RoomObjectType>
+		</Item>
+	</Items>
+	
+</XnaContent>

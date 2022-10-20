@@ -34,6 +34,10 @@ public interface IFactory
     public ISprite CreateDoorDownBlock(Vector2 location, bool isOpen);
     public ISprite CreateDoorRightBlock(Vector2 location, bool isOpen);
     public ISprite CreateDoorLeftBlock(Vector2 location, bool isOpen);
+    public ISprite CreateBombableUpBlock(Vector2 location, bool isBombed);
+    public ISprite CreateBombableDownBlock(Vector2 location, bool isBombed);
+    public ISprite CreateBombableRightBlock(Vector2 location, bool isBombed);
+    public ISprite CreateBombableLeftBlock(Vector2 location, bool isBombed);
     public ISprite CreateWallTopBlock(Vector2 location);
     public ISprite CreateWallTop1Block(Vector2 location);
     public ISprite CreateWallTop2Block(Vector2 location);

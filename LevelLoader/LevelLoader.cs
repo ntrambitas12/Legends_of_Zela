@@ -129,7 +129,6 @@ public class LevelLoader
         ((ConcreteSprite)Link).AddProjectile(Arrow, ArrayIndex.arrow);
         ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);
         ((ConcreteSprite)Link).AddProjectile(Boomerang, ArrayIndex.boomerang);
-        ((ConcreteSprite)Link).AddProjectile(Fire, ArrayIndex.fire);
     }
    
     

@@ -18,6 +18,8 @@ public class RoomObject : IRoomObject
     public List<ISprite> PickupList { get; set; }
     public List<ISprite> CollidibleList { get; set; }
     public List<ISprite> TopLayerNonCollidibleList { get; set; }
+    public List<ISprite> replacesFloorList { get; set; }
+    public List<ISprite> floorList { get; set; }
 
     private List<(ISprite, int)> toBeDeleted;
     private Dictionary<int, List<ISprite>> listDict;
@@ -40,6 +42,8 @@ public class RoomObject : IRoomObject
         PickupList = new List<ISprite>();
         CollidibleList = new List<ISprite>();
         TopLayerNonCollidibleList = new List<ISprite>();
+        replacesFloorList = new List<ISprite>();
+        floorList = new List<ISprite>();
 
         //intialize structures to add and delete
         listDict = new Dictionary<int, List<ISprite>>();
@@ -54,6 +58,8 @@ public class RoomObject : IRoomObject
         listDict.Add((int)RoomObjectTypes.typePickup, PickupList);
         listDict.Add((int)RoomObjectTypes.typeCollisionBox, CollidibleList);
         listDict.Add((int)RoomObjectTypes.typeTopLayerNonCollidible, TopLayerNonCollidibleList);
+        listDict.Add((int)RoomObjectTypes.typeReplacesFloor, replacesFloorList);
+        listDict.Add((int)RoomObjectTypes.typeFloor, floorList);
 
         //set up the logic for the enemy AI
         rand = new Random();
@@ -162,14 +168,21 @@ public class RoomObject : IRoomObject
 
     public void Draw(GameTime gameTime)
     {
-        //  background
-        /* ADD CODE HERE ONCE BACKGROUND EXISTS*/
+        foreach (var floor in floorList)
+        {
+            floor.Draw(gameTime);
+        }
+
+        foreach (var floor in replacesFloorList)
+        {
+            floor.Draw(gameTime);
+        }
 
         foreach (var controller in ControllerList)
         {
             controller.Draw(gameTime);
         }
-        //  tiles (both types)
+
         foreach (var tile in DynamicTileList)
         {
             tile.Draw(gameTime);
@@ -179,11 +192,12 @@ public class RoomObject : IRoomObject
         {
             tile.Draw(gameTime);
         }
-        //  projectiles (both types)
+
         foreach (IProjectile projectile in ((ConcreteSprite)Link).projectiles)
         {
             if (projectile != null) projectile.Draw(gameTime);
         }
+
         //foreach (var linkProjectile in LinkProjectileList)
         //{
         //    linkProjectile.Draw(gameTime);
@@ -193,18 +207,19 @@ public class RoomObject : IRoomObject
         {
             enemyProjectile.Draw(gameTime);
         }
-        //  pickup items
+
         foreach (var item in PickupList)
         {
             item.Draw(gameTime);
         }
-        //  enemies
+
         foreach (var enemy in EnemyList)
         {
             enemy.Draw(gameTime);
         }
-        //  link
+
         Link.Draw(gameTime);
+
         //  top of doorways (so that it is on the top-most layer and Link disappears below it)
         foreach (var item in TopLayerNonCollidibleList)
         {
