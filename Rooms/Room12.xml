@@ -42,13 +42,13 @@
 		<Block>
 			<xPos>272</xPos>
 			<yPos>242</yPos>
-			<Name>Fire</Name>
+			<Name>FireBlock</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>496</xPos>
 			<yPos>242</yPos>
-			<Name>Fire</Name>
+			<Name>FireBlock</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>

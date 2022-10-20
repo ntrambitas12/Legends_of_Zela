@@ -575,7 +575,8 @@ public sealed class SpriteFactory : IFactory
         wallmasterFrames[(int)SpriteAction.attackRight] = wallmasterClosed;
         wallmasterFrames[(int)SpriteAction.attackUp] = wallmasterClosed;
         wallmasterFrames[(int)SpriteAction.attackDown] = wallmasterClosed;
-
+        aquamentusFrames[(int)SpriteAction.moveLeft] = aquamentusLeft;
+        aquamentusFrames[(int)SpriteAction.moveRight] = aquamentusRight; 
 
         // Add arrow frames to the list
         arrowFrames[(int)SpriteAction.moveLeft] = arrowLeft;
