@@ -45,7 +45,7 @@ namespace CSE3902Project.Commands
             }
 
             /* This allows us to retain directional data, but stop the sprite from moving */
-            sprite.SetSpriteState(this.spritePos, sprite.still);
+                sprite.SetSpriteState(this.spritePos, sprite.still);
         }
     }
 }
