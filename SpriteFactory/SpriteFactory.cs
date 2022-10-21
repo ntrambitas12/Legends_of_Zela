@@ -17,6 +17,12 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> water;
     private List<Texture2D>[] roughFloorFrames;
     private List<Texture2D> roughFloor;
+    private List<Texture2D>[] dungeonFloorFrames;
+    private List<Texture2D> dungeonFloor;
+    private List<Texture2D>[] alternateBackgroundFrames;
+    private List<Texture2D> alternateBackground;
+    private List<Texture2D>[] invisibleBarrierFrames;
+    private List<Texture2D> invisibleBarrier;
 
     private List<Texture2D>[] statueRightFrames;
     private List<Texture2D> statueRight;
@@ -126,6 +132,7 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> nickelRupies;
     private List<Texture2D>[] clockFrames;
     private List<Texture2D> clock;
+    private List<Texture2D>[] arrowDropFrames;
 
     private List<Texture2D>[] triforceFrames;
     private List<Texture2D> triforce;
@@ -182,6 +189,9 @@ public sealed class SpriteFactory : IFactory
         statueLeftFrames = new List<Texture2D>[4];
         statueRightFrames = new List<Texture2D>[4];
         roughFloorFrames = new List<Texture2D>[4];
+        dungeonFloorFrames = new List<Texture2D>[4];
+        alternateBackgroundFrames = new List<Texture2D>[4];
+        invisibleBarrierFrames = new List<Texture2D>[4];
 
         wallTopFrames = new List<Texture2D>[4];
         wallTop1Frames = new List<Texture2D>[4];
@@ -243,12 +253,15 @@ public sealed class SpriteFactory : IFactory
         wallLeft1 = new List<Texture2D>();
         wallLeft2 = new List<Texture2D>();
 
+        dungeonFloor = new List<Texture2D>();
         roughFloor = new List<Texture2D>();
         barrier = new List<Texture2D>();
         stairs = new List<Texture2D>();
         water = new List<Texture2D>();
         statueRight = new List<Texture2D>();
         statueLeft = new List<Texture2D>();
+        alternateBackground = new List<Texture2D>();
+        invisibleBarrier = new List<Texture2D>();
 
 
         //Enemies
@@ -294,6 +307,7 @@ public sealed class SpriteFactory : IFactory
         nickelRupies = new List<Texture2D>();
         swordFrames = new List<Texture2D>[4];
         sword = new List<Texture2D>();
+        arrowDropFrames = new List<Texture2D>[4];
 
 
         //Animated Items
@@ -349,6 +363,9 @@ public sealed class SpriteFactory : IFactory
         _spriteBatch = spriteBatch;
 
         //Blocks
+        invisibleBarrier.Add(content.Load<Texture2D>("BlockSprites/InvisibleBarrier"));
+        alternateBackground.Add(content.Load<Texture2D>("DungeonSprites/Room07"));
+        dungeonFloor.Add(content.Load<Texture2D>("DungeonSprites/DungeonFloor"));
         barrier.Add(content.Load<Texture2D>("BlockSprites/Barrier"));
         stairs.Add(content.Load<Texture2D>("BlockSprites/DungeonStairs"));
         water.Add(content.Load<Texture2D>("BlockSprites/Water"));
@@ -457,12 +474,15 @@ public sealed class SpriteFactory : IFactory
         //Populate Blocks and Items
         for (int i = 0; i < 4; i++)
         {
+            dungeonFloorFrames[i] = dungeonFloor;
             barrierFrames[i] = barrier;
             stairsFrames[i] = stairs;
             waterFrames[i] = water;
             statueRightFrames[i] = statueRight;
             statueLeftFrames[i] = statueLeft;
             roughFloorFrames[i] = roughFloor;
+            alternateBackgroundFrames[i] = alternateBackground;
+            invisibleBarrierFrames[i] = invisibleBarrier;
 
             wallTopFrames[i] = wallTop;
             wallTop1Frames[i] = wallTop1;
@@ -490,6 +510,7 @@ public sealed class SpriteFactory : IFactory
             doorRightClosedFrames[i] = doorRightClosed;
             doorLeftClosedFrames[i] = doorLeftClosed;
 
+            arrowDropFrames[i] = arrowUp;
             bowFrames[i] = bow;
             heartContainerFrames[i] = heartContainer;
             compassFrames[i] = compass;
@@ -616,6 +637,18 @@ public sealed class SpriteFactory : IFactory
     }
 
     //Blocks
+    public ISprite CreateAlternateBackgroundBlock(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, alternateBackgroundFrames);
+    }
+    public ISprite CreateInvisibleBarrierBlock(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, invisibleBarrierFrames);
+    }
+    public ISprite CreateDungeonFloorBlock(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, dungeonFloorFrames);
+    }
     public ISprite CreateBarrierBlock(Vector2 location)
     {
         return CreateEntityWithCollision(location, barrierFrames);
@@ -770,6 +803,11 @@ public sealed class SpriteFactory : IFactory
 
 
     //Drops
+    public ISprite CreateArrowDrop(Vector2 location)
+    {
+        //change to collideable
+        return new ConcreteSprite(_spriteBatch, location, arrowDropFrames);
+    }
     public ISprite CreateNickelRubyDrop(Vector2 location)
     {
         return CreateEntityWithCollision(location, nickelRupiesFrames);

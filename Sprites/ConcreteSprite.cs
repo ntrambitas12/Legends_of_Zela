@@ -24,6 +24,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public ISpriteState attack { get; set; }
     public ISpriteState use { get; set; }
     public int health { get; set; }
+    public bool isDead { get; set; }
 
     /*Projectile inventory
      Use ArrayIndex enums*/
@@ -58,8 +59,11 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         moving = new MovingState(this);
         damaged = new DamagedState(this);
         attack = new AttackState(this);
-        dead = new DeadState();
+        dead = new DeadState(this);
         use = new UseState(this);
+
+        health = 3;
+        isDead = false;
 
         state = still;
 
@@ -69,11 +73,14 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
     public void SetSpriteState(SpriteAction action, ISpriteState state)
     {
-        state.SetPreviousState(this.state);
+
+        if (!isDead)
+        {
+            state.SetPreviousState(this.state);
             this.state = state;
-        SetSpriteAction(action);
-
-
+            SetSpriteAction(action);
+        }
+        
     }
     public override void Update(GameTime gameTime)
     {

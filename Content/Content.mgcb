@@ -61,6 +61,18 @@
 /processorParam:TextureFormat=Color
 /build:BlockSprites/DungeonStairs.png
 
+#begin BlockSprites/InvisibleBarrier.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BlockSprites/InvisibleBarrier.png
+
 #begin BlockSprites/RoughFloor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -360,6 +372,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:DungeonSprites/DungeonFloor.png
+
+#begin DungeonSprites/Room07.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:DungeonSprites/Room07.png
 
 #begin DungeonSprites/WallBottom0.png
 /importer:TextureImporter

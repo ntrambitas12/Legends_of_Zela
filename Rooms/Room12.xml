@@ -7,36 +7,36 @@
 			<xPos>208</xPos>
 			<yPos>114</yPos>
 			<Name>WallTop</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>208</xPos>
 			<yPos>402</yPos>
 			<Name>WallBottom</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>144</xPos>
 			<yPos>114</yPos>
 			<Name>WallLeft</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>592</xPos>
 			<yPos>114</yPos>
 			<Name>WallRight1</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>592</xPos>
 			<yPos>322</yPos>
 			<Name>WallRight2</Name>
-			<RoomObjectType>7</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
-		<Block>
+		<Block isOpen='true'>
 			<xPos>592</xPos>
 			<yPos>258</yPos>
-			<Name>DoorRightOpen</Name>
+			<Name>DoorRight</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>

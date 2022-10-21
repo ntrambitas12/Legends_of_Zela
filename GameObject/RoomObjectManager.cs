@@ -32,6 +32,16 @@ public sealed class RoomObjectManager : IRoomObjectManager
         return _currentRoom;
     }
 
+    public int currentRoomID()
+    {
+        return roomList.IndexOf(_currentRoom);
+    }
+
+    public int numberOfRooms()
+    {
+        return roomList.Capacity - 1;
+    }
+
     public void Draw(GameTime gameTime)
     {
         /*In the future, this will draw all the rooms.
@@ -54,7 +64,54 @@ public sealed class RoomObjectManager : IRoomObjectManager
         _currentRoom.Link = null;
         _currentRoom = (IRoomObject)roomList[roomId];
         _currentRoom.Link = Link;
-        
+    }
+
+    public void nextRoomRight()
+    {
+        var Link = _currentRoom.Link;
+        _currentRoom.Link = null;
+        int roomNum = this.currentRoomID();
+        this.setRoom(roomNum + 1);
+        _currentRoom = Instance._currentRoom;
+        _currentRoom.Link = Link;
+        Vector2 newPos = new Vector2(0, 240);  // might have to adjust these coordinates slightly
+        _currentRoom.Link.screenCord = newPos;
+    }
+
+    public void nextRoomLeft()
+    {
+        var Link = _currentRoom.Link;
+        _currentRoom.Link = null;
+        int roomNum = this.currentRoomID();
+        this.setRoom(roomNum - 1);
+        _currentRoom = Instance._currentRoom;
+        _currentRoom.Link = Link;
+        Vector2 newPos = new Vector2(800, 240); // might have to adjust these coordinates slightly
+        _currentRoom.Link.screenCord = newPos;
+    }
+
+    public void nextRoomUp()
+    {
+        var Link = _currentRoom.Link;
+        _currentRoom.Link = null;
+        int roomNum = this.currentRoomID();
+        this.setRoom(roomNum - 6);
+        _currentRoom = Instance._currentRoom;
+        _currentRoom.Link = Link;
+        Vector2 newPos = new Vector2(400, 480); // might have to adjust these coordinates slightly
+        _currentRoom.Link.screenCord = newPos;
+    }
+
+    public void nextRoomDown()
+    {
+        var Link = _currentRoom.Link;
+        _currentRoom.Link = null;
+        int roomNum = this.currentRoomID();
+        this.setRoom(roomNum + 6);
+        _currentRoom = Instance._currentRoom;
+        _currentRoom.Link = Link;
+        Vector2 newPos = new Vector2(400, 0); // might have to adjust these coordinates slightly
+        _currentRoom.Link.screenCord = newPos;
     }
 
     public void Update(GameTime gameTime)
