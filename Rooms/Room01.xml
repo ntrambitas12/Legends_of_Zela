@@ -46,8 +46,8 @@
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos></xPos>
-			<yPos></yPos>
+			<xPos>400</xPos>
+			<yPos>274</yPos>
 			<Name>Stairs</Name>
 			<RoomObjectType>9</RoomObjectType>
 		</Block>
@@ -98,6 +98,12 @@
 			<yPos>306</yPos>
 			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>306</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>9</RoomObjectType>
 		</Block>
 	</Blocks>
 
