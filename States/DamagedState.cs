@@ -12,8 +12,10 @@ public class DamagedState : ISpriteState
 
     private SpriteAction prevAction;
     private ISpriteState prevState;
+    private DeadState dead;
     private float timeElapsed;
     private int counter = 0;
+    public int health;
 
 
    
@@ -23,6 +25,7 @@ public class DamagedState : ISpriteState
         this.sprite = (IConcreteSprite)sprite;
         drawSprite = new DrawSprite();
         timeElapsed = 0;
+        health = this.sprite.health;
     }
 
     public void Update(GameTime gameTime)
@@ -30,8 +33,14 @@ public class DamagedState : ISpriteState
 
         timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
         counter++;
+        health--;
 
-        if (timeElapsed > 2)
+        if (health <= 0)
+        {
+            sprite.SetSpriteState(SpriteAction.damage, dead);
+        }
+
+        else if (timeElapsed > 2)
         {
             timeElapsed = 0;
             sprite.SetSpriteState(prevAction, prevState);

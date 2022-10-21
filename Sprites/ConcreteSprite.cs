@@ -61,6 +61,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         dead = new DeadState();
         use = new UseState(this);
 
+        health = 3;
+
         state = still;
 
         projectiles = new IProjectile[4];

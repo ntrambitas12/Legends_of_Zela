@@ -33,9 +33,6 @@ public class LevelLoader
     {
         
         constructer = new Dictionary<String, Delegate>();
-        initalizeControllers = new InitalizeControllers(game1);
-
-        
         parseTypes = new List<(string, string)>()
         {
             ("Blocks", "Block"),
@@ -45,6 +42,7 @@ public class LevelLoader
 
         populateDictionary();
         this.roomObjectManager = roomObjectManager;
+        initalizeControllers = new InitalizeControllers(game1, (RoomObjectManager)roomObjectManager);
         this.game1 = game1;
         runOnce = false;
         
@@ -153,15 +151,6 @@ public class LevelLoader
         
         foreach (var file in files)
         {
-            reader = XmlReader.Create(file);
-            room = new RoomObject();
-
-            if (!runOnce)
-            {
-                CreateLink();
-            }
-           
-            room.AddController(initalizeControllers.InitalizeKeyboard(Link));
             int xPos;
             int yPos;
             String name;
@@ -174,6 +163,10 @@ public class LevelLoader
             String projectile = null;
             int projDistance = 0;
             int projType = 0;
+
+            reader = XmlReader.Create(file);
+            room = new RoomObject();
+            IntializeRooms();
 
             foreach (var parseType in parseTypes)
             {
@@ -258,10 +251,17 @@ public class LevelLoader
             roomObjectManager.addRoom(room);
             runOnce = true;
         }
-        /*DEBUG REMOVE FROM PRODUCTION CODE:
-         * Used for testing of drawing all the different rooms 
-         */
-       roomObjectManager.setRoom(15);
+    }
+
+    private void IntializeRooms()
+    {
+        if (!runOnce)
+        {
+            CreateLink();
+        }
+
+        room.AddController(initalizeControllers.InitalizeKeyboard(Link));
+        room.AddController(initalizeControllers.InitalizeMouse());
     }
     
 }

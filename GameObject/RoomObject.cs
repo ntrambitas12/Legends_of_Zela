@@ -95,7 +95,9 @@ public class RoomObject : IRoomObject
             controller.Update(gameTime);
         }
 
-        Link.Update(gameTime);
+        if (Link != null) {
+            Link.Update(gameTime);
+        }
 
 
         //update all enemies
@@ -133,9 +135,11 @@ public class RoomObject : IRoomObject
         }
 
         //update projectiles
+        if (Link != null) { 
         foreach(IProjectile projectile in ((ConcreteSprite)Link).projectiles)
         {
             if (projectile != null) projectile.Update(gameTime);
+        }
         }
         //foreach (var linkProjectile in LinkProjectileList)
         //{
@@ -170,7 +174,7 @@ public class RoomObject : IRoomObject
     {
         foreach (var floor in floorList)
         {
-            floor.Draw(gameTime);
+           // floor.Draw(gameTime);
         }
 
         foreach (var floor in replacesFloorList)

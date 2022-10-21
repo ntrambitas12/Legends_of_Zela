@@ -14,11 +14,15 @@ using System.Threading.Tasks;
     private List<Keys> linkKeys;
     private KeyboardController keyboard;
     private Game1 game1;
-  
-    public InitalizeControllers(Game1 game1)
+
+    //Things needed for mouse controller
+    private MouseController mouse;
+    private RoomObjectManager roomObjectManager;
+    public InitalizeControllers(Game1 game1, RoomObjectManager roomObjectManager)
         {
          this.game1 = game1;
         this.linkKeys = new List<Keys>();
+        this.roomObjectManager = roomObjectManager;
         }
 
     public KeyboardController InitalizeKeyboard(ISprite Link)
@@ -59,6 +63,15 @@ using System.Threading.Tasks;
         keyboard.AddPlayableSprite(Link, linkKeys);
 
         return keyboard;
+        }
+
+    public MouseController InitalizeMouse()
+    {
+        mouse = MouseController.GetInstance;
+        mouse.resetController();
+        mouse.RegisterCommand(new NextRoom(game1, roomObjectManager), 0);
+        mouse.RegisterCommand(new PreviousRoom(game1, roomObjectManager), 1);
+        return mouse;
         }
     }
 
