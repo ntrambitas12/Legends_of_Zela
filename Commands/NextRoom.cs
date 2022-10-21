@@ -16,17 +16,20 @@ namespace CSE3902Project
             {
                 int initialRoomID = room.currentRoomID();
                 int nextRoomID = room.currentRoomID() + 1;
-                room.setRoom(nextRoomID);
-                while (room.currentRoom == null)
+                if (nextRoomID < room.numberOfRooms())
                 {
-                    nextRoomID++;
                     room.setRoom(nextRoomID);
-                    if (nextRoomID >= 36)
-                    {
-                        room.setRoom(initialRoomID);
-                        break;
-                    }
                 }
+                //while (room.currentRoom == null)
+                //{
+                //    nextRoomID++;
+                //    if (nextRoomID >= room.numberOfRooms())
+                //    {
+                //        room.setRoom(initialRoomID);
+                //        break;
+                //    }
+                //    room.setRoom(nextRoomID);
+                //}
             }
         }
     }

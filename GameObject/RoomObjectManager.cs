@@ -33,6 +33,11 @@ public class RoomObjectManager : IRoomObjectManager
         return roomList.IndexOf(_currentRoom);
     }
 
+    public int numberOfRooms()
+    {
+        return roomList.Capacity;
+    }
+
     public void Draw(GameTime gameTime)
     {
         /*In the future, this will draw all the rooms.

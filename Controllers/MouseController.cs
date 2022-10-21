@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
     public sealed class MouseController : IController
     {
-        private Dictionary<int, ICommand> mouseMappings;
+        private List<(ICommand, int)> mouseMappings;
         private MouseState currentMouseState;
         private MouseState previousMouseState;
         public MouseController()
         {
-            mouseMappings = new Dictionary<int, ICommand>();
+            mouseMappings = new List<(ICommand, int)>();
         }
 
         private static readonly MouseController instance = new MouseController();
@@ -26,34 +26,40 @@ using System.Threading.Tasks;
             }
         }
 
-        public void RegisterCommand(int button, ICommand command)
+        public void RegisterCommand(ICommand command, int button)
         {
-            if (!mouseMappings.ContainsKey(button))
+            if (!mouseMappings.Contains((command, button)))
             {
-                mouseMappings.Add(button, command);
+                mouseMappings.Add((command, button));
             }
         }
 
         public void Update(GameTime gametime)
         {
         
-        previousMouseState = currentMouseState;
-            MouseState state = Mouse.GetState();
+            previousMouseState = currentMouseState;
+            currentMouseState = Mouse.GetState();
             foreach (var mappedState in mouseMappings)
             {
 
-             if (mouseMappings.ContainsKey(mappedState.Key))
-             {
-            //make sure to check previous state to run only once on key press
-             if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
-            {
-            mouseMappings[0].Execute();
-             }
-            if (currentMouseState.RightButton == ButtonState.Pressed && previousMouseState.RightButton == ButtonState.Released)
+                if (mappedState.Item2 == 0)
+                {
+                    // check previous state to run only once on button press
+                    if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
                     {
-                      mouseMappings[1].Execute();
+                        mappedState.Item1.Execute();
                     }
-               }
+
+                }
+                if (mappedState.Item2 == 1)
+                {
+                    // check previous state to run only once on button press
+                    if (currentMouseState.RightButton == ButtonState.Pressed && previousMouseState.RightButton == ButtonState.Released)
+                    {
+                        mappedState.Item1.Execute();
+                    }
+
+                }
             }
         }
 

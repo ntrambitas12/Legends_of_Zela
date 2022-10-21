@@ -68,8 +68,9 @@ using System.Threading.Tasks;
     public MouseController InitalizeMouse()
     {
         mouse = MouseController.GetInstance;
-        mouse.RegisterCommand(0, new NextRoom(game1, roomObjectManager));
-        mouse.RegisterCommand(1, new PreviousRoom(game1, roomObjectManager));
+        mouse.resetController();
+        mouse.RegisterCommand(new NextRoom(game1, roomObjectManager), 0);
+        mouse.RegisterCommand(new PreviousRoom(game1, roomObjectManager), 1);
         return mouse;
         }
     }
