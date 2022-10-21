@@ -25,3 +25,34 @@ the moment, as we have it loading all content at once to purposely eliminate
 the need for multiple load calls. If memory space becomes an issue in the
 future, however, this could be something to look into.
 
+
+--------------------------------------------------------------------------------
+
+
+Code quality review
+Author: Zach Kallmeyer
+Date: 10-19-22
+Sprint #3
+File being reviewed: BoomerangType.cs
+Author of file being reviewed: Kyle Hoefker
+
+The quality of this code is very good, with very few code smells that I can
+detect. All instance variables are set. Methods are short and concise. Although
+the update method is slightly longer, it needs to be to contain the functionality
+we want and contains no extra fluff. Methods are public, all code is used, and
+variable names describe exactly what the variables are storing. One change to
+this code that I think might make this better would be to avoid the switch case
+with setting direction by simply doing projectile.SetDirection(direction). I
+know that with the current implementation this is commented out, but in case it
+needs to return when we implement the radius-based speed logic, changing our
+direction enums to match this data would be very useful.
+
+One change we could make to the game from this current projectile implementation
+would be to dynamically adjust boomerang speed based on distance from Link. I
+think the current implementation could easily support this change. You are
+already checking the projectile’s distance, but just statically alter the speed
+when it reaches a certain distance based on the counter. This could support a
+change where speed is set based on this distance value, using a simple velocity
+equation.
+
+
