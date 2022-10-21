@@ -17,7 +17,13 @@
 		<Block>
 			<xPos>208</xPos>
 			<yPos>402</yPos>
-			<Name>WallBottom</Name>
+			<Name>WallBottom1</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>402</yPos>
+			<Name>WallBottom2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
@@ -54,6 +60,12 @@
 			<xPos>144</xPos>
 			<yPos>258</yPos>
 			<Name>DoorLeft</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block isOpen='true'>
+			<xPos>368</xPos>
+			<yPos>402</yPos>
+			<Name>BombedDown</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>

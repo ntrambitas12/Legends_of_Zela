@@ -25,6 +25,9 @@ public interface IFactory
     public ISprite CreateLinkSprite(Vector2 location);
 
     //Block methods
+    public ISprite CreateInvisibleBarrierBlock(Vector2 location);
+    public ISprite CreateAlternateBackgroundBlock(Vector2 location);
+    public ISprite CreateDungeonFloorBlock(Vector2 location);
     public ISprite CreateBarrierBlock(Vector2 location);
     public ISprite CreateStairsBlock(Vector2 location);
     public ISprite CreateWaterBlock(Vector2 location);
@@ -54,6 +57,7 @@ public interface IFactory
     public ISprite CreateFireBlock(Vector2 location);
 
     //Drop Methods
+    public ISprite CreateArrowDrop(Vector2 location);
     public ISprite CreateNickelRubyDrop(Vector2 location);
     public ISprite CreateRubyDrop(Vector2 location);
     public ISprite CreateBombDrop(Vector2 location);
