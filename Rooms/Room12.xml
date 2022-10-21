@@ -11,6 +11,12 @@
 		</Block>
 		<Block>
 			<xPos>208</xPos>
+			<yPos>178</yPos>
+			<Name>Text</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
 			<yPos>402</yPos>
 			<Name>WallBottom</Name>
 			<RoomObjectType>4</RoomObjectType>

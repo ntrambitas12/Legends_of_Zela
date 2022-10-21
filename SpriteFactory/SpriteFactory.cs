@@ -24,6 +24,8 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> invisibleBarrier;
     private List<Texture2D>[] openingFrames;
     private List<Texture2D> opening;
+    private List<Texture2D>[] textFrames;
+    private List<Texture2D> text;
 
     private List<Texture2D>[] statueRightFrames;
     private List<Texture2D> statueRight;
@@ -125,8 +127,6 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> key;
     private List<Texture2D>[] mapFrames;
     private List<Texture2D> map;
-    private List<Texture2D>[] swordFrames;
-    private List<Texture2D> sword;
     private List<Texture2D>[] heartContainerFrames;
     private List<Texture2D> heartContainer;
     private List<Texture2D>[] nickelRupiesFrames;
@@ -178,12 +178,22 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> bombUp;
     private List<Texture2D> bombDown;
     private List<Texture2D> bombCloud;
+    private List<Texture2D>[] swordFrames;
+    private List<Texture2D> swordLeft;
+    private List<Texture2D> swordRight;
+    private List<Texture2D> swordUp;
+    private List<Texture2D> swordDown;
+    private List<Texture2D>[] fireballFrames;
+    private List<Texture2D> fireball1;
+    private List<Texture2D> fireball2;
+    private List<Texture2D> fireball3;
 
 
     private SpriteBatch _spriteBatch;
     private SpriteFactory()
     {
         //Blocks
+        textFrames = new List<Texture2D>[4];
         barrierFrames = new List<Texture2D>[4];
         stairsFrames = new List<Texture2D>[4];
         waterFrames = new List<Texture2D>[4];
@@ -265,6 +275,7 @@ public sealed class SpriteFactory : IFactory
         alternateBackground = new List<Texture2D>();
         invisibleBarrier = new List<Texture2D>();
         opening = new List<Texture2D>();
+        text = new List<Texture2D>();
 
 
         //Enemies
@@ -277,7 +288,7 @@ public sealed class SpriteFactory : IFactory
         aquamentusFrames = new List<Texture2D>[4];
         aquamentusLeft = new List<Texture2D>();
         aquamentusRight = new List<Texture2D>();
-        wallmasterFrames = new List<Texture2D>[8];
+        wallmasterFrames = new List<Texture2D>[4];
         wallmasterOpen = new List<Texture2D>();
         wallmasterClosed = new List<Texture2D>();
 
@@ -308,8 +319,6 @@ public sealed class SpriteFactory : IFactory
         map = new List<Texture2D>();
         nickelRupiesFrames = new List<Texture2D>[4];
         nickelRupies = new List<Texture2D>();
-        swordFrames = new List<Texture2D>[4];
-        sword = new List<Texture2D>();
         arrowDropFrames = new List<Texture2D>[4];
 
 
@@ -356,6 +365,16 @@ public sealed class SpriteFactory : IFactory
         bombUp = new List<Texture2D>();
         bombDown = new List<Texture2D>();
         bombCloud = new List<Texture2D>();
+        swordFrames = new List<Texture2D>[4];
+        swordLeft = new List<Texture2D>();
+        swordRight = new List<Texture2D>();
+        swordUp = new List<Texture2D>();
+        swordDown = new List<Texture2D>();
+        fireballFrames = new List<Texture2D>[3];
+        fireball1 = new List<Texture2D>();
+        fireball2 = new List<Texture2D>();
+        fireball3 = new List<Texture2D>();
+
     }
 
     private static readonly SpriteFactory instance = new SpriteFactory();
@@ -366,6 +385,7 @@ public sealed class SpriteFactory : IFactory
         _spriteBatch = spriteBatch;
 
         //Blocks
+        text.Add(content.Load<Texture2D>("DungeonSprites/Text"));
         opening.Add(content.Load<Texture2D>("BlockSprites/Black"));
         invisibleBarrier.Add(content.Load<Texture2D>("BlockSprites/InvisibleBarrier"));
         alternateBackground.Add(content.Load<Texture2D>("DungeonSprites/Room07"));
@@ -439,7 +459,6 @@ public sealed class SpriteFactory : IFactory
         compass.Add(content.Load<Texture2D>("ItemSprites/Compass"));
         key.Add(content.Load<Texture2D>("ItemSprites/Key"));
         map.Add(content.Load<Texture2D>("ItemSprites/Map"));
-        sword.Add(content.Load<Texture2D>("ItemSprites/Sword"));
         clock.Add(content.Load<Texture2D>("ItemSprites/Clock"));
         nickelRupies.Add(content.Load<Texture2D>("ItemSprites/5Rupies"));
 
@@ -449,6 +468,10 @@ public sealed class SpriteFactory : IFactory
         arrowRight.Add(content.Load<Texture2D>("ItemSprites/ArrowRight"));
         arrowUp.Add(content.Load<Texture2D>("ItemSprites/ArrowUp"));
         arrowDown.Add(content.Load<Texture2D>("ItemSprites/ArrowDown"));
+        swordLeft.Add(content.Load<Texture2D>("ItemSprites/SwordLeft"));
+        swordRight.Add(content.Load<Texture2D>("ItemSprites/SwordRight"));
+        swordUp.Add(content.Load<Texture2D>("ItemSprites/SwordUp"));
+        swordDown.Add(content.Load<Texture2D>("ItemSprites/SwordDown"));
         boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
         boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
         boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
@@ -473,7 +496,10 @@ public sealed class SpriteFactory : IFactory
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud2"));
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud3"));
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud4"));
-        
+        fireball1.Add(content.Load<Texture2D>("ItemSprites/fireball1"));
+        fireball2.Add(content.Load<Texture2D>("ItemSprites/fireball2"));
+        fireball3.Add(content.Load<Texture2D>("ItemSprites/fireball3"));
+
 
         //Populate Blocks and Items
         for (int i = 0; i < 4; i++)
@@ -520,11 +546,11 @@ public sealed class SpriteFactory : IFactory
             compassFrames[i] = compass;
             keyFrames[i] = key;
             mapFrames[i] = map;
-            swordFrames[i] = sword;
             clockFrames[i] = clock;
             nickelRupiesFrames[i] = nickelRupies;
             oldManFrames[i] = oldMan;
             openingFrames[i] = opening;
+            textFrames[i] = text;
         }
 
 
@@ -595,13 +621,9 @@ public sealed class SpriteFactory : IFactory
         trapFrames[(int)SpriteAction.moveUp] = trap;
         trapFrames[(int)SpriteAction.moveDown] = trap;
         wallmasterFrames[(int)SpriteAction.moveLeft] = wallmasterOpen;
-        wallmasterFrames[(int)SpriteAction.moveRight] = wallmasterOpen;
+        wallmasterFrames[(int)SpriteAction.moveRight] = wallmasterClosed;
         wallmasterFrames[(int)SpriteAction.moveUp] = wallmasterOpen;
-        wallmasterFrames[(int)SpriteAction.moveDown] = wallmasterOpen;
-        wallmasterFrames[(int)SpriteAction.attackLeft] = wallmasterClosed;
-        wallmasterFrames[(int)SpriteAction.attackRight] = wallmasterClosed;
-        wallmasterFrames[(int)SpriteAction.attackUp] = wallmasterClosed;
-        wallmasterFrames[(int)SpriteAction.attackDown] = wallmasterClosed;
+        wallmasterFrames[(int)SpriteAction.moveDown] = wallmasterClosed;
         aquamentusFrames[(int)SpriteAction.moveLeft] = aquamentusLeft;
         aquamentusFrames[(int)SpriteAction.moveRight] = aquamentusRight; 
 
@@ -610,6 +632,15 @@ public sealed class SpriteFactory : IFactory
         arrowFrames[(int)SpriteAction.moveRight] = arrowRight;
         arrowFrames[(int)SpriteAction.moveUp] = arrowUp;
         arrowFrames[(int)SpriteAction.moveDown] = arrowDown;
+        // Add sword frames to the list
+        swordFrames[(int)SpriteAction.moveLeft] = swordLeft;
+        swordFrames[(int)SpriteAction.moveRight] = swordRight;
+        swordFrames[(int)SpriteAction.moveUp] = swordUp;
+        swordFrames[(int)SpriteAction.moveDown] = swordDown;
+        // Add fireball frames to the list
+        fireballFrames[(int)SpriteAction.moveLeft] = fireball1;
+        fireballFrames[(int)SpriteAction.moveRight] = fireball2;
+        fireballFrames[(int)SpriteAction.moveUp] = fireball3;
         //Needs to be reworked to rotate...
         boomerangFrames[(int)SpriteAction.moveLeft] = boomerangLeft;
         boomerangFrames[(int)SpriteAction.moveRight] = boomerangRight;
@@ -625,6 +656,10 @@ public sealed class SpriteFactory : IFactory
 
 
     //Blocks
+    public ISprite CreateTextBlock(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, textFrames);
+    }
     public ISprite CreateOpeningBlock(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, openingFrames);
@@ -854,6 +889,7 @@ public sealed class SpriteFactory : IFactory
     }
 
     // Projectiles
+    // Add method for CreateFireballProjectile and CreateSwordProjectile
     public ISprite CreateArrowProjectile(int distance, ISprite owner)
     {
         IProjectile arrow = new Projectile(_spriteBatch, new Vector2(0, 0), arrowFrames);
