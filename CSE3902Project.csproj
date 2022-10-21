@@ -157,6 +157,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Rooms\Room01.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room02.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room07.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Rooms\Room08.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

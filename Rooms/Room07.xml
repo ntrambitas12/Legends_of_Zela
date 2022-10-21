@@ -111,7 +111,6 @@
 			<Name>InvisibleBarrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
-
 		<Block>
 			<xPos>208</xPos>
 			<yPos>274</yPos>
@@ -136,7 +135,6 @@
 			<Name>InvisibleBarrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
-
 		<Block>
 			<xPos>208</xPos>
 			<yPos>306</yPos>
@@ -185,7 +183,6 @@
 			<Name>InvisibleBarrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
-
 		<Block>
 			<xPos>208</xPos>
 			<yPos>338</yPos>
@@ -246,7 +243,90 @@
 			<Name>InvisibleBarrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
-		
+		<Block>
+			<xPos>176</xPos>
+			<yPos>338</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>370</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
 	</Blocks>
 
 
