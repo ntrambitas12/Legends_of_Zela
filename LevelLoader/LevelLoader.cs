@@ -73,8 +73,10 @@ public class LevelLoader
         constructer.Add("WallLeft1", new ConcreteEntities(SpriteFactory.Instance.CreateWallLeft1Block));
         constructer.Add("WallLeft2", new ConcreteEntities(SpriteFactory.Instance.CreateWallLeft2Block));
         constructer.Add("InvisibleBarrier", new ConcreteEntities(SpriteFactory.Instance.CreateInvisibleBarrierBlock));
+        constructer.Add("Opening", new ConcreteEntities(SpriteFactory.Instance.CreateOpeningBlock));
 
         //Enemies
+        constructer.Add("OldMan", new ConcreteEntities(SpriteFactory.Instance.CreateOldManSprite));
         constructer.Add("Keese", new ConcreteEntities(SpriteFactory.Instance.CreateKeeseSprite));
         constructer.Add("Stalfos", new ConcreteEntities(SpriteFactory.Instance.CreateStalfosSprite));
         constructer.Add("Gel", new ConcreteEntities(SpriteFactory.Instance.CreateGelSprite));

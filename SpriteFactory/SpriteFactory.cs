@@ -22,6 +22,8 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> alternateBackground;
     private List<Texture2D>[] invisibleBarrierFrames;
     private List<Texture2D> invisibleBarrier;
+    private List<Texture2D>[] openingFrames;
+    private List<Texture2D> opening;
 
     private List<Texture2D>[] statueRightFrames;
     private List<Texture2D> statueRight;
@@ -191,6 +193,7 @@ public sealed class SpriteFactory : IFactory
         dungeonFloorFrames = new List<Texture2D>[4];
         alternateBackgroundFrames = new List<Texture2D>[4];
         invisibleBarrierFrames = new List<Texture2D>[4];
+        openingFrames = new List<Texture2D>[4];
 
         wallTopFrames = new List<Texture2D>[4];
         wallTop1Frames = new List<Texture2D>[4];
@@ -261,6 +264,7 @@ public sealed class SpriteFactory : IFactory
         statueLeft = new List<Texture2D>();
         alternateBackground = new List<Texture2D>();
         invisibleBarrier = new List<Texture2D>();
+        opening = new List<Texture2D>();
 
 
         //Enemies
@@ -362,6 +366,7 @@ public sealed class SpriteFactory : IFactory
         _spriteBatch = spriteBatch;
 
         //Blocks
+        opening.Add(content.Load<Texture2D>("BlockSprites/Black"));
         invisibleBarrier.Add(content.Load<Texture2D>("BlockSprites/InvisibleBarrier"));
         alternateBackground.Add(content.Load<Texture2D>("DungeonSprites/Room07"));
         dungeonFloor.Add(content.Load<Texture2D>("DungeonSprites/DungeonFloor"));
@@ -519,6 +524,7 @@ public sealed class SpriteFactory : IFactory
             clockFrames[i] = clock;
             nickelRupiesFrames[i] = nickelRupies;
             oldManFrames[i] = oldMan;
+            openingFrames[i] = opening;
         }
 
 
@@ -619,6 +625,10 @@ public sealed class SpriteFactory : IFactory
 
 
     //Blocks
+    public ISprite CreateOpeningBlock(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, openingFrames);
+    }
     public ISprite CreateAlternateBackgroundBlock(Vector2 location)
     {
         return new ConcreteSprite(_spriteBatch, location, alternateBackgroundFrames);
