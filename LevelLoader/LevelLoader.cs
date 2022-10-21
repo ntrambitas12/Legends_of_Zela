@@ -114,6 +114,12 @@ public class LevelLoader
         constructer.Add("DoorLeft", new Doors(SpriteFactory.Instance.CreateDoorLeftBlock));
         constructer.Add("DoorUp", new Doors(SpriteFactory.Instance.CreateDoorUpBlock));
         constructer.Add("DoorDown", new Doors(SpriteFactory.Instance.CreateDoorDownBlock));
+        constructer.Add("BombDoorRight", new Doors(SpriteFactory.Instance.CreateBombableRightBlock));
+        constructer.Add("BombDoorLeft", new Doors(SpriteFactory.Instance.CreateBombableLeftBlock));
+        constructer.Add("BombDoorUp", new Doors(SpriteFactory.Instance.CreateBombableUpBlock));
+        constructer.Add("BombDoorDown", new Doors(SpriteFactory.Instance.CreateBombableDownBlock));
+
+
     }
 
     private void CreateLink()
@@ -255,7 +261,7 @@ public class LevelLoader
         /*DEBUG REMOVE FROM PRODUCTION CODE:
          * Used for testing of drawing all the different rooms 
          */
-       roomObjectManager.setRoom(6);
+       roomObjectManager.setRoom(15);
     }
     
 }
