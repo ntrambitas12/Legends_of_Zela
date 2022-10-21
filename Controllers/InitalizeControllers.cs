@@ -47,7 +47,6 @@ using System.Threading.Tasks;
         keyboard.RegisterCommand(Keys.D, new MoveRight(Link));
         keyboard.RegisterCommand(Keys.Down, new MoveDown(Link));
         keyboard.RegisterCommand(Keys.S, new MoveDown(Link));
-        keyboard.RegisterCommand(Keys.E, new TakeDamage(Link));
         keyboard.RegisterCommand(Keys.Z, new Attack(Link));
         keyboard.RegisterCommand(Keys.Space, new ProjectileAttack(Link));
         keyboard.RegisterCommand(Keys.P, new SwitchProjectile(Link));

@@ -55,9 +55,9 @@ namespace CSE3902Project
 
         public void resetGame()
         {
-           this.Initialize();
-           roomObjectManager.Reset();
-           this.LoadContent();
+            roomObjectManager.Reset();
+            this.Initialize();
+            this.LoadContent();
         }
 
 

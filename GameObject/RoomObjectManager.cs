@@ -15,7 +15,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
         roomList = new ArrayList();
     }
 
-    private static readonly RoomObjectManager instance = new RoomObjectManager();
+    private static RoomObjectManager instance = new RoomObjectManager();
     public static RoomObjectManager Instance { get { return instance; } }
 
     public void addRoom(IRoomObject room)
@@ -55,6 +55,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
         {
             room.ResetControllers();
         }
+        instance = new RoomObjectManager();
 
     }
 

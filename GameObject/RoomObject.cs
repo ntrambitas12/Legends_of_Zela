@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CSE3902Project.Commands;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,6 @@ public class RoomObject : IRoomObject
     private List<SpriteAction> enemyActions;
     private SpriteAction enemyAction;
     private Random rand;
-
 
     public RoomObject()
     {
@@ -104,6 +104,7 @@ public class RoomObject : IRoomObject
                 Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList) != null)
             {
                 //TODO: link takes damage
+                TakeDamage(Link);
             }
         }
 
@@ -264,6 +265,52 @@ public class RoomObject : IRoomObject
         }
         //after iterating the delete list, clear it!
         toBeDeleted.Clear();
+    }
+
+    private void TakeDamage(ISprite sprite)
+    {
+        IConcreteSprite castSprite = (IConcreteSprite)sprite;
+        SpriteAction newPos;
+        float orgX;
+        float orgY;
+
+        /* Decrement the sprites health field */
+        castSprite.health--;
+
+        /* Keep the sprite facing in the same direction when they take damage */
+        int spritePos = sprite.spritePos;
+        switch (spritePos)
+        {
+            case 0:
+                newPos = SpriteAction.damageLeft;
+                orgX = castSprite.screenCord.X;
+                orgY = castSprite.screenCord.Y;
+                castSprite.screenCord = new Vector2((orgX + 20), orgY);
+                break;
+            case 1:
+                newPos = SpriteAction.damageRight;
+                orgX = castSprite.screenCord.X;
+                orgY = castSprite.screenCord.Y;
+                castSprite.screenCord = new Vector2((orgX - 20), orgY);
+                break;
+            case 2:
+                newPos = SpriteAction.damageUp;
+                orgX = castSprite.screenCord.X;
+                orgY = castSprite.screenCord.Y;
+                castSprite.screenCord = new Vector2(orgX, (orgY + 20));
+                break;
+            case 3:
+                newPos = SpriteAction.damageDown;
+                orgX = castSprite.screenCord.X;
+                orgY = castSprite.screenCord.Y;
+                castSprite.screenCord = new Vector2(orgX, (orgY -20));
+                break;
+            default:
+                newPos = (SpriteAction)castSprite.spritePos;
+                break;
+
+        }
+        castSprite.SetSpriteState(newPos, castSprite.damaged);
     }
 
 

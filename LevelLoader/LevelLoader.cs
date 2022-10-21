@@ -129,7 +129,7 @@ public class LevelLoader
          * Colisions will be responsible for moving him between rooms.
          */
 
-        Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(120, 120));
+        Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(300, 350));
         room.Link = Link;
 
         /* Tempelate for creating and adding projectiles to link. Will be useful later*/
