@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 public class Collision : ICollision
-    {
+{
 
     private enum CONSTANTS
     {
@@ -18,28 +18,28 @@ public class Collision : ICollision
     //the entity this is for
     public ISprite entity { get; set; }
 
-        //gets set by UpdateCollision() method. true if this rectangle is intersecting with rectangles of entity(s) inside list
-        public Boolean isColliding { get; set; }
+    //gets set by UpdateCollision() method. true if this rectangle is intersecting with rectangles of entity(s) inside list
+    public Boolean isColliding { get; set; }
 
-        //same as isColliding, but specific for each direction
-        //used to disallow movement when colliding with obstable
-        public Boolean isCollidingTop { get; set; }
-        public Boolean isCollidingBottom { get; set; }
-        public Boolean isCollidingLeft { get; set; }
-        public Boolean isCollidingRight { get; set; }
+    //same as isColliding, but specific for each direction
+    //used to disallow movement when colliding with obstable
+    public Boolean isCollidingTop { get; set; }
+    public Boolean isCollidingBottom { get; set; }
+    public Boolean isCollidingLeft { get; set; }
+    public Boolean isCollidingRight { get; set; }
 
-        //collider rect for this
-        public Rectangle rect { get; set; }
-        private Rectangle colliderDimensions;
+    //collider rect for this
+    public Rectangle rect { get; set; }
+    private Rectangle colliderDimensions;
 
 
-        //--------------------------------INITIALIZER--------------------------------
-        //must be passed an entity for 'this' to be attached to, and size of collider 'colliderDimensions'
-       public Collision(ISprite entity, Rectangle colliderDimensions)
-        {
-            this.entity = entity;
-            this.colliderDimensions = colliderDimensions;
-        }
+    //--------------------------------INITIALIZER--------------------------------
+    //must be passed an entity for 'this' to be attached to, and size of collider 'colliderDimensions'
+    public Collision(ISprite entity, Rectangle colliderDimensions)
+    {
+        this.entity = entity;
+        this.colliderDimensions = colliderDimensions;
+    }
 
     //--------------------------------METHODS--------------------------------
 
