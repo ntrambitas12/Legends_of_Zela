@@ -35,7 +35,7 @@ public class RoomObjectManager : IRoomObjectManager
 
     public int numberOfRooms()
     {
-        return roomList.Capacity;
+        return roomList.Capacity - 1;
     }
 
     public void Draw(GameTime gameTime)

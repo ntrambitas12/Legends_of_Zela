@@ -20,16 +20,6 @@ namespace CSE3902Project
                 {
                     room.setRoom(nextRoomID);
                 }
-                //while (room.currentRoom == null)
-                //{
-                //    nextRoomID++;
-                //    if (nextRoomID >= room.numberOfRooms())
-                //    {
-                //        room.setRoom(initialRoomID);
-                //        break;
-                //    }
-                //    room.setRoom(nextRoomID);
-                //}
             }
         }
     }

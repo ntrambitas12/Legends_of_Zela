@@ -247,10 +247,6 @@ public class LevelLoader
             roomObjectManager.addRoom(room);
             runOnce = true;
         }
-        /*DEBUG REMOVE FROM PRODUCTION CODE:
-         * Used for testing of drawing all the different rooms 
-         */
-       roomObjectManager.setRoom(2);
     }
 
     private void IntializeRooms()
