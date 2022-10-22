@@ -61,10 +61,13 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     public void setRoom(int roomId)
     {
-        var Link = _currentRoom.Link;
-        _currentRoom.Link = null;
-        _currentRoom = (IRoomObject)roomList[roomId];
-        _currentRoom.Link = Link;
+        if (roomId < roomList.Count)
+        {
+            var Link = _currentRoom.Link;
+            _currentRoom.Link = null;
+            _currentRoom = (IRoomObject)roomList[roomId];
+            _currentRoom.Link = Link;
+        }
     }
 
     public void nextRoomRight()
