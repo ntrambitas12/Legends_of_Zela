@@ -61,8 +61,14 @@
 		<Block isOpen='true'>
 			<xPos>368</xPos>
 			<yPos>114</yPos>
-			<Name>BombedUp</Name>
+			<Name>BombDoorUp</Name>
 			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>114</yPos>
+			<Name>Opening</Name>
+			<RoomObjectType>9</RoomObjectType>
 		</Block>
 		<Block isOpen='true'>
 			<xPos>368</xPos>

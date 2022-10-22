@@ -186,7 +186,7 @@ public class RoomObject : IRoomObject
     {
         foreach (var floor in floorList)
         {
-           // floor.Draw(gameTime);
+           floor.Draw(gameTime);
         }
 
         foreach (var floor in replacesFloorList)

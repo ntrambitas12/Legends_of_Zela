@@ -16,10 +16,14 @@ namespace CSE3902Project
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private LevelLoader level;
-        //Move to spritefactory later
-        private Texture2D background;
         private IRoomObjectManager roomObjectManager;
+//<<<<<<< HEAD
+//        //Move to spritefactory later
+//        private Texture2D background;
+//        
 
+//=======
+//>>>>>>> origin/AttackRework
 
         public Game1()
         {
@@ -37,7 +41,6 @@ namespace CSE3902Project
 
             //Load up the content for the sprite factory
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
-            background = Content.Load<Texture2D>("DungeonSprites/DungeonFloor");
 
             base.Initialize();
         }
@@ -45,12 +48,7 @@ namespace CSE3902Project
 
         protected override void LoadContent()
         {
-            //levelLoader methods:
-
-            //Turn these into one parse method
             level.ParseRoom();
-
-     
         }
 
         public void resetGame()
@@ -74,7 +72,6 @@ namespace CSE3902Project
         protected override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin();
-            _spriteBatch.Draw(background, new Vector2(144, 114), null, Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
 
             roomObjectManager.Draw(gameTime);
 

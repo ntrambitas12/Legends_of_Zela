@@ -13,3 +13,31 @@ with very specific intentions/behavior, so this file has high cohesion. You can
 set and return each variable for the items, and it is clear which methods
 accomplish which task. Well done!
 
+
+--------------------------------------------------------------------------------
+
+
+Readability review
+Author: Zach Kallmeyer
+Date: 10-19-22
+Sprint #3
+Files being reviewed: InitializeControllers.cs, Game1.cs, LevelLoader.cs
+Author of file being reviewed: Nick Trambitas
+Code review took 20 minutes
+
+This pull request is a huge positive in terms of readability. The changes to
+these files clean up Game1 and LevelLoader tremendously, making each of them
+much easier to read and understand what they do. By pulling out the initialization
+of the mouse and keyboard controllers with registering their commands into a
+separate class, Game1 got much smaller and more concise, which helps with its
+previous status as a sort of “god class.” Additionally, LevelLoader can now just
+call these methods to initialize the controllers, removing that clutter from its
+implementation and making it much more readable. Within InitializeControllers
+itself, the InitializeKeyboard method has one single purpose and accomplishes it
+in a simple way, registering each command and key and adding their functionality
+to the controller and playable sprite. There are no vague identifiers, the
+methods aren’t too long, and parameter lists are short. The class is clear,
+concise, and cohesive, and is fantastic for improving readability among multiple
+classes. Great job!
+
+

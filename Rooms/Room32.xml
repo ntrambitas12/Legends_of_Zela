@@ -254,7 +254,7 @@
 		<Item>
 			<xPos>380</xPos>
 			<yPos>306</yPos>
-			<Name>ArrowUp</Name>
+			<Name>ArrowDrop</Name>
 			<RoomObjectType>6</RoomObjectType>
 		</Item>
 		<Item>

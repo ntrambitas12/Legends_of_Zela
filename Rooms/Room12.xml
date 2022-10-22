@@ -11,6 +11,12 @@
 		</Block>
 		<Block>
 			<xPos>208</xPos>
+			<yPos>178</yPos>
+			<Name>Text</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
 			<yPos>402</yPos>
 			<Name>WallBottom</Name>
 			<RoomObjectType>4</RoomObjectType>
@@ -40,13 +46,13 @@
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>272</xPos>
+			<xPos>288</xPos>
 			<yPos>242</yPos>
 			<Name>FireBlock</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>496</xPos>
+			<xPos>480</xPos>
 			<yPos>242</yPos>
 			<Name>FireBlock</Name>
 			<RoomObjectType>4</RoomObjectType>
@@ -55,6 +61,42 @@
 			<xPos>384</xPos>
 			<yPos>242</yPos>
 			<Name>OldMan</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>242</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>242</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>242</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>242</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>528</xPos>
+			<yPos>242</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>560</xPos>
+			<yPos>242</yPos>
+			<Name>InvisibleBarrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 	</Blocks>
