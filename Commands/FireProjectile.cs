@@ -28,9 +28,6 @@ public class FireProjectile : ICommand
             projectile.SetDirection((shooter.spritePos % 4));
             newCord = projectile.screenCord;
 
-            shooter.SetSpriteState((SpriteAction)shooter.spritePos, shooter.attack);
-
-
             switch ((shooter.spritePos % 4))
             {
                 /* Controls which direction the projectile moves in */

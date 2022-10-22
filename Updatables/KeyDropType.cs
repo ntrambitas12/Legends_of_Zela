@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-public class KeyType : IItemType
+public class KeyDropType : IItemType
 {
     private IDrop key;
 
-    public KeyType(IDrop key)
+    public KeyDropType(IDrop key)
     {
         this.key = key;
     }

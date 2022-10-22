@@ -136,16 +136,16 @@ public class LevelLoader
         room.Link = Link;
 
         /* Tempelate for creating and adding projectiles to link. Will be useful later*/
-        // Create projectiles for link
-        IProjectile Arrow = (IProjectile) SpriteFactory.Instance.CreateArrowProjectile(999, Link);
-        IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link);
-        IProjectile Boomerang = (IProjectile)SpriteFactory.Instance.CreateBoomerangProjectile(1000, Link);
+        // Create sword for link
+        //IProjectile Arrow = (IProjectile) SpriteFactory.Instance.CreateArrowProjectile(999, Link);
+        //IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link);
+        //IProjectile Boomerang = (IProjectile)SpriteFactory.Instance.CreateBoomerangProjectile(1000, Link);
         IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(15, Link);
 
-        // Add projectiles to Link
-        ((ConcreteSprite)Link).AddProjectile(Arrow, ArrayIndex.arrow);
-        ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);
-        ((ConcreteSprite)Link).AddProjectile(Boomerang, ArrayIndex.boomerang);
+        // Add sword to Link
+        //((ConcreteSprite)Link).AddProjectile(Arrow, ArrayIndex.arrow);
+        //((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);
+        //((ConcreteSprite)Link).AddProjectile(Boomerang, ArrayIndex.boomerang);
         ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
 
     }

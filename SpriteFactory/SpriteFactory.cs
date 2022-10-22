@@ -857,7 +857,7 @@ public sealed class SpriteFactory : IFactory
         arrow.collider = collisionObject;
         arrow.collider.UpdateCollisionPosition();
 
-        arrow.SetItemType(new KeyType(arrow)); //change type
+        arrow.SetItemType(new KeyDropType(arrow)); //change type
         return arrow;
     }
     public ISprite CreateNickelRubyDrop(Vector2 location)
@@ -869,7 +869,7 @@ public sealed class SpriteFactory : IFactory
         nickelRuby.collider = collisionObject;
         nickelRuby.collider.UpdateCollisionPosition();
 
-        nickelRuby.SetItemType(new KeyType(nickelRuby));
+        nickelRuby.SetItemType(new KeyDropType(nickelRuby));
         return nickelRuby;
     }
     public ISprite CreateBoomerangDrop(Vector2 location)
@@ -881,7 +881,7 @@ public sealed class SpriteFactory : IFactory
         boomerang.collider = collisionObject;
         boomerang.collider.UpdateCollisionPosition();
 
-        boomerang.SetItemType(new KeyType(boomerang));
+        boomerang.SetItemType(new BoomerangDropType(boomerang));
         return boomerang;
     }
     public ISprite CreateBombDrop(Vector2 location)
@@ -893,7 +893,7 @@ public sealed class SpriteFactory : IFactory
         bomb.collider = collisionObject;
         bomb.collider.UpdateCollisionPosition();
 
-        bomb.SetItemType(new KeyType(bomb));
+        bomb.SetItemType(new BombDropType(bomb));
         return bomb;
     }
     public ISprite CreateRubyDrop(Vector2 location)
@@ -905,7 +905,7 @@ public sealed class SpriteFactory : IFactory
         ruby.collider = collisionObject;
         ruby.collider.UpdateCollisionPosition();
 
-        ruby.SetItemType(new KeyType(ruby));
+        ruby.SetItemType(new KeyDropType(ruby));
         return ruby;
     }
     public ISprite CreateBowDrop(Vector2 location)
@@ -917,7 +917,7 @@ public sealed class SpriteFactory : IFactory
         bow.collider = collisionObject;
         bow.collider.UpdateCollisionPosition();
 
-        bow.SetItemType(new KeyType(bow));
+        bow.SetItemType(new BowDropType(bow));
         return bow;
     }
     public ISprite CreateClockDrop(Vector2 location)
@@ -929,7 +929,7 @@ public sealed class SpriteFactory : IFactory
         clock.collider = collisionObject;
         clock.collider.UpdateCollisionPosition();
 
-        clock.SetItemType(new KeyType(clock));
+        clock.SetItemType(new KeyDropType(clock));
         return clock;
     }
     public ISprite CreateCompassDrop(Vector2 location)
@@ -941,7 +941,7 @@ public sealed class SpriteFactory : IFactory
         compass.collider = collisionObject;
         compass.collider.UpdateCollisionPosition();
 
-        compass.SetItemType(new KeyType(compass));
+        compass.SetItemType(new KeyDropType(compass));
         return compass;
     }
     public ISprite CreateHeartDrop(Vector2 location)
@@ -953,7 +953,7 @@ public sealed class SpriteFactory : IFactory
         heart.collider = collisionObject;
         heart.collider.UpdateCollisionPosition();
 
-        heart.SetItemType(new KeyType(heart));
+        heart.SetItemType(new KeyDropType(heart));
         return heart;
     }
     public ISprite CreateHeartContainerDrop(Vector2 location)
@@ -965,7 +965,7 @@ public sealed class SpriteFactory : IFactory
         heartContainer.collider = collisionObject;
         heartContainer.collider.UpdateCollisionPosition();
 
-        heartContainer.SetItemType(new KeyType(heartContainer));
+        heartContainer.SetItemType(new KeyDropType(heartContainer));
         return heartContainer;
     }
     public ISprite CreateKeyDrop(Vector2 location)
@@ -977,7 +977,7 @@ public sealed class SpriteFactory : IFactory
         key.collider = collisionObject;
         key.collider.UpdateCollisionPosition();
 
-        key.SetItemType(new KeyType(key));
+        key.SetItemType(new KeyDropType(key));
         return key;
     }
     public ISprite CreateMapDrop(Vector2 location)
@@ -989,7 +989,7 @@ public sealed class SpriteFactory : IFactory
         map.collider = collisionObject;
         map.collider.UpdateCollisionPosition();
 
-        map.SetItemType(new KeyType(map));
+        map.SetItemType(new KeyDropType(map));
         return map;
     }
     public ISprite CreateSwordDrop(Vector2 location)
@@ -1001,7 +1001,7 @@ public sealed class SpriteFactory : IFactory
         sword.collider = collisionObject;
         sword.collider.UpdateCollisionPosition();
 
-        sword.SetItemType(new KeyType(sword));
+        sword.SetItemType(new KeyDropType(sword));
         return sword;
     }
     public ISprite CreateTriforceShardDrop(Vector2 location)
@@ -1013,7 +1013,7 @@ public sealed class SpriteFactory : IFactory
         triforce.collider = collisionObject;
         triforce.collider.UpdateCollisionPosition();
 
-        triforce.SetItemType(new KeyType(triforce));
+        triforce.SetItemType(new KeyDropType(triforce));
         return triforce;
     }
 
