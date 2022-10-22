@@ -86,6 +86,7 @@ public class LevelLoader
         constructer.Add("Aquamentus", new ConcreteEntities(SpriteFactory.Instance.CreateAquamentusSprite));
         constructer.Add("BladeTraps", new ConcreteEntities(SpriteFactory.Instance.CreateBladeTrapSprite));
         constructer.Add("Wallmaster", new ConcreteEntities(SpriteFactory.Instance.CreateWallmasterSprite));
+        constructer.Add("Trap", new ConcreteEntities(SpriteFactory.Instance.CreateTrapSprite));
 
         //Items 
         constructer.Add("ArrowDrop", new ConcreteEntities(SpriteFactory.Instance.CreateArrowDrop));

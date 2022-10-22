@@ -845,6 +845,10 @@ public sealed class SpriteFactory : IFactory
     {
         return CreateEntityWithCollision(location, oldManFrames);
     }
+    public ISprite CreateTrapSprite(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, trapFrames);
+    }
 
 
     //Drops
