@@ -18,3 +18,21 @@ attacked the player by hurling themselves at the player. Which AddSprite method 
 with two parameters or one? There could easily be further examples of non-trivial enemies, and having to write
 different AddSprite methods for each of these could be a bit tedious depending on if you needed to
 pass in more paramaters of information you needed to know.
+
+
+
+Code Quality Review
+Author: Ben Keip
+Date: 10-19-22
+Sprint #3
+File being reviewed: ProjectileAttack.cs and SwitchProjectile.cs
+Author of file being reviewed: Kyle Hoefker
+
+ProjectileSprite is very simple, which makes it easy to both use and understand.
+It also follows the convention of our other commands, so there is definitely something to be
+said for consistency. The same can be said with SwitchProjectile, it has very tight coupling and
+provides a much needed functionality for our project, allowing Link to actually use all the items
+in the game.
+One thing I could see being changed, however, is the bomb animation frames. I'm not sure this
+current implementation would work with it due to the bomb being animated differently, and additionally
+I believe fire could be changed to an ISprite and not a projectile.
