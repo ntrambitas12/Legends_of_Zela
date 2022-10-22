@@ -73,7 +73,7 @@ public class BoomerangType : IItemType
         //check for collisions and effects
         if (shouldDraw)
         {
-            ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().StaticTileList);
+            ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
 
             if (collidingObject != null)
             {
@@ -103,6 +103,10 @@ public class BoomerangType : IItemType
                 if (!(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(projectile.Owner())))
                 {
                     goingBack = true;
+                    if (RoomObjectManager.Instance.currentRoom().EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
+                    {
+                        RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
+                    }
                     RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
                 }
                 else

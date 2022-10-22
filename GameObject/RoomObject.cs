@@ -20,6 +20,8 @@ public class RoomObject : IRoomObject
     public List<ISprite> TopLayerNonCollidibleList { get; set; }
     public List<ISprite> replacesFloorList { get; set; }
     public List<ISprite> floorList { get; set; }
+    public List<ISprite> ProjectileStopperList { get; set; }
+    public Dictionary<ISprite, ISprite> EnemyToProjectile { get; set; }
 
     private List<(ISprite, int)> toBeDeleted;
     private Dictionary<int, List<ISprite>> listDict;
@@ -46,6 +48,9 @@ public class RoomObject : IRoomObject
         TopLayerNonCollidibleList = new List<ISprite>();
         replacesFloorList = new List<ISprite>();
         floorList = new List<ISprite>();
+
+        ProjectileStopperList = new List<ISprite>();
+        EnemyToProjectile = new Dictionary<ISprite, ISprite>();
 
         //intialize structures to add and delete
         listDict = new Dictionary<int, List<ISprite>>();
@@ -74,11 +79,21 @@ public class RoomObject : IRoomObject
     {
         ControllerList.Add(controller);
     }
-    public void AddGameObject(int objectType, ISprite gameObject)
+
+    public void AddEnemyProjectilePair(ISprite enemy, ISprite projectile)
+    {
+        if (!EnemyToProjectile.ContainsKey(enemy)) EnemyToProjectile.Add(enemy, projectile);
+    }
+
+    public void AddGameObject(int objectType, ISprite gameObject, String name)
     {
         if (listDict.TryGetValue(objectType, out List<ISprite> list))
         {
             list.Add(gameObject);
+            if (objectType == (int)RoomObjectTypes.typeTileStatic &&
+                !(name.Equals("Water"))) {
+                ProjectileStopperList.Add(gameObject);
+            }
         }
     }
 

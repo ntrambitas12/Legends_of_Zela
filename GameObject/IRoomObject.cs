@@ -63,9 +63,19 @@ public interface IRoomObject
     //Absolutely everything is drawn on top of this
     public List<ISprite> floorList { get; set; }
 
+    //list for projectile stoppers
+    //this is to exclude water from static tiles
+    public List<ISprite> ProjectileStopperList { get; set; }
+
+    //dict mapping enemies to their projectiles
+    public Dictionary<ISprite, ISprite> EnemyToProjectile { get; set; }
+
+    //adds an enemy and its projectile to dict
+    public void AddEnemyProjectilePair(ISprite enemy, ISprite projectile);
+
     //adds gameObject into its lists
     //which list depends on the enum passed as objectType
-    public void AddGameObject(int objectType, ISprite gameObject);
+    public void AddGameObject(int objectType, ISprite gameObject, String name);
 
     //adds controllers to the list
     public void AddController(IController controller);

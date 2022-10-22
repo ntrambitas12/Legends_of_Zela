@@ -17,13 +17,6 @@ namespace CSE3902Project
         private SpriteBatch _spriteBatch;
         private LevelLoader level;
         private IRoomObjectManager roomObjectManager;
-//<<<<<<< HEAD
-//        //Move to spritefactory later
-//        private Texture2D background;
-//        
-
-//=======
-//>>>>>>> origin/AttackRework
 
         public Game1()
         {

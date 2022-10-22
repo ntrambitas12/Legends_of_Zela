@@ -213,7 +213,7 @@
 			<RoomObjectType>2</RoomObjectType>
 			<Projectile>
 				<Name>Boomerang</Name>
-				<Distance>100</Distance>
+				<Distance>1000</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
 		</Enemy>
@@ -224,7 +224,7 @@
 			<RoomObjectType>2</RoomObjectType>
 			<Projectile>
 				<Name>Boomerang</Name>
-				<Distance>100</Distance>
+				<Distance>1000</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
 		</Enemy>
@@ -235,7 +235,7 @@
 			<RoomObjectType>2</RoomObjectType>
 			<Projectile>
 				<Name>Boomerang</Name>
-				<Distance>100</Distance>
+				<Distance>1000</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
 		</Enemy>

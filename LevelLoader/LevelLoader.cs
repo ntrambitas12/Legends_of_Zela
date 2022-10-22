@@ -167,6 +167,8 @@ public class LevelLoader
             String projectile = null;
             int projDistance = 0;
             int projType = 0;
+            ISprite enemyKey = null;
+            ISprite enemyVal = null;
 
             reader = XmlReader.Create(file);
             room = new RoomObject();
@@ -182,6 +184,7 @@ public class LevelLoader
                 {
                     do
                     {
+
                         if (reader.MoveToAttribute("isOpen"))
                         {
                             isDoor = true;
@@ -235,7 +238,9 @@ public class LevelLoader
                                 {
                                     ISprite concreteProj = (ISprite)projectileDel.DynamicInvoke(projDistance, sprite);
                                     //add the projectile created to the room
-                                    room.AddGameObject(projType, concreteProj);
+                                    room.AddGameObject(projType, concreteProj, "");
+                                    // Get enemy and projectile for dictionary
+                                    enemyKey = sprite; enemyVal = concreteProj;
                                     //reset projectile read in as null since we've added it to the room
                                     projectile = null;
                                 }
@@ -245,7 +250,8 @@ public class LevelLoader
                              }
                            
                         }
-                        room.AddGameObject(roomObjectType, sprite);
+                        room.AddGameObject(roomObjectType, sprite, name);
+                        if (enemyKey != null) room.AddEnemyProjectilePair(enemyKey, enemyVal);
                     }
                     while (reader.ReadToNextSibling(parseType.Item2));
                 }
