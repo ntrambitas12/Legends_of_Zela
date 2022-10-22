@@ -29,10 +29,13 @@ public class LevelLoader
     private ISprite sprite;
   
 
-    public LevelLoader(IRoomObjectManager roomObjectManager, Game1 game1)
+    public LevelLoader(Game1 game1)
     {
         
         constructer = new Dictionary<String, Delegate>();
+        initalizeControllers = new InitalizeControllers(game1);
+        roomObjectManager = RoomObjectManager.Instance;
+        
         parseTypes = new List<(string, string)>()
         {
             ("Blocks", "Block"),
@@ -41,8 +44,6 @@ public class LevelLoader
         };
 
         populateDictionary();
-        this.roomObjectManager = roomObjectManager;
-        initalizeControllers = new InitalizeControllers(game1, (RoomObjectManager)roomObjectManager);
         this.game1 = game1;
         runOnce = false;
         
@@ -74,6 +75,7 @@ public class LevelLoader
         constructer.Add("WallLeft2", new ConcreteEntities(SpriteFactory.Instance.CreateWallLeft2Block));
         constructer.Add("InvisibleBarrier", new ConcreteEntities(SpriteFactory.Instance.CreateInvisibleBarrierBlock));
         constructer.Add("Opening", new ConcreteEntities(SpriteFactory.Instance.CreateOpeningBlock));
+        constructer.Add("Text", new ConcreteEntities(SpriteFactory.Instance.CreateTextBlock));
 
         //Enemies
         constructer.Add("OldMan", new ConcreteEntities(SpriteFactory.Instance.CreateOldManSprite));
@@ -107,7 +109,7 @@ public class LevelLoader
         constructer.Add("Arrow", new Projectiles(SpriteFactory.Instance.CreateArrowProjectile));
         constructer.Add("Bomb", new Projectiles(SpriteFactory.Instance.CreateBombProjectile));
         constructer.Add("Boomerang", new Projectiles(SpriteFactory.Instance.CreateBoomerangProjectile));
-        constructer.Add("Fire", new Projectiles(SpriteFactory.Instance.CreateFireProjectile));
+        constructer.Add("Fireball", new Projectiles(SpriteFactory.Instance.CreateFireballProjectile));
 
         //Doors
         constructer.Add("DoorRight", new Doors(SpriteFactory.Instance.CreateDoorRightBlock));
@@ -130,20 +132,16 @@ public class LevelLoader
          * Colisions will be responsible for moving him between rooms.
          */
 
-        Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(120, 120));
+        Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(300, 350));
         room.Link = Link;
 
         /* Tempelate for creating and adding projectiles to link. Will be useful later*/
-        // Create projectiles for link
-        IProjectile Arrow = (IProjectile) SpriteFactory.Instance.CreateArrowProjectile(60, Link);
-        IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link);
-        IProjectile Boomerang = (IProjectile)SpriteFactory.Instance.CreateBoomerangProjectile(100, Link);
-        IProjectile Fire = (IProjectile)SpriteFactory.Instance.CreateFireProjectile(50, Link);
+        // Create sword for link
+        IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link);
 
-        // Add projectiles to Link
-        ((ConcreteSprite)Link).AddProjectile(Arrow, ArrayIndex.arrow);
-        ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);
-        ((ConcreteSprite)Link).AddProjectile(Boomerang, ArrayIndex.boomerang);
+        // Add sword to Link
+        ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
+
     }
    
     
@@ -165,6 +163,8 @@ public class LevelLoader
             String projectile = null;
             int projDistance = 0;
             int projType = 0;
+            ISprite enemyKey = null;
+            ISprite enemyVal = null;
 
             reader = XmlReader.Create(file);
             room = new RoomObject();
@@ -180,6 +180,7 @@ public class LevelLoader
                 {
                     do
                     {
+
                         if (reader.MoveToAttribute("isOpen"))
                         {
                             isDoor = true;
@@ -233,7 +234,9 @@ public class LevelLoader
                                 {
                                     ISprite concreteProj = (ISprite)projectileDel.DynamicInvoke(projDistance, sprite);
                                     //add the projectile created to the room
-                                    room.AddGameObject(projType, concreteProj);
+                                    room.AddGameObject(projType, concreteProj, "");
+                                    // Get enemy and projectile for dictionary
+                                    enemyKey = sprite; enemyVal = concreteProj;
                                     //reset projectile read in as null since we've added it to the room
                                     projectile = null;
                                 }
@@ -243,7 +246,8 @@ public class LevelLoader
                              }
                            
                         }
-                        room.AddGameObject(roomObjectType, sprite);
+                        room.AddGameObject(roomObjectType, sprite, name);
+                        if (enemyKey != null) room.AddEnemyProjectilePair(enemyKey, enemyVal);
                     }
                     while (reader.ReadToNextSibling(parseType.Item2));
                 }
@@ -253,8 +257,8 @@ public class LevelLoader
             roomObjectManager.addRoom(room);
             runOnce = true;
         }
+       
     }
-
     private void IntializeRooms()
     {
         if (!runOnce)
@@ -265,5 +269,4 @@ public class LevelLoader
         room.AddController(initalizeControllers.InitalizeKeyboard(Link));
         room.AddController(initalizeControllers.InitalizeMouse());
     }
-    
 }

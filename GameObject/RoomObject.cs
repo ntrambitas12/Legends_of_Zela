@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CSE3902Project.Commands;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,17 @@ public class RoomObject : IRoomObject
 {
     public List<IController> ControllerList { get; set; }
     public ISprite Link { get; set; }
-    public List<ISprite> LinkProjectileList { get; set; }
     public List<ISprite> EnemyList { get; set; }
     public List<ISprite> EnemyProjectileList { get; set; }
     public List<ISprite> StaticTileList { get; set; }
     public List<ISprite> DynamicTileList { get; set; }
     public List<ISprite> PickupList { get; set; }
-    public List<ISprite> CollidibleList { get; set; }
+    public List<ISprite>[] CollidibleList { get; set; }
     public List<ISprite> TopLayerNonCollidibleList { get; set; }
     public List<ISprite> replacesFloorList { get; set; }
     public List<ISprite> floorList { get; set; }
+    public List<ISprite> ProjectileStopperList { get; set; }
+    public Dictionary<ISprite, ISprite> EnemyToProjectile { get; set; }
 
     private List<(ISprite, int)> toBeDeleted;
     private Dictionary<int, List<ISprite>> listDict;
@@ -29,34 +31,37 @@ public class RoomObject : IRoomObject
     private SpriteAction enemyAction;
     private Random rand;
 
-
     public RoomObject()
     {
         //intialize sprite and controller lists
         ControllerList = new List<IController>();
-        LinkProjectileList = new List<ISprite>();
         EnemyList = new List<ISprite>();
         EnemyProjectileList = new List<ISprite>();
         StaticTileList = new List<ISprite>();
         DynamicTileList = new List<ISprite>();
         PickupList = new List<ISprite>();
-        CollidibleList = new List<ISprite>();
+
+        CollidibleList = new List<ISprite>[2];
+        CollidibleList[0] = StaticTileList;
+        CollidibleList[1] = DynamicTileList;
+
         TopLayerNonCollidibleList = new List<ISprite>();
         replacesFloorList = new List<ISprite>();
         floorList = new List<ISprite>();
+
+        ProjectileStopperList = new List<ISprite>();
+        EnemyToProjectile = new Dictionary<ISprite, ISprite>();
 
         //intialize structures to add and delete
         listDict = new Dictionary<int, List<ISprite>>();
         toBeDeleted = new List<(ISprite, int)>();
 
         //set up toBeAdded dictionary
-        listDict.Add((int)RoomObjectTypes.typeLinkProjectile, LinkProjectileList);
         listDict.Add((int)RoomObjectTypes.typeEnemy, EnemyList);
         listDict.Add((int)RoomObjectTypes.typeEnemyProjectile, EnemyProjectileList);
         listDict.Add((int)RoomObjectTypes.typeTileStatic, StaticTileList);
         listDict.Add((int)RoomObjectTypes.typeTileDynamic, DynamicTileList);
         listDict.Add((int)RoomObjectTypes.typePickup, PickupList);
-        listDict.Add((int)RoomObjectTypes.typeCollisionBox, CollidibleList);
         listDict.Add((int)RoomObjectTypes.typeTopLayerNonCollidible, TopLayerNonCollidibleList);
         listDict.Add((int)RoomObjectTypes.typeReplacesFloor, replacesFloorList);
         listDict.Add((int)RoomObjectTypes.typeFloor, floorList);
@@ -74,11 +79,21 @@ public class RoomObject : IRoomObject
     {
         ControllerList.Add(controller);
     }
-    public void AddGameObject(int objectType, ISprite gameObject)
+
+    public void AddEnemyProjectilePair(ISprite enemy, ISprite projectile)
+    {
+        if (!EnemyToProjectile.ContainsKey(enemy)) EnemyToProjectile.Add(enemy, projectile);
+    }
+
+    public void AddGameObject(int objectType, ISprite gameObject, String name)
     {
         if (listDict.TryGetValue(objectType, out List<ISprite> list))
         {
             list.Add(gameObject);
+            if (objectType == (int)RoomObjectTypes.typeTileStatic &&
+                !(name.Equals("Water"))) {
+                ProjectileStopperList.Add(gameObject);
+            }
         }
     }
 
@@ -95,13 +110,24 @@ public class RoomObject : IRoomObject
             controller.Update(gameTime);
         }
 
+        //update Link
         if (Link != null) {
             Link.Update(gameTime);
+            //TODO: move collision updates into its own manager class
+            ((IConcreteSprite)Link).UpdateCollideWithWall(this);
+            if (Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList) != null ||
+                Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList) != null)
+            {
+                //TODO: link takes damage
+                TakeDamage(Link);
+            }
         }
 
+        
+       
 
         //update all enemies
-        foreach(IConcreteSprite enemy in EnemyList)
+        foreach (IConcreteSprite enemy in EnemyList)
         {
 
             /*
@@ -131,7 +157,8 @@ public class RoomObject : IRoomObject
             }
 
             enemy.Update(gameTime);
-         
+            ((IConcreteSprite)enemy).UpdateCollideWithWall(this);
+
         }
 
         //update projectiles
@@ -174,7 +201,7 @@ public class RoomObject : IRoomObject
     {
         foreach (var floor in floorList)
         {
-           // floor.Draw(gameTime);
+           floor.Draw(gameTime);
         }
 
         foreach (var floor in replacesFloorList)
@@ -253,6 +280,52 @@ public class RoomObject : IRoomObject
         }
         //after iterating the delete list, clear it!
         toBeDeleted.Clear();
+    }
+
+    public void TakeDamage(ISprite sprite)
+    {
+        IConcreteSprite castSprite = (IConcreteSprite)sprite;
+        SpriteAction newPos;
+        float orgX;
+        float orgY;
+
+        /* Decrement the sprites health field */
+        castSprite.health--;
+
+        /* Keep the sprite facing in the same direction when they take damage */
+        int spritePos = sprite.spritePos;
+        switch (spritePos)
+        {
+            case 0:
+                newPos = SpriteAction.damageLeft;
+                orgX = castSprite.screenCord.X;
+                orgY = castSprite.screenCord.Y;
+                castSprite.screenCord = new Vector2((orgX + 20), orgY);
+                break;
+            case 1:
+                newPos = SpriteAction.damageRight;
+                orgX = castSprite.screenCord.X;
+                orgY = castSprite.screenCord.Y;
+                castSprite.screenCord = new Vector2((orgX - 20), orgY);
+                break;
+            case 2:
+                newPos = SpriteAction.damageUp;
+                orgX = castSprite.screenCord.X;
+                orgY = castSprite.screenCord.Y;
+                castSprite.screenCord = new Vector2(orgX, (orgY + 20));
+                break;
+            case 3:
+                newPos = SpriteAction.damageDown;
+                orgX = castSprite.screenCord.X;
+                orgY = castSprite.screenCord.Y;
+                castSprite.screenCord = new Vector2(orgX, (orgY -20));
+                break;
+            default:
+                newPos = (SpriteAction)castSprite.spritePos;
+                break;
+
+        }
+        castSprite.SetSpriteState(newPos, castSprite.damaged);
     }
 
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics; 
+using Microsoft.Xna.Framework.Graphics;
 
-public class ArrowType : IItemType
+public class FireballType : IItemType
 {
     private IProjectile projectile;
     private int direction;
@@ -11,7 +11,7 @@ public class ArrowType : IItemType
     private bool shouldDraw;
     private Vector2 changeCord;
 
-    public ArrowType(IProjectile projectile)
+    public FireballType(IProjectile projectile)
     {
         this.projectile = projectile;
     }
@@ -81,5 +81,7 @@ public class ArrowType : IItemType
         }
     }
 }
+
+
 
 

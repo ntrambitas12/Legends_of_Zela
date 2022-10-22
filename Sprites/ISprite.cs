@@ -19,6 +19,6 @@ using System.Threading.Tasks;
     void Draw(GameTime gameTime);
     void Update(GameTime gameTime);
     void SetSpriteAction(SpriteAction action);
-    }
+}
     
 

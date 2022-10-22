@@ -22,7 +22,12 @@ public interface IConcreteSprite : ISprite
     void SetSpriteState(SpriteAction action, ISpriteState spriteState);
 
     public void AddProjectile(IProjectile projectile, ArrayIndex i);
+    public ArrayIndex ProjectileIndex();
     public void SetProjectileIndex(ArrayIndex i);
     public void ProjectileAttack();
+    public void SwordAttack();
+
+    //call so the entity gets repelled by walls
+    public void UpdateCollideWithWall(RoomObject roomObject);
 }
 

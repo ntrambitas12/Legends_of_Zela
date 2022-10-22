@@ -25,6 +25,7 @@ public interface IFactory
     public ISprite CreateLinkSprite(Vector2 location);
 
     //Block methods
+    public ISprite CreateTextBlock(Vector2 location);
     public ISprite CreateOpeningBlock(Vector2 location);
     public ISprite CreateInvisibleBarrierBlock(Vector2 location);
     public ISprite CreateAlternateBackgroundBlock(Vector2 location);
@@ -77,6 +78,6 @@ public interface IFactory
     public ISprite CreateArrowProjectile(int distance, ISprite owner);
     public ISprite CreateBombProjectile(int distance, ISprite owner);
     public ISprite CreateBoomerangProjectile(int distance, ISprite owner);
-    public ISprite CreateFireProjectile(int distance, ISprite owner);
+    public ISprite CreateFireballProjectile(int distance, ISprite owner);
 }
 

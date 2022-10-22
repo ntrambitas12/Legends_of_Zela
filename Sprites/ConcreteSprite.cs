@@ -31,6 +31,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     private int projectileIndex;
     public IProjectile[] projectiles { get; set; }
 
+
     private IDraw drawSprite = new DrawSprite();
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
 
@@ -96,6 +97,10 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
         projectiles[(int)arrayIndex] = projectile;
     }
+    public ArrayIndex ProjectileIndex()
+    {
+        return (ArrayIndex) this.projectileIndex;
+    }
     public void SetProjectileIndex(ArrayIndex arrayIndex)
     {
         projectileIndex = (int)arrayIndex;
@@ -107,5 +112,54 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
             projectiles[projectileIndex].FireCommand().Execute();
         }
     }
+    public void SwordAttack()
+    {
+        if (projectiles[(int) ArrayIndex.sword] != null)
+        {
+            projectiles[(int) ArrayIndex.sword].FireCommand().Execute();
+        }
+    }
+
+
+    //call so the entity gets repelled by walls
+    public void UpdateCollideWithWall(RoomObject roomObject)
+    {
+        this.collider.ResetCollisionBooleans();
+        this.collider.UpdateCollision(roomObject.StaticTileList);
+        this.collider.UpdateCollision(roomObject.DynamicTileList);
+        if (this.collider.isColliding)
+        {
+            if (this.collider.isCollidingBottom)
+            {
+                Vector2 position = this.screenCord;
+                double x = this.screenCord.X;
+                double y = this.screenCord.Y - 2;        //somebody make this an enum please
+                this.screenCord = new Vector2((int)x, (int)y);
+            }
+            if (this.collider.isCollidingTop)
+            {
+                Vector2 position = this.screenCord;
+                double x = this.screenCord.X;
+                double y = this.screenCord.Y + 2;        //somebody make this an enum please
+                this.screenCord = new Vector2((int)x, (int)y);
+            }
+            if (this.collider.isCollidingLeft)
+            {
+                Vector2 position = this.screenCord;
+                double x = this.screenCord.X + 2;
+                double y = this.screenCord.Y;        //somebody make this an enum please
+                this.screenCord = new Vector2((int)x, (int)y);
+            }
+            if (this.collider.isCollidingRight)
+            {
+                Vector2 position = this.screenCord;
+                double x = this.screenCord.X - 2;
+                double y = this.screenCord.Y;        //somebody make this an enum please
+                this.screenCord = new Vector2((int)x, (int)y);
+            }
+        }
+    }
+
+    
 }
 

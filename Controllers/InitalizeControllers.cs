@@ -17,12 +17,11 @@ using System.Threading.Tasks;
 
     //Things needed for mouse controller
     private MouseController mouse;
-    private RoomObjectManager roomObjectManager;
-    public InitalizeControllers(Game1 game1, RoomObjectManager roomObjectManager)
+    public InitalizeControllers(Game1 game1)
         {
          this.game1 = game1;
         this.linkKeys = new List<Keys>();
-        this.roomObjectManager = roomObjectManager;
+        
         }
 
     public KeyboardController InitalizeKeyboard(ISprite Link)
@@ -48,7 +47,6 @@ using System.Threading.Tasks;
         keyboard.RegisterCommand(Keys.D, new MoveRight(Link));
         keyboard.RegisterCommand(Keys.Down, new MoveDown(Link));
         keyboard.RegisterCommand(Keys.S, new MoveDown(Link));
-        keyboard.RegisterCommand(Keys.E, new TakeDamage(Link));
         keyboard.RegisterCommand(Keys.Z, new Attack(Link));
         keyboard.RegisterCommand(Keys.Space, new ProjectileAttack(Link));
         keyboard.RegisterCommand(Keys.P, new SwitchProjectile(Link));
@@ -69,8 +67,8 @@ using System.Threading.Tasks;
     {
         mouse = MouseController.GetInstance;
         mouse.resetController();
-        mouse.RegisterCommand(new NextRoom(game1, roomObjectManager), 0);
-        mouse.RegisterCommand(new PreviousRoom(game1, roomObjectManager), 1);
+        mouse.RegisterCommand(new NextRoom(game1, RoomObjectManager.Instance), 0);
+        mouse.RegisterCommand(new PreviousRoom(game1, RoomObjectManager.Instance), 1);
         return mouse;
         }
     }

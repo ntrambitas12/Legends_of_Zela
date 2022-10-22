@@ -27,6 +27,12 @@ public interface ICollision
     //collider rectangle, used internally
     public Rectangle rect { get; set; }
 
+    //updates collider rect's position
+    public void UpdateCollisionPosition();
+
+    //resets the various isColliding booleans against collidibleList
+    public void ResetCollisionBooleans();
+
     //sets the various isColliding booleans against collidibleList
     //e.g. Link and enemies call UpdateCollision(Game.gameObjects.CollidibleList.get()) to set isColliding against all collidibles
     public void UpdateCollision(List<ISprite> collidibleList);

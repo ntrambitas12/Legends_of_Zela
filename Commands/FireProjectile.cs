@@ -28,27 +28,24 @@ public class FireProjectile : ICommand
             projectile.SetDirection((shooter.spritePos % 4));
             newCord = projectile.screenCord;
 
-            shooter.SetSpriteState((SpriteAction)shooter.spritePos, shooter.attack);
-
-
             switch ((shooter.spritePos % 4))
             {
                 /* Controls which direction the projectile moves in */
                 case 0: // left
-                    newCord.X = shooter.screenCord.X + 5;
-                    newCord.Y = shooter.screenCord.Y + 5;
+                    newCord.X = shooter.screenCord.X - 23;
+                    newCord.Y = shooter.screenCord.Y + 13;
                     break;
                 case 1: // right
-                    newCord.X = shooter.screenCord.X + 13;
-                    newCord.Y = shooter.screenCord.Y + 3;
+                    newCord.X = shooter.screenCord.X + 23;
+                    newCord.Y = shooter.screenCord.Y + 13;
                     break;
                 case 2: // up
                     newCord.X = shooter.screenCord.X + 5;
-                    newCord.Y = shooter.screenCord.Y;
+                    newCord.Y = shooter.screenCord.Y - 28;
                     break;
                 case 3: // down
-                    newCord.X = shooter.screenCord.X + 5;
-                    newCord.Y = shooter.screenCord.Y + 11;
+                    newCord.X = shooter.screenCord.X + 15;
+                    newCord.Y = shooter.screenCord.Y + 26;
                     break;
                 default:
                     break;
@@ -59,9 +56,7 @@ public class FireProjectile : ICommand
 
         if (counter == distance)
         {
-            projectile.SetShouldDraw(false);
-            projectile.SetDirection(-1);
-            counter = 0;
+            ResetCounter();
         }
         else
         {
@@ -72,6 +67,13 @@ public class FireProjectile : ICommand
     public int Counter()
     {
         return counter;
+    }
+
+    public void ResetCounter()
+    {
+        projectile.SetShouldDraw(false);
+        projectile.SetDirection(-1);
+        counter = 0;
     }
 }
 

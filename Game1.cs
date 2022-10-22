@@ -15,8 +15,8 @@ namespace CSE3902Project
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private IRoomObjectManager roomObjectManager;
         private LevelLoader level;
+        private IRoomObjectManager roomObjectManager;
 
         public Game1()
         {
@@ -28,9 +28,9 @@ namespace CSE3902Project
 
         protected override void Initialize()
         {
-            roomObjectManager = new RoomObjectManager();
-            level = new LevelLoader(roomObjectManager, this);
+            level = new LevelLoader(this);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            roomObjectManager = RoomObjectManager.Instance;
 
             //Load up the content for the sprite factory
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
@@ -46,9 +46,9 @@ namespace CSE3902Project
 
         public void resetGame()
         {
-           this.Initialize();
-           roomObjectManager.Reset();
-           this.LoadContent();
+            roomObjectManager.Reset();
+            this.Initialize();
+            this.LoadContent();
         }
 
 

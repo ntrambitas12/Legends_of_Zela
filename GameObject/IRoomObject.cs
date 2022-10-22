@@ -10,13 +10,11 @@ public enum RoomObjectTypes
 {
     typeController = -1,
     typeLink = 0,
-    typeLinkProjectile = 1,
     typeEnemy = 2,
     typeEnemyProjectile = 3,
     typeTileStatic = 4,
     typeTileDynamic = 5,
     typePickup = 6,
-    typeCollisionBox = 7,
     typeTopLayerNonCollidible = 8,
     typeReplacesFloor = 9,
     typeFloor = 10,
@@ -33,9 +31,6 @@ public interface IRoomObject
 
     //the pointer for Link
     public ISprite Link { get; set; }
-
-    //list for all projectiles
-    public List<ISprite> LinkProjectileList { get; set; }
 
     //the list for enemies
     public List<ISprite> EnemyList { get; set; }
@@ -54,7 +49,7 @@ public interface IRoomObject
 
     //list for things that stop entity movement
     //note that this list also contains ALL TILES in, addition to invisible collision boxes
-    public List<ISprite> CollidibleList { get; set; }
+    public List<ISprite>[] CollidibleList { get; set; }
 
     //list for non-collidible sprites and tiles (top of doorways etc.)
     //Link and enemies will disappear under these
@@ -68,9 +63,19 @@ public interface IRoomObject
     //Absolutely everything is drawn on top of this
     public List<ISprite> floorList { get; set; }
 
+    //list for projectile stoppers
+    //this is to exclude water from static tiles
+    public List<ISprite> ProjectileStopperList { get; set; }
+
+    //dict mapping enemies to their projectiles
+    public Dictionary<ISprite, ISprite> EnemyToProjectile { get; set; }
+
+    //adds an enemy and its projectile to dict
+    public void AddEnemyProjectilePair(ISprite enemy, ISprite projectile);
+
     //adds gameObject into its lists
     //which list depends on the enum passed as objectType
-    public void AddGameObject(int objectType, ISprite gameObject);
+    public void AddGameObject(int objectType, ISprite gameObject, String name);
 
     //adds controllers to the list
     public void AddController(IController controller);
@@ -105,4 +110,6 @@ public interface IRoomObject
     public void Draw(GameTime gameTime);
 
     public void ResetControllers();
+
+    public void TakeDamage(ISprite sprite);
 }

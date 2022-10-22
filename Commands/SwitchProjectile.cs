@@ -13,7 +13,7 @@ public class SwitchProjectile : ICommand
 
     public void Execute()
     {
-        i = (i + 1) % 4;
+        i = (i + 1) % 3;
         Link.SetProjectileIndex((ArrayIndex)i);
     }
 }
