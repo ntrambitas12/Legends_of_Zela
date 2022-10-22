@@ -1,45 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace CSE3902Project.Commands
+public class Attack : ICommand
 {
-    public class Attack : ICommand
+    private IConcreteSprite sprite;
+
+    public Attack(ISprite sprite)
     {
-        private IConcreteSprite sprite;
-        private SpriteAction spritePos;
+        this.sprite = (ConcreteSprite)sprite;
+    }
 
-        public Attack(ISprite link)
-        {
-            this.sprite = (IConcreteSprite)link;
-        }
-
-        public void Execute()
-        {
-
-            /* Attack based on which direction the sprite is facing */
-            int spritePos = sprite.spritePos;
-            switch (spritePos)
-            {
-                case 0:
-                    this.spritePos = SpriteAction.attackLeft;
-                    break;
-                case 1:
-                    this.spritePos = SpriteAction.attackRight;
-                    break;
-                case 2:
-                    this.spritePos = SpriteAction.attackUp;
-                    break;
-                case 3:
-                    this.spritePos = SpriteAction.attackDown;
-                    break;
-            }
-            sprite.SetSpriteState(this.spritePos, sprite.attack);
-        }
+    public void Execute()
+    {
+        sprite.SetSpriteState((SpriteAction)sprite.spritePos, sprite.attack);
     }
 }
+
+

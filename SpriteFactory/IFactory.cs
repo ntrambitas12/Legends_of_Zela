@@ -78,6 +78,6 @@ public interface IFactory
     public ISprite CreateArrowProjectile(int distance, ISprite owner);
     public ISprite CreateBombProjectile(int distance, ISprite owner);
     public ISprite CreateBoomerangProjectile(int distance, ISprite owner);
-    public ISprite CreateFireProjectile(int distance, ISprite owner);
+    public ISprite CreateFireballProjectile(int distance, ISprite owner);
 }
 

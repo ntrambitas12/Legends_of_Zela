@@ -1067,21 +1067,37 @@ public sealed class SpriteFactory : IFactory
         boomerang.SetFireCommand(fireBoomerang);
         return boomerang;
     }
-    public ISprite CreateFireProjectile(int distance, ISprite owner)
+    public ISprite CreateFireballProjectile(int distance, ISprite owner)
     {
-        IProjectile fire = new Projectile(_spriteBatch, new Vector2(0, 0), fireFrames);
+        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames);
 
-        Rectangle collisionRect = fireFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(fire, collisionRect);
-        fire.collider = collisionObject;
-        fire.collider.UpdateCollisionPosition();
+        Rectangle collisionRect = fireballFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(fireball, collisionRect);
+        fireball.collider = collisionObject;
+        fireball.collider.UpdateCollisionPosition();
 
-        fire.SetDistance(distance);
-        fire.SetOwner(owner);
-        fire.SetItemType(new ArrowType(fire));
-        FireProjectile fireFire = new FireProjectile(fire);
-        fire.SetFireCommand(fireFire);
-        return fire;
+        fireball.SetDistance(distance);
+        fireball.SetOwner(owner);
+        fireball.SetItemType(new FireballType(fireball));
+        FireProjectile fireFireball = new FireProjectile(fireball);
+        fireball.SetFireCommand(fireFireball);
+        return fireball;
+    }
+    public ISprite CreateSwordProjectile(int distance, ISprite owner)
+    {
+        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordFrames);
+
+        Rectangle collisionRect = swordFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(sword, collisionRect);
+        sword.collider = collisionObject;
+        sword.collider.UpdateCollisionPosition();
+
+        sword.SetDistance(distance);
+        sword.SetOwner(owner);
+        sword.SetItemType(new SwordType(sword));
+        FireProjectile fireFire = new FireProjectile(sword);
+        sword.SetFireCommand(fireFire);
+        return sword;
     }
 
     //Playables

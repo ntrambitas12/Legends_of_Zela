@@ -109,7 +109,7 @@ public class LevelLoader
         constructer.Add("Arrow", new Projectiles(SpriteFactory.Instance.CreateArrowProjectile));
         constructer.Add("Bomb", new Projectiles(SpriteFactory.Instance.CreateBombProjectile));
         constructer.Add("Boomerang", new Projectiles(SpriteFactory.Instance.CreateBoomerangProjectile));
-        constructer.Add("Fire", new Projectiles(SpriteFactory.Instance.CreateFireProjectile));
+        constructer.Add("Fireball", new Projectiles(SpriteFactory.Instance.CreateFireballProjectile));
 
         //Doors
         constructer.Add("DoorRight", new Doors(SpriteFactory.Instance.CreateDoorRightBlock));
@@ -140,12 +140,14 @@ public class LevelLoader
         IProjectile Arrow = (IProjectile) SpriteFactory.Instance.CreateArrowProjectile(999, Link);
         IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link);
         IProjectile Boomerang = (IProjectile)SpriteFactory.Instance.CreateBoomerangProjectile(1000, Link);
-        IProjectile Fire = (IProjectile)SpriteFactory.Instance.CreateFireProjectile(50, Link);
+        IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(15, Link);
 
         // Add projectiles to Link
         ((ConcreteSprite)Link).AddProjectile(Arrow, ArrayIndex.arrow);
         ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);
         ((ConcreteSprite)Link).AddProjectile(Boomerang, ArrayIndex.boomerang);
+        ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
+
     }
    
     

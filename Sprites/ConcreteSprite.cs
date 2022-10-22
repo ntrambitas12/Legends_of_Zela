@@ -97,6 +97,10 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
         projectiles[(int)arrayIndex] = projectile;
     }
+    public ArrayIndex ProjectileIndex()
+    {
+        return (ArrayIndex) this.projectileIndex;
+    }
     public void SetProjectileIndex(ArrayIndex arrayIndex)
     {
         projectileIndex = (int)arrayIndex;
@@ -106,6 +110,13 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         if (projectiles[projectileIndex] != null)
         {
             projectiles[projectileIndex].FireCommand().Execute();
+        }
+    }
+    public void SwordAttack()
+    {
+        if (projectiles[(int) ArrayIndex.sword] != null)
+        {
+            projectiles[(int) ArrayIndex.sword].FireCommand().Execute();
         }
     }
 

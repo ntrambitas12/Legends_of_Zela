@@ -14,6 +14,7 @@
     <Compile Remove="Content\TileSprites\**" />
     <EmbeddedResource Remove="Content\TileSprites\**" />
     <None Remove="Content\TileSprites\**" />
+    <Compile Remove="Updatables\DropType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\BlockSprites\BridgeHorizontal.png" />
