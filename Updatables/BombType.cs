@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 public class BombType : IItemType
@@ -29,6 +30,33 @@ public class BombType : IItemType
         if (shouldDraw)
         {
             fireProjectile.Execute();
+        }
+
+        //check for collisions and effects
+        if (shouldDraw)
+        {
+            ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().StaticTileList);
+
+            if (collidingObject != null)
+            {
+                fireProjectile.ResetCounter();
+            }
+
+            //collidingObject = projectile.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
+
+            //if (collidingObject != null)
+            //{
+            //    fireProjectile.ResetCounter();
+            //    //RoomObjectManager.Instance.TakeDamage(collidingObject);
+            //}
+
+            collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
+
+            if (collidingObject != null)
+            {
+                fireProjectile.ResetCounter();
+                //RoomObjectManager.Instance.TakeDamage(collidingObject);
+            }
         }
     }
 }

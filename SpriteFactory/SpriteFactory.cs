@@ -846,7 +846,15 @@ public sealed class SpriteFactory : IFactory
     }
     public ISprite CreateKeyDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, keyFrames);
+        IDrop key = new Drop(_spriteBatch, location, keyFrames);
+
+        Rectangle collisionRect = keyFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(key, collisionRect);
+        key.collider = collisionObject;
+        key.collider.UpdateCollisionPosition();
+
+        key.SetItemType(new KeyType(key));
+        return key;
     }
     public ISprite CreateMapDrop(Vector2 location)
     {

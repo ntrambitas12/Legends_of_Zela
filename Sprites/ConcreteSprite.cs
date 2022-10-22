@@ -31,6 +31,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     private int projectileIndex;
     public IProjectile[] projectiles { get; set; }
 
+
     private IDraw drawSprite = new DrawSprite();
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 public class BoomerangType : IItemType
@@ -63,6 +64,32 @@ public class BoomerangType : IItemType
         if (shouldDraw)
         {
             fireProjectile.Execute();
+        }
+
+        if (shouldDraw)
+        {
+            ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().StaticTileList);
+
+            if (collidingObject != null)
+            {
+                fireProjectile.ResetCounter();
+            }
+
+            //collidingObject = projectile.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
+
+            //if (collidingObject != null)
+            //{
+            //    fireProjectile.ResetCounter();
+            //    //RoomObject.TakeDamage(collidingObject);
+            //}
+
+            collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
+
+            if (collidingObject != null)
+            {
+                fireProjectile.ResetCounter();
+                //RoomObjectManager.Instance.TakeDamage(collidingObject);
+            }
         }
     }
 }
