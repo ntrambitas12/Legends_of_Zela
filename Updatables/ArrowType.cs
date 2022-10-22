@@ -57,17 +57,19 @@ public class ArrowType : IItemType
                 fireProjectile.ResetCounter();
             }
 
-            //collidingObject = projectile.collider.isIntersecting(new List<ISprite> {RoomObjectManager.Instance.currentRoom().Link});
+            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
+            bool check = projectile.Owner() != RoomObjectManager.Instance.currentRoom().Link;
 
-            //if (collidingObject != null)
-            //{
-            //    fireProjectile.ResetCounter();
-            //    //RoomObjectManager.Instance.TakeDamage(collidingObject);
-            //}
+            if (check && collidingObject != null)
+            {
+                fireProjectile.ResetCounter();
+                //RoomObjectManager.Instance.TakeDamage(collidingObject);
+            }
 
             collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
+            check = !(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(projectile.Owner()));
 
-            if (collidingObject != null)
+            if (check && collidingObject != null)
             {
                 fireProjectile.ResetCounter();
                 //RoomObjectManager.Instance.TakeDamage(collidingObject);

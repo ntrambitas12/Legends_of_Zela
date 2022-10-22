@@ -60,9 +60,6 @@ public class FireProjectile : ICommand
         if (counter == distance)
         {
             ResetCounter();
-            //projectile.SetShouldDraw(false);
-            //projectile.SetDirection(-1);
-            //counter = 0;
         }
         else
         {
