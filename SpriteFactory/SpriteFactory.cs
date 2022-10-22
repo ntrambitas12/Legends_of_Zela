@@ -626,7 +626,7 @@ public sealed class SpriteFactory : IFactory
         wallmasterFrames[(int)SpriteAction.moveUp] = wallmasterOpen;
         wallmasterFrames[(int)SpriteAction.moveDown] = wallmasterClosed;
         aquamentusFrames[(int)SpriteAction.moveLeft] = aquamentusLeft;
-        aquamentusFrames[(int)SpriteAction.moveRight] = aquamentusRight; 
+        aquamentusFrames[(int)SpriteAction.moveRight] = aquamentusRight;
 
         // Add arrow frames to the list
         arrowFrames[(int)SpriteAction.moveLeft] = arrowLeft;
@@ -661,8 +661,8 @@ public sealed class SpriteFactory : IFactory
         ISprite entity = new ConcreteSprite(_spriteBatch, location, frames1);
         Rectangle collisionRect = frames1[0][0].Bounds;
 
-        int x = 2*frames1[0][0].Width;
-        int y = 2*frames1[0][0].Height;
+        int x = 2 * frames1[0][0].Width;
+        int y = 2 * frames1[0][0].Height;
         collisionRect = new Rectangle(0, 0, x, y);
 
 
@@ -676,23 +676,23 @@ public sealed class SpriteFactory : IFactory
     //Blocks
     public ISprite CreateTextBlock(Vector2 location)
     {
-        return new ConcreteSprite(_spriteBatch, location, textFrames);
+        return CreateEntityWithCollision(location, textFrames);
     }
     public ISprite CreateOpeningBlock(Vector2 location)
     {
-        return new ConcreteSprite(_spriteBatch, location, openingFrames);
+        return CreateEntityWithCollision(location, openingFrames);
     }
     public ISprite CreateAlternateBackgroundBlock(Vector2 location)
     {
-        return new ConcreteSprite(_spriteBatch, location, alternateBackgroundFrames);
+        return CreateEntityWithCollision(location, alternateBackgroundFrames);
     }
     public ISprite CreateInvisibleBarrierBlock(Vector2 location)
     {
-        return new ConcreteSprite(_spriteBatch, location, invisibleBarrierFrames);
+        return CreateEntityWithCollision(location, invisibleBarrierFrames);
     }
     public ISprite CreateDungeonFloorBlock(Vector2 location)
     {
-        return new ConcreteSprite(_spriteBatch, location, dungeonFloorFrames);
+        return CreateEntityWithCollision(location, dungeonFloorFrames);
     }
     public ISprite CreateBarrierBlock(Vector2 location)
     {
@@ -768,7 +768,7 @@ public sealed class SpriteFactory : IFactory
     }
     public ISprite CreateDoorUpBlock(Vector2 location, bool isOpen)
     {
-        if (isOpen) { return new ConcreteSprite(_spriteBatch, location, doorUpOpenFrames); } 
+        if (isOpen) { return new ConcreteSprite(_spriteBatch, location, doorUpOpenFrames); }
         else { return CreateEntityWithCollision(location, doorUpClosedFrames); }
     }
     public ISprite CreateDoorDownBlock(Vector2 location, bool isOpen)
@@ -850,44 +850,123 @@ public sealed class SpriteFactory : IFactory
     //Drops
     public ISprite CreateArrowDrop(Vector2 location)
     {
-        //change to collideable
-        return new ConcreteSprite(_spriteBatch, location, arrowDropFrames);
+        IDrop arrow = new Drop(_spriteBatch, location, new List<Texture2D>[] { new List<Texture2D> { arrowFrames[2][0] } });
+
+        Rectangle collisionRect = arrowFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(arrow, collisionRect);
+        arrow.collider = collisionObject;
+        arrow.collider.UpdateCollisionPosition();
+
+        arrow.SetItemType(new KeyType(arrow)); //change type
+        return arrow;
     }
     public ISprite CreateNickelRubyDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, nickelRupiesFrames);
+        IDrop nickelRuby = new Drop(_spriteBatch, location, nickelRupiesFrames);
+
+        Rectangle collisionRect = nickelRupiesFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(nickelRuby, collisionRect);
+        nickelRuby.collider = collisionObject;
+        nickelRuby.collider.UpdateCollisionPosition();
+
+        nickelRuby.SetItemType(new KeyType(nickelRuby));
+        return nickelRuby;
     }
     public ISprite CreateBoomerangDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, boomerangFrames);
+        IDrop boomerang = new Drop(_spriteBatch, location, new List<Texture2D>[] { new List<Texture2D> { boomerangFrames[0][0] } });
+
+        Rectangle collisionRect = boomerangFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(boomerang, collisionRect);
+        boomerang.collider = collisionObject;
+        boomerang.collider.UpdateCollisionPosition();
+
+        boomerang.SetItemType(new KeyType(boomerang));
+        return boomerang;
     }
     public ISprite CreateBombDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, bombFrames);
+        IDrop bomb = new Drop(_spriteBatch, location, bombFrames);
+
+        Rectangle collisionRect = bombFrames[0][0].Bounds; //Change this for bigger explosion
+        ICollision collisionObject = new Collision(bomb, collisionRect);
+        bomb.collider = collisionObject;
+        bomb.collider.UpdateCollisionPosition();
+
+        bomb.SetItemType(new KeyType(bomb));
+        return bomb;
     }
     public ISprite CreateRubyDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, rupiesFrames);
+        IDrop ruby = new Drop(_spriteBatch, location, rupiesFrames);
+
+        Rectangle collisionRect = rupiesFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(ruby, collisionRect);
+        ruby.collider = collisionObject;
+        ruby.collider.UpdateCollisionPosition();
+
+        ruby.SetItemType(new KeyType(ruby));
+        return ruby;
     }
     public ISprite CreateBowDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, bowFrames);
+        IDrop bow = new Drop(_spriteBatch, location, bowFrames);
+
+        Rectangle collisionRect = bowFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(bow, collisionRect);
+        bow.collider = collisionObject;
+        bow.collider.UpdateCollisionPosition();
+
+        bow.SetItemType(new KeyType(bow));
+        return bow;
     }
     public ISprite CreateClockDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, clockFrames);
+        IDrop clock = new Drop(_spriteBatch, location, clockFrames);
+
+        Rectangle collisionRect = clockFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(clock, collisionRect);
+        clock.collider = collisionObject;
+        clock.collider.UpdateCollisionPosition();
+
+        clock.SetItemType(new KeyType(clock));
+        return clock;
     }
     public ISprite CreateCompassDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, compassFrames);
+        IDrop compass = new Drop(_spriteBatch, location, compassFrames);
+
+        Rectangle collisionRect = compassFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(compass, collisionRect);
+        compass.collider = collisionObject;
+        compass.collider.UpdateCollisionPosition();
+
+        compass.SetItemType(new KeyType(compass));
+        return compass;
     }
     public ISprite CreateHeartDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, heartFrames);
+        IDrop heart = new Drop(_spriteBatch, location, heartFrames);
+
+        Rectangle collisionRect = heartFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(heart, collisionRect);
+        heart.collider = collisionObject;
+        heart.collider.UpdateCollisionPosition();
+
+        heart.SetItemType(new KeyType(heart));
+        return heart;
     }
     public ISprite CreateHeartContainerDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, heartContainerFrames);
+        IDrop heartContainer = new Drop(_spriteBatch, location, heartContainerFrames);
+
+        Rectangle collisionRect = heartContainerFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(heartContainer, collisionRect);
+        heartContainer.collider = collisionObject;
+        heartContainer.collider.UpdateCollisionPosition();
+
+        heartContainer.SetItemType(new KeyType(heartContainer));
+        return heartContainer;
     }
     public ISprite CreateKeyDrop(Vector2 location)
     {
@@ -903,15 +982,39 @@ public sealed class SpriteFactory : IFactory
     }
     public ISprite CreateMapDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, mapFrames);
+        IDrop map = new Drop(_spriteBatch, location, mapFrames);
+
+        Rectangle collisionRect = mapFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(map, collisionRect);
+        map.collider = collisionObject;
+        map.collider.UpdateCollisionPosition();
+
+        map.SetItemType(new KeyType(map));
+        return map;
     }
     public ISprite CreateSwordDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, swordFrames);
+        IDrop sword = new Drop(_spriteBatch, location, swordFrames);
+
+        Rectangle collisionRect = swordFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(sword, collisionRect);
+        sword.collider = collisionObject;
+        sword.collider.UpdateCollisionPosition();
+
+        sword.SetItemType(new KeyType(sword));
+        return sword;
     }
     public ISprite CreateTriforceShardDrop(Vector2 location)
     {
-        return CreateEntityWithCollision(location, triforceFrames);
+        IDrop triforce = new Drop(_spriteBatch, location, triforceFrames);
+
+        Rectangle collisionRect = triforceFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(triforce, collisionRect);
+        triforce.collider = collisionObject;
+        triforce.collider.UpdateCollisionPosition();
+
+        triforce.SetItemType(new KeyType(triforce));
+        return triforce;
     }
 
     // Projectiles
