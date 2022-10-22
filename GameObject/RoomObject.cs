@@ -267,7 +267,7 @@ public class RoomObject : IRoomObject
         toBeDeleted.Clear();
     }
 
-    private void TakeDamage(ISprite sprite)
+    public void TakeDamage(ISprite sprite)
     {
         IConcreteSprite castSprite = (IConcreteSprite)sprite;
         SpriteAction newPos;

@@ -87,7 +87,7 @@ public class BoomerangType : IItemType
                 if (projectile.Owner() != RoomObjectManager.Instance.currentRoom().Link)
                 {
                     goingBack = true;
-                    //RoomObjectManager.Instance.TakeDamage(collidingObject);
+                    RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
                 } else
                 {
                     if (goingBack) fireProjectile.ResetCounter();
@@ -103,7 +103,7 @@ public class BoomerangType : IItemType
                 if (!(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(projectile.Owner())))
                 {
                     goingBack = true;
-                    //RoomObjectManager.Instance.TakeDamage(collidingObject);
+                    RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
                 }
                 else
                 {

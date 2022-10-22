@@ -63,7 +63,7 @@ public class ArrowType : IItemType
             if (check && collidingObject != null)
             {
                 fireProjectile.ResetCounter();
-                //RoomObjectManager.Instance.TakeDamage(collidingObject);
+                RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
             }
 
             collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
@@ -72,7 +72,7 @@ public class ArrowType : IItemType
             if (check && collidingObject != null)
             {
                 fireProjectile.ResetCounter();
-                //RoomObjectManager.Instance.TakeDamage(collidingObject);
+                RoomObjectManager.Instance.currentRoom().DeleteGameObject((int) RoomObjectTypes.typeEnemy, collidingObject);
             }
         }
     }

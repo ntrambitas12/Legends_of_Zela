@@ -100,4 +100,6 @@ public interface IRoomObject
     public void Draw(GameTime gameTime);
 
     public void ResetControllers();
+
+    public void TakeDamage(ISprite sprite);
 }
