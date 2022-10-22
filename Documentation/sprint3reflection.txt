@@ -1,0 +1,7 @@
+
+Sprint 3 reflection. 
+This sprint went even better than the last one. Organization and communication were
+two things we prioritezed this sprint and did a good job of managing. Upon code reviews we realized we have
+some refactoring we need to do, mostly for readablility. Nothing game breaking. we had much better git management
+and fewer issues as a team. In conclusion the changes we made from sprint 2 were benefitial and allowed us to preform
+more effienctly. We still have improvments to make as a team but we are on the right track.
