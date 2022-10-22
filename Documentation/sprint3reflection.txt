@@ -1,0 +1,39 @@
+
+Sprint 3 reflection. 
+This sprint went even better than the last one. Organization and communication were
+two things we prioritized this sprint and did a good job of managing. Upon code reviews we realized we have
+some refactoring we need to do, mostly for readablility. Nothing game breaking. We had much better git management
+and fewer issues as a team. In conclusion the changes we made from sprint 2 were beneficial and allowed us to perform
+more efficiently. We still have improvements to make as a team but we are on the right track.
+
+Here are a list of known issues/deviations from the original NES game:
+1. Enemy behavior is not accurate for aquamentus, wallmaster, and trap. we are working to address this next sprint.
+
+2. Due to how our room array is set up, we can not accurately transfer Link to the right room when he walks through a door.
+This indexing issue will be addressed in Sprint 4.
+	2A. As a result of this, when switching through rooms, Link's position remains the same. This leads to issues of him getting stuck
+		in the collidables of certain rooms, in particular Room07. This will be fixed when walking through doors is implemented,
+		seeing as we will be setting his position in each room based off of what door he goes through.
+
+3. The bomb does not blow up bombable walls. We will implement this in Sprint 4.
+
+4. Correct damage/death animations will be worked on next sprint.
+
+5. Currently, all rooms are drawn in their open state for the purpose of the demo. This is purely for exploration purposes, 
+and closed door functionality is implemented.
+
+6. There are two blocks in the dungeon that need to be pushable. We implemented the RoomObjectType for it this sprint, but not the
+	functionality. This will be handled in Sprint 4.
+
+	
+
+Here is a list of future refactoring:
+1. Sprites shouldn't own their position date.
+
+2. Break down the methods in RoomObject to smaller, helped methods.
+
+3. Need a master list of all Collidables to update.
+
+4. Reduce the number of levels in collison.cs.
+
+5. Can rework dictionary to take nodes and call parse for that node accordingly.

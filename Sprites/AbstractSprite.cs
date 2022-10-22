@@ -16,6 +16,9 @@ using System.Threading.Tasks;
     public SpriteBatch spriteBatch { get { return _spriteBatch; } set {} }
     public List<Texture2D> textureToDraw { get { return _textureToDraw; } set {} }
 
+    /*Declare collider variable*/
+    public ICollision collider { get; set; }
+
     private int _currentFrame;
     private int _totalFrames;
     private int _spritePos;
@@ -35,9 +38,9 @@ using System.Threading.Tasks;
         
 
     }
-    public abstract void Draw();
+    public abstract void Draw(GameTime gameTime);
     
-    public abstract void Update();
+    public abstract void Update(GameTime gameTime);
 
     /* This method, SetSpriteAction, sets the correct set of textures to draw, based on the desired action of the sprite.
      * Examples include: set the texture for the sprite moving left, set the texture for sprite moving right,
@@ -49,11 +52,18 @@ using System.Threading.Tasks;
         //only run if spritePos changes
         if ((int)action != _spritePos)
         {
+            var prevPos = _spritePos;
             _spritePos = (int)action;
-            _textureToDraw = textures[_spritePos];
-            _totalFrames = textureToDraw.Count;
-            _currentFrame = 0;
+            if (textures[_spritePos] != null)
+            {
+                _textureToDraw = textures[_spritePos];
+                _totalFrames = textureToDraw.Count;
+                _currentFrame = 0;
+            } else
+            {
+                _spritePos = prevPos;
+            }
        }
     }
-    }
+}
 

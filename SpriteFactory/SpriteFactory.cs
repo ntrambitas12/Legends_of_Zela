@@ -1,40 +1,152 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using CSE3902Project.Commands;
+using System.Net;
 
 public sealed class SpriteFactory : IFactory
-    {
+{
+
+    //Blocks
+    private List<Texture2D>[] barrierFrames;
+    private List<Texture2D> barrier;
+    private List<Texture2D>[] stairsFrames;
+    private List<Texture2D> stairs;
+    private List<Texture2D>[] waterFrames;
+    private List<Texture2D> water;
+    private List<Texture2D>[] roughFloorFrames;
+    private List<Texture2D> roughFloor;
+    private List<Texture2D>[] dungeonFloorFrames;
+    private List<Texture2D> dungeonFloor;
+    private List<Texture2D>[] alternateBackgroundFrames;
+    private List<Texture2D> alternateBackground;
+    private List<Texture2D>[] invisibleBarrierFrames;
+    private List<Texture2D> invisibleBarrier;
+    private List<Texture2D>[] openingFrames;
+    private List<Texture2D> opening;
+    private List<Texture2D>[] textFrames;
+    private List<Texture2D> text;
+
+    private List<Texture2D>[] statueRightFrames;
+    private List<Texture2D> statueRight;
+    private List<Texture2D>[] statueLeftFrames;
+    private List<Texture2D> statueLeft;
+
+    private List<Texture2D>[] doorUpOpenFrames;
+    private List<Texture2D> doorUpOpen;
+    private List<Texture2D>[] doorDownOpenFrames;
+    private List<Texture2D> doorDownOpen;
+    private List<Texture2D>[] doorRightOpenFrames;
+    private List<Texture2D> doorRightOpen;
+    private List<Texture2D>[] doorLeftOpenFrames;
+    private List<Texture2D> doorLeftOpen;
+    private List<Texture2D>[] doorUpClosedFrames;
+    private List<Texture2D> doorUpClosed;
+    private List<Texture2D>[] doorDownClosedFrames;
+    private List<Texture2D> doorDownClosed;
+    private List<Texture2D>[] doorRightClosedFrames;
+    private List<Texture2D> doorRightClosed;
+    private List<Texture2D>[] doorLeftClosedFrames;
+    private List<Texture2D> doorLeftClosed;
+
+    private List<Texture2D>[] bombedUpFrames;
+    private List<Texture2D> bombedUp;
+    private List<Texture2D>[] bombedDownFrames;
+    private List<Texture2D> bombedDown;
+    private List<Texture2D>[] bombedRightFrames;
+    private List<Texture2D> bombedRight;
+    private List<Texture2D>[] bombedLeftFrames;
+    private List<Texture2D> bombedLeft;
+    private List<Texture2D>[] unbombedUpFrames;
+    private List<Texture2D> unbombedUp;
+    private List<Texture2D>[] unbombedDownFrames;
+    private List<Texture2D> unbombedDown;
+    private List<Texture2D>[] unbombedRightFrames;
+    private List<Texture2D> unbombedRight;
+    private List<Texture2D>[] unbombedLeftFrames;
+    private List<Texture2D> unbombedLeft;
+
+    private List<Texture2D>[] wallTopFrames;
+    private List<Texture2D> wallTop;
+    private List<Texture2D>[] wallTop1Frames;
+    private List<Texture2D> wallTop1;
+    private List<Texture2D>[] wallTop2Frames;
+    private List<Texture2D> wallTop2;
+    private List<Texture2D>[] wallBottomFrames;
+    private List<Texture2D> wallBottom;
+    private List<Texture2D>[] wallBottom1Frames;
+    private List<Texture2D> wallBottom1;
+    private List<Texture2D>[] wallBottom2Frames;
+    private List<Texture2D> wallBottom2;
+    private List<Texture2D>[] wallRightFrames;
+    private List<Texture2D> wallRight;
+    private List<Texture2D>[] wallRight1Frames;
+    private List<Texture2D> wallRight1;
+    private List<Texture2D>[] wallRight2Frames;
+    private List<Texture2D> wallRight2;
+    private List<Texture2D>[] wallLeftFrames;
+    private List<Texture2D> wallLeft;
+    private List<Texture2D>[] wallLeft1Frames;
+    private List<Texture2D> wallLeft1;
+    private List<Texture2D>[] wallLeft2Frames;
+    private List<Texture2D> wallLeft2;
+
+
+    //Enemies
+    private List<Texture2D>[] goriyaFrames;
+    private List<Texture2D> goriyaRight;
+    private List<Texture2D> goriyaLeft;
+    private List<Texture2D> goriyaUp;
+    private List<Texture2D> goriyaDown;
+
+    private List<Texture2D>[] aquamentusFrames;
+    private List<Texture2D> aquamentusLeft;
+    private List<Texture2D> aquamentusRight;
+    private List<Texture2D>[] wallmasterFrames;
+    private List<Texture2D> wallmasterOpen;
+    private List<Texture2D> wallmasterClosed;
+
+    private List<Texture2D>[] keeseFrames;
+    private List<Texture2D> keese;
+    private List<Texture2D>[] stalfosFrames;
+    private List<Texture2D> stalfos;
+    private List<Texture2D>[] gelFrames;
+    private List<Texture2D> gel;
+    private List<Texture2D>[] trapFrames;
+    private List<Texture2D> trap;
+    private List<Texture2D>[] oldManFrames;
+    private List<Texture2D> oldMan;
+
+
+    //Items
+    private List<Texture2D>[] bowFrames;
+    private List<Texture2D> bow;
     private List<Texture2D>[] compassFrames;
     private List<Texture2D> compass;
-    private List<Texture2D>[] heartFrames;
-    private List<Texture2D> heart;
     private List<Texture2D>[] keyFrames;
     private List<Texture2D> key;
     private List<Texture2D>[] mapFrames;
     private List<Texture2D> map;
+    private List<Texture2D>[] heartContainerFrames;
+    private List<Texture2D> heartContainer;
+    private List<Texture2D>[] nickelRupiesFrames;
+    private List<Texture2D> nickelRupies;
+    private List<Texture2D>[] clockFrames;
+    private List<Texture2D> clock;
+    private List<Texture2D>[] arrowDropFrames;
+
+    private List<Texture2D>[] triforceFrames;
+    private List<Texture2D> triforce;
+    private List<Texture2D>[] heartFrames;
+    private List<Texture2D> heart;
     private List<Texture2D>[] rupiesFrames;
     private List<Texture2D> rupies;
-    private List<Texture2D>[] swordFrames;
-    private List<Texture2D> sword;
-    private List<Texture2D>[] barrierFrames;
-    private List<Texture2D> barrier;
-    private List<Texture2D>[] bushFrames;
-    private List<Texture2D> bush;
-    private List<Texture2D>[] defaultFloorFrames;
-    private List<Texture2D> defaultFloor;
-    private List<Texture2D>[] dungeonStairsFrames;
-    private List<Texture2D> dungeonStairs;
-    private List<Texture2D>[] gravestoneFrames;
-    private List<Texture2D> gravestone;
-    private List<Texture2D>[] waterFrames;
-    private List<Texture2D> water;
+    private List<Texture2D>[] fireFrames;
+    private List<Texture2D> fire;
+
+
+    //Link
     private List<Texture2D>[] linkFrames;
     private List<Texture2D> linkRight;
     private List<Texture2D> linkLeft;
@@ -48,73 +160,181 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> linkAttackRight;
     private List<Texture2D> linkAttackUp;
     private List<Texture2D> linkAttackDown;
-    private List<Texture2D>[] goriyaFrames;
-    private List<Texture2D> goriyaRight;
-    private List<Texture2D> goriyaLeft;
-    private List<Texture2D> goriyaUp;
-    private List<Texture2D> goriyaDown;
-    private List<Texture2D>[] oktorokFrames;
-    private List<Texture2D> oktorokRight;
-    private List<Texture2D> oktorokLeft;
-    private List<Texture2D> oktorokUp;
-    private List<Texture2D> oktorokDown;
-    private List<Texture2D>[] peahatFrames;
-    
-    private List<Texture2D> peahatRight;
-    private List<Texture2D> peahatLeft;
-    private List<Texture2D> peahatUp;
-    private List<Texture2D> peahatDown;
 
+
+    //Projectiles
     private List<Texture2D>[] arrowFrames;
     private List<Texture2D> arrowLeft;
     private List<Texture2D> arrowRight;
     private List<Texture2D> arrowUp;
     private List<Texture2D> arrowDown;
-    private List<Texture2D>[] silverArrowFrames;
-    private List<Texture2D> silverArrowLeft;
-    private List<Texture2D> silverArrowRight;
-    private List<Texture2D> silverArrowUp;
-    private List<Texture2D> silverArrowDown;
     private List<Texture2D>[] boomerangFrames;
     private List<Texture2D> boomerangLeft;
     private List<Texture2D> boomerangRight;
     private List<Texture2D> boomerangUp;
     private List<Texture2D> boomerangDown;
-    private List<Texture2D>[] magicBoomerangFrames;
-    private List<Texture2D> magicBoomerangLeft;
-    private List<Texture2D> magicBoomerangRight;
-    private List<Texture2D> magicBoomerangUp;
-    private List<Texture2D> magicBoomerangDown;
     private List<Texture2D>[] bombFrames;
     private List<Texture2D> bombLeft;
     private List<Texture2D> bombRight;
     private List<Texture2D> bombUp;
     private List<Texture2D> bombDown;
     private List<Texture2D> bombCloud;
-    private List<Texture2D>[] fireFrames;
-    private List<Texture2D> fireLeft;
-    private List<Texture2D> fireRight;
-    private List<Texture2D> fireUp;
-    private List<Texture2D> fireDown;
-
+    private List<Texture2D>[] swordFrames;
+    private List<Texture2D> swordLeft;
+    private List<Texture2D> swordRight;
+    private List<Texture2D> swordUp;
+    private List<Texture2D> swordDown;
+    private List<Texture2D>[] fireballFrames;
+    private List<Texture2D> fireball1;
+    private List<Texture2D> fireball2;
+    private List<Texture2D> fireball3;
 
 
     private SpriteBatch _spriteBatch;
     private SpriteFactory()
-        {
-        compassFrames = new List<Texture2D>[4];
-        heartFrames = new List<Texture2D>[4];
-        keyFrames = new List<Texture2D>[4];
-        mapFrames = new List<Texture2D>[4];
-        rupiesFrames = new List<Texture2D>[4];
-        swordFrames = new List<Texture2D>[4];
+    {
+        //Blocks
+        textFrames = new List<Texture2D>[4];
         barrierFrames = new List<Texture2D>[4];
-        bushFrames = new List<Texture2D>[4];
-        defaultFloorFrames = new List<Texture2D>[4];
-        dungeonStairsFrames = new List<Texture2D>[4];
-        gravestoneFrames = new List<Texture2D>[4];
+        stairsFrames = new List<Texture2D>[4];
         waterFrames = new List<Texture2D>[4];
+        statueLeftFrames = new List<Texture2D>[4];
+        statueRightFrames = new List<Texture2D>[4];
+        roughFloorFrames = new List<Texture2D>[4];
+        dungeonFloorFrames = new List<Texture2D>[4];
+        alternateBackgroundFrames = new List<Texture2D>[4];
+        invisibleBarrierFrames = new List<Texture2D>[4];
+        openingFrames = new List<Texture2D>[4];
 
+        wallTopFrames = new List<Texture2D>[4];
+        wallTop1Frames = new List<Texture2D>[4];
+        wallTop2Frames = new List<Texture2D>[4];
+        wallBottomFrames = new List<Texture2D>[4];
+        wallBottom1Frames = new List<Texture2D>[4];
+        wallBottom2Frames = new List<Texture2D>[4];
+        wallRightFrames = new List<Texture2D>[4];
+        wallRight1Frames = new List<Texture2D>[4];
+        wallRight2Frames = new List<Texture2D>[4];
+        wallLeftFrames = new List<Texture2D>[4];
+        wallLeft1Frames = new List<Texture2D>[4];
+        wallLeft2Frames = new List<Texture2D>[4];
+
+        doorUpOpenFrames = new List<Texture2D>[4];
+        doorDownOpenFrames = new List<Texture2D>[4];
+        doorRightOpenFrames = new List<Texture2D>[4];
+        doorLeftOpenFrames = new List<Texture2D>[4];
+        doorUpClosedFrames = new List<Texture2D>[4];
+        doorDownClosedFrames = new List<Texture2D>[4];
+        doorRightClosedFrames = new List<Texture2D>[4];
+        doorLeftClosedFrames = new List<Texture2D>[4];
+        bombedUpFrames = new List<Texture2D>[4];
+        bombedDownFrames = new List<Texture2D>[4];
+        bombedRightFrames = new List<Texture2D>[4];
+        bombedLeftFrames = new List<Texture2D>[4];
+        unbombedUpFrames = new List<Texture2D>[4];
+        unbombedDownFrames = new List<Texture2D>[4];
+        unbombedRightFrames = new List<Texture2D>[4];
+        unbombedLeftFrames = new List<Texture2D>[4];
+
+        doorUpOpen = new List<Texture2D>();
+        doorDownOpen = new List<Texture2D>();
+        doorRightOpen = new List<Texture2D>();
+        doorLeftOpen = new List<Texture2D>();
+        doorUpClosed = new List<Texture2D>();
+        doorDownClosed = new List<Texture2D>();
+        doorRightClosed = new List<Texture2D>();
+        doorLeftClosed = new List<Texture2D>();
+        bombedUp = new List<Texture2D>();
+        bombedDown = new List<Texture2D>();
+        bombedRight = new List<Texture2D>();
+        bombedLeft = new List<Texture2D>();
+        unbombedUp = new List<Texture2D>();
+        unbombedDown = new List<Texture2D>();
+        unbombedRight = new List<Texture2D>();
+        unbombedLeft = new List<Texture2D>();
+
+        wallTop = new List<Texture2D>();
+        wallTop1 = new List<Texture2D>();
+        wallTop2 = new List<Texture2D>();
+        wallBottom = new List<Texture2D>();
+        wallBottom1 = new List<Texture2D>();
+        wallBottom2 = new List<Texture2D>();
+        wallRight = new List<Texture2D>();
+        wallRight1 = new List<Texture2D>();
+        wallRight2 = new List<Texture2D>();
+        wallLeft = new List<Texture2D>();
+        wallLeft1 = new List<Texture2D>();
+        wallLeft2 = new List<Texture2D>();
+
+        dungeonFloor = new List<Texture2D>();
+        roughFloor = new List<Texture2D>();
+        barrier = new List<Texture2D>();
+        stairs = new List<Texture2D>();
+        water = new List<Texture2D>();
+        statueRight = new List<Texture2D>();
+        statueLeft = new List<Texture2D>();
+        alternateBackground = new List<Texture2D>();
+        invisibleBarrier = new List<Texture2D>();
+        opening = new List<Texture2D>();
+        text = new List<Texture2D>();
+
+
+        //Enemies
+        goriyaFrames = new List<Texture2D>[4];
+        goriyaLeft = new List<Texture2D>();
+        goriyaRight = new List<Texture2D>();
+        goriyaDown = new List<Texture2D>();
+        goriyaUp = new List<Texture2D>();
+
+        aquamentusFrames = new List<Texture2D>[4];
+        aquamentusLeft = new List<Texture2D>();
+        aquamentusRight = new List<Texture2D>();
+        wallmasterFrames = new List<Texture2D>[4];
+        wallmasterOpen = new List<Texture2D>();
+        wallmasterClosed = new List<Texture2D>();
+
+        gelFrames = new List<Texture2D>[4];
+        gel = new List<Texture2D>();
+        keeseFrames = new List<Texture2D>[4];
+        keese = new List<Texture2D>();
+        stalfosFrames = new List<Texture2D>[4];
+        stalfos = new List<Texture2D>();
+        trapFrames = new List<Texture2D>[4];
+        trap = new List<Texture2D>();
+        oldManFrames = new List<Texture2D>[4];
+        oldMan = new List<Texture2D>();
+
+
+        //Items
+        bowFrames = new List<Texture2D>[4];
+        bow = new List<Texture2D>();
+        clockFrames = new List<Texture2D>[4];
+        clock = new List<Texture2D>();
+        compassFrames = new List<Texture2D>[4];
+        compass = new List<Texture2D>();
+        heartContainerFrames = new List<Texture2D>[4];
+        heartContainer = new List<Texture2D>();
+        keyFrames = new List<Texture2D>[4];
+        key = new List<Texture2D>();
+        mapFrames = new List<Texture2D>[4];
+        map = new List<Texture2D>();
+        nickelRupiesFrames = new List<Texture2D>[4];
+        nickelRupies = new List<Texture2D>();
+        arrowDropFrames = new List<Texture2D>[4];
+
+
+        //Animated Items
+        fireFrames = new List<Texture2D>[4];
+        fire = new List<Texture2D>();
+        heartFrames = new List<Texture2D>[4];
+        heart = new List<Texture2D>();
+        rupiesFrames = new List<Texture2D>[4];
+        rupies = new List<Texture2D>();
+        triforceFrames = new List<Texture2D>[4];
+        triforce = new List<Texture2D>();
+
+
+        //Playables
         linkFrames = new List<Texture2D>[16];
         linkLeft = new List<Texture2D>();
         linkRight = new List<Texture2D>();
@@ -128,116 +348,216 @@ public sealed class SpriteFactory : IFactory
         linkAttackRight = new List<Texture2D>();
         linkAttackUp = new List<Texture2D>();
         linkAttackDown = new List<Texture2D>();
-        goriyaFrames = new List<Texture2D>[4];
-        goriyaLeft = new List<Texture2D>();
-        goriyaRight = new List<Texture2D>();
-        goriyaDown = new List<Texture2D>();
-        goriyaUp = new List<Texture2D>();
-        oktorokFrames = new List<Texture2D>[4];
-        oktorokLeft = new List<Texture2D>();
-        oktorokRight = new List<Texture2D>();
-        oktorokDown = new List<Texture2D>();
-        oktorokUp = new List<Texture2D>();
-        peahatFrames = new List<Texture2D>[4];
-        peahatLeft = new List<Texture2D>();
-        peahatRight = new List<Texture2D>();
-        peahatDown = new List<Texture2D>();
-        peahatUp = new List<Texture2D>();
+
+        //Projectiles
         arrowFrames = new List<Texture2D>[4];
         arrowLeft = new List<Texture2D>();
         arrowRight = new List<Texture2D>();
         arrowUp = new List<Texture2D>();
         arrowDown = new List<Texture2D>();
-        silverArrowFrames = new List<Texture2D>[4];
-        silverArrowLeft = new List<Texture2D>();
-        silverArrowRight = new List<Texture2D>();
-        silverArrowUp = new List<Texture2D>();
-        silverArrowDown = new List<Texture2D>();
         boomerangFrames = new List<Texture2D>[4];
         boomerangLeft = new List<Texture2D>();
         boomerangRight = new List<Texture2D>();
         boomerangUp = new List<Texture2D>();
         boomerangDown = new List<Texture2D>();
-        magicBoomerangFrames = new List<Texture2D>[4];
-        magicBoomerangLeft = new List<Texture2D>();
-        magicBoomerangRight = new List<Texture2D>();
-        magicBoomerangUp = new List<Texture2D>();
-        magicBoomerangDown = new List<Texture2D>();
         bombFrames = new List<Texture2D>[5];
         bombLeft = new List<Texture2D>();
         bombRight = new List<Texture2D>();
         bombUp = new List<Texture2D>();
         bombDown = new List<Texture2D>();
         bombCloud = new List<Texture2D>();
-        fireFrames = new List<Texture2D>[4];
-        fireLeft = new List<Texture2D>();
-        fireRight = new List<Texture2D>();
-        fireUp = new List<Texture2D>();
-        fireDown = new List<Texture2D>();
-        compass = new List<Texture2D>();
-        heart = new List<Texture2D>();
-        key =  new List<Texture2D>();
-        map = new List<Texture2D>();
-        rupies = new List<Texture2D>();
-        sword = new List<Texture2D>();
-        bush = new List<Texture2D>();
-        barrier = new List<Texture2D>();
-        defaultFloor = new List<Texture2D>();
-        dungeonStairs = new List<Texture2D>();
-        gravestone = new List<Texture2D>();
-        water = new List<Texture2D>();
+        swordFrames = new List<Texture2D>[4];
+        swordLeft = new List<Texture2D>();
+        swordRight = new List<Texture2D>();
+        swordUp = new List<Texture2D>();
+        swordDown = new List<Texture2D>();
+        fireballFrames = new List<Texture2D>[3];
+        fireball1 = new List<Texture2D>();
+        fireball2 = new List<Texture2D>();
+        fireball3 = new List<Texture2D>();
 
     }
 
-        private static readonly SpriteFactory instance = new SpriteFactory();
-        public static SpriteFactory Instance
-        {
-            get { return instance; }
-        }
+    private static readonly SpriteFactory instance = new SpriteFactory();
+    public static SpriteFactory Instance { get { return instance; } }
 
-       
-
-        public void LoadAllContent(ContentManager content, SpriteBatch spriteBatch)
-        {
+    public void LoadAllContent(ContentManager content, SpriteBatch spriteBatch)
+    {
         _spriteBatch = spriteBatch;
 
-        // Load tiles in
-        compass.Add(content.Load<Texture2D>("ItemSprites/Compass"));
-        key.Add(content.Load<Texture2D>("ItemSprites/Key"));
-        map.Add(content.Load<Texture2D>("ItemSprites/Map"));
-        rupies.Add(content.Load<Texture2D>("ItemSprites/5Rupies"));
-        sword.Add(content.Load<Texture2D>("ItemSprites/Sword"));
-        bush.Add(content.Load<Texture2D>("TileSprites/Bush"));
-        barrier.Add(content.Load<Texture2D>("TileSprites/Barrier"));
-        defaultFloor.Add(content.Load<Texture2D>("TileSprites/DefaultFloor"));
-        dungeonStairs.Add(content.Load<Texture2D>("TileSprites/DungeonStairs"));
-        gravestone.Add(content.Load<Texture2D>("TileSprites/Gravestone"));
-        water.Add(content.Load<Texture2D>("TileSprites/WaterMiddle"));
+        //Blocks
+        text.Add(content.Load<Texture2D>("DungeonSprites/Text"));
+        opening.Add(content.Load<Texture2D>("BlockSprites/Black"));
+        invisibleBarrier.Add(content.Load<Texture2D>("BlockSprites/InvisibleBarrier"));
+        alternateBackground.Add(content.Load<Texture2D>("DungeonSprites/Room07"));
+        dungeonFloor.Add(content.Load<Texture2D>("DungeonSprites/DungeonFloor"));
+        barrier.Add(content.Load<Texture2D>("BlockSprites/Barrier"));
+        stairs.Add(content.Load<Texture2D>("BlockSprites/DungeonStairs"));
+        water.Add(content.Load<Texture2D>("BlockSprites/Water"));
+        roughFloor.Add(content.Load<Texture2D>("BlockSprites/RoughFloor"));
+        statueRight.Add(content.Load<Texture2D>("BlockSprites/StatueRight"));
+        statueLeft.Add(content.Load<Texture2D>("BlockSprites/StatueLeft"));
+        doorUpOpen.Add(content.Load<Texture2D>("DungeonSprites/DoorTopOpen"));
+        doorDownOpen.Add(content.Load<Texture2D>("DungeonSprites/DoorBottomOpen"));
+        doorRightOpen.Add(content.Load<Texture2D>("DungeonSprites/DoorRightOpen"));
+        doorLeftOpen.Add(content.Load<Texture2D>("DungeonSprites/DoorLeftOpen"));
+        bombedUp.Add(content.Load<Texture2D>("DungeonSprites/DoorTopBombed"));
+        bombedDown.Add(content.Load<Texture2D>("DungeonSprites/DoorBottomBombed"));
+        bombedRight.Add(content.Load<Texture2D>("DungeonSprites/DoorRightBombed"));
+        bombedLeft.Add(content.Load<Texture2D>("DungeonSprites/DoorLeftBombed"));
+        unbombedUp.Add(content.Load<Texture2D>("DungeonSprites/DoorTopUnbombed"));
+        unbombedDown.Add(content.Load<Texture2D>("DungeonSprites/DoorBottomUnbombed"));
+        unbombedRight.Add(content.Load<Texture2D>("DungeonSprites/DoorRightUnbombed"));
+        unbombedLeft.Add(content.Load<Texture2D>("DungeonSprites/DoorLeftUnbombed"));
+        doorUpClosed.Add(content.Load<Texture2D>("DungeonSprites/DoorTopClosed"));
+        doorDownClosed.Add(content.Load<Texture2D>("DungeonSprites/DoorBottomClosed"));
+        doorRightClosed.Add(content.Load<Texture2D>("DungeonSprites/DoorRightClosed"));
+        doorLeftClosed.Add(content.Load<Texture2D>("DungeonSprites/DoorLeftClosed"));
+        wallTop.Add(content.Load<Texture2D>("DungeonSprites/WallTop0"));
+        wallTop1.Add(content.Load<Texture2D>("DungeonSprites/WallTop1"));
+        wallTop2.Add(content.Load<Texture2D>("DungeonSprites/WallTop2"));
+        wallBottom.Add(content.Load<Texture2D>("DungeonSprites/WallBottom0"));
+        wallBottom1.Add(content.Load<Texture2D>("DungeonSprites/WallBottom1"));
+        wallBottom2.Add(content.Load<Texture2D>("DungeonSprites/WallBottom2"));
+        wallRight.Add(content.Load<Texture2D>("DungeonSprites/WallRight0"));
+        wallRight1.Add(content.Load<Texture2D>("DungeonSprites/WallRight1"));
+        wallRight2.Add(content.Load<Texture2D>("DungeonSprites/WallRight2"));
+        wallLeft.Add(content.Load<Texture2D>("DungeonSprites/WallLeft0"));
+        wallLeft1.Add(content.Load<Texture2D>("DungeonSprites/WallLeft1"));
+        wallLeft2.Add(content.Load<Texture2D>("DungeonSprites/WallLeft2"));
 
-        for (int i = 0; i < 4; i++)
-        {
-            bushFrames[i] = bush;
-            barrierFrames[i] = barrier;
-            defaultFloorFrames[i] = defaultFloor;
-            dungeonStairsFrames[i] = dungeonStairs;
-            gravestoneFrames[i] = gravestone;
-            waterFrames[i] = water;
 
-            compassFrames[i] = compass;
-            keyFrames[i] = key;
-            mapFrames[i] = map;
-            rupiesFrames[i] = rupies;
-            swordFrames[i] = sword;
-        }
+        //Enemies
+        gel.Add(content.Load<Texture2D>("EnemySprites/Gel1"));
+        gel.Add(content.Load<Texture2D>("EnemySprites/Gel2"));
+        keese.Add(content.Load<Texture2D>("EnemySprites/Keese1"));
+        keese.Add(content.Load<Texture2D>("EnemySprites/Keese2"));
+        oldMan.Add(content.Load<Texture2D>("EnemySprites/OldMan"));
+        stalfos.Add(content.Load<Texture2D>("EnemySprites/Stalfos1"));
+        stalfos.Add(content.Load<Texture2D>("EnemySprites/Stalfos2"));
+        trap.Add(content.Load<Texture2D>("EnemySprites/Trap"));
+        wallmasterOpen.Add(content.Load<Texture2D>("EnemySprites/WallmasterULOpen"));
+        wallmasterClosed.Add(content.Load<Texture2D>("EnemySprites/WallmasterULClosed"));
 
-        /*Testing for heart*/
+
+        //Items
+        //This first section is for animated items
         heart.Add(content.Load<Texture2D>("ItemSprites/Heart1"));
         heart.Add(content.Load<Texture2D>("ItemSprites/Heart2"));
         heartFrames[0] = heart;
+        triforce.Add(content.Load<Texture2D>("ItemSprites/Triforce1"));
+        triforce.Add(content.Load<Texture2D>("ItemSprites/Triforce2"));
+        triforceFrames[0] = triforce;
+        rupies.Add(content.Load<Texture2D>("ItemSprites/BlinkingRuby1"));
+        rupies.Add(content.Load<Texture2D>("ItemSprites/BlinkingRuby2"));
+        rupiesFrames[0] = rupies;
+        fire.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
+        fire.Add(content.Load<Texture2D>("ItemSprites/Fire2"));
+        fireFrames[0] = fire;
+        //This second section is for items with only 1 frame of animation
+        heartContainer.Add(content.Load<Texture2D>("ItemSprites/HeartContainer"));
+        bow.Add(content.Load<Texture2D>("ItemSprites/Bow"));
+        compass.Add(content.Load<Texture2D>("ItemSprites/Compass"));
+        key.Add(content.Load<Texture2D>("ItemSprites/Key"));
+        map.Add(content.Load<Texture2D>("ItemSprites/Map"));
+        clock.Add(content.Load<Texture2D>("ItemSprites/Clock"));
+        nickelRupies.Add(content.Load<Texture2D>("ItemSprites/5Rupies"));
 
+
+        //Projectiles
+        arrowLeft.Add(content.Load<Texture2D>("ItemSprites/ArrowLeft"));
+        arrowRight.Add(content.Load<Texture2D>("ItemSprites/ArrowRight"));
+        arrowUp.Add(content.Load<Texture2D>("ItemSprites/ArrowUp"));
+        arrowDown.Add(content.Load<Texture2D>("ItemSprites/ArrowDown"));
+        swordLeft.Add(content.Load<Texture2D>("ItemSprites/SwordLeft"));
+        swordRight.Add(content.Load<Texture2D>("ItemSprites/SwordRight"));
+        swordUp.Add(content.Load<Texture2D>("ItemSprites/SwordUp"));
+        swordDown.Add(content.Load<Texture2D>("ItemSprites/SwordDown"));
+        boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
+        boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
+        boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
+        boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangUp"));
+        boomerangRight.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
+        boomerangRight.Add(content.Load<Texture2D>("ItemSprites/BoomerangUp"));
+        boomerangRight.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
+        boomerangRight.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
+        boomerangUp.Add(content.Load<Texture2D>("ItemSprites/BoomerangUp"));
+        boomerangUp.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
+        boomerangUp.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
+        boomerangUp.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
+        boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
+        boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
+        boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangUp"));
+        boomerangDown.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
+        bombLeft.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
+        bombRight.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
+        bombUp.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
+        bombDown.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
+        bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud1"));
+        bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud2"));
+        bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud3"));
+        bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud4"));
+        fireball1.Add(content.Load<Texture2D>("ItemSprites/fireball1"));
+        fireball2.Add(content.Load<Texture2D>("ItemSprites/fireball2"));
+        fireball3.Add(content.Load<Texture2D>("ItemSprites/fireball3"));
+
+
+        //Populate Blocks and Items
+        for (int i = 0; i < 4; i++)
+        {
+            dungeonFloorFrames[i] = dungeonFloor;
+            barrierFrames[i] = barrier;
+            stairsFrames[i] = stairs;
+            waterFrames[i] = water;
+            statueRightFrames[i] = statueRight;
+            statueLeftFrames[i] = statueLeft;
+            roughFloorFrames[i] = roughFloor;
+            alternateBackgroundFrames[i] = alternateBackground;
+            invisibleBarrierFrames[i] = invisibleBarrier;
+
+            wallTopFrames[i] = wallTop;
+            wallTop1Frames[i] = wallTop1;
+            wallTop2Frames[i] = wallTop2;
+            wallBottomFrames[i] = wallBottom;
+            wallBottom1Frames[i] = wallBottom1;
+            wallBottom2Frames[i] = wallBottom2;
+            wallRightFrames[i] = wallRight;
+            wallRight1Frames[i] = wallRight1;
+            wallRight2Frames[i] = wallRight2;
+            wallLeftFrames[i] = wallLeft;
+            wallLeft1Frames[i] = wallLeft1;
+            wallLeft2Frames[i] = wallLeft2;
+
+            doorUpOpenFrames[i] = doorUpOpen;
+            doorDownOpenFrames[i] = doorDownOpen;
+            doorRightOpenFrames[i] = doorRightOpen;
+            doorLeftOpenFrames[i] = doorLeftOpen;
+            bombedUpFrames[i] = bombedUp;
+            bombedDownFrames[i] = bombedDown;
+            bombedRightFrames[i] = bombedRight;
+            bombedLeftFrames[i] = bombedLeft;
+            doorUpClosedFrames[i] = doorUpClosed;
+            doorDownClosedFrames[i] = doorDownClosed;
+            doorRightClosedFrames[i] = doorRightClosed;
+            doorLeftClosedFrames[i] = doorLeftClosed;
+
+            arrowDropFrames[i] = arrowUp;
+            bowFrames[i] = bow;
+            heartContainerFrames[i] = heartContainer;
+            compassFrames[i] = compass;
+            keyFrames[i] = key;
+            mapFrames[i] = map;
+            clockFrames[i] = clock;
+            nickelRupiesFrames[i] = nickelRupies;
+            oldManFrames[i] = oldMan;
+            openingFrames[i] = opening;
+            textFrames[i] = text;
+        }
+
+
+        //Populate Enemies and Playables
         for (int i = 1; i <= 2; i++)
         {
-            // Loads sprite frames
             linkRight.Add(content.Load<Texture2D>("LinkSprites/linkRight" + i));
             linkLeft.Add(content.Load<Texture2D>("LinkSprites/linkLeft" + i));
             linkUp.Add(content.Load<Texture2D>("LinkSprites/linkUp" + i));
@@ -251,53 +571,15 @@ public sealed class SpriteFactory : IFactory
             linkAttackUp.Add(content.Load<Texture2D>("LinkSprites/LinkUpSword"));
             linkAttackDown.Add(content.Load<Texture2D>("LinkSprites/LinkDownSword"));
 
-
             goriyaRight.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedRight" + i));
             goriyaLeft.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedLeft" + i));
             goriyaUp.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedUp" + i));
             goriyaDown.Add(content.Load<Texture2D>("EnemySprites/GoriyaRedDown" + i));
 
-            oktorokRight.Add(content.Load<Texture2D>("EnemySprites/OktorokBlueRight" + i));
-            oktorokLeft.Add(content.Load<Texture2D>("EnemySprites/OktorokBlueLeft" + i));
-            oktorokUp.Add(content.Load<Texture2D>("EnemySprites/OktorokBlueUp" + i));
-            oktorokDown.Add(content.Load<Texture2D>("EnemySprites/OktorokBlueDown" + i));
-
-            peahatRight.Add(content.Load<Texture2D>("EnemySprites/Peahat" + i));
-            peahatLeft.Add(content.Load<Texture2D>("EnemySprites/Peahat" + i));
-            peahatUp.Add(content.Load<Texture2D>("EnemySprites/Peahat" + i));
-            peahatDown.Add(content.Load<Texture2D>("EnemySprites/Peahat" + i));
+            aquamentusRight.Add(content.Load<Texture2D>("EnemySprites/AquamentusRight" + i));
+            aquamentusLeft.Add(content.Load<Texture2D>("EnemySprites/AquamentusLeft" + i));
         }
 
-        // Assign textures to projectile directions
-        arrowLeft.Add(content.Load<Texture2D>("ItemSprites/ArrowLeft"));
-        arrowRight.Add(content.Load<Texture2D>("ItemSprites/ArrowRight"));
-        arrowUp.Add(content.Load<Texture2D>("ItemSprites/ArrowUp"));
-        arrowDown.Add(content.Load<Texture2D>("ItemSprites/ArrowDown"));
-        silverArrowLeft.Add(content.Load<Texture2D>("ItemSprites/SilverArrow"));
-        silverArrowRight.Add(content.Load<Texture2D>("ItemSprites/SilverArrow"));
-        silverArrowUp.Add(content.Load<Texture2D>("ItemSprites/SilverArrow"));
-        silverArrowDown.Add(content.Load<Texture2D>("ItemSprites/SilverArrow"));
-        boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/Boomerang"));
-        boomerangRight.Add(content.Load<Texture2D>("ItemSprites/Boomerang"));
-        boomerangUp.Add(content.Load<Texture2D>("ItemSprites/Boomerang"));
-        boomerangDown.Add(content.Load<Texture2D>("ItemSprites/Boomerang"));
-        magicBoomerangLeft.Add(content.Load<Texture2D>("ItemSprites/MagicBoomerang"));
-        magicBoomerangRight.Add(content.Load<Texture2D>("ItemSprites/MagicBoomerang"));
-        magicBoomerangUp.Add(content.Load<Texture2D>("ItemSprites/MagicBoomerang"));
-        magicBoomerangDown.Add(content.Load<Texture2D>("ItemSprites/MagicBoomerang"));
-        bombLeft.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
-        bombRight.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
-        bombUp.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
-        bombDown.Add(content.Load<Texture2D>("ItemSprites/Bomb"));
-        for (int i = 1; i <= 4; i++) bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud" + i));
-        fireLeft.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
-        fireRight.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
-        fireUp.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
-        fireDown.Add(content.Load<Texture2D>("ItemSprites/Fire1"));
-        fireLeft.Add(content.Load<Texture2D>("ItemSprites/Fire2"));
-        fireRight.Add(content.Load<Texture2D>("ItemSprites/Fire2"));
-        fireUp.Add(content.Load<Texture2D>("ItemSprites/Fire2"));
-        fireDown.Add(content.Load<Texture2D>("ItemSprites/Fire2"));
 
         // Add the link frames to the list
         linkFrames[(int)SpriteAction.moveLeft] = linkLeft;
@@ -318,165 +600,513 @@ public sealed class SpriteFactory : IFactory
         linkFrames[(int)SpriteAction.damageDown] = linkDown;
 
 
-
-
-        // Add example enemy frames to the list
+        // Add enemy frames to the list
         goriyaFrames[(int)SpriteAction.moveLeft] = goriyaLeft;
         goriyaFrames[(int)SpriteAction.moveRight] = goriyaRight;
         goriyaFrames[(int)SpriteAction.moveUp] = goriyaUp;
         goriyaFrames[(int)SpriteAction.moveDown] = goriyaDown;
-
-        oktorokFrames[(int)SpriteAction.moveLeft] = oktorokLeft;
-        oktorokFrames[(int)SpriteAction.moveRight] = oktorokRight;
-        oktorokFrames[(int)SpriteAction.moveUp] = oktorokUp;
-        oktorokFrames[(int)SpriteAction.moveDown] = oktorokDown;
-
-        peahatFrames[(int)SpriteAction.moveLeft] = peahatLeft;
-        peahatFrames[(int)SpriteAction.moveRight] = peahatRight;
-        peahatFrames[(int)SpriteAction.moveUp] = peahatUp;
-        peahatFrames[(int)SpriteAction.moveDown] = peahatDown;
+        gelFrames[(int)SpriteAction.moveLeft] = gel;
+        gelFrames[(int)SpriteAction.moveRight] = gel;
+        gelFrames[(int)SpriteAction.moveUp] = gel;
+        gelFrames[(int)SpriteAction.moveDown] = gel;
+        stalfosFrames[(int)SpriteAction.moveLeft] = stalfos;
+        stalfosFrames[(int)SpriteAction.moveRight] = stalfos;
+        stalfosFrames[(int)SpriteAction.moveUp] = stalfos;
+        stalfosFrames[(int)SpriteAction.moveDown] = stalfos;
+        keeseFrames[(int)SpriteAction.moveLeft] = keese;
+        keeseFrames[(int)SpriteAction.moveRight] = keese;
+        keeseFrames[(int)SpriteAction.moveUp] = keese;
+        keeseFrames[(int)SpriteAction.moveDown] = keese;
+        trapFrames[(int)SpriteAction.moveLeft] = trap;
+        trapFrames[(int)SpriteAction.moveRight] = trap;
+        trapFrames[(int)SpriteAction.moveUp] = trap;
+        trapFrames[(int)SpriteAction.moveDown] = trap;
+        wallmasterFrames[(int)SpriteAction.moveLeft] = wallmasterOpen;
+        wallmasterFrames[(int)SpriteAction.moveRight] = wallmasterClosed;
+        wallmasterFrames[(int)SpriteAction.moveUp] = wallmasterOpen;
+        wallmasterFrames[(int)SpriteAction.moveDown] = wallmasterClosed;
+        aquamentusFrames[(int)SpriteAction.moveLeft] = aquamentusLeft;
+        aquamentusFrames[(int)SpriteAction.moveRight] = aquamentusRight;
 
         // Add arrow frames to the list
         arrowFrames[(int)SpriteAction.moveLeft] = arrowLeft;
         arrowFrames[(int)SpriteAction.moveRight] = arrowRight;
         arrowFrames[(int)SpriteAction.moveUp] = arrowUp;
         arrowFrames[(int)SpriteAction.moveDown] = arrowDown;
-
-        silverArrowFrames[(int)SpriteAction.moveLeft] = silverArrowLeft;
-        silverArrowFrames[(int)SpriteAction.moveRight] = silverArrowRight;
-        silverArrowFrames[(int)SpriteAction.moveUp] = silverArrowUp;
-        silverArrowFrames[(int)SpriteAction.moveDown] = silverArrowDown;
-
+        // Add sword frames to the list
+        swordFrames[(int)SpriteAction.moveLeft] = swordLeft;
+        swordFrames[(int)SpriteAction.moveRight] = swordRight;
+        swordFrames[(int)SpriteAction.moveUp] = swordUp;
+        swordFrames[(int)SpriteAction.moveDown] = swordDown;
+        // Add fireball frames to the list
+        fireballFrames[(int)SpriteAction.moveLeft] = fireball1;
+        fireballFrames[(int)SpriteAction.moveRight] = fireball2;
+        fireballFrames[(int)SpriteAction.moveUp] = fireball3;
+        //Needs to be reworked to rotate...
         boomerangFrames[(int)SpriteAction.moveLeft] = boomerangLeft;
         boomerangFrames[(int)SpriteAction.moveRight] = boomerangRight;
         boomerangFrames[(int)SpriteAction.moveUp] = boomerangUp;
         boomerangFrames[(int)SpriteAction.moveDown] = boomerangDown;
-
-        magicBoomerangFrames[(int)SpriteAction.moveLeft] = magicBoomerangLeft;
-        magicBoomerangFrames[(int)SpriteAction.moveRight] = magicBoomerangRight;
-        magicBoomerangFrames[(int)SpriteAction.moveUp] = magicBoomerangUp;
-        magicBoomerangFrames[(int)SpriteAction.moveDown] = magicBoomerangDown;
-
+        //Needs to be reworked to explode...
         bombFrames[(int)SpriteAction.moveLeft] = bombLeft;
         bombFrames[(int)SpriteAction.moveRight] = bombRight;
         bombFrames[(int)SpriteAction.moveUp] = bombUp;
         bombFrames[(int)SpriteAction.moveDown] = bombDown;
         bombFrames[(int)SpriteAction.bombCloud] = bombCloud;
-
-        fireFrames[(int)SpriteAction.moveLeft] = fireLeft;
-        fireFrames[(int)SpriteAction.moveRight] = fireRight;
-        fireFrames[(int)SpriteAction.moveUp] = fireUp;
-        fireFrames[(int)SpriteAction.moveDown] = fireDown;
     }
 
-    public ISprite CreateGoriyaSprite()
+    private ISprite CreateEntityWithCollision(Vector2 location, List<Texture2D>[] frames1)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(250, 340), goriyaFrames);
+
+        ISprite entity = new ConcreteSprite(_spriteBatch, location, frames1);
+        Rectangle collisionRect = frames1[0][0].Bounds;
+
+        int x = 2 * frames1[0][0].Width;
+        int y = 2 * frames1[0][0].Height;
+        collisionRect = new Rectangle(0, 0, x, y);
+
+
+        ICollision collisionObject = new Collision(entity, collisionRect);
+        entity.collider = collisionObject;
+        entity.collider.UpdateCollisionPosition();
+
+        return entity;
     }
 
-    public ISprite CreateOktorokSprite()
+    //Blocks
+    public ISprite CreateTextBlock(Vector2 location)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(175, 140), oktorokFrames);
+        return CreateEntityWithCollision(location, textFrames);
+    }
+    public ISprite CreateOpeningBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, openingFrames);
+    }
+    public ISprite CreateAlternateBackgroundBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, alternateBackgroundFrames);
+    }
+    public ISprite CreateInvisibleBarrierBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, invisibleBarrierFrames);
+    }
+    public ISprite CreateDungeonFloorBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, dungeonFloorFrames);
+    }
+    public ISprite CreateBarrierBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, barrierFrames);
+    }
+    public ISprite CreateStairsBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, stairsFrames);
+    }
+    public ISprite CreateWaterBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, waterFrames);
+    }
+    public ISprite CreateRoughFloorBlock(Vector2 location)
+    {
+        return new ConcreteSprite(_spriteBatch, location, roughFloorFrames);
+    }
+    public ISprite CreateStatueRightBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, statueRightFrames);
+    }
+    public ISprite CreateStatueLeftBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, statueLeftFrames);
+    }
+    public ISprite CreateWallTopBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallTopFrames);
+    }
+    public ISprite CreateWallTop1Block(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallTop1Frames);
+    }
+    public ISprite CreateWallTop2Block(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallTop2Frames);
+    }
+    public ISprite CreateWallBottomBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallBottomFrames);
+    }
+    public ISprite CreateWallBottom1Block(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallBottom1Frames);
+    }
+    public ISprite CreateWallBottom2Block(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallBottom2Frames);
+    }
+    public ISprite CreateWallRightBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallRightFrames);
+    }
+    public ISprite CreateWallRight1Block(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallRight1Frames);
+    }
+    public ISprite CreateWallRight2Block(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallRight2Frames);
+    }
+    public ISprite CreateWallLeftBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallLeftFrames);
+    }
+    public ISprite CreateWallLeft1Block(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallLeft1Frames);
+    }
+    public ISprite CreateWallLeft2Block(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallLeft2Frames);
+    }
+    public ISprite CreateDoorUpBlock(Vector2 location, bool isOpen)
+    {
+        if (isOpen) { return new ConcreteSprite(_spriteBatch, location, doorUpOpenFrames); }
+        else { return CreateEntityWithCollision(location, doorUpClosedFrames); }
+    }
+    public ISprite CreateDoorDownBlock(Vector2 location, bool isOpen)
+    {
+        if (isOpen) { return new ConcreteSprite(_spriteBatch, location, doorDownOpenFrames); }
+        else { return CreateEntityWithCollision(location, doorDownClosedFrames); }
+    }
+    public ISprite CreateDoorLeftBlock(Vector2 location, bool isOpen)
+    {
+        if (isOpen) { return new ConcreteSprite(_spriteBatch, location, doorLeftOpenFrames); }
+        else { return CreateEntityWithCollision(location, doorLeftClosedFrames); }
+    }
+    public ISprite CreateDoorRightBlock(Vector2 location, bool isOpen)
+    {
+        if (isOpen) { return new ConcreteSprite(_spriteBatch, location, doorRightOpenFrames); }
+        else { return CreateEntityWithCollision(location, doorRightClosedFrames); }
+    }
+    public ISprite CreateBombableUpBlock(Vector2 location, bool isBombed)
+    {
+        if (isBombed) { return new ConcreteSprite(_spriteBatch, location, bombedUpFrames); }
+        else { return CreateEntityWithCollision(location, unbombedUpFrames); }
+    }
+    public ISprite CreateBombableDownBlock(Vector2 location, bool isBombed)
+    {
+        if (isBombed) { return new ConcreteSprite(_spriteBatch, location, bombedDownFrames); }
+        else { return CreateEntityWithCollision(location, unbombedDownFrames); }
+    }
+    public ISprite CreateBombableRightBlock(Vector2 location, bool isBombed)
+    {
+        if (isBombed) { return new ConcreteSprite(_spriteBatch, location, bombedRightFrames); }
+        else { return CreateEntityWithCollision(location, unbombedRightFrames); }
+    }
+    public ISprite CreateBombableLeftBlock(Vector2 location, bool isBombed)
+    {
+        if (isBombed) { return new ConcreteSprite(_spriteBatch, location, bombedLeftFrames); }
+        else { return CreateEntityWithCollision(location, unbombedLeftFrames); }
+    }
+    public ISprite CreateFireBlock(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, fireFrames);
     }
 
-    public ISprite CreatePeahatSprite()
+
+    //Enemies
+    public ISprite CreateGoriyaSprite(Vector2 location)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(350, 140), peahatFrames);
+        return CreateEntityWithCollision(location, goriyaFrames);
+    }
+    public ISprite CreateKeeseSprite(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, keeseFrames);
+    }
+    public ISprite CreateStalfosSprite(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, stalfosFrames);
+    }
+    public ISprite CreateGelSprite(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, gelFrames);
+    }
+    public ISprite CreateAquamentusSprite(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, aquamentusFrames);
+    }
+    public ISprite CreateBladeTrapSprite(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, trapFrames);
+    }
+    public ISprite CreateWallmasterSprite(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, wallmasterFrames);
+    }
+    public ISprite CreateOldManSprite(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, oldManFrames);
+    }
+    public ISprite CreateTrapSprite(Vector2 location)
+    {
+        return CreateEntityWithCollision(location, trapFrames);
     }
 
-    public ISprite CreateLinkSprite()
+
+    //Drops
+    public ISprite CreateArrowDrop(Vector2 location)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(250, 220), linkFrames);
+        IDrop arrow = new Drop(_spriteBatch, location, new List<Texture2D>[] { new List<Texture2D> { arrowFrames[2][0] } });
+
+        Rectangle collisionRect = arrowFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(arrow, collisionRect);
+        arrow.collider = collisionObject;
+        arrow.collider.UpdateCollisionPosition();
+
+        arrow.SetItemType(new KeyDropType(arrow)); //change type
+        return arrow;
+    }
+    public ISprite CreateNickelRubyDrop(Vector2 location)
+    {
+        IDrop nickelRuby = new Drop(_spriteBatch, location, nickelRupiesFrames);
+
+        Rectangle collisionRect = nickelRupiesFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(nickelRuby, collisionRect);
+        nickelRuby.collider = collisionObject;
+        nickelRuby.collider.UpdateCollisionPosition();
+
+        nickelRuby.SetItemType(new KeyDropType(nickelRuby));
+        return nickelRuby;
+    }
+    public ISprite CreateBoomerangDrop(Vector2 location)
+    {
+        IDrop boomerang = new Drop(_spriteBatch, location, new List<Texture2D>[] { new List<Texture2D> { boomerangFrames[0][0] } });
+
+        Rectangle collisionRect = boomerangFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(boomerang, collisionRect);
+        boomerang.collider = collisionObject;
+        boomerang.collider.UpdateCollisionPosition();
+
+        boomerang.SetItemType(new BoomerangDropType(boomerang));
+        return boomerang;
+    }
+    public ISprite CreateBombDrop(Vector2 location)
+    {
+        IDrop bomb = new Drop(_spriteBatch, location, bombFrames);
+
+        Rectangle collisionRect = bombFrames[0][0].Bounds; //Change this for bigger explosion
+        ICollision collisionObject = new Collision(bomb, collisionRect);
+        bomb.collider = collisionObject;
+        bomb.collider.UpdateCollisionPosition();
+
+        bomb.SetItemType(new BombDropType(bomb));
+        return bomb;
+    }
+    public ISprite CreateRubyDrop(Vector2 location)
+    {
+        IDrop ruby = new Drop(_spriteBatch, location, rupiesFrames);
+
+        Rectangle collisionRect = rupiesFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(ruby, collisionRect);
+        ruby.collider = collisionObject;
+        ruby.collider.UpdateCollisionPosition();
+
+        ruby.SetItemType(new KeyDropType(ruby));
+        return ruby;
+    }
+    public ISprite CreateBowDrop(Vector2 location)
+    {
+        IDrop bow = new Drop(_spriteBatch, location, bowFrames);
+
+        Rectangle collisionRect = bowFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(bow, collisionRect);
+        bow.collider = collisionObject;
+        bow.collider.UpdateCollisionPosition();
+
+        bow.SetItemType(new BowDropType(bow));
+        return bow;
+    }
+    public ISprite CreateClockDrop(Vector2 location)
+    {
+        IDrop clock = new Drop(_spriteBatch, location, clockFrames);
+
+        Rectangle collisionRect = clockFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(clock, collisionRect);
+        clock.collider = collisionObject;
+        clock.collider.UpdateCollisionPosition();
+
+        clock.SetItemType(new KeyDropType(clock));
+        return clock;
+    }
+    public ISprite CreateCompassDrop(Vector2 location)
+    {
+        IDrop compass = new Drop(_spriteBatch, location, compassFrames);
+
+        Rectangle collisionRect = compassFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(compass, collisionRect);
+        compass.collider = collisionObject;
+        compass.collider.UpdateCollisionPosition();
+
+        compass.SetItemType(new KeyDropType(compass));
+        return compass;
+    }
+    public ISprite CreateHeartDrop(Vector2 location)
+    {
+        IDrop heart = new Drop(_spriteBatch, location, heartFrames);
+
+        Rectangle collisionRect = heartFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(heart, collisionRect);
+        heart.collider = collisionObject;
+        heart.collider.UpdateCollisionPosition();
+
+        heart.SetItemType(new KeyDropType(heart));
+        return heart;
+    }
+    public ISprite CreateHeartContainerDrop(Vector2 location)
+    {
+        IDrop heartContainer = new Drop(_spriteBatch, location, heartContainerFrames);
+
+        Rectangle collisionRect = heartContainerFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(heartContainer, collisionRect);
+        heartContainer.collider = collisionObject;
+        heartContainer.collider.UpdateCollisionPosition();
+
+        heartContainer.SetItemType(new KeyDropType(heartContainer));
+        return heartContainer;
+    }
+    public ISprite CreateKeyDrop(Vector2 location)
+    {
+        IDrop key = new Drop(_spriteBatch, location, keyFrames);
+
+        Rectangle collisionRect = keyFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(key, collisionRect);
+        key.collider = collisionObject;
+        key.collider.UpdateCollisionPosition();
+
+        key.SetItemType(new KeyDropType(key));
+        return key;
+    }
+    public ISprite CreateMapDrop(Vector2 location)
+    {
+        IDrop map = new Drop(_spriteBatch, location, mapFrames);
+
+        Rectangle collisionRect = mapFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(map, collisionRect);
+        map.collider = collisionObject;
+        map.collider.UpdateCollisionPosition();
+
+        map.SetItemType(new KeyDropType(map));
+        return map;
+    }
+    public ISprite CreateSwordDrop(Vector2 location)
+    {
+        IDrop sword = new Drop(_spriteBatch, location, swordFrames);
+
+        Rectangle collisionRect = swordFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(sword, collisionRect);
+        sword.collider = collisionObject;
+        sword.collider.UpdateCollisionPosition();
+
+        sword.SetItemType(new KeyDropType(sword));
+        return sword;
+    }
+    public ISprite CreateTriforceShardDrop(Vector2 location)
+    {
+        IDrop triforce = new Drop(_spriteBatch, location, triforceFrames);
+
+        Rectangle collisionRect = triforceFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(triforce, collisionRect);
+        triforce.collider = collisionObject;
+        triforce.collider.UpdateCollisionPosition();
+
+        triforce.SetItemType(new KeyDropType(triforce));
+        return triforce;
     }
 
-    public ISprite CreateBarrierTile()
+    // Projectiles
+    // Add method for CreateFireballProjectile and CreateSwordProjectile
+    public ISprite CreateArrowProjectile(int distance, ISprite owner)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), barrierFrames);
+        IProjectile arrow = new Projectile(_spriteBatch, new Vector2(0, 0), arrowFrames);
+
+        Rectangle collisionRect = arrowFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(arrow, collisionRect);
+        arrow.collider = collisionObject;
+        arrow.collider.UpdateCollisionPosition();
+
+        arrow.SetDistance(distance);
+        arrow.SetOwner(owner);
+        arrow.SetItemType(new ArrowType(arrow));
+        FireProjectile fireArrow = new FireProjectile(arrow);
+        arrow.SetFireCommand(fireArrow);
+        return arrow;
+    }
+    public ISprite CreateBombProjectile(int distance, ISprite owner)
+    {
+        IProjectile bomb = new Projectile(_spriteBatch, new Vector2(0, 0), bombFrames);
+
+        Rectangle collisionRect = bombFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(bomb, collisionRect);
+        bomb.collider = collisionObject;
+        bomb.collider.UpdateCollisionPosition();
+
+        bomb.SetDistance(distance);
+        bomb.SetOwner(owner);
+        bomb.SetItemType(new BombType(bomb));
+        FireProjectile fireBomb = new FireProjectile(bomb);
+        bomb.SetFireCommand(fireBomb);
+        return bomb;
+    }
+    public ISprite CreateBoomerangProjectile(int distance, ISprite owner)
+    {
+        IProjectile boomerang = new Projectile(_spriteBatch, new Vector2(0, 0), boomerangFrames);
+
+        Rectangle collisionRect = boomerangFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(boomerang, collisionRect);
+        boomerang.collider = collisionObject;
+        boomerang.collider.UpdateCollisionPosition();
+
+        boomerang.SetDistance(distance);
+        boomerang.SetOwner(owner);
+        boomerang.SetItemType(new BoomerangType(boomerang));
+        FireProjectile fireBoomerang = new FireProjectile(boomerang);
+        boomerang.SetFireCommand(fireBoomerang);
+        return boomerang;
+    }
+    public ISprite CreateFireballProjectile(int distance, ISprite owner)
+    {
+        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames);
+
+        Rectangle collisionRect = fireballFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(fireball, collisionRect);
+        fireball.collider = collisionObject;
+        fireball.collider.UpdateCollisionPosition();
+
+        fireball.SetDistance(distance);
+        fireball.SetOwner(owner);
+        fireball.SetItemType(new FireballType(fireball));
+        FireProjectile fireFireball = new FireProjectile(fireball);
+        fireball.SetFireCommand(fireFireball);
+        return fireball;
+    }
+    public ISprite CreateSwordProjectile(int distance, ISprite owner)
+    {
+        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordFrames);
+
+        Rectangle collisionRect = swordFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(sword, collisionRect);
+        sword.collider = collisionObject;
+        sword.collider.UpdateCollisionPosition();
+
+        sword.SetDistance(distance);
+        sword.SetOwner(owner);
+        sword.SetItemType(new SwordType(sword));
+        FireProjectile fireFire = new FireProjectile(sword);
+        sword.SetFireCommand(fireFire);
+        return sword;
     }
 
-    public ISprite CreateBushTile()
+    //Playables
+    public ISprite CreateLinkSprite(Vector2 location)
     {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), bushFrames);
-    }
-
-    public ISprite CreateDefaultFloorTile()
-    {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), defaultFloorFrames);
-    }
-
-    public ISprite CreateDungeonStairsTile()
-    {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), dungeonStairsFrames);
-    }
-
-    public ISprite CreateGravestoneTile()
-    {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), gravestoneFrames);
-    }
-
-    public ISprite CreateWaterTile()
-    {
-        return new ConcreteSprite(_spriteBatch, new Vector2(100, 100), waterFrames);
-    }
-
-    public ISprite CreateCompassItem()
-    {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), compassFrames); 
-    }
-
-    public ISprite CreateHeartItem()
-    {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), heartFrames);
-    }
-
-    public ISprite CreateKeyItem()
-    {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), keyFrames);
-    }
-
-    public ISprite CreateMapItem()
-    {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), mapFrames);
-    }
-
-    public ISprite CreateRupiesItem()
-    {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), rupiesFrames);
-    }
-
-    public ISprite CreateSwordItem()
-    {
-        return new ConcreteSprite(_spriteBatch, new Vector2(300, 200), swordFrames);
-    }
-
-    public IItem CreateArrowSprite()
-    {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), arrowFrames);
-    }
-
-    public IItem CreateSilverArrowSprite()
-    {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), silverArrowFrames);
-    }
-
-    public IItem CreateBoomerangSprite()
-    {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), boomerangFrames);
-    }
-
-    public IItem CreateMagicBoomerangSprite()
-    {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), magicBoomerangFrames);
-    }
-
-    public IItem CreateBombSprite()
-    {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), bombFrames);
-    }
-
-    public IItem CreateFireSprite()
-    {
-        return new ConcreteItem(_spriteBatch, new Vector2(50, 50), fireFrames);
+        return CreateEntityWithCollision(location, linkFrames);
     }
 }
-

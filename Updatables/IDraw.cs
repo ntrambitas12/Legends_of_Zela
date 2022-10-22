@@ -7,6 +7,6 @@ using Microsoft.Xna.Framework;
 
     public interface IDraw
     {
-    public void Draw(ISprite sprite, Color color, bool animated);
+    public void Draw(ISprite sprite, Color color, bool animated, GameTime gameTime);
     }
 

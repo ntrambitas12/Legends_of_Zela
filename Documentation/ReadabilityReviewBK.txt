@@ -11,3 +11,18 @@ all fields are practical in terms of their naming. The spacing throughout the do
 and leaves a little bit to be desired. Comments are provided where clarity is needed, but the difference between
 the two draw methods should be more explicitly stated. Coupling is tight. Great job!
 
+
+
+Readability Review
+Author: Ben Keip
+Date: 9-22-22
+Sprint #3
+File being reviewed: LevelLoader.cs
+Author of file being reviewed: Nick Trambitas and Ben Keip
+Code review took 15 minutes
+
+In LevelLoader, the first couple of methods are quite easy to read, exceeding no more than ~10 lines (with the exception of the dictionary
+loader, which is necessary). In the ParseRoom method, however, the code seems to drag on a bit, being around 4 levels deep when you take all the
+if statements and loops into account. A lot of this code could be pulled out and refactored to another method, and then be called on each
+var parseType in parseTypes. Speaking of parseTypes, this goes a long way in making the code readable, as it is easier to understand
+how our code reads in object groups from XML files.
