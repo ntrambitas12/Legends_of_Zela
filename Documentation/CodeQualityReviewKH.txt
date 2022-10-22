@@ -17,3 +17,25 @@ class that just takes in a sprite and draws it to the screen, so it is a good
 job keeping the task specific. This leads into cohesion. Since the classes are
 only meant to draw, there is very high cohesion. All variables and methods show
 a clear role in how they help to draw the sprite.
+
+
+Code Quality Review
+Author: Kyle Hoefker
+Date: 10-12-22
+Sprint #2
+File being reviewed: Collision.cs
+Author of file being reviewed: Tony Mai
+
+The code quality in these methods is good. The Collisions deal with ISprites,
+which is the correct move given our implementation. ISprite is the "base" class
+of our game objects, so this is the choice that makes the most sense. This
+class also has very high cohesion. The only variable in this class are variables
+that affect collision checking. This class has a very specific task, and it does
+a good job of staying on this task, which also helps it have higher cohesion. I
+detected little to no coupling in this code which is good.
+
+Most methods in this class are short, with the exception of UpdateCollision.
+UpdateCollision is nearly three times the size of the second biggest method in
+Collision.cs. It may be beneficial to create helper methods to use inside of the
+UpdateCollision method. This would be relatively easy because helper methods do
+not depend on anything outside of the class.

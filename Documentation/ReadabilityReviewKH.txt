@@ -10,3 +10,19 @@ meaningful, so while there may not be many comments, they aren't necessary
 because the code is easily understood. The spacing is consistent throughout the
 file and very well organized. It's easy to tell what is going on and how to
 easily change the file.
+
+
+Readability Review
+Author: Kyle Hoefker
+Date: 10-18-22
+Sprint #3
+File being reviewed: NextRoom.cs / PreviousRoom.cs
+Author of file being reviewed: Zach Kallmeyer
+Code Review took 10 min
+
+These files don't have any comments, but that is okay. The readibility is very
+good still. The names of the variables are descripitive enough that it is easy
+to tell what is going on, but the names aren't so long that it takes away from
+the readibilty. Additionally, there is a clear task being accomplished which
+helps make this code easy to read.
+
