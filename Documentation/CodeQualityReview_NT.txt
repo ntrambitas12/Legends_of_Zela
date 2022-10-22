@@ -14,3 +14,20 @@ has very high cohesion in its methods and almost no coupling. Good work! :)
 I can't think of any changes that I would do off the top of my head. I wouldn't be able to code it better than 
 how it's written. Looks like it's maintainable. 
 If anything comes up in future sprints, we can address it but good work! 
+
+Code Quality Review
+Author: Nick Trambitas
+Date: 10-18-22
+Sprint #2
+File being reviewed: SpriteFactory.cs
+Author of file being reviewed:Ben Keip
+
+SpriteFactory has come a long way since last sprint. I really like how
+the sprite frames and textures are organized at the top of the file by
+sections of types of sprites (blocks, enemies, link, projecitles, and items).
+This makes it super easy to maintain and keep track of.
+
+All the methods in SpriteFactory are very short and easy to understand. 
+SpriteFactory is maintainable since it's easy to add a new sprite and instantiate
+one if we ever decide to add more enemies to the game. 
+Overall, great work on spriteFactory!

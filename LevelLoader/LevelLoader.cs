@@ -8,7 +8,7 @@ using System.IO;
 using System.Reflection.Emit;
 using System.Xml;
 
-public class LevelLoader
+public class LevelLoader: ILevelLoader
 {
     private XmlReader reader;
     private List<(string, string)> parseTypes;

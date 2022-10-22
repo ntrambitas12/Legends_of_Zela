@@ -210,7 +210,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Rooms\Room.xml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Rooms\Room33.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
