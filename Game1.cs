@@ -17,6 +17,7 @@ namespace CSE3902Project
         private SpriteBatch _spriteBatch;
         private LevelLoader level;
         private IRoomObjectManager roomObjectManager;
+        private Camera camera;
 
         public Game1()
         {
@@ -31,7 +32,7 @@ namespace CSE3902Project
             level = new LevelLoader(this);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             roomObjectManager = RoomObjectManager.Instance;
-
+            camera = Camera.Instance;
             //Load up the content for the sprite factory
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
 
@@ -49,6 +50,7 @@ namespace CSE3902Project
             roomObjectManager.Reset();
             this.Initialize();
             this.LoadContent();
+            camera.reset();
         }
 
 
@@ -64,7 +66,15 @@ namespace CSE3902Project
 
         protected override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Begin();
+           
+            _spriteBatch.Begin(SpriteSortMode.BackToFront,
+                        BlendState.AlphaBlend,
+                        null,
+                        null,
+                        null,
+                        null,
+                        camera.get_transformation(GraphicsDevice));
+            
 
             roomObjectManager.Draw(gameTime);
 
