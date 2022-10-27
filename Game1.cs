@@ -73,7 +73,7 @@ namespace CSE3902Project
                         null,
                         null,
                         null,
-                        camera.get_transformation(GraphicsDevice));
+                        camera.getTransformation(GraphicsDevice));
             
 
             roomObjectManager.Draw(gameTime);
