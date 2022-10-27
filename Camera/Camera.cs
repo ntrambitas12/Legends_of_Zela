@@ -34,7 +34,6 @@ using System.Threading.Tasks;
         set { rotation = value; }
     }
 
-    // Auxiliary function to move the camera
     public void Move(Vector2 amount)
     {
         pos += amount;
@@ -47,7 +46,7 @@ using System.Threading.Tasks;
         rotation = 0.0f;
     }
 
-    public Matrix get_transformation(GraphicsDevice graphicsDevice)
+    public Matrix getTransformation(GraphicsDevice graphicsDevice)
     {
         transform =       // Thanks to o KB o for this solution
           Matrix.CreateTranslation(new Vector3(-pos.X, -pos.Y, 0)) *
