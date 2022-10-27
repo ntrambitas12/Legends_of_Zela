@@ -10,9 +10,19 @@ public sealed class RoomObjectManager : IRoomObjectManager
 {
     private ArrayList roomList;
     private IRoomObject _currentRoom;
+    private Camera camera;
+    private Dictionary<String, (int, int, int, int, int)> roomDir;
     private RoomObjectManager()
     {
         roomList = new ArrayList();
+        camera = Camera.Instance;
+        roomDir = new Dictionary<String, (int, int, int, int, int)>();
+        roomDir.Add("Up", (400, 480, -6, 0, 150));
+        roomDir.Add("Down", (400, 0, 6, 0, -150));
+        roomDir.Add("Left", (800, 240, -1, -150, 0));
+        roomDir.Add("Right", (0, 240, 1, 150, 0));
+
+
     }
 
     private static RoomObjectManager instance = new RoomObjectManager();
@@ -70,53 +80,21 @@ public sealed class RoomObjectManager : IRoomObjectManager
         }
     }
 
-    public void nextRoomRight()
+
+    public void nextRoom(String direction)
     {
+        roomDir.TryGetValue(direction, out var roomData);
         var Link = _currentRoom.Link;
         _currentRoom.Link = null;
-        int roomNum = this.currentRoomID();
-        this.setRoom(roomNum + 1);
-        _currentRoom = Instance._currentRoom;
+        setRoom(currentRoomID() + roomData.Item3);
         _currentRoom.Link = Link;
-        Vector2 newPos = new Vector2(0, 240);  // might have to adjust these coordinates slightly
+        Vector2 newPos = new Vector2(roomData.Item1, roomData.Item2); 
+        camera.Move(new Vector2((float)roomData.Item4, (float)roomData.Item5));
         _currentRoom.Link.screenCord = newPos;
+
     }
 
-    public void nextRoomLeft()
-    {
-        var Link = _currentRoom.Link;
-        _currentRoom.Link = null;
-        int roomNum = this.currentRoomID();
-        this.setRoom(roomNum - 1);
-        _currentRoom = Instance._currentRoom;
-        _currentRoom.Link = Link;
-        Vector2 newPos = new Vector2(800, 240); // might have to adjust these coordinates slightly
-        _currentRoom.Link.screenCord = newPos;
-    }
 
-    public void nextRoomUp()
-    {
-        var Link = _currentRoom.Link;
-        _currentRoom.Link = null;
-        int roomNum = this.currentRoomID();
-        this.setRoom(roomNum - 6);
-        _currentRoom = Instance._currentRoom;
-        _currentRoom.Link = Link;
-        Vector2 newPos = new Vector2(400, 480); // might have to adjust these coordinates slightly
-        _currentRoom.Link.screenCord = newPos;
-    }
-
-    public void nextRoomDown()
-    {
-        var Link = _currentRoom.Link;
-        _currentRoom.Link = null;
-        int roomNum = this.currentRoomID();
-        this.setRoom(roomNum + 6);
-        _currentRoom = Instance._currentRoom;
-        _currentRoom.Link = Link;
-        Vector2 newPos = new Vector2(400, 0); // might have to adjust these coordinates slightly
-        _currentRoom.Link.screenCord = newPos;
-    }
 
     public void Update(GameTime gameTime)
     {

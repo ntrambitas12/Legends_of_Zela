@@ -2,7 +2,10 @@
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
 	<!-- ROOM COMPLETE -->
 	<!-- Change bombed doors -->
-	
+	<BaseCord>
+		<xCord>0</xCord>
+		<yCord>0</yCord>
+	</BaseCord>
 	<Blocks>
 		<Block>
 			<xPos>144</xPos>

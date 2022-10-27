@@ -22,10 +22,11 @@ public class RoomObject : IRoomObject
     public List<ISprite> floorList { get; set; }
     public List<ISprite> ProjectileStopperList { get; set; }
     public Dictionary<ISprite, ISprite> EnemyToProjectile { get; set; }
+    public Vector2 BaseCord { get; set; }
 
     private List<(ISprite, int)> toBeDeleted;
     private Dictionary<int, List<ISprite>> listDict;
-    
+
     //enemy AI related data
     private List<SpriteAction> enemyActions;
     private SpriteAction enemyAction;
@@ -194,6 +195,9 @@ public class RoomObject : IRoomObject
             tile.Update(gameTime);
         }
 
+        //update switching roooms
+        CheckEnteredDoor();
+
         Delete();
     }
 
@@ -328,6 +332,11 @@ public class RoomObject : IRoomObject
         castSprite.SetSpriteState(newPos, castSprite.damaged);
     }
 
+    private void CheckEnteredDoor()
+    {
 
+        
+
+    }
 }
 

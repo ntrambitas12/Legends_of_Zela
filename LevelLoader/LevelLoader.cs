@@ -154,6 +154,8 @@ public class LevelLoader: ILevelLoader
         {
             int xPos;
             int yPos;
+            int baseX;
+            int baseY;
             String name;
             int roomObjectType;
             bool read = false;
@@ -170,6 +172,14 @@ public class LevelLoader: ILevelLoader
             reader = XmlReader.Create(file);
             room = new RoomObject();
             IntializeRooms();
+
+            //read the base coordinates of each room
+            reader.ReadToFollowing("BaseCord");
+            reader.ReadToDescendant("xCord");
+            baseX = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("yCord");
+            baseY = reader.ReadElementContentAsInt();
+
 
             foreach (var parseType in parseTypes)
             {
@@ -212,11 +222,12 @@ public class LevelLoader: ILevelLoader
                         /* This is where you call the corresponding method from spritefactory
                          * and add that ISprite to the roomobject into correct list using add
                          */
+                        Vector2 _base = new Vector2(baseX, baseY);
                         if (isDoor)
                         {
                             if(constructer.TryGetValue(name, out Delegate doorConstructor))
                             {
-                                sprite = (ISprite)doorConstructor.DynamicInvoke(new Vector2(xPos, yPos), isDoorOpen);
+                                sprite = (ISprite)doorConstructor.DynamicInvoke(new Vector2(xPos, yPos) + _base, isDoorOpen);
                             }
 
                             isDoor = false;
@@ -224,7 +235,7 @@ public class LevelLoader: ILevelLoader
                         else { 
                         if (constructer.TryGetValue(name, out Delegate value))
                         {
-                             sprite = (ISprite)value.DynamicInvoke(new Vector2(xPos, yPos));
+                             sprite = (ISprite)value.DynamicInvoke(new Vector2(xPos, yPos)+_base);
 
                             //case for when we have to pair projectile with parent sprite
                             //check if projectile is not null
@@ -247,6 +258,7 @@ public class LevelLoader: ILevelLoader
                              }
                            
                         }
+                        room.BaseCord = _base;
                         room.AddGameObject(roomObjectType, sprite, name);
                         if (enemyKey != null) room.AddEnemyProjectilePair(enemyKey, enemyVal);
                     }
@@ -254,12 +266,11 @@ public class LevelLoader: ILevelLoader
                 }
             }
 
-            //Build the Room
-            roomObjectManager.addRoom(room);
-            runOnce = true;
+            BuildRoom();
         }
        
     }
+
     private void IntializeRooms()
     {
         if (!runOnce)
@@ -269,5 +280,12 @@ public class LevelLoader: ILevelLoader
 
         room.AddController(initalizeControllers.InitalizeKeyboard(Link));
         room.AddController(initalizeControllers.InitalizeMouse());
+    }
+
+    private void BuildRoom()
+    {
+        //Build the Room
+        roomObjectManager.addRoom(room);
+        runOnce = true;
     }
 }
