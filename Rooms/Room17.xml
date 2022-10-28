@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
-	<!-- ROOM COMPLETE -->
 	<BaseCord>
-		<xCord>0</xCord>
-		<yCord>0</yCord>
+		<xCord>2400</xCord>
+		<yCord>1440</yCord>
+		<id>17</id>
 	</BaseCord>
 	<Blocks>
 		<Block>
@@ -54,18 +54,6 @@
 			<Name>WallLeft2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
-		<Block>
-			<xPos>368</xPos>
-			<yPos>274</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>5</RoomObjectType>
-		</Block>
-		<Block isOpen='true'>
-			<xPos>368</xPos>
-			<yPos>402</yPos>
-			<Name>DoorDown</Name>
-			<RoomObjectType>8</RoomObjectType>
-		</Block>
 		<Block isOpen='true'>
 			<xPos>592</xPos>
 			<yPos>258</yPos>
@@ -78,27 +66,78 @@
 			<Name>DoorLeft</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
+		<Block isOpen='true'>
+			<xPos>368</xPos>
+			<yPos>402</yPos>
+			<Name>BombDoorDown</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>402</yPos>
+			<Name>Opening</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>272</xPos>
+			<yPos>242</yPos>
+			<Name>Barrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>272</xPos>
+			<yPos>306</yPos>
+			<Name>Barrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>496</xPos>
+			<yPos>242</yPos>
+			<Name>Barrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>496</xPos>
+			<yPos>306</yPos>
+			<Name>Barrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
 	</Blocks>
 
 
 	<Enemies>
 		<Enemy>
-			<xPos>344</xPos>
-			<yPos>216</yPos>
-			<Name>Gel</Name>
+			<xPos>274</xPos>
+			<yPos>178</yPos>
+			<Name>Goriya</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Projectile>
+				<Name>Boomerang</Name>
+				<Distance>1000</Distance>
+				<RoomObjectType>3</RoomObjectType>
+			</Projectile>
 		</Enemy>
 		<Enemy>
-			<xPos>280</xPos>
-			<yPos>250</yPos>
-			<Name>Gel</Name>
+			<xPos>306</xPos>
+			<yPos>338</yPos>
+			<Name>Goriya</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Projectile>
+				<Name>Boomerang</Name>
+				<Distance>1000</Distance>
+				<RoomObjectType>3</RoomObjectType>
+			</Projectile>
 		</Enemy>
 		<Enemy>
-			<xPos>504</xPos>
-			<yPos>216</yPos>
-			<Name>Gel</Name>
+			<xPos>562</xPos>
+			<yPos>306</yPos>
+			<Name>Goriya</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Projectile>
+				<Name>Boomerang</Name>
+				<Distance>1000</Distance>
+				<RoomObjectType>3</RoomObjectType>
+			</Projectile>
 		</Enemy>
 	</Enemies>
 

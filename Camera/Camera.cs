@@ -12,12 +12,14 @@ using System.Threading.Tasks;
     public Matrix transform; // Matrix Transform
     public Vector2 pos; // Camera Position
     private float rotation; // Camera Rotation
+    private Vector2 defaultPos;
 
     private Camera()
     {
         zoom = 1.0f;
         rotation = 0.0f;
         pos = new Vector2(400.0f, 250.0f);
+        defaultPos = new Vector2(400.0f, 250.0f);
     }
     private static Camera instance = new Camera();
     public static Camera Instance { get { return instance; } }
@@ -36,6 +38,7 @@ using System.Threading.Tasks;
 
     public void Move(Vector2 amount)
     {
+        pos = defaultPos;
         pos += amount;
     }
 

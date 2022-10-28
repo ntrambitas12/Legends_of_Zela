@@ -32,6 +32,14 @@ public class RoomObject : IRoomObject
     private SpriteAction enemyAction;
     private Random rand;
 
+    //constants
+    private int leftDoorBoundary = 146;
+    private int rightDoorBoundary = 624;
+    private int upDoorBoundary = 114;
+    private int downDoorBoundary = 434;
+
+    //roomObjectManager
+    private RoomObjectManager roomObjectManager;
     public RoomObject()
     {
         //intialize sprite and controller lists
@@ -74,6 +82,8 @@ public class RoomObject : IRoomObject
         enemyActions.Add(SpriteAction.moveLeft);
         enemyActions.Add(SpriteAction.moveRight);
         enemyActions.Add(SpriteAction.moveUp);
+
+        roomObjectManager = RoomObjectManager.Instance;
 
     }
     public void AddController(IController controller)
@@ -228,15 +238,14 @@ public class RoomObject : IRoomObject
             tile.Draw(gameTime);
         }
 
-        foreach (IProjectile projectile in ((ConcreteSprite)Link).projectiles)
+        if (Link != null)
         {
-            if (projectile != null) projectile.Draw(gameTime);
+            foreach (IProjectile projectile in ((ConcreteSprite)Link).projectiles)
+            {
+                if (projectile != null) projectile.Draw(gameTime);
+            }
+            Link.Draw(gameTime);
         }
-
-        //foreach (var linkProjectile in LinkProjectileList)
-        //{
-        //    linkProjectile.Draw(gameTime);
-        //}
 
         foreach (var enemyProjectile in EnemyProjectileList)
         {
@@ -253,7 +262,7 @@ public class RoomObject : IRoomObject
             enemy.Draw(gameTime);
         }
 
-        Link.Draw(gameTime);
+      
 
         //  top of doorways (so that it is on the top-most layer and Link disappears below it)
         foreach (var item in TopLayerNonCollidibleList)
@@ -334,8 +343,32 @@ public class RoomObject : IRoomObject
 
     private void CheckEnteredDoor()
     {
+       
+        if(Link != null) { 
+            
+        //check left door
+        if (Link.screenCord.X < (leftDoorBoundary + BaseCord.X))
+        {
+                roomObjectManager.nextRoom("Left");
+        } 
+        //check right door
+        else if(Link.screenCord.X > (rightDoorBoundary + BaseCord.X))
+        {
+                roomObjectManager.nextRoom("Right");
+            }
+        //check up door
+        else  if (Link.screenCord.Y < (upDoorBoundary + BaseCord.Y))
+        {
+                roomObjectManager.nextRoom("Up");
+        }
 
-        
+        //check down door
+        else if (Link.screenCord.Y > (downDoorBoundary + BaseCord.Y))
+        {
+                roomObjectManager.nextRoom("Down");
+        }
+
+       }
 
     }
 }

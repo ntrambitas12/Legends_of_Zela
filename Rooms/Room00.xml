@@ -2,8 +2,9 @@
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
 	<!-- ROOM COMPLETE -->
 	<BaseCord>
-		<xCord>0</xCord>
+		<xCord>800</xCord>
 		<yCord>0</yCord>
+		<id>0</id>
 	</BaseCord>
 	<Blocks>
 		<Block>

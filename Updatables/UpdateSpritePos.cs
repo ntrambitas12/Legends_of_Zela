@@ -30,50 +30,22 @@ public sealed class UpdateSpritePos : IPosition
         {
             /* Move sprite to the left */
             case 0:
-                if (screenCord.X >= 0 && screenCord.X <= 800)
-                {
-                    screenCord.X-=2;
-                }
-                else
-                {
-                    screenCord.X = 800;
-                }
+                screenCord.X-=2;
                 sprite.screenCord = screenCord;
                 break;
            /* Move sprite to the right */
             case 1:
-                if (screenCord.X >= 0 && screenCord.X <= 800)
-                {
-                    screenCord.X+=2;
-                }
-                else
-                {
-                    screenCord.X = 0;
-                }
+                screenCord.X+=2;
                 sprite.screenCord = screenCord;
                 break;
             /* Move sprite up */
             case 2:
-                if (screenCord.Y >= 0 && screenCord.Y <= 480)
-                {
-                    screenCord.Y-=2;
-                }
-                else
-                {
-                    screenCord.Y = 480;
-                }
+                screenCord.Y-=2;
                 sprite.screenCord = screenCord;
                 break;
             /* Move sprite down */
             case 3:
-                if (screenCord.Y >= 0 && screenCord.Y <= 480)
-                {
-                    screenCord.Y+=2;
-                }
-                else
-                {
-                    screenCord.Y = 0;
-                }
+                screenCord.Y+=2;
                 sprite.screenCord = screenCord;
                 break;
             default:

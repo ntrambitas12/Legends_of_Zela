@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 public sealed class RoomObjectManager : IRoomObjectManager
 {
-    private ArrayList roomList;
+    private  IRoomObject[] roomList;
     private IRoomObject _currentRoom;
     private Camera camera;
-    private Dictionary<String, (int, int, int, int, int)> roomDir;
+    private Dictionary<String, (int, int, int)> roomDir;
     private RoomObjectManager()
     {
-        roomList = new ArrayList();
+        roomList = new IRoomObject[100];
         camera = Camera.Instance;
-        roomDir = new Dictionary<String, (int, int, int, int, int)>();
-        roomDir.Add("Up", (400, 480, -6, 0, 150));
-        roomDir.Add("Down", (400, 0, 6, 0, -150));
-        roomDir.Add("Left", (800, 240, -1, -150, 0));
-        roomDir.Add("Right", (0, 240, 1, 150, 0));
+        roomDir = new Dictionary<String, (int, int, int)>();
+        roomDir.Add("Up", (400, 430, 5));
+        roomDir.Add("Down", (400, 112, -5));
+        roomDir.Add("Left", (620, 240, -1));
+        roomDir.Add("Right", (150, 240, 1));
 
 
     }
@@ -28,9 +28,9 @@ public sealed class RoomObjectManager : IRoomObjectManager
     private static RoomObjectManager instance = new RoomObjectManager();
     public static RoomObjectManager Instance { get { return instance; } }
 
-    public void addRoom(IRoomObject room)
+    public void addRoom(IRoomObject room, int id)
     {
-        roomList.Add(room);
+        roomList[id] = room;
         if (_currentRoom == null)
         {
             _currentRoom = room;
@@ -44,19 +44,21 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     public int currentRoomID()
     {
-        return roomList.IndexOf(_currentRoom);
+        int ret = Array.IndexOf(roomList, _currentRoom);
+        return ret;
     }
 
     public int numberOfRooms()
     {
-        return roomList.Capacity - 1;
+        return roomList.Length - 1;
     }
 
     public void Draw(GameTime gameTime)
     {
-        /*In the future, this will draw all the rooms.
-         * Camera will be focued only on the current room*/
-        _currentRoom.Draw(gameTime);
+       //foreach (IRoomObject room in roomList)
+       // {
+            _currentRoom.Draw(gameTime);
+      //  }
     }
 
     public void Reset()
@@ -71,26 +73,41 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     public void setRoom(int roomId)
     {
-        if (roomId < roomList.Count)
+        if (roomId < roomList.Length)
         {
             var Link = _currentRoom.Link;
+            Vector2 LinkCord = Link.screenCord - _currentRoom.BaseCord;
             _currentRoom.Link = null;
-            _currentRoom = (IRoomObject)roomList[roomId];
+            _currentRoom = roomList[roomId];
+            while (_currentRoom == null)
+            {
+                roomId++;
+                if(roomId < roomList.Length)
+                _currentRoom = roomList[roomId];
+            }
+            Vector2 baseCord = _currentRoom.BaseCord;
             _currentRoom.Link = Link;
+            //move the camera to the right room
+            camera.Move(baseCord);
+            //update link's cordinates
+            _currentRoom.Link.screenCord = baseCord + LinkCord;
         }
     }
 
 
     public void nextRoom(String direction)
     {
-        roomDir.TryGetValue(direction, out var roomData);
-        var Link = _currentRoom.Link;
-        _currentRoom.Link = null;
-        setRoom(currentRoomID() + roomData.Item3);
-        _currentRoom.Link = Link;
-        Vector2 newPos = new Vector2(roomData.Item1, roomData.Item2); 
-        camera.Move(new Vector2((float)roomData.Item4, (float)roomData.Item5));
-        _currentRoom.Link.screenCord = newPos;
+        
+            roomDir.TryGetValue(direction, out var roomData);
+            var Link = _currentRoom.Link;
+            Vector2 LinkCord = new Vector2(roomData.Item1, roomData.Item2);
+            _currentRoom.Link = null;
+            _currentRoom = roomList[currentRoomID() + roomData.Item3];
+            _currentRoom.Link = Link;
+            Vector2 baseCord = _currentRoom.BaseCord;
+            camera.Move(baseCord);
+            _currentRoom.Link.screenCord = LinkCord + baseCord;
+        
 
     }
 

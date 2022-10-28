@@ -2,8 +2,9 @@
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
 	<!-- ROOM COMPLETE -->
 	<BaseCord>
-		<xCord>0</xCord>
-		<yCord>0</yCord>
+		<xCord>1600</xCord>
+		<yCord>1440</yCord>
+		<id>16</id>
 	</BaseCord>
 	<Blocks>
 		<Block>
@@ -27,13 +28,25 @@
 		<Block>
 			<xPos>208</xPos>
 			<yPos>402</yPos>
-			<Name>WallBottom</Name>
+			<Name>WallBottom1</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>402</yPos>
+			<Name>WallBottom2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>592</xPos>
 			<yPos>114</yPos>
-			<Name>WallRight</Name>
+			<Name>WallRight1</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>322</yPos>
+			<Name>WallRight2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
@@ -49,17 +62,35 @@
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block isOpen='true'>
-			<xPos>144</xPos>
-			<yPos>258</yPos>
-			<Name>DoorLeft</Name>
-			<RoomObjectType>8</RoomObjectType>
-		</Block>
-		<Block isOpen='true'>
 			<xPos>368</xPos>
 			<yPos>114</yPos>
 			<Name>DoorUp</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
+		<Block isOpen='true'>
+			<xPos>368</xPos>
+			<yPos>402</yPos>
+			<Name>BombDoorDown</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>402</yPos>
+			<Name>Opening</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block isOpen='true'>
+			<xPos>592</xPos>
+			<yPos>258</yPos>
+			<Name>DoorRight</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block isOpen='true'>
+			<xPos>144</xPos>
+			<yPos>258</yPos>
+			<Name>DoorLeft</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
 		<Block>
 			<xPos>240</xPos>
 			<yPos>210</yPos>
@@ -67,25 +98,13 @@
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>304</xPos>
+			<xPos>272</xPos>
 			<yPos>210</yPos>
 			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>368</xPos>
-			<yPos>210</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>400</xPos>
-			<yPos>210</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>464</xPos>
+			<xPos>496</xPos>
 			<yPos>210</yPos>
 			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
@@ -97,18 +116,6 @@
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>240</xPos>
-			<yPos>274</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>304</xPos>
-			<yPos>274</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
 			<xPos>368</xPos>
 			<yPos>274</yPos>
 			<Name>Barrier</Name>
@@ -121,43 +128,19 @@
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>464</xPos>
-			<yPos>274</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>528</xPos>
-			<yPos>274</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
 			<xPos>240</xPos>
 			<yPos>338</yPos>
 			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>304</xPos>
+			<xPos>272</xPos>
 			<yPos>338</yPos>
 			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>368</xPos>
-			<yPos>338</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>400</xPos>
-			<yPos>338</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>464</xPos>
+			<xPos>496</xPos>
 			<yPos>338</yPos>
 			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
@@ -173,51 +156,33 @@
 
 	<Enemies>
 		<Enemy>
-			<xPos>208</xPos>
-			<yPos>306</yPos>
-			<Name>Wallmaster</Name>
+			<xPos>536</xPos>
+			<yPos>186</yPos>
+			<Name>Gel</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
-			<xPos>208</xPos>
-			<yPos>338</yPos>
-			<Name>Wallmaster</Name>
+			<xPos>472</xPos>
+			<yPos>218</yPos>
+			<Name>Gel</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
-			<xPos>560</xPos>
-			<yPos>370</yPos>
-			<Name>Wallmaster</Name>
+			<xPos>504</xPos>
+			<yPos>282</yPos>
+			<Name>Gel</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
-			<xPos>560</xPos>
-			<yPos>338</yPos>
-			<Name>Wallmaster</Name>
+			<xPos>376</xPos>
+			<yPos>218</yPos>
+			<Name>Gel</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
-			<xPos>272</xPos>
-			<yPos>178</yPos>
-			<Name>Wallmaster</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>304</xPos>
-			<yPos>178</yPos>
-			<Name>Wallmaster</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>560</xPos>
-			<yPos>178</yPos>
-			<Name>Wallmaster</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>528</xPos>
-			<yPos>178</yPos>
-			<Name>Wallmaster</Name>
+			<xPos>344</xPos>
+			<yPos>282</yPos>
+			<Name>Gel</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 	</Enemies>
@@ -225,9 +190,9 @@
 
 	<Items>
 		<Item>
-			<xPos>472</xPos>
-			<yPos>370</yPos>
-			<Name>Key</Name>
+			<xPos>536</xPos>
+			<yPos>274</yPos>
+			<Name>Map</Name>
 			<RoomObjectType>6</RoomObjectType>
 		</Item>
 	</Items>
