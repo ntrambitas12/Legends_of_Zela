@@ -102,11 +102,17 @@ public sealed class RoomObjectManager : IRoomObjectManager
             var Link = _currentRoom.Link;
             Vector2 LinkCord = new Vector2(roomData.Item1, roomData.Item2);
             _currentRoom.Link = null;
-            _currentRoom = roomList[currentRoomID() + roomData.Item3];
+             int nextRoom = currentRoomID() + roomData.Item3;
+        if (nextRoom > 0 && nextRoom < roomList.Length)
+        {
+            _currentRoom = roomList[nextRoom];
+        } if (_currentRoom != null)
+        {
             _currentRoom.Link = Link;
             Vector2 baseCord = _currentRoom.BaseCord;
             camera.Move(baseCord);
             _currentRoom.Link.screenCord = LinkCord + baseCord;
+        }
         
 
     }
