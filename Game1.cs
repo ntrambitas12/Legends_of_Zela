@@ -47,10 +47,11 @@ namespace CSE3902Project
 
         public void resetGame()
         {
+            camera.reset();
             roomObjectManager.Reset();
             this.Initialize();
             this.LoadContent();
-            camera.reset();
+           
         }
 
 
@@ -74,9 +75,9 @@ namespace CSE3902Project
                         null,
                         null,
                         camera.getTransformation(GraphicsDevice));
-            
 
-            roomObjectManager.Draw(gameTime);
+
+             roomObjectManager.Draw(gameTime);
 
             _spriteBatch.End();
 

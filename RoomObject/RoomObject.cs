@@ -124,12 +124,10 @@ public class RoomObject : IRoomObject
         //update Link
         if (Link != null) {
             Link.Update(gameTime);
-            //TODO: move collision updates into its own manager class
             ((IConcreteSprite)Link).UpdateCollideWithWall(this);
             if (Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList) != null ||
                 Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList) != null)
             {
-                //TODO: link takes damage
                 TakeDamage(Link);
             }
         }
@@ -179,10 +177,6 @@ public class RoomObject : IRoomObject
             if (projectile != null) projectile.Update(gameTime);
         }
         }
-        //foreach (var linkProjectile in LinkProjectileList)
-        //{
-        //    linkProjectile.Update(gameTime);
-        //}
 
         foreach (IProjectile enemyProjectile in EnemyProjectileList)
         {
@@ -213,16 +207,16 @@ public class RoomObject : IRoomObject
 
     public void Draw(GameTime gameTime)
     {
+
         foreach (var floor in floorList)
         {
-           floor.Draw(gameTime);
+            floor.Draw(gameTime);
         }
 
         foreach (var floor in replacesFloorList)
         {
             floor.Draw(gameTime);
         }
-
         foreach (var controller in ControllerList)
         {
             controller.Draw(gameTime);
@@ -238,14 +232,6 @@ public class RoomObject : IRoomObject
             tile.Draw(gameTime);
         }
 
-        if (Link != null)
-        {
-            foreach (IProjectile projectile in ((ConcreteSprite)Link).projectiles)
-            {
-                if (projectile != null) projectile.Draw(gameTime);
-            }
-            Link.Draw(gameTime);
-        }
 
         foreach (var enemyProjectile in EnemyProjectileList)
         {
@@ -262,7 +248,16 @@ public class RoomObject : IRoomObject
             enemy.Draw(gameTime);
         }
 
-      
+
+
+        if (Link != null)
+        {
+            foreach (IProjectile projectile in ((ConcreteSprite)Link).projectiles)
+            {
+                if (projectile != null) projectile.Draw(gameTime);
+            }
+            Link.Draw(gameTime);
+        }
 
         //  top of doorways (so that it is on the top-most layer and Link disappears below it)
         foreach (var item in TopLayerNonCollidibleList)
@@ -344,26 +339,27 @@ public class RoomObject : IRoomObject
     private void CheckEnteredDoor()
     {
        
-        if(Link != null) { 
+        if(Link != null) {
+            IConcreteSprite castedLink = (IConcreteSprite)Link;
             
         //check left door
-        if (Link.screenCord.X < (leftDoorBoundary + BaseCord.X))
+        if (Link.screenCord.X < (leftDoorBoundary + BaseCord.X) && !castedLink.isDead)
         {
                 roomObjectManager.nextRoom("Left");
         } 
         //check right door
-        else if(Link.screenCord.X > (rightDoorBoundary + BaseCord.X))
+        else if(Link.screenCord.X > (rightDoorBoundary + BaseCord.X) && !castedLink.isDead)
         {
                 roomObjectManager.nextRoom("Right");
             }
         //check up door
-        else  if (Link.screenCord.Y < (upDoorBoundary + BaseCord.Y))
+        else  if (Link.screenCord.Y < (upDoorBoundary + BaseCord.Y) && !castedLink.isDead)
         {
                 roomObjectManager.nextRoom("Up");
         }
 
         //check down door
-        else if (Link.screenCord.Y > (downDoorBoundary + BaseCord.Y))
+        else if (Link.screenCord.Y > (downDoorBoundary + BaseCord.Y) && !castedLink.isDead)
         {
                 roomObjectManager.nextRoom("Down");
         }

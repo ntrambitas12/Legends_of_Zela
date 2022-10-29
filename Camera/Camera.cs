@@ -38,6 +38,11 @@ using System.Threading.Tasks;
 
     public void Move(Vector2 amount)
     {
+        pos += amount;
+    }
+
+    public void Set(Vector2 amount)
+    {
         pos = defaultPos;
         pos += amount;
     }
