@@ -64,13 +64,21 @@ public class BoomerangType : IItemType
             }
         }
         projectile.SetPosition(changeCord);
-        
+
         if (shouldDraw)
         {
             fireProjectile.Execute();
         }
 
         //check for collisions and effects
+        UpdateCollisions(gameTime);
+    }
+
+
+
+    //check for collisions and effects
+    private void UpdateCollisions(GameTime gameTime)
+    {
         if (shouldDraw)
         {
             ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
@@ -88,11 +96,12 @@ public class BoomerangType : IItemType
                 {
                     goingBack = true;
                     RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
-                } else
+                }
+                else
                 {
                     if (goingBack) fireProjectile.ResetCounter();
                     goingBack = false;
-                    
+
                 }
             }
 
@@ -113,7 +122,7 @@ public class BoomerangType : IItemType
                 {
                     if (goingBack) fireProjectile.ResetCounter();
                     goingBack = false;
-                    
+
                 }
             }
         }

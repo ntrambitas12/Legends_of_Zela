@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.Contracts;
 
 public interface IConcreteSprite : ISprite
 {
@@ -26,8 +27,6 @@ public interface IConcreteSprite : ISprite
     public void SetProjectileIndex(ArrayIndex i);
     public void ProjectileAttack();
     public void SwordAttack();
-
-    //call so the entity gets repelled by walls
-    public void UpdateCollideWithWall(RoomObject roomObject);
+    public void TakeDamage();
 }
 

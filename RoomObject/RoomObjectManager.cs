@@ -10,9 +10,12 @@ public sealed class RoomObjectManager : IRoomObjectManager
 {
     private ArrayList roomList;
     private IRoomObject _currentRoom;
+    private ICollisionManager collisionManager;
+
     private RoomObjectManager()
     {
         roomList = new ArrayList();
+        collisionManager = CollisionManager.Instance;
     }
 
     private static RoomObjectManager instance = new RoomObjectManager();
@@ -121,6 +124,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
     public void Update(GameTime gameTime)
     {
         _currentRoom.Update(gameTime);
+        collisionManager.Update(gameTime);
     }
 
     public void DeleteGameObject(int objectType, ISprite gameObject)

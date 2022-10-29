@@ -24,9 +24,15 @@ public class SwordType : IItemType
         }
 
         //check for collisions and effects
+        UpdateCollisions(gameTime);
+    }
+
+
+    //check for collisions and effects
+    private void UpdateCollisions(GameTime gameTime)
+    {
         if (shouldDraw)
         {
-
             ISprite collidingObject = sword.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
             bool check = sword.Owner() != RoomObjectManager.Instance.currentRoom().Link;
 

@@ -113,14 +113,6 @@ public class RoomObject : IRoomObject
         //update Link
         if (Link != null) {
             Link.Update(gameTime);
-            //TODO: move collision updates into its own manager class
-            ((IConcreteSprite)Link).UpdateCollideWithWall(this);
-            if (Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList) != null ||
-                Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList) != null)
-            {
-                //TODO: link takes damage
-                TakeDamage(Link);
-            }
         }
 
         
@@ -157,7 +149,6 @@ public class RoomObject : IRoomObject
             }
 
             enemy.Update(gameTime);
-            ((IConcreteSprite)enemy).UpdateCollideWithWall(this);
 
         }
 

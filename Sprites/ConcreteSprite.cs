@@ -120,46 +120,52 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         }
     }
 
-
-    //call so the entity gets repelled by walls
-    public void UpdateCollideWithWall(RoomObject roomObject)
+    public void TakeDamage()
     {
-        this.collider.ResetCollisionBooleans();
-        this.collider.UpdateCollision(roomObject.StaticTileList);
-        this.collider.UpdateCollision(roomObject.DynamicTileList);
-        if (this.collider.isColliding)
+        SpriteAction newPos;
+        float orgX;
+        float orgY;
+
+        /* Decrement the entitys health field */
+        this.health--;
+
+        /* Keep the sprite facing in the same direction when they take damage */
+        int entityPos = this.spritePos;
+        switch (entityPos)
         {
-            if (this.collider.isCollidingBottom)
-            {
-                Vector2 position = this.screenCord;
-                double x = this.screenCord.X;
-                double y = this.screenCord.Y - 2;        //somebody make this an enum please
-                this.screenCord = new Vector2((int)x, (int)y);
-            }
-            if (this.collider.isCollidingTop)
-            {
-                Vector2 position = this.screenCord;
-                double x = this.screenCord.X;
-                double y = this.screenCord.Y + 2;        //somebody make this an enum please
-                this.screenCord = new Vector2((int)x, (int)y);
-            }
-            if (this.collider.isCollidingLeft)
-            {
-                Vector2 position = this.screenCord;
-                double x = this.screenCord.X + 2;
-                double y = this.screenCord.Y;        //somebody make this an enum please
-                this.screenCord = new Vector2((int)x, (int)y);
-            }
-            if (this.collider.isCollidingRight)
-            {
-                Vector2 position = this.screenCord;
-                double x = this.screenCord.X - 2;
-                double y = this.screenCord.Y;        //somebody make this an enum please
-                this.screenCord = new Vector2((int)x, (int)y);
-            }
+            case 0:
+                newPos = SpriteAction.damageLeft;
+                orgX = this.screenCord.X;
+                orgY = this.screenCord.Y;
+                this.screenCord = new Vector2((orgX + 20), orgY);
+                break;
+            case 1:
+                newPos = SpriteAction.damageRight;
+                orgX = this.screenCord.X;
+                orgY = this.screenCord.Y;
+                this.screenCord = new Vector2((orgX - 20), orgY);
+                break;
+            case 2:
+                newPos = SpriteAction.damageUp;
+                orgX = this.screenCord.X;
+                orgY = this.screenCord.Y;
+                this.screenCord = new Vector2(orgX, (orgY + 20));
+                break;
+            case 3:
+                newPos = SpriteAction.damageDown;
+                orgX = this.screenCord.X;
+                orgY = this.screenCord.Y;
+                this.screenCord = new Vector2(orgX, (orgY - 20));
+                break;
+            default:
+                newPos = (SpriteAction)this.spritePos;
+                break;
+
         }
+        this.SetSpriteState(newPos, this.damaged);
     }
 
-    
+
+
 }
 

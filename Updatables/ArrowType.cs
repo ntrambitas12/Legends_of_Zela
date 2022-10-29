@@ -48,6 +48,12 @@ public class ArrowType : IItemType
         }
 
         //check for collisions and effects
+        UpdateCollisions(gameTime);
+    }
+
+    //check for collisions and effects
+    private void UpdateCollisions(GameTime gameTime)
+    { 
         if (shouldDraw)
         {
             ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
