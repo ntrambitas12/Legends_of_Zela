@@ -3,7 +3,7 @@
 	<!-- ROOM COMPLETE -->
 	<BaseCord>
 		<xCord>1600</xCord>
-		<yCord>2400</yCord>
+		<yCord>-2400</yCord>
 		<id>26</id>
 	</BaseCord>
 	<Blocks>

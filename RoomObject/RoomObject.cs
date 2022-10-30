@@ -208,30 +208,36 @@ public class RoomObject : IRoomObject
     public void Draw(GameTime gameTime)
     {
 
-        foreach (var floor in floorList)
-        {
-            floor.Draw(gameTime);
-        }
-
+        /*    foreach (var floor in floorList)
+            {
+                floor.Draw(gameTime);
+            }
+    */
         foreach (var floor in replacesFloorList)
         {
             floor.Draw(gameTime);
         }
+
         foreach (var controller in ControllerList)
         {
             controller.Draw(gameTime);
         }
+     
 
         foreach (var tile in DynamicTileList)
         {
             tile.Draw(gameTime);
         }
-
+     
         foreach (var tile in StaticTileList)
         {
             tile.Draw(gameTime);
         }
-
+        //  top of doorways (so that it is on the top-most layer and Link disappears below it)
+        foreach (var item in TopLayerNonCollidibleList)
+        {
+            item.Draw(gameTime);
+        }
 
         foreach (var enemyProjectile in EnemyProjectileList)
         {
@@ -248,7 +254,7 @@ public class RoomObject : IRoomObject
             enemy.Draw(gameTime);
         }
 
-
+        
 
         if (Link != null)
         {
@@ -259,11 +265,10 @@ public class RoomObject : IRoomObject
             Link.Draw(gameTime);
         }
 
-        //  top of doorways (so that it is on the top-most layer and Link disappears below it)
-        foreach (var item in TopLayerNonCollidibleList)
-        {
-            item.Draw(gameTime);
-        }
+       
+
+
+
     }
     public void ResetControllers()
     {

@@ -51,6 +51,7 @@ namespace CSE3902Project
             roomObjectManager.Reset();
             this.Initialize();
             this.LoadContent();
+            roomObjectManager.setRoom(1);
            
         }
 

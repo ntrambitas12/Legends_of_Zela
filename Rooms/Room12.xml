@@ -4,7 +4,7 @@
 	<!-- Change bombed doors -->
 	<BaseCord>
 		<xCord>2400</xCord>
-		<yCord>960</yCord>
+		<yCord>-960</yCord>
 		<id>12</id>
 	</BaseCord>
 	<Blocks>

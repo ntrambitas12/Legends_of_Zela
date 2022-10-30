@@ -206,10 +206,10 @@
     <None Update="Rooms\Room06.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room00.xml">
+    <None Update="Rooms\Room01.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room01.xml">
+    <None Update="Rooms\Room00.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Rooms\Room.xml">

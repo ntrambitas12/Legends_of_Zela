@@ -2,7 +2,7 @@
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
 	<BaseCord>
 		<xCord>0</xCord>
-		<yCord>1440</yCord>
+		<yCord>-1440</yCord>
 		<id>14</id>
 	</BaseCord>
 	<Blocks>

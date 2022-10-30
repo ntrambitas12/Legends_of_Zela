@@ -2,9 +2,9 @@
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
 	<!-- ROOM COMPLETE -->
 	<BaseCord>
-		<xCord>800</xCord>
+		<xCord>1600</xCord>
 		<yCord>0</yCord>
-		<id>0</id>
+		<id>1</id>
 	</BaseCord>
 	<Blocks>
 		<Block>
@@ -16,19 +16,25 @@
 		<Block>
 			<xPos>208</xPos>
 			<yPos>114</yPos>
-			<Name>WallTop</Name>
+			<Name>WallTop1</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>114</yPos>
+			<Name>WallTop2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>208</xPos>
 			<yPos>402</yPos>
-			<Name>WallBottom</Name>
+			<Name>WallBottom1</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>144</xPos>
-			<yPos>114</yPos>
-			<Name>WallLeft</Name>
+			<xPos>432</xPos>
+			<yPos>402</yPos>
+			<Name>WallBottom2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
@@ -43,42 +49,228 @@
 			<Name>WallRight2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
+		<Block>
+			<xPos>144</xPos>
+			<yPos>114</yPos>
+			<Name>WallLeft1</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>144</xPos>
+			<yPos>322</yPos>
+			<Name>WallLeft2</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block isOpen='true'>
+			<xPos>368</xPos>
+			<yPos>114</yPos>
+			<Name>DoorUp</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block isOpen='true'>
+			<xPos>368</xPos>
+			<yPos>402</yPos>
+			<Name>DoorDown</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
 		<Block isOpen='true'>
 			<xPos>592</xPos>
 			<yPos>258</yPos>
 			<Name>DoorRight</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
+		<Block isOpen='true'>
+			<xPos>144</xPos>
+			<yPos>258</yPos>
+			<Name>DoorLeft</Name>
+			<RoomObjectType>8</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>304</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>400</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>464</xPos>
+			<yPos>370</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>304</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>400</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>464</xPos>
+			<yPos>338</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>306</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>400</xPos>
+			<yPos>306</yPos>
+			<Name>RoughFloor</Name>
+			<RoomObjectType>9</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>210</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>274</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>338</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>210</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>274</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>338</yPos>
+			<Name>StatueRight</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>210</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>274</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>338</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>528</xPos>
+			<yPos>210</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>528</xPos>
+			<yPos>274</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>528</xPos>
+			<yPos>338</yPos>
+			<Name>StatueLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
 	</Blocks>
 
-
+	
 	<Enemies>
-		<Enemy>
-			<xPos>240</xPos>
-			<yPos>250</yPos>
-			<Name>Keese</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>368</xPos>
-			<yPos>314</yPos>
-			<Name>Keese</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>432</xPos>
-			<yPos>282</yPos>
-			<Name>Keese</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
 	</Enemies>
 
-
+	
 	<Items>
 		<Item>
-			<xPos>312</xPos>
+			<xPos>378</xPos>
 			<yPos>274</yPos>
-			<Name>Key</Name>
+			<Name>Bow</Name>
+			<RoomObjectType>6</RoomObjectType>
+		</Item>
+		<Item>
+			<xPos>380</xPos>
+			<yPos>306</yPos>
+			<Name>ArrowDrop</Name>
+			<RoomObjectType>6</RoomObjectType>
+		</Item>
+		<Item>
+			<xPos>412</xPos>
+			<yPos>282</yPos>
+			<Name>BoomerangDrop</Name>
+			<RoomObjectType>6</RoomObjectType>
+		</Item>
+		<Item>
+			<xPos>408</xPos>
+			<yPos>308</yPos>
+			<Name>BombDrop</Name>
 			<RoomObjectType>6</RoomObjectType>
 		</Item>
 	</Items>

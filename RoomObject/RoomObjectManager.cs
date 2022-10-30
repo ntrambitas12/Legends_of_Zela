@@ -65,11 +65,12 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     public void Draw(GameTime gameTime)
     {
-        _currentRoom.Draw(gameTime);
-
-        if (_previousRoom != null && isTransitioning)
+        foreach (var room in roomList)
         {
-            _previousRoom.Draw(gameTime);
+            if (room != null)
+            {
+                room.Draw(gameTime);
+            }
         }
        
 
@@ -90,7 +91,6 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     public void setRoom(int roomId)
     {
-        /*TODO: test this  */
         if (roomId < roomList.Length)
         {
             var Link = _currentRoom.Link;
@@ -122,21 +122,10 @@ public sealed class RoomObjectManager : IRoomObjectManager
             Vector2 LinkCord = new Vector2(roomData.Item1, roomData.Item2);
               _previousRoom = _currentRoom;
               _currentRoom.Link = null;
-             int nextRoom = currentRoomID() + roomData.Item3;
-               if (nextRoom >= 0 && nextRoom < roomList.Length)
-             {
-            _currentRoom = roomList[nextRoom];
-             } 
+            _currentRoom = roomList[currentRoomID() + roomData.Item3];
            _currentRoom.Link = Link;
-        Vector2 baseCord = _currentRoom.BaseCord;
-        _currentRoom.Link.screenCord = LinkCord + baseCord;
+        _currentRoom.Link.screenCord = LinkCord + _currentRoom.BaseCord;
         isTransitioning = true;
-          
-        
-            
-        
-        
-
     }
 
     private void panRoom()
@@ -164,7 +153,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
                 break;
 
             case "Up":
-            camera.Move(new Vector2(0, 20));
+            camera.Move(new Vector2(0, -20));
             if (camera.pos.Y == _currentRoom.BaseCord.Y + 250)
             {
                 isTransitioning = false;
@@ -172,7 +161,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
                     break;
 
             case "Down":
-            camera.Move(new Vector2(0, -20));
+            camera.Move(new Vector2(0, 20));
             if (camera.pos.Y == _currentRoom.BaseCord.Y + 250)
             {
                 isTransitioning = false;
