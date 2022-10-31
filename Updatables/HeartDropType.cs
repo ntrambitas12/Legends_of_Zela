@@ -20,9 +20,12 @@ public class HeartDropType : IItemType
             ISprite collidingObject = heart.collider.isIntersecting(new List<ISprite> { Link });
 
             if (collidingObject != null)
-            {
-                heart.SetShouldDraw(false);
-                // Add to Link's inventory here
+            {               
+                if (Link.health < Link.maxHealth)
+                {
+                    heart.SetShouldDraw(false);
+                    Link.health++;
+                }
             }
         }
     }

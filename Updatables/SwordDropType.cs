@@ -21,7 +21,7 @@ public class SwordDropType : IItemType
             if (collidingObject != null)
             {
                 sword.SetShouldDraw(false);
-                IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(1000, Link);
+                IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link);
                 ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
             }
         }
