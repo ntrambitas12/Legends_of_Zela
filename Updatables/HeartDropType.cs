@@ -20,10 +20,10 @@ public class HeartDropType : IItemType
             ISprite collidingObject = heart.collider.isIntersecting(new List<ISprite> { Link });
 
             if (collidingObject != null)
-            {               
+            {
+                heart.SetShouldDraw(false);            
                 if (Link.health < Link.maxHealth)
                 {
-                    heart.SetShouldDraw(false);
                     Link.health++;
                 }
             }

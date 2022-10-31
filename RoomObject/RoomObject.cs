@@ -30,6 +30,7 @@ public class RoomObject : IRoomObject
     private List<SpriteAction> enemyActions;
     private SpriteAction enemyAction;
     private Random rand;
+    private bool pauseEnemies;
 
     public RoomObject()
     {
@@ -73,6 +74,7 @@ public class RoomObject : IRoomObject
         enemyActions.Add(SpriteAction.moveLeft);
         enemyActions.Add(SpriteAction.moveRight);
         enemyActions.Add(SpriteAction.moveUp);
+        pauseEnemies = false;
 
     }
     public void AddController(IController controller)
@@ -126,10 +128,11 @@ public class RoomObject : IRoomObject
              * Using rand.next as a mechanism to "randomly" 
              * have each enemy change its state.
              * Couldnt think of a better ai, this will do
-             * for now.
+             * for now. If a clock was used then enemies 
+             * don't move.
            */
 
-            if (rand.Next(25) == 5)
+            if (!pauseEnemies && rand.Next(25) == 5)
             {
                 enemyAction = enemyActions[rand.Next(4)];
 
@@ -166,7 +169,7 @@ public class RoomObject : IRoomObject
 
         foreach (IProjectile enemyProjectile in EnemyProjectileList)
         {
-            if (rand.Next(25) == 5)
+            if (!pauseEnemies && rand.Next(25) == 5)
             {
                 enemyProjectile.FireCommand().Execute();
             }
@@ -319,6 +322,15 @@ public class RoomObject : IRoomObject
         castSprite.SetSpriteState(newPos, castSprite.damaged);
     }
 
+    public void PauseEnemies()
+    {
+        pauseEnemies = true;
 
+        //set all enemies to still
+        foreach (IConcreteSprite enemy in EnemyList)
+        {
+            enemy.SetSpriteState(enemyAction, enemy.still);            
+        }
+    }
 }
 

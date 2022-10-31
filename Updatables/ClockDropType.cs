@@ -15,12 +15,13 @@ public class ClockDropType : IItemType
     {
         if (clock.ShouldDraw())
         {
-            ISprite collidingObject = clock.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
+            IRoomObject currentRoom = RoomObjectManager.Instance.currentRoom();
+            ISprite collidingObject = clock.collider.isIntersecting(new List<ISprite> {currentRoom.Link });
 
             if (collidingObject != null)
             {
                 clock.SetShouldDraw(false);
-                // Add to Link's inventory here
+                currentRoom.PauseEnemies();
             }
         }
     }
