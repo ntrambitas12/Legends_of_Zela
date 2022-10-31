@@ -25,7 +25,11 @@ public class BombType : IItemType
         if (counter >= distance - 20)
         {
             projectile.SetSpriteAction(SpriteAction.bombCloud);
-
+            //check for collisions and effects
+            Vector2 prevCord = projectile.screenCord;
+            projectile.SetPosition(new Vector2(prevCord.X - 30, prevCord.Y - 30));
+            UpdateCollisions(gameTime);
+            projectile.SetPosition(prevCord);
         }
 
         if (shouldDraw)
@@ -33,8 +37,7 @@ public class BombType : IItemType
             fireProjectile.Execute();
         }
 
-        //check for collisions and effects
-        UpdateCollisions(gameTime);
+        
     }
 
     //check for collisions and effects

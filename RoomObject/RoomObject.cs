@@ -332,5 +332,10 @@ public class RoomObject : IRoomObject
             enemy.SetSpriteState(enemyAction, enemy.still);            
         }
     }
+
+    public void UnpauseEnemies()
+    {
+        pauseEnemies = false;
+    }
 }
 

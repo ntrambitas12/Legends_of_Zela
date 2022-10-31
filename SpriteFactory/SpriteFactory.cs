@@ -892,7 +892,7 @@ public sealed class SpriteFactory : IFactory
     {
         IDrop bomb = new Drop(_spriteBatch, location, bombFrames);
 
-        Rectangle collisionRect = bombFrames[0][0].Bounds; //Change this for bigger explosion
+        Rectangle collisionRect = bombFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(bomb, collisionRect);
         bomb.collider = collisionObject;
         bomb.collider.UpdateCollisionPosition();
@@ -1044,6 +1044,7 @@ public sealed class SpriteFactory : IFactory
         IProjectile bomb = new Projectile(_spriteBatch, new Vector2(0, 0), bombFrames);
 
         Rectangle collisionRect = bombFrames[0][0].Bounds;
+        collisionRect.Inflate(30, 30);
         ICollision collisionObject = new Collision(bomb, collisionRect);
         bomb.collider = collisionObject;
         bomb.collider.UpdateCollisionPosition();

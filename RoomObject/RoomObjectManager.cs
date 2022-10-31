@@ -75,6 +75,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     public void nextRoomRight()
     {
+        _currentRoom.UnpauseEnemies();
         var Link = _currentRoom.Link;
         _currentRoom.Link = null;
         int roomNum = this.currentRoomID();
@@ -87,6 +88,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     public void nextRoomLeft()
     {
+        _currentRoom.UnpauseEnemies();
         var Link = _currentRoom.Link;
         _currentRoom.Link = null;
         int roomNum = this.currentRoomID();
@@ -99,6 +101,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     public void nextRoomUp()
     {
+        _currentRoom.UnpauseEnemies();
         var Link = _currentRoom.Link;
         _currentRoom.Link = null;
         int roomNum = this.currentRoomID();
@@ -111,6 +114,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     public void nextRoomDown()
     {
+        _currentRoom.UnpauseEnemies();
         var Link = _currentRoom.Link;
         _currentRoom.Link = null;
         int roomNum = this.currentRoomID();
