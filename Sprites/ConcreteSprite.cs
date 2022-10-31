@@ -24,7 +24,11 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public ISpriteState attack { get; set; }
     public ISpriteState use { get; set; }
     public int health { get; set; }
+    public int maxHealth { get; set; }
     public bool isDead { get; set; }
+    public int keys { get; set; }
+    public int rubies { get; set; }
+
 
     /*Projectile inventory
      Use ArrayIndex enums*/
@@ -64,7 +68,11 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         use = new UseState(this);
 
         health = 3;
+        maxHealth = 3;
         isDead = false;
+
+        keys = 0;
+        rubies = 0;
 
         state = still;
 

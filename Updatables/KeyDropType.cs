@@ -15,12 +15,13 @@ public class KeyDropType : IItemType
     {
         if (key.ShouldDraw())
         {
-            ISprite collidingObject = key.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
+            IConcreteSprite Link = (IConcreteSprite) RoomObjectManager.Instance.currentRoom().Link;
+            ISprite collidingObject = key.collider.isIntersecting(new List<ISprite> { Link });
 
             if (collidingObject != null)
             {
                 key.SetShouldDraw(false);
-                // Add to Link's inventory here
+                Link.keys++;
             }
         }
     }
