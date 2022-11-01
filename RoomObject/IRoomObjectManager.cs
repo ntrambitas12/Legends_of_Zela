@@ -9,7 +9,7 @@ using System.Threading.Tasks;
     {
     
     public void addRoom(IRoomObject room, int id);
-    public void setRoom(int roomId);
+    public void setRoom(int roomId, bool inc);
     public IRoomObject currentRoom();
     public void Reset();
     public void Draw(GameTime gameTime);

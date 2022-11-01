@@ -18,7 +18,7 @@ namespace CSE3902Project
                 int nextRoomID = room.currentRoomID() + 1;
                 if (nextRoomID < room.numberOfRooms())
                 {
-                    room.setRoom(nextRoomID);
+                    room.setRoom(nextRoomID, true);
                 }
             }
         }

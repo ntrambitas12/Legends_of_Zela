@@ -132,9 +132,6 @@ public class RoomObject : IRoomObject
             }
         }
 
-        
-       
-
         //update all enemies
         foreach (IConcreteSprite enemy in EnemyList)
         {
@@ -160,14 +157,10 @@ public class RoomObject : IRoomObject
                 {
                     enemy.SetSpriteState(enemyAction, enemy.still);
                 }
-
-                
-
             }
 
             enemy.Update(gameTime);
-            ((IConcreteSprite)enemy).UpdateCollideWithWall(this);
-
+            enemy.UpdateCollideWithWall(this);
         }
 
         //update projectiles
@@ -208,11 +201,11 @@ public class RoomObject : IRoomObject
     public void Draw(GameTime gameTime)
     {
 
-        /*    foreach (var floor in floorList)
-            {
-                floor.Draw(gameTime);
-            }
-    */
+        foreach (var floor in floorList)
+        {
+            floor.Draw(gameTime);
+        }
+
         foreach (var floor in replacesFloorList)
         {
             floor.Draw(gameTime);
@@ -232,11 +225,6 @@ public class RoomObject : IRoomObject
         foreach (var tile in StaticTileList)
         {
             tile.Draw(gameTime);
-        }
-        //  top of doorways (so that it is on the top-most layer and Link disappears below it)
-        foreach (var item in TopLayerNonCollidibleList)
-        {
-            item.Draw(gameTime);
         }
 
         foreach (var enemyProjectile in EnemyProjectileList)
@@ -265,10 +253,11 @@ public class RoomObject : IRoomObject
             Link.Draw(gameTime);
         }
 
-       
-
-
-
+        //  top of doorways (so that it is on the top-most layer and Link disappears below it)
+        foreach (var item in TopLayerNonCollidibleList)
+        {
+            item.Draw(gameTime);
+        }
     }
     public void ResetControllers()
     {

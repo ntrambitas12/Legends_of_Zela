@@ -51,7 +51,7 @@ namespace CSE3902Project
             roomObjectManager.Reset();
             this.Initialize();
             this.LoadContent();
-            roomObjectManager.setRoom(1);
+            roomObjectManager.setRoom(1, true);
            
         }
 
@@ -69,7 +69,7 @@ namespace CSE3902Project
         protected override void Draw(GameTime gameTime)
         {
            
-            _spriteBatch.Begin(SpriteSortMode.BackToFront,
+            _spriteBatch.Begin(SpriteSortMode.Immediate,
                         BlendState.AlphaBlend,
                         null,
                         null,

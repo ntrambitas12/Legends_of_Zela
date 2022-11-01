@@ -12,20 +12,30 @@ public sealed class RoomObjectManager : IRoomObjectManager
 {
     private  IRoomObject[] roomList;
     private IRoomObject _currentRoom;
-    private IRoomObject _previousRoom;
     private bool isTransitioning;
     private Camera camera;
     private String direction;
-    private Dictionary<String, (int, int, int)> roomDir;
+    private int roomXLimit = 400;
+    private int roomYLimit = 250;
+    private Vector2 RightPan;
+    private Vector2 LeftPan;
+    private Vector2 UpPan;
+    private Vector2 DownPan;
+    private Dictionary<String, (int, int, int, Vector2, int, bool)> roomDir;
+  
     private RoomObjectManager()
     {
         roomList = new IRoomObject[100];
         camera = Camera.Instance;
-        roomDir = new Dictionary<String, (int, int, int)>();
-        roomDir.Add("Up", (400, 430, 5));
-        roomDir.Add("Down", (400, 112, -5));
-        roomDir.Add("Left", (620, 240, -1));
-        roomDir.Add("Right", (150, 240, 1));
+        roomDir = new Dictionary<String, (int, int, int, Vector2, int, bool)>();
+        RightPan = new Vector2(25, 0);
+        LeftPan = new Vector2(-25, 0);
+        UpPan = new Vector2(0, -20);
+        DownPan = new Vector2(0, 20);
+        roomDir.Add("Up", (400, 430, 5, UpPan, roomYLimit, false));
+        roomDir.Add("Down", (400, 112, -5, DownPan, roomYLimit, false));
+        roomDir.Add("Left", (620, 240, -1, LeftPan, roomXLimit, true));
+        roomDir.Add("Right", (150, 240, 1, RightPan, roomXLimit, true));
         isTransitioning = false;
 
 
@@ -72,8 +82,6 @@ public sealed class RoomObjectManager : IRoomObjectManager
                 room.Draw(gameTime);
             }
         }
-       
-
     }
 
     public void Reset()
@@ -89,20 +97,36 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     }
 
-    public void setRoom(int roomId)
+    public void setRoom(int roomId, bool inc)
     {
-        if (roomId < roomList.Length)
+        if (roomId < roomList.Length-1 && roomId >= 0)
         {
             var Link = _currentRoom.Link;
             Vector2 LinkCord = Link.screenCord - _currentRoom.BaseCord;
             _currentRoom.Link = null;
-            _previousRoom = _currentRoom;
             _currentRoom = roomList[roomId];
+
+            //find the next not null element in the room array
             while (_currentRoom == null)
             {
-                roomId++;
-                if (roomId < roomList.Length)
-                _currentRoom = roomList[roomId];
+                //either decrement or increment till the next room
+                if (inc)
+                {
+                    roomId++;
+                } else
+                {
+                    roomId--;
+                }
+
+
+                if (roomId < roomList.Length - 1 && roomId >= 0) {
+                    _currentRoom = roomList[roomId];
+                }
+                else
+                {
+                    //loop back to 0 if we reach the end of the array
+                    roomId = 0;
+                }
             }
             Vector2 baseCord = _currentRoom.BaseCord;
             _currentRoom.Link = Link;
@@ -117,58 +141,39 @@ public sealed class RoomObjectManager : IRoomObjectManager
     public void nextRoom(String direction)
     {
         this.direction = direction; 
-            roomDir.TryGetValue(direction, out var roomData);
-            var Link = _currentRoom.Link;
-            Vector2 LinkCord = new Vector2(roomData.Item1, roomData.Item2);
-              _previousRoom = _currentRoom;
-              _currentRoom.Link = null;
-            _currentRoom = roomList[currentRoomID() + roomData.Item3];
-           _currentRoom.Link = Link;
+        roomDir.TryGetValue(direction, out var roomData);
+        var Link = _currentRoom.Link;
+        Vector2 LinkCord = new Vector2(roomData.Item1, roomData.Item2);
+        _currentRoom.Link = null;
+        //move link to the next room and enter the transition state
+        _currentRoom = roomList[currentRoomID() + roomData.Item3];
+        _currentRoom.Link = Link;
         _currentRoom.Link.screenCord = LinkCord + _currentRoom.BaseCord;
         isTransitioning = true;
     }
 
     private void panRoom()
     {
-        /* Since were checking against X and Y, we need to do some sort
-         * of branching. Since there's only 4 directions, this seems to be 
-         * an acceptable location for switch case*/
-
-        switch (direction) {
-            case "Right":
+        roomDir.TryGetValue(direction, out var roomData);
+        //if we are checking the X condition:
+        if(roomData.Item6)
+        {
+            camera.Move(roomData.Item4);
+            if (camera.pos.X == _currentRoom.BaseCord.X + roomData.Item5)
+            {
+                isTransitioning = false;
+            }
+        } 
+        //check the y condition
+        else
+        {
+            camera.Move(roomData.Item4);
+            if (camera.pos.Y == _currentRoom.BaseCord.Y + roomData.Item5)
+            {
+                isTransitioning = false;
+            }
+        }
         
-            camera.Move(new Vector2(25, 0));
-            if (camera.pos.X == _currentRoom.BaseCord.X + 400)
-            {
-                isTransitioning = false;
-            }
-                break;
-            case "Left":
-        
-            camera.Move(new Vector2(-25, 0));
-            if (camera.pos.X == _currentRoom.BaseCord.X + 400)
-            {
-                isTransitioning = false;
-            }
-                break;
-
-            case "Up":
-            camera.Move(new Vector2(0, -20));
-            if (camera.pos.Y == _currentRoom.BaseCord.Y + 250)
-            {
-                isTransitioning = false;
-            }
-                    break;
-
-            case "Down":
-            camera.Move(new Vector2(0, 20));
-            if (camera.pos.Y == _currentRoom.BaseCord.Y + 250)
-            {
-                isTransitioning = false;
-            }
-                break;
-    }
-
     }
 
 
