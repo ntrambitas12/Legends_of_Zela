@@ -70,15 +70,21 @@ public sealed class CollisionManager : ICollisionManager
             UpdateCollideWithWall(enemy, currentRoom);
         }
     }
-    // TODO: updates link projectile collisions
+    // updates link projectile collisions
     private void UpdateLinkProjectile(GameTime gameTime)
     {
-        //does nothing
+        foreach (IProjectile projectile in ((IConcreteSprite) currentRoom.Link).projectiles)
+        {
+            if (projectile != null) ((IProjectileType)projectile.ItemType()).UpdateCollisions(gameTime);
+        }
     }
-    // TODO: updates enemy projectile collisions
+    // updates enemy projectile collisions
     private void UpdateEnemyProjectile(GameTime gameTime)
     {
-        //does nothing
+        foreach (IProjectile projectile in currentRoom.EnemyProjectileList)
+        {
+            if (projectile != null) ((IProjectileType)projectile.ItemType()).UpdateCollisions(gameTime);
+        }
     }
 
     //call so the entity gets repelled by walls

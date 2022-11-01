@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-public class BombType : IItemType
+public class BombType : IProjectileType
 {
     private IProjectile projectile;
     private FireProjectile fireProjectile;
@@ -24,12 +24,7 @@ public class BombType : IItemType
 
         if (counter >= distance - 20)
         {
-            projectile.SetSpriteAction(SpriteAction.bombCloud);
-            //check for collisions and effects
-            Vector2 prevCord = projectile.screenCord;
-            projectile.SetPosition(new Vector2(prevCord.X - 30, prevCord.Y - 30));
-            UpdateCollisions(gameTime);
-            projectile.SetPosition(prevCord);
+            projectile.SetSpriteAction(SpriteAction.bombCloud);           
         }
 
         if (shouldDraw)
@@ -37,14 +32,18 @@ public class BombType : IItemType
             fireProjectile.Execute();
         }
 
-        
+        //check for collisions and effects
+        //UpdateCollisions(gameTime);
     }
 
-    //check for collisions and effects
-    private void UpdateCollisions(GameTime gameTime)
+    
+    public void UpdateCollisions(GameTime gameTime)
     {
-        if (shouldDraw)
+        
+        if (shouldDraw && counter >= distance - 20)
         {
+            Vector2 prevCord = projectile.screenCord;
+            projectile.SetPosition(new Vector2(prevCord.X - 30, prevCord.Y - 30));
             ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
 
             //if (collidingObject != null)
@@ -73,7 +72,9 @@ public class BombType : IItemType
                 }
                 RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
             }
+            projectile.SetPosition(prevCord);
         }
+        
     }
 }
 

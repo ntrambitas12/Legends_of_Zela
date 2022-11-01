@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics; 
 
-public class ArrowType : IItemType
+public class ArrowType : IProjectileType
 {
     private IProjectile projectile;
     private int direction;
@@ -48,11 +48,11 @@ public class ArrowType : IItemType
         }
 
         //check for collisions and effects
-        UpdateCollisions(gameTime);
+        //UpdateCollisions(gameTime);
     }
 
     //check for collisions and effects
-    private void UpdateCollisions(GameTime gameTime)
+    public void UpdateCollisions(GameTime gameTime)
     { 
         if (shouldDraw)
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-public class BoomerangType : IItemType
+public class BoomerangType : IProjectileType
 {
     private IProjectile projectile;
     private int direction;
@@ -71,13 +71,13 @@ public class BoomerangType : IItemType
         }
 
         //check for collisions and effects
-        UpdateCollisions(gameTime);
+        //UpdateCollisions(gameTime);
     }
 
 
 
     //check for collisions and effects
-    private void UpdateCollisions(GameTime gameTime)
+    public void UpdateCollisions(GameTime gameTime)
     {
         if (shouldDraw)
         {

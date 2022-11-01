@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-public class SwordType : IItemType
+public class SwordType : IProjectileType
 {
     private IProjectile sword;
     private FireProjectile fireProjectile;
@@ -24,12 +24,12 @@ public class SwordType : IItemType
         }
 
         //check for collisions and effects
-        UpdateCollisions(gameTime);
+        //UpdateCollisions(gameTime);
     }
 
 
     //check for collisions and effects
-    private void UpdateCollisions(GameTime gameTime)
+    public void UpdateCollisions(GameTime gameTime)
     {
         if (shouldDraw)
         {
