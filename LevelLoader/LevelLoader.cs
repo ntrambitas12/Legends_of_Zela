@@ -124,28 +124,7 @@ public class LevelLoader: ILevelLoader
 
 
     }
-
-    private void CreateLink()
-    {
-        /*
-         * Link only needs to be created once.
-         * Add him to the starting room only.
-         * Colisions will be responsible for moving him between rooms.
-         */
-
-        Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(300, 350));
-        room.Link = Link;
-
-        /* Tempelate for creating and adding projectiles to link. Will be useful later*/
-        // Create sword for link
-        IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link);
-
-        // Add sword to Link
-        ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
-
-    }
-   
-    
+ 
     public void ParseRoom()
     {
         var files = Directory.GetFiles(@"Rooms/", "*.xml");
@@ -154,6 +133,9 @@ public class LevelLoader: ILevelLoader
         {
             int xPos;
             int yPos;
+            int baseX;
+            int baseY;
+            int id;
             String name;
             int roomObjectType;
             bool read = false;
@@ -169,8 +151,18 @@ public class LevelLoader: ILevelLoader
 
             reader = XmlReader.Create(file);
             room = new RoomObject();
-            IntializeRooms();
+       
 
+            //read the base coordinates of each room
+            reader.ReadToFollowing("BaseCord");
+            reader.ReadToDescendant("xCord");
+            baseX = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("yCord");
+            baseY = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("id");
+            id = reader.ReadElementContentAsInt();
+
+            IntializeRooms(baseX, baseY);
             foreach (var parseType in parseTypes)
             {
                 reader.ReadToFollowing(parseType.Item1);
@@ -212,11 +204,12 @@ public class LevelLoader: ILevelLoader
                         /* This is where you call the corresponding method from spritefactory
                          * and add that ISprite to the roomobject into correct list using add
                          */
+                        Vector2 _base = new Vector2(baseX, baseY);
                         if (isDoor)
                         {
                             if(constructer.TryGetValue(name, out Delegate doorConstructor))
                             {
-                                sprite = (ISprite)doorConstructor.DynamicInvoke(new Vector2(xPos, yPos), isDoorOpen);
+                                sprite = (ISprite)doorConstructor.DynamicInvoke(new Vector2(xPos, yPos) + _base, isDoorOpen);
                             }
 
                             isDoor = false;
@@ -224,7 +217,7 @@ public class LevelLoader: ILevelLoader
                         else { 
                         if (constructer.TryGetValue(name, out Delegate value))
                         {
-                             sprite = (ISprite)value.DynamicInvoke(new Vector2(xPos, yPos));
+                             sprite = (ISprite)value.DynamicInvoke(new Vector2(xPos, yPos)+_base);
 
                             //case for when we have to pair projectile with parent sprite
                             //check if projectile is not null
@@ -247,6 +240,7 @@ public class LevelLoader: ILevelLoader
                              }
                            
                         }
+                        room.BaseCord = _base;
                         room.AddGameObject(roomObjectType, sprite, name);
                         if (enemyKey != null) room.AddEnemyProjectilePair(enemyKey, enemyVal);
                     }
@@ -254,20 +248,49 @@ public class LevelLoader: ILevelLoader
                 }
             }
 
-            //Build the Room
-            roomObjectManager.addRoom(room);
-            runOnce = true;
+            BuildRoom(id);
         }
        
     }
-    private void IntializeRooms()
+
+    private void IntializeRooms(int xBase, int yBase)
     {
         if (!runOnce)
         {
-            CreateLink();
+            Vector2 baseCord = new Vector2(xBase, yBase);
+            Camera camera = Camera.Instance;
+            camera.Move(baseCord);
+            CreateLink(baseCord);
         }
 
         room.AddController(initalizeControllers.InitalizeKeyboard(Link));
         room.AddController(initalizeControllers.InitalizeMouse());
+    }
+
+    private void CreateLink(Vector2 baseCord)
+    {
+        /*
+         * Link only needs to be created once.
+         * Add him to the starting room only.
+         * Colisions will be responsible for moving him between rooms.
+         */
+
+        Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(300, 350) + baseCord);
+        room.Link = Link;
+
+        /* Tempelate for creating and adding projectiles to link. Will be useful later*/
+        // Create sword for link
+        IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link);
+
+        // Add sword to Link
+        ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
+
+    }
+
+    private void BuildRoom(int id)
+    {
+        //Build the Room
+        roomObjectManager.addRoom(room, id);
+        runOnce = true;
     }
 }

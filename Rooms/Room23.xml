@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
-	<!-- ROOM COMPLETE -->
 	<BaseCord>
-		<xCord>1600</xCord>
-		<yCord>-2400</yCord>
-		<id>26</id>
+		<xCord>3200</xCord>
+		<yCord>-1920</yCord>
+		<id>23</id>
 	</BaseCord>
 	<Blocks>
 		<Block>
@@ -32,27 +31,27 @@
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
+			<xPos>144</xPos>
+			<yPos>114</yPos>
+			<Name>WallLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
 			<xPos>592</xPos>
 			<yPos>114</yPos>
-			<Name>WallRight</Name>
+			<Name>WallRight1</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>144</xPos>
-			<yPos>114</yPos>
-			<Name>WallLeft1</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>144</xPos>
+			<xPos>592</xPos>
 			<yPos>322</yPos>
-			<Name>WallLeft2</Name>
+			<Name>WallRight2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block isOpen='true'>
-			<xPos>144</xPos>
+			<xPos>592</xPos>
 			<yPos>258</yPos>
-			<Name>DoorLeft</Name>
+			<Name>DoorRight</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block isOpen='true'>
@@ -62,148 +61,123 @@
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>240</xPos>
-			<yPos>210</yPos>
-			<Name>Water</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>272</xPos>
-			<yPos>210</yPos>
-			<Name>Water</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>304</xPos>
-			<yPos>210</yPos>
-			<Name>Water</Name>
+			<xPos>432</xPos>
+			<yPos>178</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>464</xPos>
-			<yPos>210</yPos>
-			<Name>Water</Name>
+			<yPos>178</yPos>
+			<Name>Barrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>496</xPos>
+			<yPos>178</yPos>
+			<Name>Barrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>528</xPos>
+			<yPos>178</yPos>
+			<Name>Barrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>560</xPos>
+			<yPos>178</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>496</xPos>
 			<yPos>210</yPos>
-			<Name>Water</Name>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>528</xPos>
 			<yPos>210</yPos>
-			<Name>Water</Name>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>240</xPos>
-			<yPos>242</yPos>
-			<Name>Water</Name>
+			<xPos>560</xPos>
+			<yPos>210</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>528</xPos>
 			<yPos>242</yPos>
-			<Name>Water</Name>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>240</xPos>
-			<yPos>274</yPos>
-			<Name>Water</Name>
+			<xPos>560</xPos>
+			<yPos>242</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>304</xPos>
-			<yPos>274</yPos>
-			<Name>Water</Name>
+			<xPos>528</xPos>
+			<yPos>306</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>336</xPos>
-			<yPos>274</yPos>
-			<Name>Water</Name>
+			<xPos>560</xPos>
+			<yPos>306</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>368</xPos>
-			<yPos>274</yPos>
-			<Name>Water</Name>
+			<xPos>496</xPos>
+			<yPos>338</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>400</xPos>
-			<yPos>274</yPos>
-			<Name>Water</Name>
+			<xPos>528</xPos>
+			<yPos>338</yPos>
+			<Name>Barrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>560</xPos>
+			<yPos>338</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>432</xPos>
-			<yPos>274</yPos>
-			<Name>Water</Name>
+			<yPos>370</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>464</xPos>
-			<yPos>274</yPos>
-			<Name>Water</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>528</xPos>
-			<yPos>274</yPos>
-			<Name>Water</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>240</xPos>
-			<yPos>306</yPos>
-			<Name>Water</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>528</xPos>
-			<yPos>306</yPos>
-			<Name>Water</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		
-		<Block>
-			<xPos>240</xPos>
-			<yPos>338</yPos>
-			<Name>Water</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>272</xPos>
-			<yPos>338</yPos>
-			<Name>Water</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>304</xPos>
-			<yPos>338</yPos>
-			<Name>Water</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>464</xPos>
-			<yPos>338</yPos>
-			<Name>Water</Name>
+			<yPos>370</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>496</xPos>
-			<yPos>338</yPos>
-			<Name>Water</Name>
+			<yPos>370</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>528</xPos>
-			<yPos>338</yPos>
-			<Name>Water</Name>
+			<yPos>370</yPos>
+			<Name>Barrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>560</xPos>
+			<yPos>370</yPos>
+			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 	</Blocks>
@@ -211,48 +185,38 @@
 
 	<Enemies>
 		<Enemy>
-			<xPos>338</xPos>
-			<yPos>178</yPos>
-			<Name>Goriya</Name>
+			<xPos>464</xPos>
+			<yPos>242</yPos>
+			<Name>Aquamentus</Name>
 			<RoomObjectType>2</RoomObjectType>
 			<Projectile>
-				<Name>Boomerang</Name>
-				<Distance>1000</Distance>
+				<Name>Fireball</Name>
+				<Distance>100</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
-		</Enemy>
-		<Enemy>
-			<xPos>434</xPos>
-			<yPos>178</yPos>
-			<Name>Goriya</Name>
-			<RoomObjectType>2</RoomObjectType>
 			<Projectile>
-				<Name>Boomerang</Name>
-				<Distance>1000</Distance>
+				<Name>Fireball</Name>
+				<Distance>100</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
-		</Enemy>
-		<Enemy>
-			<xPos>434</xPos>
-			<yPos>210</yPos>
-			<Name>Goriya</Name>
-			<RoomObjectType>2</RoomObjectType>
 			<Projectile>
-				<Name>Boomerang</Name>
-				<Distance>1000</Distance>
+				<Name>Fireball</Name>
+				<Distance>100</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
 		</Enemy>
 	</Enemies>
 
-
+	
 	<Items>
 		<Item>
-			<xPos>280</xPos>
-			<yPos>274</yPos>
-			<Name>Key</Name>
+			<xPos>530</xPos>
+			<yPos>278</yPos>
+			<Name>HeartContainer</Name>
 			<RoomObjectType>6</RoomObjectType>
 		</Item>
 	</Items>
+	
+	<!-- NEED TO ADD PROJECTILE FIREBALLS FOR AQUAMENTUS -->
 	
 </XnaContent>

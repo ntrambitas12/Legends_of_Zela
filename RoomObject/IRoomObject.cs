@@ -69,6 +69,8 @@ public interface IRoomObject
 
     //dict mapping enemies to their projectiles
     public Dictionary<ISprite, ISprite> EnemyToProjectile { get; set; }
+   //Base cord for camera
+    public Vector2 BaseCord { get; set; }
 
     //adds an enemy and its projectile to dict
     public void AddEnemyProjectilePair(ISprite enemy, ISprite projectile);
