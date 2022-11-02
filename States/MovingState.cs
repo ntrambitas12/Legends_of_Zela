@@ -32,4 +32,9 @@ public class MovingState : ISpriteState
     {
         //implement if needed
     }
+
+    public string toString()
+    {
+        return "MovingState";
+    }
 }

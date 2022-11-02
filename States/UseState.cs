@@ -50,6 +50,8 @@ public class UseState : ISpriteState
             }
             
             sprite.ProjectileAttack();
+            SoundManager.Instance.PlayOnce("LOZ_Arrow_Boomerang");
+
         }
 
         if (timeElapsed > .2)
@@ -75,6 +77,10 @@ public class UseState : ISpriteState
             prevAction = (SpriteAction)sprite.spritePos;
             prevState = state;
         }
+    }
+    public string toString()
+    {
+        return "UseState";
     }
 }
 

@@ -63,11 +63,12 @@ public class AttackState : ISpriteState
 
         }
 
-
+        
     }
 
     public void Draw(GameTime gameTime)
     {
+        
         drawSprite.Draw(sprite, Color.White, true, gameTime);
     }
 
@@ -78,5 +79,10 @@ public class AttackState : ISpriteState
             prevAction = (SpriteAction)sprite.spritePos;
             prevState = state;
         }
+    }
+    
+    public string toString()
+    {
+        return "AttackState";
     }
 }

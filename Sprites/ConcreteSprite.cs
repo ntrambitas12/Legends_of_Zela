@@ -82,12 +82,15 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
     public void SetSpriteState(SpriteAction action, ISpriteState state)
     {
+        //play sound
+        
 
         if (!isDead)
         {
             state.SetPreviousState(this.state);
             this.state = state;
             SetSpriteAction(action);
+            SoundManager.Instance.playStateSounds(action, state);
         }
         
     }
