@@ -32,4 +32,9 @@ public class StillAnimated : ISpriteState
     {
         //implement if needed
     }
+
+    public string toString()
+    {
+        return "StillAnimated";
+    }
 }

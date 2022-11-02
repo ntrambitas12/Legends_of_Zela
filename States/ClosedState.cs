@@ -32,5 +32,10 @@ using System.Threading.Tasks;
         {
         //add collideable object
         }
+
+    public string toString()
+    {
+        return "ClosedState";
     }
+}
 
