@@ -1,13 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
 	<!-- ROOM COMPLETE -->
-	
+	<BaseCord>
+		<xCord>1600</xCord>
+		<yCord>-480</yCord>
+		<id>6</id>
+	</BaseCord>
 	<Blocks>
 		<Block>
 			<xPos>144</xPos>
 			<yPos>114</yPos>
 			<Name>DungeonFloor</Name>
 			<RoomObjectType>10</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>144</xPos>
+			<yPos>114</yPos>
+			<Name>WallLeft</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>114</yPos>
+			<Name>WallRight</Name>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>208</xPos>
@@ -24,25 +40,13 @@
 		<Block>
 			<xPos>208</xPos>
 			<yPos>402</yPos>
-			<Name>WallBottom</Name>
+			<Name>WallBottom1</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>592</xPos>
-			<yPos>114</yPos>
-			<Name>WallRight1</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>592</xPos>
-			<yPos>322</yPos>
-			<Name>WallRight2</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>144</xPos>
-			<yPos>114</yPos>
-			<Name>WallLeft</Name>
+			<xPos>432</xPos>
+			<yPos>402</yPos>
+			<Name>WallBottom2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block isOpen='true'>
@@ -52,9 +56,9 @@
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block isOpen='true'>
-			<xPos>592</xPos>
-			<yPos>258</yPos>
-			<Name>DoorRight</Name>
+			<xPos>368</xPos>
+			<yPos>402</yPos>
+			<Name>DoorDown</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>
@@ -98,39 +102,21 @@
 
 	<Enemies>
 		<Enemy>
-			<xPos>240</xPos>
-			<yPos>218</yPos>
-			<Name>Keese</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>464</xPos>
-			<yPos>186</yPos>
-			<Name>Keese</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
 			<xPos>304</xPos>
-			<yPos>314</yPos>
-			<Name>Keese</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>208</xPos>
-			<yPos>282</yPos>
-			<Name>Keese</Name>
+			<yPos>306</yPos>
+			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
 			<xPos>240</xPos>
-			<yPos>346</yPos>
-			<Name>Keese</Name>
+			<yPos>210</yPos>
+			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
-			<xPos>464</xPos>
-			<yPos>378</yPos>
-			<Name>Keese</Name>
+			<xPos>336</xPos>
+			<yPos>178</yPos>
+			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 	</Enemies>

@@ -47,10 +47,12 @@ namespace CSE3902Project
 
         public void resetGame()
         {
+            camera.reset();
             roomObjectManager.Reset();
             this.Initialize();
             this.LoadContent();
-            camera.reset();
+            roomObjectManager.setRoom(1, true);
+           
         }
 
 
@@ -67,16 +69,16 @@ namespace CSE3902Project
         protected override void Draw(GameTime gameTime)
         {
            
-            _spriteBatch.Begin(SpriteSortMode.BackToFront,
+            _spriteBatch.Begin(SpriteSortMode.Immediate,
                         BlendState.AlphaBlend,
                         null,
                         null,
                         null,
                         null,
                         camera.getTransformation(GraphicsDevice));
-            
 
-            roomObjectManager.Draw(gameTime);
+
+             roomObjectManager.Draw(gameTime);
 
             _spriteBatch.End();
 

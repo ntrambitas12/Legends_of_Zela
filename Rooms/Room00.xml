@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
 	<!-- ROOM COMPLETE -->
-	
+	<BaseCord>
+		<xCord>1600</xCord>
+		<yCord>0</yCord>
+		<id>1</id>
+	</BaseCord>
 	<Blocks>
 		<Block>
 			<xPos>144</xPos>
@@ -63,7 +67,7 @@
 			<Name>DoorUp</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
-		<Block isOpen='true'>
+		<Block isOpen='false'>
 			<xPos>368</xPos>
 			<yPos>402</yPos>
 			<Name>DoorDown</Name>

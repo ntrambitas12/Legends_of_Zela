@@ -8,8 +8,8 @@ using System.Threading.Tasks;
     public interface IRoomObjectManager
     {
     
-    public void addRoom(IRoomObject room);
-    public void setRoom(int roomId);
+    public void addRoom(IRoomObject room, int id);
+    public void setRoom(int roomId, bool inc);
     public IRoomObject currentRoom();
     public void Reset();
     public void Draw(GameTime gameTime);

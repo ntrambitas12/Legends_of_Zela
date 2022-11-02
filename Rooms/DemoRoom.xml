@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
 	<!-- ROOM COMPLETE -->
-
+	<BaseCord>
+		<xCord>0</xCord>
+		<yCord>0</yCord>
+	</BaseCord>
 	<Blocks>
 		<Block>
 			<xPos>272</xPos>
