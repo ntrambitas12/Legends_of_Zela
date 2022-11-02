@@ -337,6 +337,11 @@ public class RoomObject : IRoomObject
             enemy.SetSpriteState(enemyAction, enemy.still);            
         }
     }
+
+    public void UnpauseEnemies()
+    {
+        pauseEnemies = false;
+    }
     private void CheckEnteredDoor()
     {
        
@@ -367,11 +372,6 @@ public class RoomObject : IRoomObject
 
        }
 
-    public void UnpauseEnemies()
-    {
-        pauseEnemies = false;
+    
     }
-}
-    }
-}
-
+  }
