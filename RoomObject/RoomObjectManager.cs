@@ -23,6 +23,8 @@ public sealed class RoomObjectManager : IRoomObjectManager
     private Vector2 DownPan;
     private Dictionary<String, (int, int, int, Vector2, int, bool)> roomDir;
   
+    private ICollisionManager collisionManager;
+
     private RoomObjectManager()
     {
         roomList = new IRoomObject[100];
@@ -38,7 +40,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
         roomDir.Add("Right", (150, 240, 1, RightPan, roomXLimit, true));
         isTransitioning = false;
 
-
+        collisionManager = CollisionManager.Instance;
     }
 
     private static RoomObjectManager instance = new RoomObjectManager();
@@ -143,6 +145,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
         this.direction = direction; 
         roomDir.TryGetValue(direction, out var roomData);
         var Link = _currentRoom.Link;
+        _currentRoom.UnpauseEnemies();
         Vector2 LinkCord = new Vector2(roomData.Item1, roomData.Item2);
         _currentRoom.Link = null;
         //move link to the next room and enter the transition state
@@ -184,6 +187,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
         {
             panRoom();
         }
+        collisionManager.Update(gameTime);
     }
 
     public void DeleteGameObject(int objectType, ISprite gameObject)

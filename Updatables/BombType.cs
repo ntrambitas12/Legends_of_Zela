@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-public class BombType : IItemType
+public class BombType : IProjectileType
 {
     private IProjectile projectile;
     private FireProjectile fireProjectile;
@@ -24,46 +24,57 @@ public class BombType : IItemType
 
         if (counter >= distance - 20)
         {
-            projectile.SetSpriteAction(SpriteAction.bombCloud);
-
-            //check for collisions and effects
-            if (shouldDraw)
-            {
-                ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
-
-                //if (collidingObject != null)
-                //{
-                //    fireProjectile.ResetCounter();
-                //}
-
-                collidingObject = projectile.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
-                bool check = projectile.Owner() != RoomObjectManager.Instance.currentRoom().Link;
-
-                if (check && collidingObject != null)
-                {
-                    //fireProjectile.ResetCounter();
-                    RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
-                }
-
-                collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
-                check = !(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(projectile.Owner()));
-
-                if (check && collidingObject != null)
-                {
-                    //fireProjectile.ResetCounter();
-                    if (RoomObjectManager.Instance.currentRoom().EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
-                    {
-                        RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
-                    }
-                    RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
-                }
-            }
+            projectile.SetSpriteAction(SpriteAction.bombCloud);           
         }
 
         if (shouldDraw)
         {
             fireProjectile.Execute();
         }
+
+        //check for collisions and effects
+        //UpdateCollisions(gameTime);
+    }
+
+    
+    public void UpdateCollisions(GameTime gameTime)
+    {
+        
+        if (shouldDraw && counter >= distance - 20)
+        {
+            Vector2 prevCord = projectile.screenCord;
+            projectile.SetPosition(new Vector2(prevCord.X - 30, prevCord.Y - 30));
+            ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
+
+            //if (collidingObject != null)
+            //{
+            //    fireProjectile.ResetCounter();
+            //}
+
+            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
+            bool check = projectile.Owner() != RoomObjectManager.Instance.currentRoom().Link;
+
+            if (check && collidingObject != null)
+            {
+                //fireProjectile.ResetCounter();
+                RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
+            }
+
+            collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
+            check = !(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(projectile.Owner()));
+
+            if (check && collidingObject != null)
+            {
+                //fireProjectile.ResetCounter();
+                if (RoomObjectManager.Instance.currentRoom().EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
+                {
+                    RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
+                }
+                RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+            }
+            projectile.SetPosition(prevCord);
+        }
+        
     }
 }
 

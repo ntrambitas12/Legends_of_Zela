@@ -114,4 +114,8 @@ public interface IRoomObject
     public void ResetControllers();
 
     public void TakeDamage(ISprite sprite);
+
+    public void PauseEnemies();
+
+    public void UnpauseEnemies();
 }

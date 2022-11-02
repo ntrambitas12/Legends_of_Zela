@@ -31,6 +31,7 @@ public class RoomObject : IRoomObject
     private List<SpriteAction> enemyActions;
     private SpriteAction enemyAction;
     private Random rand;
+    private bool pauseEnemies;
 
     //constants
     private int leftDoorBoundary = 146;
@@ -82,6 +83,7 @@ public class RoomObject : IRoomObject
         enemyActions.Add(SpriteAction.moveLeft);
         enemyActions.Add(SpriteAction.moveRight);
         enemyActions.Add(SpriteAction.moveUp);
+        pauseEnemies = false;
 
         roomObjectManager = RoomObjectManager.Instance;
 
@@ -124,12 +126,6 @@ public class RoomObject : IRoomObject
         //update Link
         if (Link != null) {
             Link.Update(gameTime);
-            ((IConcreteSprite)Link).UpdateCollideWithWall(this);
-            if (Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList) != null ||
-                Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList) != null)
-            {
-                TakeDamage(Link);
-            }
         }
 
         //update all enemies
@@ -140,10 +136,11 @@ public class RoomObject : IRoomObject
              * Using rand.next as a mechanism to "randomly" 
              * have each enemy change its state.
              * Couldnt think of a better ai, this will do
-             * for now.
+             * for now. If a clock was used then enemies 
+             * don't move.
            */
 
-            if (rand.Next(25) == 5)
+            if (!pauseEnemies && rand.Next(25) == 5)
             {
                 enemyAction = enemyActions[rand.Next(4)];
 
@@ -160,7 +157,7 @@ public class RoomObject : IRoomObject
             }
 
             enemy.Update(gameTime);
-            enemy.UpdateCollideWithWall(this);
+
         }
 
         //update projectiles
@@ -173,7 +170,7 @@ public class RoomObject : IRoomObject
 
         foreach (IProjectile enemyProjectile in EnemyProjectileList)
         {
-            if (rand.Next(25) == 5)
+            if (!pauseEnemies && rand.Next(25) == 5)
             {
                 enemyProjectile.FireCommand().Execute();
             }
@@ -330,6 +327,21 @@ public class RoomObject : IRoomObject
         castSprite.SetSpriteState(newPos, castSprite.damaged);
     }
 
+    public void PauseEnemies()
+    {
+        pauseEnemies = true;
+
+        //set all enemies to still
+        foreach (IConcreteSprite enemy in EnemyList)
+        {
+            enemy.SetSpriteState(enemyAction, enemy.still);            
+        }
+    }
+
+    public void UnpauseEnemies()
+    {
+        pauseEnemies = false;
+    }
     private void CheckEnteredDoor()
     {
        
@@ -360,6 +372,6 @@ public class RoomObject : IRoomObject
 
        }
 
+    
     }
-}
-
+  }

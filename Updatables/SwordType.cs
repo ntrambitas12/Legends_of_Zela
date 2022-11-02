@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-public class SwordType : IItemType
+public class SwordType : IProjectileType
 {
     private IProjectile sword;
     private FireProjectile fireProjectile;
@@ -24,9 +24,15 @@ public class SwordType : IItemType
         }
 
         //check for collisions and effects
+        //UpdateCollisions(gameTime);
+    }
+
+
+    //check for collisions and effects
+    public void UpdateCollisions(GameTime gameTime)
+    {
         if (shouldDraw)
         {
-
             ISprite collidingObject = sword.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
             bool check = sword.Owner() != RoomObjectManager.Instance.currentRoom().Link;
 
