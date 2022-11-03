@@ -15,6 +15,7 @@ public enum RoomObjectTypes
     typeTileStatic = 4,
     typeTileDynamic = 5,
     typePickup = 6,
+    typeTileMoveable = 7,
     typeTopLayerNonCollidible = 8,
     typeReplacesFloor = 9,
     typeFloor = 10,
@@ -43,6 +44,10 @@ public interface IRoomObject
 
     //list for dynamic tiles (doors, moving tiles)
     public List<ISprite> DynamicTileList { get; set; }
+    
+    //list for moveable tiles
+    public List<ISprite> MoveableTileList { get; set; }
+
 
     //list for item pickups
     public List<ISprite> PickupList { get; set; }
@@ -96,6 +101,7 @@ public interface IRoomObject
     //  projectiles (both types)
     //  pickup items
     //  dynamic tiles
+    //  moveable tiles
     //after updating game objects, goes into 'delete step', and deletes game objects held in private toBeDeleted list
     //clears toBeDeleted once all objects in it have been deleted from Game Object's various lists
     public void Update(GameTime gameTime);
