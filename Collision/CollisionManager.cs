@@ -71,8 +71,6 @@ public sealed class CollisionManager : ICollisionManager
         foreach (IConcreteSprite enemy in currentRoom.EnemyList)
         {
             UpdateCollideWithWall(enemy, currentRoom, true);
-            UpdateMoveableTiles(enemy, currentRoom);
-
         }
     }
     // updates link projectile collisions
