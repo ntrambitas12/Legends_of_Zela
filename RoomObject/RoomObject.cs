@@ -22,6 +22,8 @@ public class RoomObject : IRoomObject
     public List<ISprite> replacesFloorList { get; set; }
     public List<ISprite> floorList { get; set; }
     public List<ISprite> ProjectileStopperList { get; set; }
+    public Dictionary<ISprite, bool> LockedDoorsList { get; set; }
+    public Dictionary<ISprite, bool> BombDoorsList { get; set; }
     public Dictionary<ISprite, ISprite> EnemyToProjectile { get; set; }
     public Vector2 BaseCord { get; set; }
 
@@ -64,6 +66,9 @@ public class RoomObject : IRoomObject
         ProjectileStopperList = new List<ISprite>();
         EnemyToProjectile = new Dictionary<ISprite, ISprite>();
 
+        LockedDoorsList = new Dictionary<ISprite, bool>();
+        BombDoorsList = new Dictionary<ISprite, bool>();
+
         //intialize structures to add and delete
         listDict = new Dictionary<int, List<ISprite>>();
         toBeDeleted = new List<(ISprite, int)>();
@@ -99,6 +104,107 @@ public class RoomObject : IRoomObject
     public void AddEnemyProjectilePair(ISprite enemy, ISprite projectile)
     {
         if (!EnemyToProjectile.ContainsKey(enemy)) EnemyToProjectile.Add(enemy, projectile);
+    }
+
+    public void AddClosedDoor(ISprite door, String name)
+    {
+        if ((name.Substring(0, 4)).Equals("Door"))
+        {
+            LockedDoorsList.Add(door, true);
+        }
+        else
+        {
+            BombDoorsList.Add(door, true);
+        }
+    }
+
+    public void OpenDoor(ISprite door)
+    {
+        IConcreteSprite _door = (IConcreteSprite) door;
+        _door.SetSpriteAction(SpriteAction.doorOpen);
+        IRoomObject otherRoom = RoomObjectManager.Instance.adjacentRoom(_door.direction);
+        if (LockedDoorsList.ContainsKey(door))
+        {
+            LockedDoorsList[door] = false;
+            foreach (IConcreteSprite otherDoor in otherRoom.LockedDoorsList.Keys)
+            {
+                switch (_door.direction)
+                {
+                    case SpriteAction.left:
+                        if (otherDoor.direction == SpriteAction.right)
+                        {
+                            otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherRoom.LockedDoorsList[otherDoor] = false;
+                        }
+                        break;
+                    case SpriteAction.right:
+                        if (otherDoor.direction == SpriteAction.left)
+                        {
+                            otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherRoom.LockedDoorsList[otherDoor] = false;
+                        }
+                        break;
+                    case SpriteAction.up:
+                        if (otherDoor.direction == SpriteAction.down)
+                        {
+                            otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherRoom.LockedDoorsList[otherDoor] = false;
+                        }
+                        break;
+                    case SpriteAction.down:
+                        if (otherDoor.direction == SpriteAction.up)
+                        {
+                            otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherRoom.LockedDoorsList[otherDoor] = false;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        else if (BombDoorsList.ContainsKey(door))
+        {
+            BombDoorsList[door] = false;
+            foreach (IConcreteSprite otherDoor in otherRoom.BombDoorsList.Keys)
+            {
+                switch (_door.direction)
+                {
+                    case SpriteAction.left:
+                        if (otherDoor.direction == SpriteAction.right)
+                        {
+                            otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherRoom.BombDoorsList[otherDoor] = false;
+                        }
+                        break;
+                    case SpriteAction.right:
+                        if (otherDoor.direction == SpriteAction.left)
+                        {
+                            otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherRoom.BombDoorsList[otherDoor] = false;
+                        }
+                        break;
+                    case SpriteAction.up:
+                        if (otherDoor.direction == SpriteAction.down)
+                        {
+                            otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherRoom.BombDoorsList[otherDoor] = false;
+                        }
+                        break;
+                    case SpriteAction.down:
+                        if (otherDoor.direction == SpriteAction.up)
+                        {
+                            otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherRoom.BombDoorsList[otherDoor] = false;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        
+        
     }
 
     public void AddGameObject(int objectType, ISprite gameObject, String name)

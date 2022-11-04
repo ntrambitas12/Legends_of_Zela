@@ -49,7 +49,7 @@
 			<Name>WallBottom2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
-		<Block isOpen='true'>
+		<Block isOpen='false'>
 			<xPos>368</xPos>
 			<yPos>114</yPos>
 			<Name>DoorUp</Name>

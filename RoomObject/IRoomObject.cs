@@ -72,6 +72,12 @@ public interface IRoomObject
     //this is to exclude water from static tiles
     public List<ISprite> ProjectileStopperList { get; set; }
 
+    //list of locked doors (true if closed, false if open)
+    public Dictionary<ISprite, bool> LockedDoorsList { get; set; }
+
+    //list of bombable doors (true if closed, false if open)
+    public Dictionary<ISprite, bool> BombDoorsList { get; set; }
+
     //dict mapping enemies to their projectiles
     public Dictionary<ISprite, ISprite> EnemyToProjectile { get; set; }
    //Base cord for camera
@@ -79,6 +85,12 @@ public interface IRoomObject
 
     //adds an enemy and its projectile to dict
     public void AddEnemyProjectilePair(ISprite enemy, ISprite projectile);
+
+    //adds a closed door to list
+    public void AddClosedDoor(ISprite door, String name);
+
+    //removes opened door from its list and sets its sprite action
+    public void OpenDoor(ISprite door);
 
     //adds gameObject into its lists
     //which list depends on the enum passed as objectType

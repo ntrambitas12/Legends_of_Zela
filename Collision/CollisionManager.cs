@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,11 +39,14 @@ public sealed class CollisionManager : ICollisionManager
             //update enemy collisions
             UpdateEnemies(gameTime);
 
-            // TODO: updates link projectile collisions
+            // updates link projectile collisions
             UpdateLinkProjectile(gameTime);
 
-            // TODO: updates enemy projectile collisions
+            // updates enemy projectile collisions
             UpdateEnemyProjectile(gameTime);
+
+            // updates closed door
+            UpdateLockedDoors(gameTime);
         }
     }
 
@@ -90,12 +93,48 @@ public sealed class CollisionManager : ICollisionManager
         }
     }
 
+    // updates closed door collisions
+    private void UpdateLockedDoors(GameTime gameTime)
+    {
+        foreach (ISprite door in currentRoom.LockedDoorsList.Keys)
+        {
+            IConcreteSprite _door = (IConcreteSprite) door;
+            IConcreteSprite colliding = (IConcreteSprite) _door.collider.isIntersecting( new List<ISprite> { currentRoom.Link });
+
+            if (colliding != null && colliding.keys > 0) // colliding is link if not null
+            {
+                currentRoom.OpenDoor(door);
+                colliding.keys--;
+            }
+
+            //Stop link if door still closed
+            if (colliding != null && currentRoom.LockedDoorsList.TryGetValue(door, out bool closed) && closed)
+            {
+
+            }
+        }
+    }
+
     //call so the entity gets repelled by walls
     private void UpdateCollideWithWall(ISprite entity, IRoomObject roomObject, bool enemy)
     {
         entity.collider.ResetCollisionBooleans();
         entity.collider.UpdateCollision(roomObject.StaticTileList);
         entity.collider.UpdateCollision(roomObject.DynamicTileList);
+        foreach (IConcreteSprite door in currentRoom.LockedDoorsList.Keys)
+        {
+            if (currentRoom.LockedDoorsList.TryGetValue(door, out bool closed) && closed)
+            {
+                entity.collider.UpdateCollision(door);
+            }
+        }
+        foreach (IConcreteSprite door in currentRoom.BombDoorsList.Keys)
+        {
+            if (currentRoom.BombDoorsList.TryGetValue(door, out bool closed) && closed)
+            {
+                entity.collider.UpdateCollision(door);
+            }
+        }
         if (enemy)
         {
             //only run this for enemies

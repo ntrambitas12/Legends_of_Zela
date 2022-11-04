@@ -61,7 +61,6 @@ public class Collision : ICollision
     {
         this.rect = new Rectangle((int)entity.screenCord.X, (int)entity.screenCord.Y, colliderDimensions.Width, colliderDimensions.Height);
     }
-
     //sets the various isColliding booleans against collidibleList
     public void UpdateCollision(List<ISprite> collidibleList)
     {
@@ -109,8 +108,15 @@ public class Collision : ICollision
         }
     }
 
+    //overload for single element
+    public void UpdateCollision(ISprite collidable)
+    {
+        List<ISprite> collidableList = new List<ISprite> { collidable };
+        UpdateCollision(collidableList);
+    }
+
     //returns the object that this.rect has intersected with. returns null if not intersecting with anything in list
-    public ISprite isIntersecting(List<ISprite> collidibleList)
+    public ISprite isIntersecting(ICollection<ISprite> collidibleList)
     {
 
         //update collider position
