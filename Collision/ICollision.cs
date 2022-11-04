@@ -24,6 +24,9 @@ public interface ICollision
     public Boolean isCollidingLeft { get; set; }
     public Boolean isCollidingRight { get; set; }
 
+    //set the object that the entity collided with
+    public ISprite collidedEntity { get; set; } 
+
     //collider rectangle, used internally
     public Rectangle rect { get; set; }
 

@@ -15,6 +15,7 @@ public class RoomObject : IRoomObject
     public List<ISprite> EnemyProjectileList { get; set; }
     public List<ISprite> StaticTileList { get; set; }
     public List<ISprite> DynamicTileList { get; set; }
+    public List<ISprite> MoveableTileList { get; set; }
     public List<ISprite> PickupList { get; set; }
     public List<ISprite>[] CollidibleList { get; set; }
     public List<ISprite> TopLayerNonCollidibleList { get; set; }
@@ -51,6 +52,7 @@ public class RoomObject : IRoomObject
         EnemyProjectileList = new List<ISprite>();
         StaticTileList = new List<ISprite>();
         DynamicTileList = new List<ISprite>();
+        MoveableTileList = new List<ISprite>();
         PickupList = new List<ISprite>();
 
         CollidibleList = new List<ISprite>[2];
@@ -76,6 +78,7 @@ public class RoomObject : IRoomObject
         listDict.Add((int)RoomObjectTypes.typeEnemyProjectile, EnemyProjectileList);
         listDict.Add((int)RoomObjectTypes.typeTileStatic, StaticTileList);
         listDict.Add((int)RoomObjectTypes.typeTileDynamic, DynamicTileList);
+        listDict.Add((int)RoomObjectTypes.typeTileMoveable, MoveableTileList);
         listDict.Add((int)RoomObjectTypes.typePickup, PickupList);
         listDict.Add((int)RoomObjectTypes.typeTopLayerNonCollidible, TopLayerNonCollidibleList);
         listDict.Add((int)RoomObjectTypes.typeReplacesFloor, replacesFloorList);
@@ -295,6 +298,12 @@ public class RoomObject : IRoomObject
             tile.Update(gameTime);
         }
 
+        //update moveable tiles
+        foreach (var tile in MoveableTileList)
+        {
+            tile.Update(gameTime);
+        }
+
         //update switching roooms
         CheckEnteredDoor();
 
@@ -330,6 +339,11 @@ public class RoomObject : IRoomObject
             tile.Draw(gameTime);
         }
 
+        foreach (var tile in MoveableTileList)
+        {
+            tile.Draw(gameTime);
+        }
+
         foreach (var enemyProjectile in EnemyProjectileList)
         {
             enemyProjectile.Draw(gameTime);
@@ -344,8 +358,6 @@ public class RoomObject : IRoomObject
         {
             enemy.Draw(gameTime);
         }
-
-        
 
         if (Link != null)
         {
@@ -477,7 +489,5 @@ public class RoomObject : IRoomObject
         }
 
        }
-
-    
     }
   }
