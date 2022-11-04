@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,13 +56,16 @@ public sealed class CollisionManager : ICollisionManager
         if (currentRoom.Link != null)
         {
             //wall collision and repulsion
-            UpdateCollideWithWall(currentRoom.Link, currentRoom);
+            UpdateCollideWithWall(currentRoom.Link, currentRoom, false);
             //contact damage with enemy
             if (currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList) != null ||
                 currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList) != null)
             {
                 ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
             }
+
+            //update the moveable tiles
+            UpdateMoveableTiles(currentRoom.Link, currentRoom);
         }
     }
     //updates enemies's collisions
@@ -70,7 +73,7 @@ public sealed class CollisionManager : ICollisionManager
     {
         foreach (IConcreteSprite enemy in currentRoom.EnemyList)
         {
-            UpdateCollideWithWall(enemy, currentRoom);
+            UpdateCollideWithWall(enemy, currentRoom, true);
         }
     }
     // updates link projectile collisions
@@ -113,7 +116,7 @@ public sealed class CollisionManager : ICollisionManager
     }
 
     //call so the entity gets repelled by walls
-    private void UpdateCollideWithWall(ISprite entity, IRoomObject roomObject)
+    private void UpdateCollideWithWall(ISprite entity, IRoomObject roomObject, bool enemy)
     {
         entity.collider.ResetCollisionBooleans();
         entity.collider.UpdateCollision(roomObject.StaticTileList);
@@ -131,6 +134,11 @@ public sealed class CollisionManager : ICollisionManager
             {
                 entity.collider.UpdateCollision(door);
             }
+        }
+        if (enemy)
+        {
+            //only run this for enemies
+            entity.collider.UpdateCollision(roomObject.MoveableTileList);
         }
         if (entity.collider.isColliding)
         {
@@ -163,5 +171,46 @@ public sealed class CollisionManager : ICollisionManager
                 entity.screenCord = new Vector2((int)x, (int)y);
             }
         }
+    }
+
+    //call to update moveable tiles
+    private void UpdateMoveableTiles(ISprite entity, IRoomObject roomObject)
+    {
+        entity.collider.ResetCollisionBooleans();
+        entity.collider.UpdateCollision(roomObject.MoveableTileList);
+     
+        if (entity.collider.isColliding)
+        {
+            ISprite collidedEntity = entity.collider.collidedEntity;
+            if (entity.collider.isCollidingBottom)
+            {
+                Vector2 position = collidedEntity.screenCord;
+                double x = collidedEntity.screenCord.X;
+                double y = collidedEntity.screenCord.Y + (int)CONSTANTS.REPULSION;
+                collidedEntity.screenCord = new Vector2((int)x, (int)y);
+            }
+            if (entity.collider.isCollidingTop)
+            {
+                Vector2 position = collidedEntity.screenCord;
+                double x = collidedEntity.screenCord.X;
+                double y = collidedEntity.screenCord.Y - (int)CONSTANTS.REPULSION;
+                collidedEntity.screenCord = new Vector2((int)x, (int)y);
+            }
+            if (entity.collider.isCollidingLeft)
+            {
+                Vector2 position = collidedEntity.screenCord;
+                double x = collidedEntity.screenCord.X - (int)CONSTANTS.REPULSION;
+                double y = collidedEntity.screenCord.Y;
+                collidedEntity.screenCord = new Vector2((int)x, (int)y);
+            }
+            if (entity.collider.isCollidingRight)
+            {
+                Vector2 position = collidedEntity.screenCord;
+                double x = collidedEntity.screenCord.X + (int)CONSTANTS.REPULSION;
+                double y = collidedEntity.screenCord.Y;
+                collidedEntity.screenCord = new Vector2((int)x, (int)y);
+            }
+            collidedEntity.collider.UpdateCollisionPosition();
+        } 
     }
 }

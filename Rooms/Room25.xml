@@ -60,7 +60,7 @@
 			<xPos>336</xPos>
 			<yPos>274</yPos>
 			<Name>Barrier</Name>
-			<RoomObjectType>5</RoomObjectType>
+			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>368</xPos>
@@ -84,7 +84,7 @@
 			<xPos>464</xPos>
 			<yPos>274</yPos>
 			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
+			<RoomObjectType>7</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>432</xPos>
@@ -104,12 +104,7 @@
 			<Name>Barrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
-		<Block>
-			<xPos>368</xPos>
-			<yPos>306</yPos>
-			<Name>InvisibleBarrier</Name>
-			<RoomObjectType>9</RoomObjectType>
-		</Block>
+		
 	</Blocks>
 
 

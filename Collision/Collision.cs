@@ -27,7 +27,9 @@ public class Collision : ICollision
     public Boolean isCollidingBottom { get; set; }
     public Boolean isCollidingLeft { get; set; }
     public Boolean isCollidingRight { get; set; }
-
+    
+    //set the object that the entity collided with
+    public ISprite collidedEntity { get; set; }
     //collider rect for this
     public Rectangle rect { get; set; }
     private Rectangle colliderDimensions;
@@ -51,6 +53,7 @@ public class Collision : ICollision
         isCollidingBottom = false;
         isCollidingLeft = false;
         isCollidingRight = false;
+        collidedEntity = null;
     }
 
     //updates collider rect's position
@@ -64,7 +67,7 @@ public class Collision : ICollision
 
         //update collider position
         this.rect = new Rectangle((int)entity.screenCord.X, (int)entity.screenCord.Y, colliderDimensions.Width, colliderDimensions.Height);
-
+       
         foreach (ISprite collidingEntity in collidibleList)
         {
             Rectangle intersectRect = Rectangle.Intersect(this.rect, ((Collision)collidingEntity.collider).rect);
@@ -72,6 +75,7 @@ public class Collision : ICollision
             if (intersectRect.Height > (int)CONSTANTS.THRESHHOLD && intersectRect.Width > (int)CONSTANTS.THRESHHOLD)
             {
                 this.isColliding = true;                                                //collision detected
+                collidedEntity = collidingEntity;
                 if (intersectRect.Height > intersectRect.Width)                         //check whether horizontal or vertical collision
                 {
                     //case 1: horizontal collision (intersectRect has higher height)
