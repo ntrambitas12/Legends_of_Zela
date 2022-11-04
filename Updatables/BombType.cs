@@ -42,36 +42,47 @@ public class BombType : IProjectileType
         
         if (shouldDraw && counter >= distance - 20)
         {
+            IRoomObject _currentRoom = RoomObjectManager.Instance.currentRoom();
             Vector2 prevCord = projectile.screenCord;
             projectile.SetPosition(new Vector2(prevCord.X - 30, prevCord.Y - 30));
-            ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
+            ISprite collidingObject = projectile.collider.isIntersecting(_currentRoom.ProjectileStopperList);
 
             //if (collidingObject != null)
             //{
             //    fireProjectile.ResetCounter();
             //}
 
-            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
-            bool check = projectile.Owner() != RoomObjectManager.Instance.currentRoom().Link;
+            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { _currentRoom.Link });
+            bool check = projectile.Owner() != _currentRoom.Link;
 
             if (check && collidingObject != null)
             {
                 //fireProjectile.ResetCounter();
-                RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
+                _currentRoom.TakeDamage(collidingObject);
             }
 
-            collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
-            check = !(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(projectile.Owner()));
+            collidingObject = projectile.collider.isIntersecting(_currentRoom.EnemyList);
+            check = !(_currentRoom.EnemyList.Contains(projectile.Owner()));
 
             if (check && collidingObject != null)
             {
                 //fireProjectile.ResetCounter();
-                if (RoomObjectManager.Instance.currentRoom().EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
+                if (_currentRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
                 {
-                    RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
+                    _currentRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
                 }
-                RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                _currentRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
             }
+
+            //check for bombable doors
+            collidingObject = projectile.collider.isIntersecting(_currentRoom.BombDoorsList.Keys);
+            check = projectile.Owner() == _currentRoom.Link;
+
+            if (check && collidingObject != null)
+            {
+                _currentRoom.OpenDoor(collidingObject);
+            }
+
             projectile.SetPosition(prevCord);
         }
         

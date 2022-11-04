@@ -35,6 +35,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     private int projectileIndex;
     public IProjectile[] projectiles { get; set; }
 
+    public SpriteAction direction { get; set; }
 
     private IDraw drawSprite = new DrawSprite();
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
@@ -55,6 +56,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         {
             state = ClosedDoor;
         }
+        direction = SpriteAction.left;
     }
 
     public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures)
@@ -75,6 +77,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         rubies = 0;
 
         state = still;
+        direction = SpriteAction.left;
 
         projectiles = new IProjectile[4];
         projectileIndex = (int)ArrayIndex.arrow;
@@ -176,7 +179,10 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         this.SetSpriteState(newPos, this.damaged);
     }
 
-
+    public void SetDirection(SpriteAction direction)
+    {
+        this.direction = direction;
+    }
 
 }
 

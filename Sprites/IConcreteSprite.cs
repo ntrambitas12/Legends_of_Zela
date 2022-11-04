@@ -24,8 +24,11 @@ public interface IConcreteSprite : ISprite
     public int keys { get; set; }
     public int rubies { get; set; }
 
+    public SpriteAction direction { get; set; }
 
+    
     void SetSpriteState(SpriteAction action, ISpriteState spriteState);
+    public void SetDirection(SpriteAction direction);
 
     public void AddProjectile(IProjectile projectile, ArrayIndex i);
     public ArrayIndex ProjectileIndex();

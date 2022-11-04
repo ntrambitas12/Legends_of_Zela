@@ -210,7 +210,13 @@ public class LevelLoader: ILevelLoader
                             if(constructer.TryGetValue(name, out Delegate doorConstructor))
                             {
                                 sprite = (ISprite)doorConstructor.DynamicInvoke(new Vector2(xPos, yPos) + _base, isDoorOpen);
+                                if (!isDoorOpen)
+                                {
+                                    ((IConcreteSprite)sprite).SetSpriteAction(SpriteAction.doorClosed);
+                                    room.AddClosedDoor(sprite, name);
+                                }
                             }
+
 
                             isDoor = false;
                         }

@@ -139,6 +139,24 @@ public sealed class RoomObjectManager : IRoomObjectManager
         }
     }
 
+    public IRoomObject adjacentRoom(SpriteAction direction)
+    {
+        switch (direction)
+        {
+            case SpriteAction.left:
+                return roomList[currentRoomID() - 1];
+            case SpriteAction.right:
+                return roomList[currentRoomID() + 1];
+            case SpriteAction.up:
+                return roomList[currentRoomID() + 5];
+            case SpriteAction.down:
+                return roomList[currentRoomID() - 5];
+            default:
+                break;
+        }
+        return null;
+    }
+
 
     public void nextRoom(String direction)
     {

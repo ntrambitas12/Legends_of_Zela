@@ -61,7 +61,7 @@
 			<Name>Barrier</Name>
 			<RoomObjectType>5</RoomObjectType>
 		</Block>
-		<Block isOpen='true'>
+		<Block isOpen='false'>
 			<xPos>368</xPos>
 			<yPos>402</yPos>
 			<Name>DoorDown</Name>

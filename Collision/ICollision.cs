@@ -36,10 +36,12 @@ public interface ICollision
     //sets the various isColliding booleans against collidibleList
     //e.g. Link and enemies call UpdateCollision(Game.gameObjects.CollidibleList.get()) to set isColliding against all collidibles
     public void UpdateCollision(List<ISprite> collidibleList);
+    //overload for single element
+    public void UpdateCollision(ISprite collidable);
 
     //returns the object that this.rect has intersected with. returns null if not intersecting with anything in list
     //does NOT require UpdateCollision() to be called
     //a light-weight method for projectiles and items that do not need complex logic for movement
-    public ISprite isIntersecting(List<ISprite> collidibleList);
+    public ISprite isIntersecting(ICollection<ISprite> collidibleList);
 
 }
