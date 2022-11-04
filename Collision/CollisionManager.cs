@@ -16,10 +16,12 @@ public sealed class CollisionManager : ICollisionManager
     //--------------------------------VARIABLES--------------------------------
     private static CollisionManager instance = new CollisionManager();
     private IRoomObject currentRoom;
+    private float timeElapsed;
 
     //--------------------------------INITIALIZER--------------------------------
     private CollisionManager()
     {
+        timeElapsed = 0;
     }
 
     public static CollisionManager Instance { get { return instance; } }
@@ -48,6 +50,7 @@ public sealed class CollisionManager : ICollisionManager
             // updates closed door
             UpdateLockedDoors(gameTime);
         }
+        timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 
     //updates Link's collisions
@@ -101,16 +104,13 @@ public sealed class CollisionManager : ICollisionManager
             IConcreteSprite _door = (IConcreteSprite) door;
             IConcreteSprite colliding = (IConcreteSprite) _door.collider.isIntersecting( new List<ISprite> { currentRoom.Link });
 
-            if (colliding != null && colliding.keys > 0) // colliding is link if not null
+            if (colliding != null && colliding.keys > 0 && timeElapsed > 0.5
+                && currentRoom.LockedDoorsList.TryGetValue(door, out bool closed)
+                && closed) // colliding is link if not null
             {
+                timeElapsed = 0;
                 currentRoom.OpenDoor(door);
                 colliding.keys--;
-            }
-
-            //Stop link if door still closed
-            if (colliding != null && currentRoom.LockedDoorsList.TryGetValue(door, out bool closed) && closed)
-            {
-
             }
         }
     }

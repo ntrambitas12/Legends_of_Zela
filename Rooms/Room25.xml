@@ -44,7 +44,7 @@
 			<Name>WallRight2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
-		<Block isOpen='true'>
+		<Block isOpen='false'>
 			<xPos>592</xPos>
 			<yPos>258</yPos>
 			<Name>DoorRight</Name>
