@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,7 +101,6 @@ public sealed class CollisionManager : ICollisionManager
     {
         foreach (ISprite door in currentRoom.LockedDoorsList.Keys)
         {
-
             IConcreteSprite _door = (IConcreteSprite) door;
             IConcreteSprite colliding = (IConcreteSprite) _door.collider.isIntersecting( new List<ISprite> { currentRoom.Link });
 
