@@ -27,8 +27,8 @@ public sealed class CollisionManager : ICollisionManager
     public static CollisionManager Instance { get { return instance; } }
 
     //--------------------------------METHODS--------------------------------
-    
-    /* called by Update in Game1
+
+    /* called by Update in RoomObjectManager
      * updates collision of game objects inside current room */
     public void Update(GameTime gameTime)
     {

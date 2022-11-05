@@ -43,7 +43,7 @@ public sealed class AIManager : IAIManager
         return entity;
     }
 
-    /* called by Update in Game1
+    /* called by Update in RoomObjectManager
      * updates collision of game objects inside current room */
     public void Update(GameTime gameTime)
     {
