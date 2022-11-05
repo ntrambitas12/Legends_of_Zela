@@ -233,17 +233,15 @@ public class RoomObject : IRoomObject
         //update all enemies
         foreach (IConcreteSprite enemy in EnemyList)
         {
-
             enemy.Update(gameTime);
-
         }
 
         //update projectiles
         if (Link != null) { 
-        foreach(IProjectile projectile in ((ConcreteSprite)Link).projectiles)
-        {
-            if (projectile != null) projectile.Update(gameTime);
-        }
+            foreach(IProjectile projectile in ((ConcreteSprite)Link).projectiles)
+            {
+                if (projectile != null) projectile.Update(gameTime);
+            }
         }
 
         foreach (IProjectile enemyProjectile in EnemyProjectileList)
