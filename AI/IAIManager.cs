@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 //The single point where all AI are updated.
 internal interface IAIManager
 {
+    //adds ai component to entity
+    public ISprite AddAI(ISprite entity, AIType ai);
+
     //updates all game objects in current room
     public void Update(GameTime gameTime);
 }

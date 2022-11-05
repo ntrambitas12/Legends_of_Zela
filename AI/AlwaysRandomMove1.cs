@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class RandomMove1 : IAI
+public class AlwaysRandomMove1 : IAI
 {
 
     private enum CONSTANTS
@@ -24,7 +24,7 @@ public class RandomMove1 : IAI
 
     //--------------------------------INITIALIZER--------------------------------
     //must be passed an entity for 'this' to be attached to, and size of collider 'colliderDimensions'
-    public RandomMove1(ISprite entity)
+    public AlwaysRandomMove1(ISprite entity)
     {
         this.entity = entity;
         rand = new Random();
@@ -36,17 +36,8 @@ public class RandomMove1 : IAI
         this.pauseEnemies = RoomObjectManager.Instance.currentRoom().IsPauseEnemies();
         if (!pauseEnemies && rand.Next(25) == 5)
         {
-            enemyAction = (SpriteAction)rand.Next(3);
-            //if 0, then enemy will move
-            if (rand.Next(2) == 0)
-            {
-                ((IConcreteSprite)entity).SetSpriteState(enemyAction, ((IConcreteSprite)entity).moving);
-            }
-            //if 1, enemy will stay still
-            else
-            {
-                ((IConcreteSprite)entity).SetSpriteState(enemyAction, ((IConcreteSprite)entity).still);
-            }
+            enemyAction = (SpriteAction)rand.Next(4);
+            ((IConcreteSprite)entity).SetSpriteState(enemyAction, ((IConcreteSprite)entity).moving);
         }
     }
 }

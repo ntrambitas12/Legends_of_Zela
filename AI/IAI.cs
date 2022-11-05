@@ -19,5 +19,6 @@ public interface IAI
 
 public enum AIType
 {
-    RandomMove = 1,
+    RandomMove = 11,
+    AlwaysRandomMove = 12,
 }

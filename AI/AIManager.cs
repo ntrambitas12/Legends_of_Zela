@@ -24,6 +24,25 @@ public sealed class AIManager : IAIManager
 
     //--------------------------------METHODS--------------------------------
 
+    //adds ai component to entity
+    public ISprite AddAI(ISprite entity, AIType ai)
+    {
+        IAI newAI = null;
+
+        switch (ai)
+        {
+            case AIType.RandomMove:
+                newAI = new RandomMove1(entity);
+                break;
+            case AIType.AlwaysRandomMove:
+                newAI = new AlwaysRandomMove1(entity);
+                break;
+        }
+
+        entity.ai = newAI;
+        return entity;
+    }
+
     /* called by Update in Game1
      * updates collision of game objects inside current room */
     public void Update(GameTime gameTime)

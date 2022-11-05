@@ -666,15 +666,7 @@ public sealed class SpriteFactory : IFactory
     //gives entity an ai component, ai type is an enum
     private ISprite AddAI(ISprite entity, AIType ai)
     {
-        IAI newAI = null;
-
-        switch (ai) {
-            case AIType.RandomMove: 
-                newAI = new RandomMove1(entity);
-                break;
-        }
-
-        entity.ai = newAI;
+        AIManager.Instance.AddAI(entity, ai);
         return entity;
     }
 
@@ -832,7 +824,7 @@ public sealed class SpriteFactory : IFactory
     }
     public ISprite CreateKeeseSprite(Vector2 location)
     {
-        return AddAI(CreateEntityWithCollision(location, keeseFrames), AIType.RandomMove);
+        return AddAI(CreateEntityWithCollision(location, keeseFrames), AIType.AlwaysRandomMove);
     }
     public ISprite CreateStalfosSprite(Vector2 location)
     {
