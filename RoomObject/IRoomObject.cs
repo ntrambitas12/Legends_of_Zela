@@ -136,4 +136,6 @@ public interface IRoomObject
     public void PauseEnemies();
 
     public void UnpauseEnemies();
+
+    public Boolean IsPauseEnemies();
 }

@@ -22,8 +22,9 @@ public sealed class RoomObjectManager : IRoomObjectManager
     private Vector2 UpPan;
     private Vector2 DownPan;
     private Dictionary<String, (int, int, int, Vector2, int, bool)> roomDir;
-  
+
     private ICollisionManager collisionManager;
+    private IAIManager aiManager;
 
     private RoomObjectManager()
     {
@@ -41,6 +42,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
         isTransitioning = false;
 
         collisionManager = CollisionManager.Instance;
+        aiManager = AIManager.Instance;
     }
 
     private static RoomObjectManager instance = new RoomObjectManager();
@@ -206,6 +208,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
             panRoom();
         }
         collisionManager.Update(gameTime);
+        aiManager.Update(gameTime);
     }
 
     public void DeleteGameObject(int objectType, ISprite gameObject)

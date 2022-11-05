@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 
     /*Declare collider variable*/
     public ICollision collider { get; set; }
+    public IAI ai { get; set; }
 
     private int _currentFrame;
     private int _totalFrames;
