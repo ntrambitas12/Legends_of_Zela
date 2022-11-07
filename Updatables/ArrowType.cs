@@ -56,33 +56,35 @@ public class ArrowType : IProjectileType
     { 
         if (shouldDraw)
         {
-            ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
+            IRoomObject currRoom = RoomObjectManager.Instance.currentRoom();
+            ISprite collidingObject = projectile.collider.isIntersecting(currRoom.ProjectileStopperList);
 
             if (collidingObject != null)
             {
                 fireProjectile.ResetCounter();
             }
 
-            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
-            bool check = projectile.Owner() != RoomObjectManager.Instance.currentRoom().Link;
+            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { currRoom.Link });
+            bool check = projectile.Owner() != currRoom.Link;
 
             if (check && collidingObject != null)
             {
                 fireProjectile.ResetCounter();
-                RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
+                currRoom.TakeDamage(collidingObject);
             }
 
-            collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
-            check = !(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(projectile.Owner()));
+            collidingObject = projectile.collider.isIntersecting(currRoom.EnemyList);
+            check = !(currRoom.EnemyList.Contains(projectile.Owner()));
 
             if (check && collidingObject != null)
             {
                 fireProjectile.ResetCounter();
-                if (RoomObjectManager.Instance.currentRoom().EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
+                if (currRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
                 {
-                    RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
+                    currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
                 }
-                RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                DropHandler.Drop(currRoom, collidingObject.screenCord);
             }
         }
     }

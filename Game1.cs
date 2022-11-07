@@ -63,9 +63,9 @@ namespace CSE3902Project
 
         protected override void Update(GameTime gameTime)
         {
-
+            
             GraphicsDevice.Clear(Color.Black);
-
+            roomObjectManager.currentRoom().PauseEnemies();
             roomObjectManager.Update(gameTime);
 
             base.Update(gameTime);
