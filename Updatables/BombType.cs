@@ -72,6 +72,7 @@ public class BombType : IProjectileType
                     _currentRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
                 }
                 _currentRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                DropHandler.Drop(_currentRoom, collidingObject.screenCord);
             }
 
             //check for bombable doors

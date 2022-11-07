@@ -33,24 +33,26 @@ public class SwordType : IProjectileType
     {
         if (shouldDraw)
         {
-            ISprite collidingObject = sword.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
-            bool check = sword.Owner() != RoomObjectManager.Instance.currentRoom().Link;
+            IRoomObject currRoom = RoomObjectManager.Instance.currentRoom();
+            ISprite collidingObject = sword.collider.isIntersecting(new List<ISprite> { currRoom.Link });
+            bool check = sword.Owner() != currRoom.Link;
 
             if (check && collidingObject != null)
             {
-                RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
+                currRoom.TakeDamage(collidingObject);
             }
 
-            collidingObject = sword.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
-            check = !(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(sword.Owner()));
+            collidingObject = sword.collider.isIntersecting(currRoom.EnemyList);
+            check = !(currRoom.EnemyList.Contains(sword.Owner()));
 
             if (check && collidingObject != null)
             {
-                if (RoomObjectManager.Instance.currentRoom().EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
+                if (currRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
                 {
-                    RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
+                    currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
                 }
-                RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                DropHandler.Drop(currRoom, collidingObject.screenCord);
             }
         }
     }
