@@ -829,6 +829,13 @@
 /processorParam:TextureFormat=Color
 /build:EnemySprites/WallmasterULOpen.png
 
+#begin Fonts/InventoryFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/InventoryFont.spritefont
+
 #begin ItemSprites/5Rupies.png
 /importer:TextureImporter
 /processor:TextureProcessor

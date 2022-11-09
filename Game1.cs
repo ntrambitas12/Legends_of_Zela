@@ -16,7 +16,9 @@ namespace CSE3902Project
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private LevelLoader level;
+        private SpriteFont textFont;
         private IRoomObjectManager roomObjectManager;
+        private ItemSelectionScreen inventory;
         private Camera camera;
 
         public Game1()
@@ -29,8 +31,11 @@ namespace CSE3902Project
 
         protected override void Initialize()
         {
-            level = new LevelLoader(this);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            //load text font
+            textFont = Content.Load<SpriteFont>("Fonts/InventoryFont");
+            inventory = new ItemSelectionScreen(GraphicsDevice, _spriteBatch, textFont);
+            level = new LevelLoader(this, inventory);
             roomObjectManager = RoomObjectManager.Instance;
             camera = Camera.Instance;
             //Load up the content for the sprite factory
@@ -65,27 +70,39 @@ namespace CSE3902Project
         {
             
             GraphicsDevice.Clear(Color.Black);
-            roomObjectManager.currentRoom().PauseEnemies();
+            if (inventory.isOpen())
+            {
+                roomObjectManager.currentRoom().PauseEnemies();
+            }
+            roomObjectManager.currentRoom().UnpauseEnemies();
             roomObjectManager.Update(gameTime);
+            inventory.Update(gameTime);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-           
-            _spriteBatch.Begin(SpriteSortMode.Immediate,
-                        BlendState.AlphaBlend,
-                        null,
-                        null,
-                        null,
-                        null,
-                        camera.getTransformation(GraphicsDevice));
-
-
-             roomObjectManager.Draw(gameTime);
-
+          
+            _spriteBatch.Begin();
+            inventory.Draw(gameTime);
             _spriteBatch.End();
+
+            if (!inventory.isOpen())
+            {
+                _spriteBatch.Begin(SpriteSortMode.Immediate,
+                            BlendState.AlphaBlend,
+                            null,
+                            null,
+                            null,
+                            null,
+                            camera.getTransformation(GraphicsDevice));
+
+
+                roomObjectManager.Draw(gameTime);
+
+                _spriteBatch.End();
+            }
 
             base.Draw(gameTime);
         }

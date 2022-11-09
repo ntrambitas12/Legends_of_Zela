@@ -1,6 +1,7 @@
 ﻿using CSE3902Project;
 using CSE3902Project.Commands;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,11 @@ public class LevelLoader: ILevelLoader
     private ISprite Link;
     private Game1 game1;
     private ISprite sprite;
+    private ItemSelectionScreen inventory;
+   
   
 
-    public LevelLoader(Game1 game1)
+    public LevelLoader(Game1 game1, ItemSelectionScreen inventory)
     {
         
         constructer = new Dictionary<String, Delegate>();
@@ -46,7 +49,7 @@ public class LevelLoader: ILevelLoader
         populateDictionary();
         this.game1 = game1;
         runOnce = false;
-        
+        this.inventory = inventory;
     }
 
     private void populateDictionary()
@@ -269,7 +272,7 @@ public class LevelLoader: ILevelLoader
             CreateLink(baseCord);
         }
 
-        room.AddController(initalizeControllers.InitalizeKeyboard(Link));
+        room.AddController(initalizeControllers.InitalizeKeyboard(Link, inventory));
         room.AddController(initalizeControllers.InitalizeMouse());
     }
 
