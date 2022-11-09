@@ -644,6 +644,7 @@ public sealed class SpriteFactory : IFactory
         bombFrames[(int)SpriteAction.bombCloud] = bombCloud;
     }
 
+    //creates an entity with collider
     private ISprite CreateEntityWithCollision(Vector2 location, List<Texture2D>[] frames1)
     {
 
@@ -659,6 +660,13 @@ public sealed class SpriteFactory : IFactory
         entity.collider = collisionObject;
         entity.collider.UpdateCollisionPosition();
 
+        return entity;
+    }
+
+    //gives entity an ai component, ai type is an enum
+    private ISprite AddAI(ISprite entity, AIType ai)
+    {
+        AIManager.Instance.AddAI(entity, ai);
         return entity;
     }
 
@@ -812,39 +820,39 @@ public sealed class SpriteFactory : IFactory
     //Enemies
     public ISprite CreateGoriyaSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, goriyaFrames);
+        return AddAI(CreateEntityWithCollision(location, goriyaFrames), AIType.RandomMove);
     }
     public ISprite CreateKeeseSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, keeseFrames);
+        return AddAI(CreateEntityWithCollision(location, keeseFrames), AIType.AlwaysRandomMove);
     }
     public ISprite CreateStalfosSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, stalfosFrames);
+        return AddAI(CreateEntityWithCollision(location, stalfosFrames), AIType.RandomMove);
     }
     public ISprite CreateGelSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, gelFrames);
+        return AddAI(CreateEntityWithCollision(location, gelFrames), AIType.RandomMove);
     }
     public ISprite CreateAquamentusSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, aquamentusFrames);
+        return AddAI(CreateEntityWithCollision(location, aquamentusFrames), AIType.RandomMove);
     }
     public ISprite CreateBladeTrapSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, trapFrames);
+        return AddAI(CreateEntityWithCollision(location, trapFrames), AIType.RandomMove);
     }
     public ISprite CreateWallmasterSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, wallmasterFrames);
+        return AddAI(CreateEntityWithCollision(location, wallmasterFrames), AIType.RandomMove);
     }
     public ISprite CreateOldManSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, oldManFrames);
+        return AddAI(CreateEntityWithCollision(location, oldManFrames), AIType.RandomMove);
     }
     public ISprite CreateTrapSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, trapFrames);
+        return AddAI(CreateEntityWithCollision(location, trapFrames), AIType.RandomMove);
     }
 
 

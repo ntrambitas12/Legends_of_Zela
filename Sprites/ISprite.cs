@@ -13,6 +13,7 @@ using System.Threading.Tasks;
     public int totalFrames { get; set; }
     public int spritePos { get; set; }
     public ICollision collider { get; set; }
+    public IAI ai { get; set; }
     public SpriteBatch spriteBatch { get; set; }
     public Vector2 screenCord { get; set; }
     public List<Texture2D> textureToDraw { get; set; }

@@ -31,8 +31,6 @@ public class RoomObject : IRoomObject
     private Dictionary<int, List<ISprite>> listDict;
 
     //enemy AI related data
-    private List<SpriteAction> enemyActions;
-    private SpriteAction enemyAction;
     private Random rand;
     private bool pauseEnemies;
 
@@ -86,11 +84,6 @@ public class RoomObject : IRoomObject
 
         //set up the logic for the enemy AI
         rand = new Random();
-        enemyActions = new List<SpriteAction>();
-        enemyActions.Add(SpriteAction.moveDown);
-        enemyActions.Add(SpriteAction.moveLeft);
-        enemyActions.Add(SpriteAction.moveRight);
-        enemyActions.Add(SpriteAction.moveUp);
         pauseEnemies = false;
 
         roomObjectManager = RoomObjectManager.Instance;
@@ -240,49 +233,23 @@ public class RoomObject : IRoomObject
         //update all enemies
         foreach (IConcreteSprite enemy in EnemyList)
         {
-
-            /*
-             * Using rand.next as a mechanism to "randomly" 
-             * have each enemy change its state.
-             * Couldnt think of a better ai, this will do
-             * for now. If a clock was used then enemies 
-             * don't move.
-           */
-
-            if (!pauseEnemies && rand.Next(25) == 5)
-            {
-                enemyAction = enemyActions[rand.Next(4)];
-
-                //if 0, then enemy will move
-                if (rand.Next(2) == 0)
-                {
-                    enemy.SetSpriteState(enemyAction, enemy.moving);
-                }
-                //if 1, enemy will stay still
-                else
-                {
-                    enemy.SetSpriteState(enemyAction, enemy.still);
-                }
-            }
-
             enemy.Update(gameTime);
-
         }
 
         //update projectiles
         if (Link != null) { 
-        foreach(IProjectile projectile in ((ConcreteSprite)Link).projectiles)
-        {
-            if (projectile != null) projectile.Update(gameTime);
-        }
+            foreach(IProjectile projectile in ((ConcreteSprite)Link).projectiles)
+            {
+                if (projectile != null) projectile.Update(gameTime);
+            }
         }
 
         foreach (IProjectile enemyProjectile in EnemyProjectileList)
         {
-            if (!pauseEnemies && rand.Next(25) == 5)
-            {
-                enemyProjectile.FireCommand().Execute();
-            }
+            //if (!pauseEnemies && rand.Next(25) == 5)
+            //{
+            //    enemyProjectile.FireCommand().Execute();
+            //}
             enemyProjectile.Update(gameTime);
         }
 
@@ -452,6 +419,7 @@ public class RoomObject : IRoomObject
         //set all enemies to still
         foreach (IConcreteSprite enemy in EnemyList)
         {
+            SpriteAction enemyAction = SpriteAction.still;
             enemy.SetSpriteState(enemyAction, enemy.still);            
         }
     }
@@ -459,6 +427,11 @@ public class RoomObject : IRoomObject
     public void UnpauseEnemies()
     {
         pauseEnemies = false;
+    }
+
+    public Boolean IsPauseEnemies()
+    {
+        return pauseEnemies;
     }
     private void CheckEnteredDoor()
     {
