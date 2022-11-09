@@ -812,39 +812,57 @@ public sealed class SpriteFactory : IFactory
     //Enemies
     public ISprite CreateGoriyaSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, goriyaFrames);
+        IConcreteSprite goriya = (IConcreteSprite) CreateEntityWithCollision(location, goriyaFrames);
+        goriya.health = 2;
+        return goriya;
     }
     public ISprite CreateKeeseSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, keeseFrames);
+        IConcreteSprite keese = (IConcreteSprite) CreateEntityWithCollision(location, keeseFrames);
+        keese.health = 1;
+        return keese;
     }
     public ISprite CreateStalfosSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, stalfosFrames);
+        IConcreteSprite stalfos = (IConcreteSprite) CreateEntityWithCollision(location, stalfosFrames);
+        stalfos.health = 1;
+        return stalfos;
     }
     public ISprite CreateGelSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, gelFrames);
+        IConcreteSprite gel = (IConcreteSprite) CreateEntityWithCollision(location, gelFrames);
+        gel.health = 1;
+        return gel;
     }
     public ISprite CreateAquamentusSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, aquamentusFrames);
+        IConcreteSprite aquamentus = (IConcreteSprite) CreateEntityWithCollision(location, aquamentusFrames);
+        aquamentus.health = 4;
+        return aquamentus;
     }
     public ISprite CreateBladeTrapSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, trapFrames);
+        IConcreteSprite bladeTrap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
+        bladeTrap.health = -1;
+        return bladeTrap;
     }
     public ISprite CreateWallmasterSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, wallmasterFrames);
+        IConcreteSprite wallmaster = (IConcreteSprite) CreateEntityWithCollision(location, wallmasterFrames);
+        wallmaster.health = 2;
+        return wallmaster;
     }
     public ISprite CreateOldManSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, oldManFrames);
+        IConcreteSprite oldMan = (IConcreteSprite) CreateEntityWithCollision(location, oldManFrames);
+        oldMan.health = -1;
+        return oldMan;
     }
     public ISprite CreateTrapSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, trapFrames);
+        IConcreteSprite trap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
+        trap.health = -1;
+        return trap;
     }
 
 

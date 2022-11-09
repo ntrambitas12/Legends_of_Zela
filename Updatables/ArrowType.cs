@@ -83,8 +83,12 @@ public class ArrowType : IProjectileType
                 {
                     currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
                 }
-                currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
-                DropHandler.Drop(currRoom, collidingObject.screenCord);
+                ((IConcreteSprite)collidingObject).health--;
+                if (((IConcreteSprite)collidingObject).health == 0)
+                {
+                    currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                    DropHandler.Drop(currRoom, collidingObject.screenCord);
+                }
             }
         }
     }
