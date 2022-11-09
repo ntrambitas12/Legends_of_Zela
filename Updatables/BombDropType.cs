@@ -21,8 +21,10 @@ public class BombDropType : IItemType
             if (collidingObject != null)
             {
                 bomb.SetShouldDraw(false);
+                ItemSelectionScreen.AddToInventory(bomb, ArrayIndex.bomb);
                 IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link);
                 ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);
+                ((ConcreteSprite)Link).SetProjectileIndex(ArrayIndex.bomb);
             }
         }
     }
