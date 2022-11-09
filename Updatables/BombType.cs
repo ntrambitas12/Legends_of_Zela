@@ -24,6 +24,7 @@ public class BombType : IProjectileType
 
         if (counter >= distance - 20)
         {
+            SoundManager.Instance.PlayOnce("LOZ_Bomb_Blow");
             projectile.SetSpriteAction(SpriteAction.bombCloud);           
         }
 

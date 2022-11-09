@@ -118,6 +118,7 @@ public class RoomObject : IRoomObject
         IRoomObject otherRoom = RoomObjectManager.Instance.adjacentRoom(_door.direction);
         if (LockedDoorsList.ContainsKey(door))
         {
+            SoundManager.Instance.PlayOnce("LOZ_Door_Unlock");
             LockedDoorsList[door] = false;
             foreach (IConcreteSprite otherDoor in otherRoom.LockedDoorsList.Keys)
             {

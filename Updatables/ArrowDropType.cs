@@ -19,6 +19,8 @@ public class ArrowDropType : IItemType
 
             if (collidingObject != null)
             {
+                //Add pickup sound
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 arrow.SetShouldDraw(false);
                 // Add to Link's inventory here
             }

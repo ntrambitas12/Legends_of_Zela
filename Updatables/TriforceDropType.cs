@@ -19,6 +19,7 @@ public class TriforceDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Fanfare");
                 triforce.SetShouldDraw(false);
                 // Add to Link's inventory here
             }

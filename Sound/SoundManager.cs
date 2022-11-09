@@ -90,15 +90,33 @@ public class SoundManager
             case "DamagedState":
                 SoundManager.Instance.PlayOnce("LOZ_Link_Hurt");
                 break;
-/*  Might not need these
-            case "OpenState":
+/*            case "OpenState":
                 SoundManager.Instance.PlayOnce("Door_Unlock");
                 break;
-
+/*
             case "ClosedState":
                 SoundManager.Instance.PlayOnce("LOZ_Sword_Slash");
                 break;*/
         }
+    }
+
+    public void playPainSounds(int maxHealth)
+    {
+        switch (maxHealth)
+        {
+            case 1:
+                break;
+            case 6:
+                SoundManager.Instance.PlayOnce("LOZ_Boss_Hurt");
+                break;
+        }
+    }
+
+    public void playBackgroundMusic()
+    {
+        SoundManager.Instance.PlayLooped("Dungeon 1");
+        var instance = soundEffects["Dungeon 1"];
+        instance.Volume=.2f;
     }
 }
 

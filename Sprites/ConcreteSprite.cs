@@ -75,7 +75,6 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
         keys = 0;
         rubies = 0;
-
         state = still;
         direction = SpriteAction.left;
 
@@ -85,7 +84,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
     public void SetSpriteState(SpriteAction action, ISpriteState state)
     {
-        //play sound
+        
         
 
         if (!isDead)
@@ -138,10 +137,12 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
         SpriteAction newPos;
         float orgX;
-        float orgY;
+        float orgY;//lmao
 
         /* Decrement the entitys health field */
         this.health--;
+        //SoundManager.Instance.PlayOnce("LOZ_Enemy_Hit");
+        //SoundManager.Instance.playPainSounds(this.maxHealth);
 
         /* Keep the sprite facing in the same direction when they take damage */
         int entityPos = this.spritePos;
