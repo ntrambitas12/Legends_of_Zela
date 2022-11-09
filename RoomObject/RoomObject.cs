@@ -246,10 +246,10 @@ public class RoomObject : IRoomObject
 
         foreach (IProjectile enemyProjectile in EnemyProjectileList)
         {
-            if (!pauseEnemies && rand.Next(25) == 5)
-            {
-                enemyProjectile.FireCommand().Execute();
-            }
+            //if (!pauseEnemies && rand.Next(25) == 5)
+            //{
+            //    enemyProjectile.FireCommand().Execute();
+            //}
             enemyProjectile.Update(gameTime);
         }
 

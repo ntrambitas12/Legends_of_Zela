@@ -15,6 +15,8 @@ public interface IAI
     //updates ai module
     public void Update(GameTime gameTime);
 
+    //sets the enemy's projectile
+    public void SetProjectile(IProjectile projectile);
 }
 
 public enum AIType

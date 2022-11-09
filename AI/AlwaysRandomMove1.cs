@@ -18,6 +18,7 @@ public class AlwaysRandomMove1 : IAI
 
     private bool pauseEnemies;
     private SpriteAction enemyAction;
+    private IProjectile projectile;
 
     private Random rand;
 
@@ -38,6 +39,12 @@ public class AlwaysRandomMove1 : IAI
         {
             enemyAction = (SpriteAction)rand.Next(4);
             ((IConcreteSprite)entity).SetSpriteState(enemyAction, ((IConcreteSprite)entity).moving);
+            if (projectile != null) projectile.FireCommand().Execute();
         }
+    }
+
+    public void SetProjectile(IProjectile projectile)
+    {
+        this.projectile = projectile;
     }
 }

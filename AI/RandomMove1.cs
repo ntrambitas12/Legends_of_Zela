@@ -18,7 +18,7 @@ public class RandomMove1 : IAI
 
     private bool pauseEnemies;
     private SpriteAction enemyAction;
-
+    private IProjectile projectile;
     private Random rand;
 
 
@@ -46,7 +46,13 @@ public class RandomMove1 : IAI
             else
             {
                 ((IConcreteSprite)entity).SetSpriteState(enemyAction, ((IConcreteSprite)entity).still);
+                if (projectile != null) projectile.FireCommand().Execute();
             }
         }
+    }
+
+    public void SetProjectile(IProjectile projectile)
+    {
+        this.projectile = projectile;
     }
 }

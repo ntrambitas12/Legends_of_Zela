@@ -248,7 +248,11 @@ public class LevelLoader: ILevelLoader
                         }
                         room.BaseCord = _base;
                         room.AddGameObject(roomObjectType, sprite, name);
-                        if (enemyKey != null) room.AddEnemyProjectilePair(enemyKey, enemyVal);
+                        if (enemyKey != null)
+                        {
+                            room.AddEnemyProjectilePair(enemyKey, enemyVal);
+                            ((IConcreteSprite)enemyKey).ai.SetProjectile((IProjectile) enemyVal);
+                        }
                     }
                     while (reader.ReadToNextSibling(parseType.Item2));
                 }
