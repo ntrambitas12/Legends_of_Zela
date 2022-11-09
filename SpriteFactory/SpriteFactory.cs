@@ -838,6 +838,7 @@ public sealed class SpriteFactory : IFactory
     {
         IConcreteSprite aquamentus = (IConcreteSprite) CreateEntityWithCollision(location, aquamentusFrames);
         aquamentus.health = 4;
+        aquamentus.maxHealth = 4;
         return aquamentus;
     }
     public ISprite CreateBladeTrapSprite(Vector2 location)
