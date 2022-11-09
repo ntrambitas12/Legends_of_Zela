@@ -21,6 +21,8 @@ public class RubyDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Rupee");
+
                 ruby.SetShouldDraw(false);
                 Link.rubies++;
             }

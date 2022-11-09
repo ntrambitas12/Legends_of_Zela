@@ -21,6 +21,7 @@ public class BowDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 bow.SetShouldDraw(false);
                 IProjectile Arrow = (IProjectile)SpriteFactory.Instance.CreateArrowProjectile(999, Link);
                 ((ConcreteSprite)Link).AddProjectile(Arrow, ArrayIndex.arrow);

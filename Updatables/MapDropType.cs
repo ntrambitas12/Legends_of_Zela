@@ -19,6 +19,7 @@ public class MapDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 map.SetShouldDraw(false);
                 // Add to Link's inventory here
             }

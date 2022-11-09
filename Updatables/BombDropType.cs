@@ -20,6 +20,7 @@ public class BombDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 bomb.SetShouldDraw(false);
                 IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link);
                 ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);

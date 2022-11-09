@@ -19,6 +19,7 @@ public class CompassDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 compass.SetShouldDraw(false);
                 // Add to Link's inventory here
             }

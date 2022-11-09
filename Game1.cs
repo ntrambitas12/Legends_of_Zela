@@ -36,7 +36,7 @@ namespace CSE3902Project
             //Load up the content for the sprite factory
             SoundFactory.Instance.LoadAllContent(Content);
             //plays background music
-            SoundManager.Instance.PlayLooped("Dungeon 1");
+            SoundManager.Instance.playBackgroundMusic();
 
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
 

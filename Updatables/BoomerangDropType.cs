@@ -20,6 +20,7 @@ public class BoomerangDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 boomerang.SetShouldDraw(false);
                 IProjectile Boomerang = (IProjectile)SpriteFactory.Instance.CreateBoomerangProjectile(1000, Link);
                 ((ConcreteSprite)Link).AddProjectile(Boomerang, ArrayIndex.boomerang);
