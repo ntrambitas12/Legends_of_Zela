@@ -24,6 +24,7 @@ public class BombType : IProjectileType
 
         if (counter >= distance - 20)
         {
+            SoundManager.Instance.PlayOnce("LOZ_Bomb_Blow");
             projectile.SetSpriteAction(SpriteAction.bombCloud);           
         }
 
@@ -47,31 +48,22 @@ public class BombType : IProjectileType
             projectile.SetPosition(new Vector2(prevCord.X - 30, prevCord.Y - 30));
             ISprite collidingObject = projectile.collider.isIntersecting(_currentRoom.ProjectileStopperList);
 
-            //if (collidingObject != null)
-            //{
-            //    fireProjectile.ResetCounter();
-            //}
-
             collidingObject = projectile.collider.isIntersecting(new List<ISprite> { _currentRoom.Link });
             bool check = projectile.Owner() != _currentRoom.Link;
 
             if (check && collidingObject != null)
             {
-                //fireProjectile.ResetCounter();
+                
                 _currentRoom.TakeDamage(collidingObject);
             }
 
             collidingObject = projectile.collider.isIntersecting(_currentRoom.EnemyList);
             check = !(_currentRoom.EnemyList.Contains(projectile.Owner()));
+            check = check && !_currentRoom.DeadEnemyList.Contains(collidingObject);
 
             if (check && collidingObject != null)
             {
-                //fireProjectile.ResetCounter();
-                if (_currentRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
-                {
-                    _currentRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
-                }
-                _currentRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                _currentRoom.KillEnemy(collidingObject);
                 DropHandler.Drop(_currentRoom, collidingObject.screenCord);
             }
 

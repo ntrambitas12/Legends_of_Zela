@@ -21,6 +21,8 @@ public class NickelRubyDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Rupee");
+
                 nickelRuby.SetShouldDraw(false);
                 Link.rubies += 5;
             }

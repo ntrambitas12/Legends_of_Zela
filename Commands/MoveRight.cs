@@ -17,7 +17,10 @@ namespace CSE3902Project.Commands
         }
         public void Execute()
         {
-            sprite.SetSpriteState(SpriteAction.moveRight, sprite.moving) ;
+            if (!RoomObject.pauseLink)
+            {
+                sprite.SetSpriteState(SpriteAction.moveRight, sprite.moving);
+            }
         }
     }
 }

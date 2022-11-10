@@ -33,6 +33,7 @@ public class Collision : ICollision
     //collider rect for this
     public Rectangle rect { get; set; }
     private Rectangle colliderDimensions;
+    private Rectangle roomEdgeRect;
 
 
     //--------------------------------INITIALIZER--------------------------------
@@ -41,6 +42,7 @@ public class Collision : ICollision
     {
         this.entity = entity;
         this.colliderDimensions = colliderDimensions;
+        this.roomEdgeRect = CollisionManager.Instance.roomEdge();
     }
 
     //--------------------------------METHODS--------------------------------
@@ -130,5 +132,32 @@ public class Collision : ICollision
             }
         }
         return null;
+    }
+
+    //updates booleans against room edges
+    public void UpdateCollisionRoomEdge()
+    {
+        Vector2 roomOffset = RoomObjectManager.Instance.currentRoom().BaseCord;
+
+        if (this.rect.Top < roomEdgeRect.Top + roomOffset.Y)
+        {
+            this.isColliding = true;
+            this.isCollidingTop = true;
+        }
+        if (this.rect.Bottom > roomEdgeRect.Bottom + roomOffset.Y)
+        {
+            this.isColliding = true;
+            this.isCollidingBottom = true;
+        }
+        if (this.rect.Left < roomEdgeRect.Left + roomOffset.X)
+        {
+            this.isColliding = true;
+            this.isCollidingLeft = true;
+        }
+        if (this.rect.Right > roomEdgeRect.Right + roomOffset.X)
+        {
+            this.isColliding = true;
+            this.isCollidingRight = true;
+        }
     }
 }

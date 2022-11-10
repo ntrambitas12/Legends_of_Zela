@@ -1,12 +1,5 @@
-
-using CSE3902Project.Commands;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Threading;
 
 namespace CSE3902Project
 {
@@ -16,7 +9,11 @@ namespace CSE3902Project
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private LevelLoader level;
+        private SpriteFont textFont;
+        private SpriteFont hudFont;
         private IRoomObjectManager roomObjectManager;
+        private ItemSelectionScreen inventory;
+        private HUD hud;
         private Camera camera;
 
         public Game1()
@@ -29,18 +26,25 @@ namespace CSE3902Project
 
         protected override void Initialize()
         {
-            level = new LevelLoader(this);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            //load text font
+            textFont = Content.Load<SpriteFont>("Fonts/InventoryFont");
+            hudFont = Content.Load<SpriteFont>("Fonts/NESFont");
+
             roomObjectManager = RoomObjectManager.Instance;
             camera = Camera.Instance;
+
+            hud = new HUD(GraphicsDevice, _spriteBatch, hudFont, (RoomObjectManager)roomObjectManager);
+            inventory = new ItemSelectionScreen(GraphicsDevice, _spriteBatch, textFont, hud);
+            level = new LevelLoader(this, inventory, hud);
+
             //Load up the content for the sprite factory
             SoundFactory.Instance.LoadAllContent(Content);
             //plays background music
-            SoundManager.Instance.PlayLooped("Dungeon 1");
+            SoundManager.Instance.playBackgroundMusic();
 
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
-
-
+            hud.sf = SpriteFactory.Instance;
             base.Initialize();
         }
 
@@ -52,20 +56,20 @@ namespace CSE3902Project
 
         public void resetGame()
         {
+            inventory.Reset();
             camera.reset();
             roomObjectManager.Reset();
             this.Initialize();
             this.LoadContent();
             roomObjectManager.setRoom(1, true);
-           
         }
 
 
         protected override void Update(GameTime gameTime)
         {
-            
+
             GraphicsDevice.Clear(Color.Black);
-           // roomObjectManager.currentRoom().PauseEnemies();
+            inventory.Update(gameTime, roomObjectManager.currentRoom());
             roomObjectManager.Update(gameTime);
 
             base.Update(gameTime);
@@ -73,22 +77,35 @@ namespace CSE3902Project
 
         protected override void Draw(GameTime gameTime)
         {
-           
-            _spriteBatch.Begin(SpriteSortMode.Immediate,
-                        BlendState.AlphaBlend,
-                        null,
-                        null,
-                        null,
-                        null,
-                        camera.getTransformation(GraphicsDevice));
+            if (inventory.isOpen())
+            {
+                _spriteBatch.Begin();
+                inventory.Draw(gameTime);
+                hud.Draw(gameTime, true);
+                _spriteBatch.End();
+            }
 
+            else
+            {
+                _spriteBatch.Begin();
+                hud.Draw(gameTime, false);
+                _spriteBatch.End();
 
-             roomObjectManager.Draw(gameTime);
+                _spriteBatch.Begin(SpriteSortMode.Immediate,
+                            BlendState.AlphaBlend,
+                            null,
+                            null,
+                            null,
+                            null,
+                            camera.getTransformation(GraphicsDevice));
 
-            _spriteBatch.End();
+                roomObjectManager.Draw(gameTime);
+
+                _spriteBatch.End();
+            }
 
             base.Draw(gameTime);
         }
-     
+
     }
 }

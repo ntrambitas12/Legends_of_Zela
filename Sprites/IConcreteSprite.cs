@@ -23,6 +23,9 @@ public interface IConcreteSprite : ISprite
     public IProjectile[] projectiles { get; set; }
     public int keys { get; set; }
     public int rubies { get; set; }
+    public int bombs { get; set; }
+    public bool map { get; set; }
+    public bool compass { get; set; }
 
     public SpriteAction direction { get; set; }
 

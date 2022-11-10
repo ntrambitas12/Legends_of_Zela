@@ -69,9 +69,6 @@ public class BoomerangType : IProjectileType
         {
             fireProjectile.Execute();
         }
-
-        //check for collisions and effects
-        //UpdateCollisions(gameTime);
     }
 
 
@@ -110,14 +107,11 @@ public class BoomerangType : IProjectileType
 
             if (collidingObject != null)
             {
-                if (!(currRoom.EnemyList.Contains(projectile.Owner())))
+                bool check = !currRoom.DeadEnemyList.Contains(collidingObject);
+                if (check && !(currRoom.EnemyList.Contains(projectile.Owner())))
                 {
                     goingBack = true;
-                    if (currRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
-                    {
-                        currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
-                    }
-                    currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                    currRoom.KillEnemy(collidingObject);
                     DropHandler.Drop(currRoom, collidingObject.screenCord);
                 }
                 else

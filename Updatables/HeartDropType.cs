@@ -21,6 +21,7 @@ public class HeartDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Heart");
                 heart.SetShouldDraw(false);            
                 if (Link.health < Link.maxHealth)
                 {

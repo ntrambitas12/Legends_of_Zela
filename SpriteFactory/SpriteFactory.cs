@@ -181,6 +181,18 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> fireball2;
     private List<Texture2D> fireball3;
 
+    //HUDSprites
+    private Texture2D HUDKeys;
+    private Texture2D HUDMaps;
+    private Texture2D HUDBombs;
+    private Texture2D HUDRubies;
+    private Texture2D HUDItemBorders;
+    private Texture2D HUDHearts;
+    private Texture2D HUDLinks;
+    private Texture2D HUDTriforces;
+    private Texture2D HUDBows;
+    private Texture2D HUDBoomerangs;
+
 
     private SpriteBatch _spriteBatch;
     private SpriteFactory()
@@ -485,6 +497,17 @@ public sealed class SpriteFactory : IFactory
         fireball2.Add(content.Load<Texture2D>("ItemSprites/fireball2"));
         fireball3.Add(content.Load<Texture2D>("ItemSprites/fireball3"));
 
+        //HUD Elements
+        HUDItemBorders = content.Load<Texture2D>("HUDElements/HUDItemBorder");
+        HUDRubies = content.Load<Texture2D>("HUDElements/HUDRuby");
+        HUDBombs = content.Load<Texture2D>("HUDElements/HUDBomb");
+        HUDKeys = content.Load<Texture2D>("HUDElements/HUDKey");
+        HUDHearts = content.Load<Texture2D>("HUDElements/Heart1");
+        HUDMaps = content.Load<Texture2D>("HUDElements/HUDMap0");
+        HUDLinks = content.Load<Texture2D>("HUDElements/LinkOnMap");
+        HUDTriforces = content.Load<Texture2D>("HUDElements/TriforceOnMap");
+        HUDBows = content.Load<Texture2D>("ItemSprites/Bow");
+        HUDBoomerangs = content.Load<Texture2D>("ItemSprites/BoomerangRight");
 
         //Populate Blocks and Items
         for (int i = 0; i < 4; i++)
@@ -644,6 +667,7 @@ public sealed class SpriteFactory : IFactory
         bombFrames[(int)SpriteAction.bombCloud] = bombCloud;
     }
 
+    //creates an entity with collider
     private ISprite CreateEntityWithCollision(Vector2 location, List<Texture2D>[] frames1)
     {
 
@@ -659,6 +683,13 @@ public sealed class SpriteFactory : IFactory
         entity.collider = collisionObject;
         entity.collider.UpdateCollisionPosition();
 
+        return entity;
+    }
+
+    //gives entity an ai component, ai type is an enum
+    private ISprite AddAI(ISprite entity, AIType ai)
+    {
+        AIManager.Instance.AddAI(entity, ai);
         return entity;
     }
 
@@ -812,39 +843,58 @@ public sealed class SpriteFactory : IFactory
     //Enemies
     public ISprite CreateGoriyaSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, goriyaFrames);
+        IConcreteSprite goriya = (IConcreteSprite) CreateEntityWithCollision(location, goriyaFrames);
+        goriya.health = 2;
+        return AddAI(goriya, AIType.RandomMove);
     }
     public ISprite CreateKeeseSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, keeseFrames);
+        IConcreteSprite keese = (IConcreteSprite) CreateEntityWithCollision(location, keeseFrames);
+        keese.health = 1;
+        return AddAI(keese, AIType.AlwaysRandomMove);
     }
     public ISprite CreateStalfosSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, stalfosFrames);
+        IConcreteSprite stalfos = (IConcreteSprite) CreateEntityWithCollision(location, stalfosFrames);
+        stalfos.health = 1;
+        return AddAI(stalfos, AIType.RandomMove);
     }
     public ISprite CreateGelSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, gelFrames);
+        IConcreteSprite gel = (IConcreteSprite) CreateEntityWithCollision(location, gelFrames);
+        gel.health = 1;
+ return AddAI(gel, AIType.RandomMove);
     }
     public ISprite CreateAquamentusSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, aquamentusFrames);
+        IConcreteSprite aquamentus = (IConcreteSprite) CreateEntityWithCollision(location, aquamentusFrames);
+        aquamentus.health = 4;
+        aquamentus.maxHealth = 4;
+        return AddAI(aquamentus, AIType.RandomMove);
     }
     public ISprite CreateBladeTrapSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, trapFrames);
+        IConcreteSprite bladeTrap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
+        bladeTrap.health = -1;
+        return AddAI(bladeTrap, AIType.RandomMove);
     }
     public ISprite CreateWallmasterSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, wallmasterFrames);
+        IConcreteSprite wallmaster = (IConcreteSprite) CreateEntityWithCollision(location, wallmasterFrames);
+        wallmaster.health = 2;
+        return AddAI(wallmaster, AIType.RandomMove);
     }
     public ISprite CreateOldManSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, oldManFrames);
+        IConcreteSprite oldMan = (IConcreteSprite) CreateEntityWithCollision(location, oldManFrames);
+        oldMan.health = -1;
+        return AddAI(oldMan, AIType.RandomMove);
     }
     public ISprite CreateTrapSprite(Vector2 location)
     {
-        return CreateEntityWithCollision(location, trapFrames);
+        IConcreteSprite trap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
+        trap.health = -1;
+        return AddAI(trap, AIType.RandomMove);
     }
 
 
@@ -1106,5 +1156,55 @@ public sealed class SpriteFactory : IFactory
     public ISprite CreateLinkSprite(Vector2 location)
     {
         return CreateEntityWithCollision(location, linkFrames);
+    }
+
+    //HUD Elements
+    public Texture2D HUDHeart()
+    {
+        return HUDHearts;
+    }
+    public Texture2D HUDSword()
+    {
+        return swordUp[0];
+    }
+    public Texture2D HUDRuby()
+    {
+        return HUDRubies;
+    }
+    public Texture2D HUDKey()
+    {
+        return HUDKeys;
+    }
+    public Texture2D HUDBomb()
+    {
+        return HUDBombs;
+    }
+    public Texture2D HUDItemBorder()
+    {
+        return HUDItemBorders;
+    }
+    public Texture2D HUDMap()
+    {
+        return HUDMaps;
+    }
+    public Texture2D HUDLink()
+    {
+        return HUDLinks;
+    }
+    public Texture2D HUDTriforce()
+    {
+        return HUDTriforces;
+    }
+    public Texture2D HUDBoomerang()
+    {
+        return HUDBoomerangs;
+    }
+    public Texture2D HUDBow()
+    {
+        return HUDBows;
+    }
+    public Texture2D Blank()
+    {
+        return invisibleBarrier[0];
     }
 }

@@ -11,4 +11,6 @@ internal interface ICollisionManager
 {
     //updates all game objects in current room
     public void Update(GameTime gameTime);
+    //returns room rectangle
+    public Rectangle roomEdge();
 }

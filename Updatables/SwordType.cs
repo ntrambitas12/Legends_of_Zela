@@ -44,14 +44,15 @@ public class SwordType : IProjectileType
 
             collidingObject = sword.collider.isIntersecting(currRoom.EnemyList);
             check = !(currRoom.EnemyList.Contains(sword.Owner()));
+            check = check && !currRoom.DeadEnemyList.Contains(collidingObject);
 
             if (check && collidingObject != null)
             {
-                if (currRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
-                {
-                    currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
-                }
-                currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                //if (currRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
+                //{
+                //    currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
+                //}
+                currRoom.KillEnemy(collidingObject);
                 DropHandler.Drop(currRoom, collidingObject.screenCord);
             }
         }
