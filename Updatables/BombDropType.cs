@@ -25,6 +25,7 @@ public class BombDropType : IItemType
                 IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link);
                 ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);
                 ((ConcreteSprite)Link).SetProjectileIndex(ArrayIndex.bomb);
+                ((ConcreteSprite)Link).bombs++;
             }
         }
     }

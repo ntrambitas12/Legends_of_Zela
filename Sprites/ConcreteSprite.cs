@@ -28,6 +28,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public bool isDead { get; set; }
     public int keys { get; set; }
     public int rubies { get; set; }
+    public int bombs { get; set; }
 
 
     /*Projectile inventory
@@ -75,6 +76,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
         keys = 0;
         rubies = 0;
+        bombs = 0;
 
         state = still;
         direction = SpriteAction.left;

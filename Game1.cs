@@ -17,8 +17,10 @@ namespace CSE3902Project
         private SpriteBatch _spriteBatch;
         private LevelLoader level;
         private SpriteFont textFont;
+        private SpriteFont hudFont;
         private IRoomObjectManager roomObjectManager;
         private ItemSelectionScreen inventory;
+        private HUD hud;
         private Camera camera;
 
         public Game1()
@@ -34,18 +36,18 @@ namespace CSE3902Project
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             //load text font
             textFont = Content.Load<SpriteFont>("Fonts/InventoryFont");
+            hudFont = Content.Load<SpriteFont>("Fonts/NESFont");
+            hud = new HUD(GraphicsDevice, _spriteBatch, hudFont);
             inventory = new ItemSelectionScreen(GraphicsDevice, _spriteBatch, textFont);
-            level = new LevelLoader(this, inventory);
+            level = new LevelLoader(this, inventory, hud);
             roomObjectManager = RoomObjectManager.Instance;
             camera = Camera.Instance;
             //Load up the content for the sprite factory
             SoundFactory.Instance.LoadAllContent(Content);
             //plays background music
             SoundManager.Instance.PlayLooped("Dungeon 1");
-
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
-
-
+            hud.sf = SpriteFactory.Instance;
             base.Initialize();
         }
 
@@ -90,6 +92,10 @@ namespace CSE3902Project
 
             if (!inventory.isOpen())
             {
+                _spriteBatch.Begin();
+                hud.Draw(gameTime);
+                _spriteBatch.End();
+
                 _spriteBatch.Begin(SpriteSortMode.Immediate,
                             BlendState.AlphaBlend,
                             null,
@@ -97,7 +103,6 @@ namespace CSE3902Project
                             null,
                             null,
                             camera.getTransformation(GraphicsDevice));
-
 
                 roomObjectManager.Draw(gameTime);
 
