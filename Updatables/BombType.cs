@@ -64,15 +64,16 @@ public class BombType : IProjectileType
 
             collidingObject = projectile.collider.isIntersecting(_currentRoom.EnemyList);
             check = !(_currentRoom.EnemyList.Contains(projectile.Owner()));
+            check = check && !_currentRoom.DeadEnemyList.Contains(collidingObject);
 
             if (check && collidingObject != null)
             {
                 //fireProjectile.ResetCounter();
-                if (_currentRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
-                {
-                    _currentRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
-                }
-                _currentRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                //if (_currentRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
+                //{
+                //    _currentRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
+                //}
+                _currentRoom.KillEnemy(collidingObject);
                 DropHandler.Drop(_currentRoom, collidingObject.screenCord);
             }
 
