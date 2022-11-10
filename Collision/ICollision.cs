@@ -47,4 +47,7 @@ public interface ICollision
     //a light-weight method for projectiles and items that do not need complex logic for movement
     public ISprite isIntersecting(ICollection<ISprite> collidibleList);
 
+    //updates booleans against room edges
+    public void UpdateCollisionRoomEdge();
+
 }
