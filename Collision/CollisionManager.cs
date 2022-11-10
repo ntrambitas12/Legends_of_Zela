@@ -17,6 +17,7 @@ public sealed class CollisionManager : ICollisionManager
         RIGHT_BOUNDARY = 592,
         UPPER_BOUNDARY = 178,
         LOWER_BOUNDARY = 402,
+        MOVEABLE_BLOCK = 31,
     }
     //--------------------------------VARIABLES--------------------------------
     private static CollisionManager instance = new CollisionManager();
@@ -207,35 +208,52 @@ public sealed class CollisionManager : ICollisionManager
         if (entity.collider.isColliding)
         {
             ISprite collidedEntity = entity.collider.collidedEntity;
-            if (entity.collider.isCollidingBottom)
+           
+            //set the original screen cord once
+            if (entity.orgScreenCord.X == 0 && entity.orgScreenCord.Y == 0)
             {
-                Vector2 position = collidedEntity.screenCord;
-                double x = collidedEntity.screenCord.X;
-                double y = collidedEntity.screenCord.Y + (int)CONSTANTS.REPULSION;
-                collidedEntity.screenCord = new Vector2((int)x, (int)y);
+                entity.orgScreenCord = entity.screenCord;
             }
-            if (entity.collider.isCollidingTop)
+
+            if (Math.Abs(entity.screenCord.X - entity.orgScreenCord.X) < (int)CONSTANTS.MOVEABLE_BLOCK && Math.Abs(entity.screenCord.Y - entity.orgScreenCord.Y) < (int)CONSTANTS.MOVEABLE_BLOCK)
             {
-                Vector2 position = collidedEntity.screenCord;
-                double x = collidedEntity.screenCord.X;
-                double y = collidedEntity.screenCord.Y - (int)CONSTANTS.REPULSION;
-                collidedEntity.screenCord = new Vector2((int)x, (int)y);
+                if (entity.collider.isCollidingBottom)
+                {
+                    Vector2 position = collidedEntity.screenCord;
+                    double x = collidedEntity.screenCord.X;
+                    double y = collidedEntity.screenCord.Y + (int)CONSTANTS.REPULSION;
+                    collidedEntity.screenCord = new Vector2((int)x, (int)y);
+                }
+                if (entity.collider.isCollidingTop)
+                {
+                    Vector2 position = collidedEntity.screenCord;
+                    double x = collidedEntity.screenCord.X;
+                    double y = collidedEntity.screenCord.Y - (int)CONSTANTS.REPULSION;
+                    collidedEntity.screenCord = new Vector2((int)x, (int)y);
+                }
+                if (entity.collider.isCollidingLeft)
+                {
+                    Vector2 position = collidedEntity.screenCord;
+                    double x = collidedEntity.screenCord.X - (int)CONSTANTS.REPULSION;
+                    double y = collidedEntity.screenCord.Y;
+                    collidedEntity.screenCord = new Vector2((int)x, (int)y);
+                }
+                if (entity.collider.isCollidingRight)
+                {
+                    Vector2 position = collidedEntity.screenCord;
+                    double x = collidedEntity.screenCord.X + (int)CONSTANTS.REPULSION;
+                    double y = collidedEntity.screenCord.Y;
+                    collidedEntity.screenCord = new Vector2((int)x, (int)y);
+
+                }
+                collidedEntity.collider.UpdateCollisionPosition();
+
             }
-            if (entity.collider.isCollidingLeft)
+            else
             {
-                Vector2 position = collidedEntity.screenCord;
-                double x = collidedEntity.screenCord.X - (int)CONSTANTS.REPULSION;
-                double y = collidedEntity.screenCord.Y;
-                collidedEntity.screenCord = new Vector2((int)x, (int)y);
+               roomObject.MoveableTileList.Remove(collidedEntity);
+               roomObject.StaticTileList.Add(collidedEntity);
             }
-            if (entity.collider.isCollidingRight)
-            {
-                Vector2 position = collidedEntity.screenCord;
-                double x = collidedEntity.screenCord.X + (int)CONSTANTS.REPULSION;
-                double y = collidedEntity.screenCord.Y;
-                collidedEntity.screenCord = new Vector2((int)x, (int)y);
-            }
-            collidedEntity.collider.UpdateCollisionPosition();
         } 
     }
 }
