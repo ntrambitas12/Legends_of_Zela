@@ -20,7 +20,7 @@
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>432</xPos>
+			<xPos>416</xPos>
 			<yPos>114</yPos>
 			<Name>WallTop2</Name>
 			<RoomObjectType>4</RoomObjectType>
@@ -32,7 +32,7 @@
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>432</xPos>
+			<xPos>416</xPos>
 			<yPos>402</yPos>
 			<Name>WallBottom2</Name>
 			<RoomObjectType>4</RoomObjectType>
@@ -45,7 +45,7 @@
 		</Block>
 		<Block>
 			<xPos>592</xPos>
-			<yPos>322</yPos>
+			<yPos>306</yPos>
 			<Name>WallRight2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
@@ -57,7 +57,7 @@
 		</Block>
 		<Block>
 			<xPos>144</xPos>
-			<yPos>322</yPos>
+			<yPos>306</yPos>
 			<Name>WallLeft2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
@@ -249,12 +249,6 @@
 
 	
 	<Items>
-		<Item>
-			<xPos>378</xPos>
-			<yPos>274</yPos>
-			<Name>Bow</Name>
-			<RoomObjectType>6</RoomObjectType>
-		</Item>
 		<Item>
 			<xPos>380</xPos>
 			<yPos>306</yPos>

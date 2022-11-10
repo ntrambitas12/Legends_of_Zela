@@ -12,6 +12,7 @@ public class RoomObject : IRoomObject
     public List<IController> ControllerList { get; set; }
     public ISprite Link { get; set; }
     public List<ISprite> EnemyList { get; set; }
+    public List<ISprite> DeadEnemyList { get; set; }
     public List<ISprite> EnemyProjectileList { get; set; }
     public List<ISprite> StaticTileList { get; set; }
     public List<ISprite> DynamicTileList { get; set; }
@@ -31,8 +32,6 @@ public class RoomObject : IRoomObject
     private Dictionary<int, List<ISprite>> listDict;
 
     //enemy AI related data
-    private List<SpriteAction> enemyActions;
-    private SpriteAction enemyAction;
     private Random rand;
     private bool pauseEnemies;
 
@@ -42,6 +41,8 @@ public class RoomObject : IRoomObject
     private int upDoorBoundary = 114;
     private int downDoorBoundary = 434;
 
+    public static bool pauseLink;
+
     //roomObjectManager
     private RoomObjectManager roomObjectManager;
     public RoomObject()
@@ -49,6 +50,7 @@ public class RoomObject : IRoomObject
         //intialize sprite and controller lists
         ControllerList = new List<IController>();
         EnemyList = new List<ISprite>();
+        DeadEnemyList = new List<ISprite>();
         EnemyProjectileList = new List<ISprite>();
         StaticTileList = new List<ISprite>();
         DynamicTileList = new List<ISprite>();
@@ -86,12 +88,8 @@ public class RoomObject : IRoomObject
 
         //set up the logic for the enemy AI
         rand = new Random();
-        enemyActions = new List<SpriteAction>();
-        enemyActions.Add(SpriteAction.moveDown);
-        enemyActions.Add(SpriteAction.moveLeft);
-        enemyActions.Add(SpriteAction.moveRight);
-        enemyActions.Add(SpriteAction.moveUp);
         pauseEnemies = false;
+        pauseLink = false;
 
         roomObjectManager = RoomObjectManager.Instance;
 
@@ -125,6 +123,7 @@ public class RoomObject : IRoomObject
         IRoomObject otherRoom = RoomObjectManager.Instance.adjacentRoom(_door.direction);
         if (LockedDoorsList.ContainsKey(door))
         {
+            SoundManager.Instance.PlayOnce("LOZ_Door_Unlock");
             LockedDoorsList[door] = false;
             foreach (IConcreteSprite otherDoor in otherRoom.LockedDoorsList.Keys)
             {
@@ -224,6 +223,19 @@ public class RoomObject : IRoomObject
         toBeDeleted.Add((gameObject, objectType));
     }
 
+    public void KillEnemy(ISprite enemy)
+    {
+        DeadEnemyList.Add(enemy);
+    }
+
+    public void ResetEnemies()
+    {
+        if (DeadEnemyList.Count < EnemyList.Count)
+        {
+            DeadEnemyList = new List<ISprite>();
+        }
+    }
+
     public void Update(GameTime gameTime)
     {
         //update all controllers
@@ -233,57 +245,33 @@ public class RoomObject : IRoomObject
         }
 
         //update Link
-        if (Link != null) {
+        if (Link != null && !pauseLink) {
             Link.Update(gameTime);
         }
 
         //update all enemies
         foreach (IConcreteSprite enemy in EnemyList)
         {
-
-            /*
-             * Using rand.next as a mechanism to "randomly" 
-             * have each enemy change its state.
-             * Couldnt think of a better ai, this will do
-             * for now. If a clock was used then enemies 
-             * don't move.
-           */
-
-            if (!pauseEnemies && rand.Next(25) == 5)
+            if (!DeadEnemyList.Contains(enemy))
             {
-                enemyAction = enemyActions[rand.Next(4)];
-
-                //if 0, then enemy will move
-                if (rand.Next(2) == 0)
-                {
-                    enemy.SetSpriteState(enemyAction, enemy.moving);
-                }
-                //if 1, enemy will stay still
-                else
-                {
-                    enemy.SetSpriteState(enemyAction, enemy.still);
-                }
+                enemy.Update(gameTime);
             }
-
-            enemy.Update(gameTime);
-
         }
 
         //update projectiles
         if (Link != null) { 
-        foreach(IProjectile projectile in ((ConcreteSprite)Link).projectiles)
-        {
-            if (projectile != null) projectile.Update(gameTime);
-        }
+            foreach(IProjectile projectile in ((ConcreteSprite)Link).projectiles)
+            {
+                if (projectile != null) projectile.Update(gameTime);
+            }
         }
 
         foreach (IProjectile enemyProjectile in EnemyProjectileList)
         {
-            if (!pauseEnemies && rand.Next(25) == 5)
+            if (!DeadEnemyList.Contains(((IProjectile)enemyProjectile).Owner()))
             {
-                enemyProjectile.FireCommand().Execute();
+                enemyProjectile.Update(gameTime);
             }
-            enemyProjectile.Update(gameTime);
         }
 
         //update pickup items
@@ -346,7 +334,10 @@ public class RoomObject : IRoomObject
 
         foreach (var enemyProjectile in EnemyProjectileList)
         {
-            enemyProjectile.Draw(gameTime);
+            if (!DeadEnemyList.Contains(((IProjectile)enemyProjectile).Owner()))
+            {
+                enemyProjectile.Draw(gameTime);
+            }
         }
 
         foreach (var item in PickupList)
@@ -356,7 +347,10 @@ public class RoomObject : IRoomObject
 
         foreach (var enemy in EnemyList)
         {
-            enemy.Draw(gameTime);
+            if (!DeadEnemyList.Contains(enemy))
+            {
+                enemy.Draw(gameTime);
+            }
         }
 
         if (Link != null)
@@ -398,6 +392,8 @@ public class RoomObject : IRoomObject
         //after iterating the delete list, clear it!
         toBeDeleted.Clear();
     }
+
+
 
     public void TakeDamage(ISprite sprite)
     {
@@ -452,6 +448,7 @@ public class RoomObject : IRoomObject
         //set all enemies to still
         foreach (IConcreteSprite enemy in EnemyList)
         {
+            SpriteAction enemyAction = SpriteAction.still;
             enemy.SetSpriteState(enemyAction, enemy.still);            
         }
     }
@@ -459,6 +456,21 @@ public class RoomObject : IRoomObject
     public void UnpauseEnemies()
     {
         pauseEnemies = false;
+    }
+
+    public void PauseLink()
+    {
+        pauseLink = true;
+    }
+
+    public void UnpauseLink()
+    {
+        pauseLink = false;
+    }
+
+    public Boolean IsPauseEnemies()
+    {
+        return pauseEnemies;
     }
     private void CheckEnteredDoor()
     {

@@ -21,6 +21,7 @@ public class BowDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 bow.SetShouldDraw(false);
                 ItemSelectionScreen.AddToInventory(bow, ArrayIndex.arrow);
 
