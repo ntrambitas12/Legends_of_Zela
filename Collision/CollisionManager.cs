@@ -77,12 +77,14 @@ public sealed class CollisionManager : ICollisionManager
             //contact damage with enemy
             IConcreteSprite collidingEnemy = (IConcreteSprite)currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
             IProjectile collidingProjectile = (IProjectile) currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList);
-            if (collidingEnemy != null && !currentRoom.DeadEnemyList.Contains(collidingEnemy))
+            if (collidingEnemy != null && !currentRoom.DeadEnemyList.Contains(collidingEnemy) && timeElapsed > 2)
+            {
+                timeElapsed = 0;
+                ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
+            } else if (collidingProjectile != null && !currentRoom.DeadEnemyList.Contains(collidingProjectile.Owner()) && timeElapsed > 2 )
             {
                 ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
-            } else if (collidingProjectile != null && !currentRoom.DeadEnemyList.Contains(collidingProjectile.Owner()))
-            {
-                ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
+                timeElapsed = 0;
             }
 
             //update the moveable tiles
