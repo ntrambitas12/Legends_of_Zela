@@ -20,6 +20,7 @@ public class MapDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 map.SetShouldDraw(false);
                 link.map = true;
             }

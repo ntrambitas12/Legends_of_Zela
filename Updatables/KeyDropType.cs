@@ -20,6 +20,7 @@ public class KeyDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 key.SetShouldDraw(false);
                 Link.keys++;
             }

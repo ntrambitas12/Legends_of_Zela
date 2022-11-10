@@ -61,8 +61,12 @@ public sealed class CollisionManager : ICollisionManager
             //wall collision and repulsion
             UpdateCollideWithWall(currentRoom.Link, currentRoom, false);
             //contact damage with enemy
-            if (currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList) != null ||
-                currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList) != null)
+            IConcreteSprite collidingEnemy = (IConcreteSprite)currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
+            IProjectile collidingProjectile = (IProjectile) currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList);
+            if (collidingEnemy != null && !currentRoom.DeadEnemyList.Contains(collidingEnemy))
+            {
+                ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
+            } else if (collidingProjectile != null && !currentRoom.DeadEnemyList.Contains(collidingProjectile.Owner()))
             {
                 ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
             }

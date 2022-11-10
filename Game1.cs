@@ -1,12 +1,5 @@
-
-using CSE3902Project.Commands;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Threading;
 
 namespace CSE3902Project
 {
@@ -48,7 +41,8 @@ namespace CSE3902Project
             //Load up the content for the sprite factory
             SoundFactory.Instance.LoadAllContent(Content);
             //plays background music
-            SoundManager.Instance.PlayLooped("Dungeon 1");
+            SoundManager.Instance.playBackgroundMusic();
+
             SpriteFactory.Instance.LoadAllContent(Content, _spriteBatch);
             hud.sf = SpriteFactory.Instance;
             base.Initialize();
@@ -67,13 +61,13 @@ namespace CSE3902Project
             this.Initialize();
             this.LoadContent();
             roomObjectManager.setRoom(1, true);
-           
+
         }
 
 
         protected override void Update(GameTime gameTime)
         {
-            
+
             GraphicsDevice.Clear(Color.Black);
             if (inventory.isOpen())
             {
@@ -88,7 +82,7 @@ namespace CSE3902Project
 
         protected override void Draw(GameTime gameTime)
         {
-          
+
             _spriteBatch.Begin();
             inventory.Draw(gameTime);
             _spriteBatch.End();
@@ -114,6 +108,6 @@ namespace CSE3902Project
 
             base.Draw(gameTime);
         }
-     
+
     }
 }

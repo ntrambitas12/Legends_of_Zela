@@ -20,6 +20,7 @@ public class ClockDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 clock.SetShouldDraw(false);
                 currentRoom.PauseEnemies();
             }

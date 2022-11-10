@@ -20,6 +20,7 @@ public class CompassDropType : IItemType
 
             if (collidingObject != null)
             {
+                SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 compass.SetShouldDraw(false);
                 link.compass = true;
             }
