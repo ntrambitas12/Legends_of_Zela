@@ -29,6 +29,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public int keys { get; set; }
     public int rubies { get; set; }
     public int bombs { get; set; }
+    public bool map { get; set; }
+    public bool compass { get; set; }
 
 
     /*Projectile inventory
@@ -77,6 +79,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         keys = 0;
         rubies = 0;
         bombs = 0;
+        map = false;
+        compass = false;
 
         state = still;
         direction = SpriteAction.left;

@@ -15,12 +15,13 @@ public class MapDropType : IItemType
     {
         if (map.ShouldDraw())
         {
-            ISprite collidingObject = map.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
+            IConcreteSprite link = (IConcreteSprite)RoomObjectManager.Instance.currentRoom().Link;
+            ISprite collidingObject = map.collider.isIntersecting(new List<ISprite> { link });
 
             if (collidingObject != null)
             {
                 map.SetShouldDraw(false);
-                // Add to Link's inventory here
+                link.map = true;
             }
         }
     }

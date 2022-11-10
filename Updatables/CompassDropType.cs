@@ -15,12 +15,13 @@ public class CompassDropType : IItemType
     {
         if (compass.ShouldDraw())
         {
-            ISprite collidingObject = compass.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
+            IConcreteSprite link = (IConcreteSprite) RoomObjectManager.Instance.currentRoom().Link;
+            ISprite collidingObject = compass.collider.isIntersecting(new List<ISprite> { link });
 
             if (collidingObject != null)
             {
                 compass.SetShouldDraw(false);
-                // Add to Link's inventory here
+                link.compass = true;
             }
         }
     }
