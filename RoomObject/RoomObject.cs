@@ -12,6 +12,7 @@ public class RoomObject : IRoomObject
     public List<IController> ControllerList { get; set; }
     public ISprite Link { get; set; }
     public List<ISprite> EnemyList { get; set; }
+    public List<ISprite> DeadEnemyList { get; set; }
     public List<ISprite> EnemyProjectileList { get; set; }
     public List<ISprite> StaticTileList { get; set; }
     public List<ISprite> DynamicTileList { get; set; }
@@ -47,6 +48,7 @@ public class RoomObject : IRoomObject
         //intialize sprite and controller lists
         ControllerList = new List<IController>();
         EnemyList = new List<ISprite>();
+        DeadEnemyList = new List<ISprite>();
         EnemyProjectileList = new List<ISprite>();
         StaticTileList = new List<ISprite>();
         DynamicTileList = new List<ISprite>();
@@ -218,6 +220,19 @@ public class RoomObject : IRoomObject
         toBeDeleted.Add((gameObject, objectType));
     }
 
+    public void KillEnemy(ISprite enemy)
+    {
+        DeadEnemyList.Add(enemy);
+    }
+
+    public void ResetEnemies()
+    {
+        if (DeadEnemyList.Count < EnemyList.Count)
+        {
+            DeadEnemyList = new List<ISprite>();
+        }
+    }
+
     public void Update(GameTime gameTime)
     {
         //update all controllers
@@ -234,7 +249,10 @@ public class RoomObject : IRoomObject
         //update all enemies
         foreach (IConcreteSprite enemy in EnemyList)
         {
-            enemy.Update(gameTime);
+            if (!DeadEnemyList.Contains(enemy))
+            {
+                enemy.Update(gameTime);
+            }
         }
 
         //update projectiles
@@ -251,7 +269,10 @@ public class RoomObject : IRoomObject
             //{
             //    enemyProjectile.FireCommand().Execute();
             //}
-            enemyProjectile.Update(gameTime);
+            if (!DeadEnemyList.Contains(((IProjectile)enemyProjectile).Owner()))
+            {
+                enemyProjectile.Update(gameTime);
+            }
         }
 
         //update pickup items
@@ -314,7 +335,10 @@ public class RoomObject : IRoomObject
 
         foreach (var enemyProjectile in EnemyProjectileList)
         {
-            enemyProjectile.Draw(gameTime);
+            if (!DeadEnemyList.Contains(((IProjectile)enemyProjectile).Owner()))
+            {
+                enemyProjectile.Draw(gameTime);
+            }
         }
 
         foreach (var item in PickupList)
@@ -324,7 +348,10 @@ public class RoomObject : IRoomObject
 
         foreach (var enemy in EnemyList)
         {
-            enemy.Draw(gameTime);
+            if (!DeadEnemyList.Contains(enemy))
+            {
+                enemy.Draw(gameTime);
+            }
         }
 
         if (Link != null)
@@ -366,6 +393,8 @@ public class RoomObject : IRoomObject
         //after iterating the delete list, clear it!
         toBeDeleted.Clear();
     }
+
+
 
     public void TakeDamage(ISprite sprite)
     {

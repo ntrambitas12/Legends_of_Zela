@@ -36,6 +36,9 @@ public interface IRoomObject
     //the list for enemies
     public List<ISprite> EnemyList { get; set; }
 
+    //the list for dead enemies
+    public List<ISprite> DeadEnemyList { get; set; }
+
     //list for enemy projectiles
     public List<ISprite> EnemyProjectileList { get; set; }
 
@@ -104,6 +107,12 @@ public interface IRoomObject
     //toBeDeleted list is declared as:
     //  private List<(ISprite, int)> toBeDeleted;
     public void DeleteGameObject(int objectType, ISprite gameObject);
+
+    //Kills the enemy, and if it is the last one then it deletes all of them
+    public void KillEnemy(ISprite enemy);
+
+    //Resets enemies unless all enemies were killed
+    public void ResetEnemies();
 
     //is called by the Game class, Game1, in its Update() method.
     //updates all Updateables, includes
