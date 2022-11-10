@@ -39,7 +39,7 @@
 		</Block>
 		<Block>
 			<xPos>592</xPos>
-			<yPos>322</yPos>
+			<yPos>306</yPos>
 			<Name>WallRight2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
@@ -76,8 +76,8 @@
 
 	<Items>
 		<Item>
-			<xPos>312</xPos>
-			<yPos>274</yPos>
+			<xPos>472</xPos>
+			<yPos>371</yPos>
 			<Name>Key</Name>
 			<RoomObjectType>6</RoomObjectType>
 		</Item>

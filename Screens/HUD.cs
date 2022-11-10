@@ -129,7 +129,10 @@ public class HUD
         {
                 spriteBatch.Draw(sf.HUDTriforce(), isInvOpen ? triforceRoom + openInvOffset : triforceRoom, Color.White);
         }
-        spriteBatch.Draw(sf.HUDLink(), isInvOpen? linkMapLocation[currentRoom] + openInvOffset : linkMapLocation[currentRoom], Color.White);
+        if (linkMapLocation.ContainsKey(currentRoom))
+        {
+            spriteBatch.Draw(sf.HUDLink(), isInvOpen ? linkMapLocation[currentRoom] + openInvOffset : linkMapLocation[currentRoom], Color.White);
+        }
     }
 
     public void LoadLocationDictionary()

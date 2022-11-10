@@ -250,6 +250,91 @@
 			<Name>InvisibleBarrier</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
+		<Block>
+			<xPos>176</xPos>
+			<yPos>370</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>208</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>240</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>272</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>304</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>336</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>368</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>400</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>432</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>464</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>496</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>528</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>560</xPos>
+			<yPos>402</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		<Block>
+			<xPos>592</xPos>
+			<yPos>370</yPos>
+			<Name>InvisibleBarrier</Name>
+			<RoomObjectType>4</RoomObjectType>
+		</Block>
+		
 		
 	</Blocks>
 
@@ -283,6 +368,12 @@
 
 
 	<Items>
+		<Item>
+			<xPos>410</xPos>
+			<yPos>274</yPos>
+			<Name>Bow</Name>
+			<RoomObjectType>6</RoomObjectType>
+		</Item>
 	</Items>
 	
 </XnaContent>
