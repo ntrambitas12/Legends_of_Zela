@@ -71,10 +71,10 @@ public class HUD
         Vector2 offset = new Vector2(0, 0);
         for(int i = 0; i < Link.maxHealth; i++)
         {
-            spriteBatch.Draw(sf.HUDHeart(), (isInvOpen ? heartOrigin + offset + openInvOffset : heartOrigin + offset), null, Color.Maroon, 0, _00, 3, SpriteEffects.None, 0);
+            spriteBatch.Draw(sf.HUDHeart(), (isInvOpen ? heartOrigin + offset + openInvOffset : heartOrigin + offset), null, Color.Maroon, 0, _00, 2, SpriteEffects.None, 0);
             if (Link.health > i)
             {
-                spriteBatch.Draw(sf.HUDHeart(), (isInvOpen ? heartOrigin + offset + openInvOffset : heartOrigin + offset), null, Color.Red, 0, _00, 3, SpriteEffects.None, 0);
+                spriteBatch.Draw(sf.HUDHeart(), (isInvOpen ? heartOrigin + offset + openInvOffset : heartOrigin + offset), null, Color.Red, 0, _00, 2, SpriteEffects.None, 0);
             }
             offset.X += 25;
         }
