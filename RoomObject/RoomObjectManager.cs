@@ -23,6 +23,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
     private Vector2 DownPan;
     private Dictionary<String, (int, int, int, Vector2, int, bool)> roomDir;
 
+    private HUD hud;
     private ICollisionManager collisionManager;
     private IAIManager aiManager;
 

@@ -25,7 +25,10 @@ public enum RoomObjectTypes
 //ONLY GAME OBJECTS THAT ARE DRAWN AND/OR UPDATED ARE IN THESE LISTS.
 //  this should include ONLY the game objects in the CURRENT room.
 public interface IRoomObject
+
 {
+    public static bool pauseLink;
+
     //the controllers list
     //includes keyboardController, mouseController, gamepadController(?)
     public List<IController> ControllerList { get; set; }
@@ -145,6 +148,9 @@ public interface IRoomObject
     public void PauseEnemies();
 
     public void UnpauseEnemies();
+
+    public void PauseLink();
+    public void UnpauseLink();
 
     public Boolean IsPauseEnemies();
 }

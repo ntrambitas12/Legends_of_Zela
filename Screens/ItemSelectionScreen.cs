@@ -12,6 +12,7 @@ public class ItemSelectionScreen
     {
     public IConcreteSprite Link { get; set; }
     private static IDrop[] items;
+    private HUD hud;
     private static Vector2 itemOffset = new Vector2(505, 100);
     private Rectangle baseSelector = new Rectangle(450, 60, 300, 100);
     private int baseXitemSelector = 490;
@@ -28,13 +29,13 @@ public class ItemSelectionScreen
     private static Vector2 selectedItemCord = new Vector2(180, 100);
     private int selectedItem = 0;
     private static Dictionary<int, IDrop> selectedDrop;
-    private IDrop currentItem;
+    public static IDrop currentItem;
     private int baseSelectorWidth = 6;
     private int currentSelectedWidth = 4;
     private int itemSelectedWidth = 2;
 
 
-    public ItemSelectionScreen(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, SpriteFont textFont)
+    public ItemSelectionScreen(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, SpriteFont textFont, HUD hud)
     {
 
         items = new IDrop[3];
@@ -42,22 +43,34 @@ public class ItemSelectionScreen
         this.graphicsDevice = graphicsDevice;   
         this.spriteBatch = spriteBatch; 
         this.textFont = textFont;
+        this.hud = hud;
         selectedDrop = new Dictionary<int, IDrop>();    
        
     }
     
-    public void Update(GameTime gameTime)
+    public void Update(GameTime gameTime, IRoomObject room)
     {
+     
+            selectedItem = (int)Link.ProjectileIndex();
         if (isActive)
         {
-            selectedItem = (int)Link.ProjectileIndex();
+            room.PauseEnemies();
+            room.PauseLink();
+        }
+        else
+        {
+            room.UnpauseEnemies();
+            room.UnpauseLink();
+        }
             if (items[selectedItem] != null)
             {
                 currentItem = selectedDrop[selectedItem];
                 currentItem.SetShouldDraw(true);
+                hud.currentItem = selectedItem;
             }
+
                 UpdateSelectedBox();
-        }
+  
     }
 
     private void UpdateSelectedBox()
@@ -149,6 +162,11 @@ public class ItemSelectionScreen
     public bool isOpen()
     {
         return isActive;
+    }
+
+    public void Reset()
+    {
+        currentItem = null; 
     }
 }
 

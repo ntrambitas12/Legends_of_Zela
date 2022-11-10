@@ -29,10 +29,11 @@ public class LevelLoader: ILevelLoader
     private Game1 game1;
     private ISprite sprite;
     private ItemSelectionScreen inventory;
+    private HUD hud;
    
   
 
-    public LevelLoader(Game1 game1, ItemSelectionScreen inventory)
+    public LevelLoader(Game1 game1, ItemSelectionScreen inventory, HUD hud)
     {
         
         constructer = new Dictionary<String, Delegate>();
@@ -50,6 +51,7 @@ public class LevelLoader: ILevelLoader
         this.game1 = game1;
         runOnce = false;
         this.inventory = inventory;
+        this.hud = hud;
     }
 
     private void populateDictionary()
@@ -290,6 +292,7 @@ public class LevelLoader: ILevelLoader
 
         Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(300, 350) + baseCord);
         room.Link = Link;
+        hud.Link = (ConcreteSprite)Link;
 
         /* Tempelate for creating and adding projectiles to link. Will be useful later*/
         // Create sword for link

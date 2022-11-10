@@ -11,7 +11,10 @@ public class Attack : ICommand
 
     public void Execute()
     {
-        sprite.SetSpriteState((SpriteAction)sprite.spritePos, sprite.attack);
+        if (!RoomObject.pauseLink)
+        {
+            sprite.SetSpriteState((SpriteAction)sprite.spritePos, sprite.attack);
+        }
     }
 }
 
