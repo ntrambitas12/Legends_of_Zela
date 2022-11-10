@@ -843,39 +843,58 @@ public sealed class SpriteFactory : IFactory
     //Enemies
     public ISprite CreateGoriyaSprite(Vector2 location)
     {
-        return AddAI(CreateEntityWithCollision(location, goriyaFrames), AIType.RandomMove);
+        IConcreteSprite goriya = (IConcreteSprite) CreateEntityWithCollision(location, goriyaFrames);
+        goriya.health = 2;
+        return AddAI(goriya, AIType.RandomMove);
     }
     public ISprite CreateKeeseSprite(Vector2 location)
     {
-        return AddAI(CreateEntityWithCollision(location, keeseFrames), AIType.AlwaysRandomMove);
+        IConcreteSprite keese = (IConcreteSprite) CreateEntityWithCollision(location, keeseFrames);
+        keese.health = 1;
+        return AddAI(keese, AIType.AlwaysRandomMove);
     }
     public ISprite CreateStalfosSprite(Vector2 location)
     {
-        return AddAI(CreateEntityWithCollision(location, stalfosFrames), AIType.RandomMove);
+        IConcreteSprite stalfos = (IConcreteSprite) CreateEntityWithCollision(location, stalfosFrames);
+        stalfos.health = 1;
+        return AddAI(stalfos, AIType.RandomMove);
     }
     public ISprite CreateGelSprite(Vector2 location)
     {
-        return AddAI(CreateEntityWithCollision(location, gelFrames), AIType.RandomMove);
+        IConcreteSprite gel = (IConcreteSprite) CreateEntityWithCollision(location, gelFrames);
+        gel.health = 1;
+ return AddAI(gel, AIType.RandomMove);
     }
     public ISprite CreateAquamentusSprite(Vector2 location)
     {
-        return AddAI(CreateEntityWithCollision(location, aquamentusFrames), AIType.RandomMove);
+        IConcreteSprite aquamentus = (IConcreteSprite) CreateEntityWithCollision(location, aquamentusFrames);
+        aquamentus.health = 4;
+        aquamentus.maxHealth = 4;
+        return AddAI(aquamentus, AIType.RandomMove);
     }
     public ISprite CreateBladeTrapSprite(Vector2 location)
     {
-        return AddAI(CreateEntityWithCollision(location, trapFrames), AIType.RandomMove);
+        IConcreteSprite bladeTrap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
+        bladeTrap.health = -1;
+        return AddAI(bladeTrap, AIType.RandomMove);
     }
     public ISprite CreateWallmasterSprite(Vector2 location)
     {
-        return AddAI(CreateEntityWithCollision(location, wallmasterFrames), AIType.RandomMove);
+        IConcreteSprite wallmaster = (IConcreteSprite) CreateEntityWithCollision(location, wallmasterFrames);
+        wallmaster.health = 2;
+        return AddAI(wallmaster, AIType.RandomMove);
     }
     public ISprite CreateOldManSprite(Vector2 location)
     {
-        return AddAI(CreateEntityWithCollision(location, oldManFrames), AIType.RandomMove);
+        IConcreteSprite oldMan = (IConcreteSprite) CreateEntityWithCollision(location, oldManFrames);
+        oldMan.health = -1;
+        return AddAI(oldMan, AIType.RandomMove);
     }
     public ISprite CreateTrapSprite(Vector2 location)
     {
-        return AddAI(CreateEntityWithCollision(location, trapFrames), AIType.RandomMove);
+        IConcreteSprite trap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
+        trap.health = -1;
+        return AddAI(trap, AIType.RandomMove);
     }
 
 

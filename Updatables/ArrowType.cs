@@ -80,10 +80,6 @@ public class ArrowType : IProjectileType
             if (check && collidingObject != null)
             {
                 fireProjectile.ResetCounter();
-                //if (currRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
-                //{
-                //    currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
-                //}
                 currRoom.KillEnemy(collidingObject);
                 DropHandler.Drop(currRoom, collidingObject.screenCord);
             }
