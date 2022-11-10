@@ -882,7 +882,7 @@ public sealed class SpriteFactory : IFactory
     {
         IConcreteSprite wallmaster = (IConcreteSprite) CreateEntityWithCollision(location, wallmasterFrames);
         wallmaster.health = 2;
-        return AddAI(CreateEntityWithCollision(wallmaster, AIType.RandomMove);
+        return AddAI(wallmaster, AIType.RandomMove);
     }
     public ISprite CreateOldManSprite(Vector2 location)
     {

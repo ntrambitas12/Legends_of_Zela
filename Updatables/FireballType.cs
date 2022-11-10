@@ -48,9 +48,6 @@ public class FireballType : IProjectileType
             fireProjectile.Execute();
         }
 
-        //check for collisions and effects
-        //UpdateCollisions(gameTime);
-
     }
 
 

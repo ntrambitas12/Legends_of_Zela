@@ -48,17 +48,12 @@ public class BombType : IProjectileType
             projectile.SetPosition(new Vector2(prevCord.X - 30, prevCord.Y - 30));
             ISprite collidingObject = projectile.collider.isIntersecting(_currentRoom.ProjectileStopperList);
 
-            //if (collidingObject != null)
-            //{
-            //    fireProjectile.ResetCounter();
-            //}
-
             collidingObject = projectile.collider.isIntersecting(new List<ISprite> { _currentRoom.Link });
             bool check = projectile.Owner() != _currentRoom.Link;
 
             if (check && collidingObject != null)
             {
-                //fireProjectile.ResetCounter();
+                
                 _currentRoom.TakeDamage(collidingObject);
             }
 
@@ -68,11 +63,6 @@ public class BombType : IProjectileType
 
             if (check && collidingObject != null)
             {
-                //fireProjectile.ResetCounter();
-                //if (_currentRoom.EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
-                //{
-                //    _currentRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
-                //}
                 _currentRoom.KillEnemy(collidingObject);
                 DropHandler.Drop(_currentRoom, collidingObject.screenCord);
             }
