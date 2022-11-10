@@ -65,7 +65,7 @@ namespace CSE3902Project
         {
             
             GraphicsDevice.Clear(Color.Black);
-            roomObjectManager.currentRoom().PauseEnemies();
+           // roomObjectManager.currentRoom().PauseEnemies();
             roomObjectManager.Update(gameTime);
 
             base.Update(gameTime);

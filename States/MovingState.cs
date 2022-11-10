@@ -10,6 +10,7 @@ public class MovingState : ISpriteState
     private IConcreteSprite sprite;
     private IPosition position;
     private IDraw drawSprite;
+    public Boolean isDamaged { get; set; }
 
     public MovingState(IConcreteSprite sprite)
     {
@@ -19,7 +20,14 @@ public class MovingState : ISpriteState
     }
     public void Draw(GameTime gameTime)
     {
-        drawSprite.Draw(sprite, Color.White, true, gameTime);
+        if (isDamaged)
+        {
+            drawSprite.Draw(sprite, Color.Red, false, gameTime);
+        }
+        else
+        {
+            drawSprite.Draw(sprite, Color.White, true, gameTime);
+        }
     }
 
     public void Update(GameTime gameTime)

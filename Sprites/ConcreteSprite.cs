@@ -29,6 +29,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public int keys { get; set; }
     public int rubies { get; set; }
 
+    public Boolean isDamaged { get; set; }
 
     /*Projectile inventory
      Use ArrayIndex enums*/
@@ -36,6 +37,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public IProjectile[] projectiles { get; set; }
 
     public SpriteAction direction { get; set; }
+
+    private float timeElapsed;
 
     private IDraw drawSprite = new DrawSprite();
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
@@ -81,6 +84,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
         projectiles = new IProjectile[4];
         projectileIndex = (int)ArrayIndex.arrow;
+
     }
 
     public void SetSpriteState(SpriteAction action, ISpriteState state)
@@ -137,8 +141,10 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public void TakeDamage()
     {
         SpriteAction newPos;
+        SpriteAction currentPos = this.direction;
         float orgX;
         float orgY;
+        
 
         /* Decrement the entitys health field */
         this.health--;
@@ -177,6 +183,15 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
         }
         this.SetSpriteState(newPos, this.damaged);
+        isDamaged = true;
+
+       // timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        //while (timeElapsed < 2)
+        //{
+        //    timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        //}
+        //this.SetSpriteState(currentPos, this.still);
+
     }
 
     public void SetDirection(SpriteAction direction)

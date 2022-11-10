@@ -16,6 +16,7 @@ public class DamagedState : ISpriteState
     private float timeElapsed;
     private int counter = 0;
     public int health = 0;
+    public Boolean isDamaged { get; set; }
 
 
    
@@ -46,6 +47,7 @@ public class DamagedState : ISpriteState
         {
             timeElapsed = 0;
             sprite.SetSpriteState(prevAction, prevState);
+            isDamaged = false;
             counter = 0;
 
         }

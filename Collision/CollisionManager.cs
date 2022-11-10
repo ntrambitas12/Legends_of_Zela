@@ -61,10 +61,12 @@ public sealed class CollisionManager : ICollisionManager
             //wall collision and repulsion
             UpdateCollideWithWall(currentRoom.Link, currentRoom, false);
             //contact damage with enemy
-            if (currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList) != null ||
-                currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList) != null)
+            if (timeElapsed > 2 && // something not working here
+                (currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList) != null ||
+                currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList) != null))
             {
                 ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
+                timeElapsed = 0;
             }
 
             //update the moveable tiles
