@@ -37,11 +37,14 @@ namespace CSE3902Project
             //load text font
             textFont = Content.Load<SpriteFont>("Fonts/InventoryFont");
             hudFont = Content.Load<SpriteFont>("Fonts/NESFont");
-            hud = new HUD(GraphicsDevice, _spriteBatch, hudFont);
-            inventory = new ItemSelectionScreen(GraphicsDevice, _spriteBatch, textFont);
-            level = new LevelLoader(this, inventory, hud);
+
             roomObjectManager = RoomObjectManager.Instance;
             camera = Camera.Instance;
+
+            hud = new HUD(GraphicsDevice, _spriteBatch, hudFont, (RoomObjectManager)roomObjectManager);
+            inventory = new ItemSelectionScreen(GraphicsDevice, _spriteBatch, textFont, hud);
+            level = new LevelLoader(this, inventory, hud);
+
             //Load up the content for the sprite factory
             SoundFactory.Instance.LoadAllContent(Content);
             //plays background music

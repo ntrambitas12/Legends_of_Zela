@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Mime;
 using System.Runtime.CompilerServices;
@@ -14,10 +15,10 @@ public class HUD
 {
     public IConcreteSprite Link { get; set; }
     public SpriteFactory sf { get; set; }
-    public ItemSelectionScreen inventory;
     private GraphicsDevice graphicsDevice;
     private SpriteBatch spriteBatch;
     private SpriteFont textFont;
+    private RoomObjectManager rom;
     private Vector2 levelPlacement = new Vector2(150, 10);
     private Vector2 mapPlacement = new Vector2(160, 40);
     private Vector2 keyPlacement = new Vector2(300, 60);
@@ -35,32 +36,28 @@ public class HUD
     private Vector2 borderB = new Vector2(369, 30);
     private Vector2 triforceRoom = new Vector2(255, 49);
 
-    private Boolean hasMap;
-    private Boolean hasCompass;
-    public int currentRoom { get; set; }
+    private Texture2D[] items = new Texture2D[4];
+    public int currentItem { get; set; }
     private static Dictionary<int, Vector2> linkMapLocation;
 
-    public HUD(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, SpriteFont textFont)
+    public HUD(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, SpriteFont textFont, RoomObjectManager rom)
     {
 
         this.graphicsDevice = graphicsDevice;
         this.spriteBatch = spriteBatch;
         this.textFont = textFont;
+        this.rom = rom;
         linkMapLocation = new Dictionary<int, Vector2>();
         LoadLocationDictionary();
     }
 
     public void Draw(GameTime gameTime)
     {
-        //for testing
-        currentRoom = 25;
-        hasMap = true;
-        hasCompass = true;
-
+        GetSecondaryItem(currentItem);
         DrawStaticElements();
         DrawUpdatingElements();
         DrawHealth();
-        MapHandler(hasMap, currentRoom, hasCompass);
+        MapHandler(rom.currentRoomID(), gameTime);
     }
 
     public void DrawHealth()
@@ -98,21 +95,33 @@ public class HUD
         spriteBatch.DrawString(textFont, "X" + Link.keys, keyPlacement + countOffset, Color.White);
         spriteBatch.DrawString(textFont, "X" + Link.bombs, bombPlacement + countOffset, Color.White);
         spriteBatch.DrawString(textFont, "X" + Link.bombs, bombPlacement + countOffset, Color.White);
-        spriteBatch.Draw(GetSecondaryItem(), secondaryPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
+        spriteBatch.Draw(GetSecondaryItem(currentItem), secondaryPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
     }
 
-    public Texture2D GetSecondaryItem()
+    public Texture2D GetSecondaryItem(int currentItem)
     {
-        //Temp
-        return sf.HUDBomb();
+        items[0] = sf.HUDBow();
+        items[1] = sf.HUDBomb();
+        items[2] = sf.HUDBoomerang();
+        items[3] = sf.Blank();
+        if (Link.projectiles[0] == null || Link.projectiles[1] == null || Link.projectiles[2] == null)
+        {
+            return items[3];
+        }
+        else
+        {
+            return items[currentItem];
+        }
     }
 
-    public void MapHandler(Boolean hasMap, int currentRoom, Boolean hasCompass)
+    public void MapHandler(int currentRoom, GameTime gameTime)
     {
-        if (hasMap) { spriteBatch.Draw(sf.HUDMap(), mapPlacement, Color.White); }
-        if (hasCompass) { spriteBatch.Draw(sf.HUDTriforce(), triforceRoom, Color.White); }
+        if (Link.map) { spriteBatch.Draw(sf.HUDMap(), mapPlacement, Color.White); }
+        if (Link.compass) 
+        {
+                spriteBatch.Draw(sf.HUDTriforce(), triforceRoom, Color.White);
+        }
         spriteBatch.Draw(sf.HUDLink(), linkMapLocation[currentRoom], Color.White);
-
     }
 
     public void LoadLocationDictionary()

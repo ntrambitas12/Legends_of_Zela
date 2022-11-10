@@ -190,6 +190,8 @@ public sealed class SpriteFactory : IFactory
     private Texture2D HUDHearts;
     private Texture2D HUDLinks;
     private Texture2D HUDTriforces;
+    private Texture2D HUDBows;
+    private Texture2D HUDBoomerangs;
 
 
     private SpriteBatch _spriteBatch;
@@ -504,6 +506,8 @@ public sealed class SpriteFactory : IFactory
         HUDMaps = content.Load<Texture2D>("HUDElements/HUDMap0");
         HUDLinks = content.Load<Texture2D>("HUDElements/LinkOnMap");
         HUDTriforces = content.Load<Texture2D>("HUDElements/TriforceOnMap");
+        HUDBows = content.Load<Texture2D>("ItemSprites/Bow");
+        HUDBoomerangs = content.Load<Texture2D>("ItemSprites/BoomerangRight");
 
         //Populate Blocks and Items
         for (int i = 0; i < 4; i++)
@@ -1171,5 +1175,17 @@ public sealed class SpriteFactory : IFactory
     public Texture2D HUDTriforce()
     {
         return HUDTriforces;
+    }
+    public Texture2D HUDBoomerang()
+    {
+        return HUDBoomerangs;
+    }
+    public Texture2D HUDBow()
+    {
+        return HUDBows;
+    }
+    public Texture2D Blank()
+    {
+        return invisibleBarrier[0];
     }
 }
