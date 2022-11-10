@@ -35,8 +35,9 @@ public class HUD
     private Vector2 borderA = new Vector2(409, 30);
     private Vector2 borderB = new Vector2(369, 30);
     private Vector2 triforceRoom = new Vector2(255, 49);
-
-    private Texture2D[] items = new Texture2D[4];
+    private Vector2 openInvOffset = new Vector2(0, 325);
+    private IDrop item;
+    private bool isResetting;
     public int currentItem { get; set; }
     private static Dictionary<int, Vector2> linkMapLocation;
 
@@ -47,81 +48,88 @@ public class HUD
         this.spriteBatch = spriteBatch;
         this.textFont = textFont;
         this.rom = rom;
+        isResetting = false;
         linkMapLocation = new Dictionary<int, Vector2>();
         LoadLocationDictionary();
     }
 
-    public void Draw(GameTime gameTime)
+    public void Draw(GameTime gameTime, bool isInvOpen)
     {
-        GetSecondaryItem(currentItem);
-        DrawStaticElements();
-        DrawUpdatingElements();
-        DrawHealth();
-        MapHandler(rom.currentRoomID(), gameTime);
+        
+            GetSecondaryItem(isInvOpen);
+            DrawStaticElements(isInvOpen);
+            DrawUpdatingElements(isInvOpen, gameTime);
+            DrawHealth(isInvOpen);
+            MapHandler(rom.currentRoomID(), gameTime, isInvOpen);
+        
     }
 
-    public void DrawHealth()
+    public void DrawHealth(bool isInvOpen)
     {
-        spriteBatch.DrawString(textFont, "-LIFE-", LifeTextPlacement, Color.DarkRed);
+        spriteBatch.DrawString(textFont, "-LIFE-", isInvOpen? LifeTextPlacement + openInvOffset: LifeTextPlacement, Color.DarkRed);
 
         Vector2 offset = new Vector2(0, 0);
         for(int i = 0; i < Link.maxHealth; i++)
         {
-            spriteBatch.Draw(sf.HUDHeart(), (heartOrigin + offset), null, Color.Maroon, 0, _00, 3, SpriteEffects.None, 0);
+            spriteBatch.Draw(sf.HUDHeart(), (isInvOpen ? heartOrigin + offset + openInvOffset : heartOrigin + offset), null, Color.Maroon, 0, _00, 3, SpriteEffects.None, 0);
             if (Link.health > i)
             {
-                spriteBatch.Draw(sf.HUDHeart(), (heartOrigin + offset), null, Color.Red, 0, _00, 3, SpriteEffects.None, 0);
+                spriteBatch.Draw(sf.HUDHeart(), (isInvOpen ? heartOrigin + offset + openInvOffset : heartOrigin + offset), null, Color.Red, 0, _00, 3, SpriteEffects.None, 0);
             }
             offset.X += 25;
         }
     }
 
-    public void DrawStaticElements()
+    public void DrawStaticElements(bool isInvOpen)
     {
-        spriteBatch.DrawString(textFont, "LEVEL-1", levelPlacement, Color.White);
-        spriteBatch.DrawString(textFont, "B", BPlacement, Color.White);
-        spriteBatch.DrawString(textFont, "A", APlacement, Color.White);
-        spriteBatch.Draw(sf.HUDKey(), keyPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
-        spriteBatch.Draw(sf.HUDBomb(), bombPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
-        spriteBatch.Draw(sf.HUDRuby(), rubyPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
-        spriteBatch.Draw(sf.HUDSword(), swordPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
-        spriteBatch.Draw(sf.HUDItemBorder(), borderA, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
-        spriteBatch.Draw(sf.HUDItemBorder(), borderB, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
+        spriteBatch.DrawString(textFont, "LEVEL-1", isInvOpen? levelPlacement + openInvOffset : levelPlacement, Color.White);
+        spriteBatch.DrawString(textFont, "B", isInvOpen? BPlacement + openInvOffset : BPlacement, Color.White);
+        spriteBatch.DrawString(textFont, "A", isInvOpen? APlacement + openInvOffset : APlacement, Color.White);
+        spriteBatch.Draw(sf.HUDKey(),  isInvOpen? keyPlacement + openInvOffset : keyPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
+        spriteBatch.Draw(sf.HUDBomb(), isInvOpen? bombPlacement + openInvOffset : bombPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
+        spriteBatch.Draw(sf.HUDRuby(), isInvOpen ? rubyPlacement + openInvOffset : rubyPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
+        spriteBatch.Draw(sf.HUDSword(),isInvOpen ? swordPlacement + openInvOffset : swordPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
+        spriteBatch.Draw(sf.HUDItemBorder(), isInvOpen ? borderA + openInvOffset : borderA, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
+        spriteBatch.Draw(sf.HUDItemBorder(),  isInvOpen ? borderB + openInvOffset : borderB, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
     }
 
-    public void DrawUpdatingElements()
+    public void DrawUpdatingElements(bool isInvOpen, GameTime gameTime)
     {
-        spriteBatch.DrawString(textFont, "X" + Link.rubies, rubyPlacement + countOffset, Color.White);
-        spriteBatch.DrawString(textFont, "X" + Link.keys, keyPlacement + countOffset, Color.White);
-        spriteBatch.DrawString(textFont, "X" + Link.bombs, bombPlacement + countOffset, Color.White);
-        spriteBatch.DrawString(textFont, "X" + Link.bombs, bombPlacement + countOffset, Color.White);
-        spriteBatch.Draw(GetSecondaryItem(currentItem), secondaryPlacement, null, Color.White, 0, _00, 2, SpriteEffects.None, 0);
-    }
-
-    public Texture2D GetSecondaryItem(int currentItem)
-    {
-        items[0] = sf.HUDBow();
-        items[1] = sf.HUDBomb();
-        items[2] = sf.HUDBoomerang();
-        items[3] = sf.Blank();
-        if (Link.projectiles[0] == null || Link.projectiles[1] == null || Link.projectiles[2] == null)
+        spriteBatch.DrawString(textFont, "X" + Link.rubies, isInvOpen? rubyPlacement + countOffset + openInvOffset : rubyPlacement + countOffset, Color.White);
+        spriteBatch.DrawString(textFont, "X" + Link.keys, isInvOpen? keyPlacement + countOffset + openInvOffset : keyPlacement + countOffset, Color.White);
+        spriteBatch.DrawString(textFont, "X" + Link.bombs, isInvOpen? bombPlacement + countOffset + openInvOffset : bombPlacement + countOffset, Color.White);
+        spriteBatch.DrawString(textFont, "X" + Link.bombs, isInvOpen ? bombPlacement + countOffset + openInvOffset : bombPlacement + countOffset, Color.White);
+        
+        item = GetSecondaryItem(isInvOpen);
+        if(item != null && !isResetting)
         {
-            return items[3];
-        }
-        else
-        {
-            return items[currentItem];
+            item.Draw(gameTime);
+            item.SetShouldDraw(false);
         }
     }
 
-    public void MapHandler(int currentRoom, GameTime gameTime)
+    public IDrop GetSecondaryItem(bool isInvOpen) 
     {
-        if (Link.map) { spriteBatch.Draw(sf.HUDMap(), mapPlacement, Color.White); }
+
+        IDrop item = ItemSelectionScreen.currentItem;
+        if(item != null)
+        {
+            item = (IDrop)item.Clone();
+            item.SetPosition(isInvOpen ? secondaryPlacement + openInvOffset : secondaryPlacement);
+            item.SetShouldDraw(true);
+        }
+
+        return item;  
+    }
+
+    public void MapHandler(int currentRoom, GameTime gameTime, bool isInvOpen)
+    {
+        if (Link.map) { spriteBatch.Draw(sf.HUDMap(), isInvOpen ? mapPlacement + openInvOffset : mapPlacement, Color.White); }
         if (Link.compass) 
         {
-                spriteBatch.Draw(sf.HUDTriforce(), triforceRoom, Color.White);
+                spriteBatch.Draw(sf.HUDTriforce(), isInvOpen ? triforceRoom + openInvOffset : triforceRoom, Color.White);
         }
-        spriteBatch.Draw(sf.HUDLink(), linkMapLocation[currentRoom], Color.White);
+        spriteBatch.Draw(sf.HUDLink(), isInvOpen? linkMapLocation[currentRoom] + openInvOffset : linkMapLocation[currentRoom], Color.White);
     }
 
     public void LoadLocationDictionary()
@@ -144,4 +152,5 @@ public class HUD
         linkMapLocation.Add(1, new Vector2(201, 85));
         linkMapLocation.Add(0, new Vector2(183, 85));
     }
+
 }

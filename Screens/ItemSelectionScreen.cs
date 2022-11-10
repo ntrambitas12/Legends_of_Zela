@@ -29,7 +29,7 @@ public class ItemSelectionScreen
     private static Vector2 selectedItemCord = new Vector2(180, 100);
     private int selectedItem = 0;
     private static Dictionary<int, IDrop> selectedDrop;
-    private IDrop currentItem;
+    public static IDrop currentItem;
     private int baseSelectorWidth = 6;
     private int currentSelectedWidth = 4;
     private int itemSelectedWidth = 2;
@@ -48,19 +48,29 @@ public class ItemSelectionScreen
        
     }
     
-    public void Update(GameTime gameTime)
+    public void Update(GameTime gameTime, IRoomObject room)
     {
+     
+            selectedItem = (int)Link.ProjectileIndex();
         if (isActive)
         {
-            selectedItem = (int)Link.ProjectileIndex();
+            room.PauseEnemies();
+            room.PauseLink();
+        }
+        else
+        {
+            room.UnpauseEnemies();
+            room.UnpauseLink();
+        }
             if (items[selectedItem] != null)
             {
                 currentItem = selectedDrop[selectedItem];
                 currentItem.SetShouldDraw(true);
                 hud.currentItem = selectedItem;
             }
+
                 UpdateSelectedBox();
-        }
+  
     }
 
     private void UpdateSelectedBox()
@@ -152,6 +162,11 @@ public class ItemSelectionScreen
     public bool isOpen()
     {
         return isActive;
+    }
+
+    public void Reset()
+    {
+        currentItem = null; 
     }
 }
 

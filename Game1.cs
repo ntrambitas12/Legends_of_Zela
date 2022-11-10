@@ -56,12 +56,12 @@ namespace CSE3902Project
 
         public void resetGame()
         {
+            inventory.Reset();
             camera.reset();
             roomObjectManager.Reset();
             this.Initialize();
             this.LoadContent();
             roomObjectManager.setRoom(1, true);
-
         }
 
 
@@ -69,28 +69,26 @@ namespace CSE3902Project
         {
 
             GraphicsDevice.Clear(Color.Black);
-            if (inventory.isOpen())
-            {
-                roomObjectManager.currentRoom().PauseEnemies();
-            }
-            roomObjectManager.currentRoom().UnpauseEnemies();
+            inventory.Update(gameTime, roomObjectManager.currentRoom());
             roomObjectManager.Update(gameTime);
-            inventory.Update(gameTime);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-
-            _spriteBatch.Begin();
-            inventory.Draw(gameTime);
-            _spriteBatch.End();
-
-            if (!inventory.isOpen())
+            if (inventory.isOpen())
             {
                 _spriteBatch.Begin();
-                hud.Draw(gameTime);
+                inventory.Draw(gameTime);
+                hud.Draw(gameTime, true);
+                _spriteBatch.End();
+            }
+
+            else
+            {
+                _spriteBatch.Begin();
+                hud.Draw(gameTime, false);
                 _spriteBatch.End();
 
                 _spriteBatch.Begin(SpriteSortMode.Immediate,

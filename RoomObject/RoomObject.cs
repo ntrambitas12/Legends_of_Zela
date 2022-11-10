@@ -41,6 +41,8 @@ public class RoomObject : IRoomObject
     private int upDoorBoundary = 114;
     private int downDoorBoundary = 434;
 
+    public static bool pauseLink;
+
     //roomObjectManager
     private RoomObjectManager roomObjectManager;
     public RoomObject()
@@ -87,6 +89,7 @@ public class RoomObject : IRoomObject
         //set up the logic for the enemy AI
         rand = new Random();
         pauseEnemies = false;
+        pauseLink = false;
 
         roomObjectManager = RoomObjectManager.Instance;
 
@@ -242,7 +245,7 @@ public class RoomObject : IRoomObject
         }
 
         //update Link
-        if (Link != null) {
+        if (Link != null && !pauseLink) {
             Link.Update(gameTime);
         }
 
@@ -265,10 +268,6 @@ public class RoomObject : IRoomObject
 
         foreach (IProjectile enemyProjectile in EnemyProjectileList)
         {
-            //if (!pauseEnemies && rand.Next(25) == 5)
-            //{
-            //    enemyProjectile.FireCommand().Execute();
-            //}
             if (!DeadEnemyList.Contains(((IProjectile)enemyProjectile).Owner()))
             {
                 enemyProjectile.Update(gameTime);
@@ -457,6 +456,16 @@ public class RoomObject : IRoomObject
     public void UnpauseEnemies()
     {
         pauseEnemies = false;
+    }
+
+    public void PauseLink()
+    {
+        pauseLink = true;
+    }
+
+    public void UnpauseLink()
+    {
+        pauseLink = false;
     }
 
     public Boolean IsPauseEnemies()
