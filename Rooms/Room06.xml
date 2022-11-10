@@ -32,7 +32,7 @@
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>432</xPos>
+			<xPos>416</xPos>
 			<yPos>114</yPos>
 			<Name>WallTop2</Name>
 			<RoomObjectType>4</RoomObjectType>
@@ -44,7 +44,7 @@
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>432</xPos>
+			<xPos>416</xPos>
 			<yPos>402</yPos>
 			<Name>WallBottom2</Name>
 			<RoomObjectType>4</RoomObjectType>
