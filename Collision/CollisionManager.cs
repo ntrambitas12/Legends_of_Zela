@@ -8,25 +8,39 @@ using System.Threading.Tasks;
 
 public sealed class CollisionManager : ICollisionManager
 {
-    private enum CONSTANTS
+    public enum CONSTANTS
     {
         //how much walls repel entities
         REPULSION = 2,
+
+        LEFT_BOUNDARY = 208,
+        RIGHT_BOUNDARY = 592,
+        UPPER_BOUNDARY = 178,
+        LOWER_BOUNDARY = 402,
     }
     //--------------------------------VARIABLES--------------------------------
     private static CollisionManager instance = new CollisionManager();
     private IRoomObject currentRoom;
     private float timeElapsed;
+    private Rectangle roomEdgeRect;
 
     //--------------------------------INITIALIZER--------------------------------
     private CollisionManager()
     {
         timeElapsed = 0;
+        roomEdgeRect = new Rectangle((int)CONSTANTS.LEFT_BOUNDARY, (int)CONSTANTS.UPPER_BOUNDARY,
+            (int)CONSTANTS.RIGHT_BOUNDARY - (int)CONSTANTS.LEFT_BOUNDARY, (int)CONSTANTS.LOWER_BOUNDARY - (int)CONSTANTS.UPPER_BOUNDARY);
     }
 
     public static CollisionManager Instance { get { return instance; } }
 
     //--------------------------------METHODS--------------------------------
+
+    //returns room rectangle
+    public Rectangle roomEdge()
+    {
+        return roomEdgeRect;
+    }
 
     /* called by Update in RoomObjectManager
      * updates collision of game objects inside current room */
@@ -122,6 +136,7 @@ public sealed class CollisionManager : ICollisionManager
     //call so the entity gets repelled by walls
     private void UpdateCollideWithWall(ISprite entity, IRoomObject roomObject, bool enemy)
     {
+        //update collider booleans against other objects
         entity.collider.ResetCollisionBooleans();
         entity.collider.UpdateCollision(roomObject.StaticTileList);
         entity.collider.UpdateCollision(roomObject.DynamicTileList);
@@ -139,11 +154,15 @@ public sealed class CollisionManager : ICollisionManager
                 entity.collider.UpdateCollision(door);
             }
         }
+
         if (enemy)
         {
             //only run this for enemies
             entity.collider.UpdateCollision(roomObject.MoveableTileList);
+            entity.collider.UpdateCollisionRoomEdge();
         }
+
+        //shift backwards depending on collider booleans
         if (entity.collider.isColliding)
         {
             if (entity.collider.isCollidingBottom)
