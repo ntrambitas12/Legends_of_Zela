@@ -52,8 +52,14 @@ public class SwordType : IProjectileType
                 //{
                 //    currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
                 //}
-                currRoom.KillEnemy(collidingObject);
-                DropHandler.Drop(currRoom, collidingObject.screenCord);
+                if (((IConcreteSprite)collidingObject).health == 1)
+                {
+                    currRoom.KillEnemy(collidingObject);
+                    DropHandler.Drop(currRoom, collidingObject.screenCord);
+                } else
+                {
+                    ((IConcreteSprite)collidingObject).health--;
+                }
             }
         }
     }

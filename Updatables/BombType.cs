@@ -63,8 +63,14 @@ public class BombType : IProjectileType
 
             if (check && collidingObject != null)
             {
-                _currentRoom.KillEnemy(collidingObject);
-                DropHandler.Drop(_currentRoom, collidingObject.screenCord);
+                if (((IConcreteSprite)collidingObject).health == 1)
+                {
+                    _currentRoom.KillEnemy(collidingObject);
+                    DropHandler.Drop(_currentRoom, collidingObject.screenCord);
+                } else
+                {
+                    ((IConcreteSprite)collidingObject).health--;
+                }
             }
 
             //check for bombable doors

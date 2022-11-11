@@ -234,6 +234,10 @@ public class RoomObject : IRoomObject
         if (DeadEnemyList.Count < EnemyList.Count)
         {
             DeadEnemyList = new List<ISprite>();
+            foreach (IConcreteSprite enemy in EnemyList)
+            {
+                enemy.health = enemy.maxHealth;
+            }
         }
     }
 
