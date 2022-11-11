@@ -22,8 +22,8 @@ public class HeartContainerDropType : IItemType
             if (collidingObject != null)
             {
                 heartContainer.SetShouldDraw(false);
-                Link.maxHealth++;
-                Link.health++;
+                Link.maxHealth+=2;
+                Link.health+=2;
             }
         }
     }

@@ -75,8 +75,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         dead = new DeadState(this);
         use = new UseState(this);
 
-        health = 3;
-        maxHealth = 3;
+        health = 6;
+        maxHealth = 6;
         isDead = false;
 
         keys = 0;
