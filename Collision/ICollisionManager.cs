@@ -11,6 +11,16 @@ internal interface ICollisionManager
 {
     //updates all game objects in current room
     public void Update(GameTime gameTime);
+
+    //add collisions to entity
+    public ISprite AddCollisions(ISprite entity, ColliderType collider, Rectangle collisionRect);
+
     //returns room rectangle
     public Rectangle roomEdge();
+}
+
+public enum ColliderType
+{
+    Normal = 11,
+    Keese = 12,
 }

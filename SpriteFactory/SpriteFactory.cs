@@ -667,7 +667,8 @@ public sealed class SpriteFactory : IFactory
         bombFrames[(int)SpriteAction.bombCloud] = bombCloud;
     }
 
-    //creates an entity with collider
+    //------------------------------PRIVATE COLLISION METHODS------------------------------
+    //creates an entity with a default collider
     private ISprite CreateEntityWithCollision(Vector2 location, List<Texture2D>[] frames1)
     {
 
@@ -678,14 +679,27 @@ public sealed class SpriteFactory : IFactory
         int y = 2 * frames1[0][0].Height;
         collisionRect = new Rectangle(0, 0, x, y);
 
+        CollisionManager.Instance.AddCollisions(entity, ColliderType.Normal, collisionRect);
 
-        ICollision collisionObject = new Collision(entity, collisionRect);
-        entity.collider = collisionObject;
-        entity.collider.UpdateCollisionPosition();
+        return entity;
+    }
+    //creates an entity with the specified collider
+    private ISprite CreateEntityWithCollision(Vector2 location, List<Texture2D>[] frames1, ColliderType collider)
+    {
+
+        ISprite entity = new ConcreteSprite(_spriteBatch, location, frames1);
+        Rectangle collisionRect = frames1[0][0].Bounds;
+
+        int x = 2 * frames1[0][0].Width;
+        int y = 2 * frames1[0][0].Height;
+        collisionRect = new Rectangle(0, 0, x, y);
+
+        CollisionManager.Instance.AddCollisions(entity, collider, collisionRect);
 
         return entity;
     }
 
+    //------------------------------PRIVATE AI METHODS------------------------------
     //gives entity an ai component, ai type is an enum
     private ISprite AddAI(ISprite entity, AIType ai)
     {
@@ -849,7 +863,7 @@ public sealed class SpriteFactory : IFactory
     }
     public ISprite CreateKeeseSprite(Vector2 location)
     {
-        IConcreteSprite keese = (IConcreteSprite) CreateEntityWithCollision(location, keeseFrames);
+        IConcreteSprite keese = (IConcreteSprite) CreateEntityWithCollision(location, keeseFrames, ColliderType.Keese);
         keese.health = 1;
         return AddAI(keese, AIType.AlwaysRandomMove);
     }

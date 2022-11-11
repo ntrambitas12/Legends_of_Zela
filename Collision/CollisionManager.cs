@@ -68,6 +68,27 @@ public sealed class CollisionManager : ICollisionManager
         timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 
+    //add collisions to entity
+    public ISprite AddCollisions(ISprite entity, ColliderType collider, Rectangle collisionRect)
+    {
+        ICollision collisionObject;
+        switch (collider)
+        {
+            case ColliderType.Normal:
+                collisionObject = new Collision(entity, collisionRect);
+                break;
+            case ColliderType.Keese:
+                collisionObject = new CollisionKeese(entity, collisionRect);
+                break;
+            default:
+                collisionObject = null;
+                break;
+        }
+        entity.collider = collisionObject;
+        entity.collider.UpdateCollisionPosition();
+        return entity;
+    }
+
     //updates Link's collisions
     private void UpdateLink(GameTime gameTime)
     {
