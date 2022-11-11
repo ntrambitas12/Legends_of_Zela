@@ -44,8 +44,8 @@ public class FireballType : IProjectileType
 
         if (shouldDraw)
         {
-           // SoundManager.Instance.PlayOnce("LOZ_Sword_Slash"); fireball sound?
-            fireProjectile.Execute();
+            SoundManager.Instance.PlayOnce("LOZ_Boss_Scream1"); //fireball sound
+            fireProjectile.Execute(); 
         }
 
     }

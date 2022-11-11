@@ -25,6 +25,7 @@ public class HeartDropType : IItemType
                 heart.SetShouldDraw(false);            
                 if (Link.health < Link.maxHealth)
                 {
+                    
                     Link.health++;
                 }
             }

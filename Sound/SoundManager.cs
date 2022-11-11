@@ -90,13 +90,8 @@ public class SoundManager
             case "DamagedState":
                 SoundManager.Instance.PlayOnce("LOZ_Link_Hurt");
                 break;
-/*            case "OpenState":
-                SoundManager.Instance.PlayOnce("Door_Unlock");
-                break;
-/*
-            case "ClosedState":
-                SoundManager.Instance.PlayOnce("LOZ_Sword_Slash");
-                break;*/
+
+            
         }
     }
 

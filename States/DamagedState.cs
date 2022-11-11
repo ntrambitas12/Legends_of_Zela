@@ -39,7 +39,7 @@ public class DamagedState : ISpriteState
         {
             sprite.SetSpriteState(SpriteAction.damage, dead);
             SoundManager.Instance.PauseSounds();
-            SoundManager.Instance.PlayOnce("LOZ_Link_Die");//this will play for enemies too
+            SoundManager.Instance.PlayOnce("LOZ_Link_Die");
 
         }
 
