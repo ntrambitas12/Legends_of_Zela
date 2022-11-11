@@ -5,4 +5,5 @@
     bomb = 1,
     boomerang = 2,
     sword = 3,
+    swordShoot = 4,
 }

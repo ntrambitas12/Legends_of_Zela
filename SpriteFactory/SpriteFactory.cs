@@ -176,6 +176,11 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> swordRight;
     private List<Texture2D> swordUp;
     private List<Texture2D> swordDown;
+    private List<Texture2D>[] swordShootFrames;
+    private List<Texture2D> swordShootLeft;
+    private List<Texture2D> swordShootRight;
+    private List<Texture2D> swordShootUp;
+    private List<Texture2D> swordShootDown;
     private List<Texture2D>[] fireballFrames;
     private List<Texture2D> fireball1;
     private List<Texture2D> fireball2;
@@ -367,6 +372,11 @@ public sealed class SpriteFactory : IFactory
         swordRight = new List<Texture2D>();
         swordUp = new List<Texture2D>();
         swordDown = new List<Texture2D>();
+        swordShootFrames = new List<Texture2D>[4];
+        swordShootLeft = new List<Texture2D>();
+        swordShootRight = new List<Texture2D>();
+        swordShootUp = new List<Texture2D>();
+        swordShootDown = new List<Texture2D>();
         fireballFrames = new List<Texture2D>[3];
         fireball1 = new List<Texture2D>();
         fireball2 = new List<Texture2D>();
@@ -469,6 +479,22 @@ public sealed class SpriteFactory : IFactory
         swordRight.Add(content.Load<Texture2D>("ItemSprites/SwordRight"));
         swordUp.Add(content.Load<Texture2D>("ItemSprites/SwordUp"));
         swordDown.Add(content.Load<Texture2D>("ItemSprites/SwordDown"));
+        swordLeft.Add(content.Load<Texture2D>("ItemSprites/SwordLeft"));
+        swordShootRight.Add(content.Load<Texture2D>("ItemSprites/SwordRight"));
+        swordShootUp.Add(content.Load<Texture2D>("ItemSprites/SwordUp"));
+        swordShootDown.Add(content.Load<Texture2D>("ItemSprites/SwordDown"));
+        swordShootLeft.Add(content.Load<Texture2D>("ItemSprites/WhiteSwordLeft"));
+        swordShootRight.Add(content.Load<Texture2D>("ItemSprites/WhiteSwordRight"));
+        swordShootUp.Add(content.Load<Texture2D>("ItemSprites/WhiteSwordUp"));
+        swordShootDown.Add(content.Load<Texture2D>("ItemSprites/WhiteSwordDown"));
+        swordShootLeft.Add(content.Load<Texture2D>("ItemSprites/RedSwordLeft"));
+        swordShootRight.Add(content.Load<Texture2D>("ItemSprites/RedSwordRight"));
+        swordShootUp.Add(content.Load<Texture2D>("ItemSprites/RedSwordUp"));
+        swordShootDown.Add(content.Load<Texture2D>("ItemSprites/RedSwordDown"));
+        swordShootLeft.Add(content.Load<Texture2D>("ItemSprites/BlueSwordLeft"));
+        swordShootRight.Add(content.Load<Texture2D>("ItemSprites/BlueSwordRight"));
+        swordShootUp.Add(content.Load<Texture2D>("ItemSprites/BlueSwordUp"));
+        swordShootDown.Add(content.Load<Texture2D>("ItemSprites/BlueSwordDown"));
         boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
         boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
         boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
@@ -650,6 +676,11 @@ public sealed class SpriteFactory : IFactory
         swordFrames[(int)SpriteAction.moveRight] = swordRight;
         swordFrames[(int)SpriteAction.moveUp] = swordUp;
         swordFrames[(int)SpriteAction.moveDown] = swordDown;
+        // Add sword shoot frames to the list
+        swordShootFrames[(int)SpriteAction.moveLeft] = swordShootLeft;
+        swordShootFrames[(int)SpriteAction.moveRight] = swordShootRight;
+        swordShootFrames[(int)SpriteAction.moveUp] = swordShootUp;
+        swordShootFrames[(int)SpriteAction.moveDown] = swordShootDown;
         // Add fireball frames to the list
         fireballFrames[(int)SpriteAction.moveLeft] = fireball1;
         fireballFrames[(int)SpriteAction.moveRight] = fireball2;
@@ -1169,8 +1200,24 @@ public sealed class SpriteFactory : IFactory
         sword.SetDistance(distance);
         sword.SetOwner(owner);
         sword.SetItemType(new SwordType(sword));
-        FireProjectile fireFire = new FireProjectile(sword);
-        sword.SetFireCommand(fireFire);
+        FireProjectile fireSword = new FireProjectile(sword);
+        sword.SetFireCommand(fireSword);
+        return sword;
+    }
+    public ISprite CreateSwordShootProjectile(int distance, ISprite owner)
+    {
+        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordShootFrames);
+
+        Rectangle collisionRect = swordShootFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(sword, collisionRect);
+        sword.collider = collisionObject;
+        sword.collider.UpdateCollisionPosition();
+
+        sword.SetDistance(distance);
+        sword.SetOwner(owner);
+        sword.SetItemType(new ArrowType(sword));
+        FireProjectile fireSword = new FireProjectile(sword);
+        sword.SetFireCommand(fireSword);
         return sword;
     }
 
