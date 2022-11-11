@@ -225,6 +225,7 @@ public class RoomObject : IRoomObject
 
     public void KillEnemy(ISprite enemy)
     {
+        SoundManager.Instance.PlayOnce("LOZ_Enemy_Die");
         DeadEnemyList.Add(enemy);
     }
 

@@ -105,6 +105,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
             SetSpriteAction(action);
             SoundManager.Instance.playStateSounds(action, state);
         }
+       
         
     }
     public override void Update(GameTime gameTime)
@@ -154,7 +155,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
         /* Decrement the entitys health field */
         this.health--;
-        //SoundManager.Instance.PlayOnce("LOZ_Enemy_Hit");
+        SoundManager.Instance.PlayOnce("LOZ_Enemy_Hit");
         //SoundManager.Instance.playPainSounds(this.maxHealth);
 
         /* Keep the sprite facing in the same direction when they take damage */
