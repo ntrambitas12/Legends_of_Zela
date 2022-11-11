@@ -110,6 +110,9 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D>[] oldManFrames;
     private List<Texture2D> oldMan;
 
+    private List<Texture2D>[] deathCloudFrames;
+    private List<Texture2D> deathCloud;
+
 
     //Items
     private List<Texture2D>[] bowFrames;
@@ -305,6 +308,9 @@ public sealed class SpriteFactory : IFactory
         oldManFrames = new List<Texture2D>[4];
         oldMan = new List<Texture2D>();
 
+        deathCloudFrames = new List<Texture2D>[1];
+        deathCloud = new List<Texture2D>();
+
 
         //Items
         bowFrames = new List<Texture2D>[4];
@@ -445,6 +451,14 @@ public sealed class SpriteFactory : IFactory
         wallmasterOpen.Add(content.Load<Texture2D>("EnemySprites/WallmasterULOpen"));
         wallmasterClosed.Add(content.Load<Texture2D>("EnemySprites/WallmasterULClosed"));
 
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death0"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death1"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death2"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death3"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death2"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death1"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death0"));
+
 
         //Items
         //This first section is for animated items
@@ -576,22 +590,24 @@ public sealed class SpriteFactory : IFactory
             textFrames[i] = text;
         }
 
-            doorUpFrames[0] = doorUpOpen;
-            doorDownFrames[0] = doorDownOpen;
-            doorRightFrames[0] = doorRightOpen;
-            doorLeftFrames[0] = doorLeftOpen;
-            bombDoorUpFrames[0] = bombedUp;
-            bombDoorDownFrames[0] = bombedDown;
-            bombDoorRightFrames[0] = bombedRight;
-            bombDoorLeftFrames[0] = bombedLeft;
-            bombDoorUpFrames[1] = unbombedUp;
-            bombDoorDownFrames[1] = unbombedDown;
-            bombDoorRightFrames[1] = unbombedRight;
-            bombDoorLeftFrames[1] = unbombedLeft;
-            doorUpFrames[1] = doorUpClosed;
-            doorDownFrames[1] = doorDownClosed;
-            doorRightFrames[1] = doorRightClosed;
-            doorLeftFrames[1] = doorLeftClosed;
+        deathCloudFrames[0] = deathCloud;
+
+        doorUpFrames[0] = doorUpOpen;
+        doorDownFrames[0] = doorDownOpen;
+        doorRightFrames[0] = doorRightOpen;
+        doorLeftFrames[0] = doorLeftOpen;
+        bombDoorUpFrames[0] = bombedUp;
+        bombDoorDownFrames[0] = bombedDown;
+        bombDoorRightFrames[0] = bombedRight;
+        bombDoorLeftFrames[0] = bombedLeft;
+        bombDoorUpFrames[1] = unbombedUp;
+        bombDoorDownFrames[1] = unbombedDown;
+        bombDoorRightFrames[1] = unbombedRight;
+        bombDoorLeftFrames[1] = unbombedLeft;
+        doorUpFrames[1] = doorUpClosed;
+        doorDownFrames[1] = doorDownClosed;
+        doorRightFrames[1] = doorRightClosed;
+        doorLeftFrames[1] = doorLeftClosed;
 
         //Populate Enemies and Playables
         for (int i = 1; i <= 2; i++)
@@ -948,6 +964,12 @@ public sealed class SpriteFactory : IFactory
         trap.health = -1;
         trap.maxHealth = -1;
         return AddAI(trap, AIType.RandomMove);
+    }
+    public ISprite CreateDeathCloud(Vector2 location)
+    {
+        IDrop deathCloud = new Drop(_spriteBatch, location, deathCloudFrames);
+        deathCloud.SetItemType(new DeathCloudDropType(deathCloud));
+        return deathCloud;
     }
 
 
