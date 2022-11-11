@@ -1,0 +1,20 @@
+﻿Code quality review
+Author: Zach Kallmeyer
+Date: 11-2-22
+Sprint #4
+File being reviewed: SoundManager.cs
+Author of file being reviewed: Matt Russotti
+
+I would say that the quality of this code is quite good, with few code smells.
+Instance variables are set. Each method is short and concise, with one distinct
+purpose that it accomplishes well. Using a Dictionary was a good solution to the
+sheer amount of different sounds that must be loaded and played. Good use of the
+factory design pattern to load this dictionary. Methods are public and instances
+are private. Identifiers are clear and not vague at all. Well done!
+
+One change we could make to the game would be to add different sound effects for
+new actions or change the background music or sounds for existing actions. This
+current implementation could very easily support this change, as all that would
+be needed is loading different sound files in the sound factory that’s used to
+populate our SoundManager dictionary.
+

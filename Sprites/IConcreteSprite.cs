@@ -39,5 +39,6 @@ public interface IConcreteSprite : ISprite
     public void ProjectileAttack();
     public void SwordAttack();
     public void TakeDamage();
+    public void CarryToStart(IConcreteSprite sprite, IRoomObject room, RoomObjectManager roomSwitch);
 }
 

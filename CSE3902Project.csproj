@@ -15,6 +15,7 @@
     <EmbeddedResource Remove="Content\TileSprites\**" />
     <None Remove="Content\TileSprites\**" />
     <Compile Remove="Updatables\DropType.cs" />
+    <None Remove="Documentation\Sprint 4 Documentation\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\BlockSprites\BridgeHorizontal.png" />
@@ -218,6 +219,9 @@
     <None Update="Rooms\Room02.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Documentation\Sprint 4 Documentation\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

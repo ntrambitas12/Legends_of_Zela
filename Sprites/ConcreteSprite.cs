@@ -207,5 +207,21 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         this.direction = direction;
     }
 
+    public void CarryToStart(IConcreteSprite wallmaster, IRoomObject room, RoomObjectManager roomSwitch)
+    {
+        room.PauseLink();
+        while (this.screenCord.Y < 400)
+        {
+            this.screenCord = new Vector2(this.screenCord.X, (this.screenCord.Y - 5));
+            wallmaster.screenCord = new Vector2(wallmaster.screenCord.X, (wallmaster.screenCord.Y - 5));
+        }
+        roomSwitch.setRoom(1, false);
+        room = (RoomObject)roomSwitch.currentRoom();
+        this.screenCord = new Vector2(1100, 350);
+        room.UnpauseLink();
+
+
+    }
+
 }
 

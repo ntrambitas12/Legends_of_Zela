@@ -80,6 +80,9 @@ public sealed class CollisionManager : ICollisionManager
             case ColliderType.Keese:
                 collisionObject = new CollisionKeese(entity, collisionRect);
                 break;
+            //case ColliderType.Wallmaster:
+            //    collisionObject = new CollisionWallmaster(entity, collisionRect);
+            //    break;
             default:
                 collisionObject = null;
                 break;
@@ -99,7 +102,11 @@ public sealed class CollisionManager : ICollisionManager
             //contact damage with enemy
             IConcreteSprite collidingEnemy = (IConcreteSprite)currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
             IProjectile collidingProjectile = (IProjectile) currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList);
-            if (collidingEnemy != null && !currentRoom.DeadEnemyList.Contains(collidingEnemy) && timeElapsed > 2)
+            if (currentRoom.BaseCord == new Vector2(3200, 1440))
+            {
+                ((IConcreteSprite)(currentRoom.Link)).CarryToStart(collidingEnemy, currentRoom, RoomObjectManager.Instance);
+            }
+            else if (collidingEnemy != null && !currentRoom.DeadEnemyList.Contains(collidingEnemy) && timeElapsed > 2)
             {
                 timeElapsed = 0;
                 ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
