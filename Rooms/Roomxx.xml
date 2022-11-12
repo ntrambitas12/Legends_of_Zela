@@ -8,6 +8,12 @@
 	</BaseCord>
 	<Blocks>
 		<Block>
+			<xPos>240</xPos>
+			<yPos>160</yPos>
+			<Name>InvisibleStairs</Name>
+			<RoomObjectType>6</RoomObjectType>
+        </Block>
+		<Block>
 			<xPos>144</xPos>
 			<yPos>146</yPos>
 			<Name>AlternateBackground</Name>
