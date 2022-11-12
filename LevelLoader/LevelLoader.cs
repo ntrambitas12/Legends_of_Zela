@@ -216,6 +216,7 @@ public class LevelLoader: ILevelLoader
                             if(constructer.TryGetValue(name, out Delegate doorConstructor))
                             {
                                 sprite = (ISprite)doorConstructor.DynamicInvoke(new Vector2(xPos, yPos) + _base, isDoorOpen);
+                                room.ProjectileStopperList.Add(sprite);
                                 if (!isDoorOpen)
                                 {
                                     ((IConcreteSprite)sprite).SetSpriteAction(SpriteAction.doorClosed);
@@ -230,6 +231,7 @@ public class LevelLoader: ILevelLoader
                         if (constructer.TryGetValue(name, out Delegate value))
                         {
                              sprite = (ISprite)value.DynamicInvoke(new Vector2(xPos, yPos)+_base);
+                                if (sprite != null && name.Equals("InvisibleStairs")) room.ProjectileStopperList.Add(sprite);
 
                             //case for when we have to pair projectile with parent sprite
                             //check if projectile is not null
@@ -280,7 +282,7 @@ public class LevelLoader: ILevelLoader
         }
 
         room.AddController(initalizeControllers.InitalizeKeyboard(Link, inventory));
-        //room.AddController(initalizeControllers.InitalizeMouse());
+        room.AddController(initalizeControllers.InitalizeMouse());
     }
 
     private void CreateLink(Vector2 baseCord)
