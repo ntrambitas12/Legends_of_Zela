@@ -23,4 +23,5 @@ public enum AIType
 {
     RandomMove = 11,
     AlwaysRandomMove = 12,
+    BladeTrapBehavior = 13,
 }

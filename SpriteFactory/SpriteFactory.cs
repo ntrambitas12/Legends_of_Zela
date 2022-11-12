@@ -964,7 +964,7 @@ public sealed class SpriteFactory : IFactory
         IConcreteSprite bladeTrap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
         bladeTrap.health = -1;
         bladeTrap.maxHealth = -1;
-        return AddAI(bladeTrap, AIType.RandomMove);
+        return AddAI(bladeTrap, AIType.BladeTrapBehavior);
     }
     public ISprite CreateWallmasterSprite(Vector2 location)
     {
@@ -985,7 +985,7 @@ public sealed class SpriteFactory : IFactory
         IConcreteSprite trap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
         trap.health = -1;
         trap.maxHealth = -1;
-        return AddAI(trap, AIType.RandomMove);
+        return AddAI(trap, AIType.BladeTrapBehavior);
     }
     public ISprite CreateDeathCloud(Vector2 location)
     {
