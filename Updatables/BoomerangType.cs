@@ -15,11 +15,13 @@ public class BoomerangType : IProjectileType
     private Vector2 shooterCord;
     private Vector2 directionBack;
     private bool goingBack;
+    private float timeElapsed;
 
     public BoomerangType(IProjectile projectile)
     {
         this.projectile = projectile;
         goingBack = false;
+        timeElapsed = 0;
     }
 
     public void Update(GameTime gameTime)
@@ -69,6 +71,7 @@ public class BoomerangType : IProjectileType
         {
             fireProjectile.Execute();
         }
+        timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 
 
@@ -105,26 +108,24 @@ public class BoomerangType : IProjectileType
 
             collidingObject = projectile.collider.isIntersecting(currRoom.EnemyList);
 
-            if (collidingObject != null)
+            if (collidingObject != null && projectile.ShouldCollide())
             {
                 bool check = !currRoom.DeadEnemyList.Contains(collidingObject);
-                if (check && !(currRoom.EnemyList.Contains(projectile.Owner())))
+                if (check && !(currRoom.EnemyList.Contains(projectile.Owner())) && timeElapsed > .1)
                 {
-                    if (((IConcreteSprite)collidingObject).health == 1)
+                    ((IConcreteSprite)collidingObject).health--;
+                    projectile.SetShouldCollide(false);
+                    goingBack = true;
+                    if (((IConcreteSprite)collidingObject).health == 0)
                     {
-                        goingBack = true;
                         currRoom.KillEnemy(collidingObject);
                         DropHandler.Drop(currRoom, collidingObject.screenCord);
-                    } else
-                    {
-                        ((IConcreteSprite)collidingObject).health--;
                     }
                 }
                 else
                 {
                     if (goingBack) fireProjectile.ResetCounter();
                     goingBack = false;
-
                 }
             }
         }

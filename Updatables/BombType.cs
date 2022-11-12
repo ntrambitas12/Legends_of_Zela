@@ -9,10 +9,12 @@ public class BombType : IProjectileType
     private bool shouldDraw;
     private int counter;
     private int distance;
+    private float timeElapsed;
 
     public BombType(IProjectile projectile)
     {
         this.projectile = projectile;
+        timeElapsed = 0;
     }
 
     public void Update(GameTime gameTime)
@@ -35,13 +37,14 @@ public class BombType : IProjectileType
 
         //check for collisions and effects
         //UpdateCollisions(gameTime);
+        timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 
     
     public void UpdateCollisions(GameTime gameTime)
     {
         
-        if (shouldDraw && counter >= distance - 20)
+        if (shouldDraw && counter >= distance - 20 && projectile.ShouldCollide())
         {
             IRoomObject _currentRoom = RoomObjectManager.Instance.currentRoom();
             Vector2 prevCord = projectile.screenCord;
@@ -61,16 +64,16 @@ public class BombType : IProjectileType
             check = !(_currentRoom.EnemyList.Contains(projectile.Owner()));
             check = check && !_currentRoom.DeadEnemyList.Contains(collidingObject);
 
-            if (check && collidingObject != null)
+            if (check && collidingObject != null && timeElapsed > .1)
             {
-                if (((IConcreteSprite)collidingObject).health == 1)
+                ((IConcreteSprite)collidingObject).health--;
+                projectile.SetShouldCollide(false);
+                if (((IConcreteSprite)collidingObject).health == 0)
                 {
                     _currentRoom.KillEnemy(collidingObject);
                     DropHandler.Drop(_currentRoom, collidingObject.screenCord);
-                } else
-                {
-                    ((IConcreteSprite)collidingObject).health--;
                 }
+                timeElapsed = 0;
             }
 
             //check for bombable doors
