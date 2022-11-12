@@ -1,0 +1,12 @@
+Quality review
+
+Author of the code review: Matt Russotti
+Date of the code review: 11/12/22
+Sprint number: 4
+Name of the .cs file being reviewed: ItemSelectionScreen.cs
+Author of the .cs file being reviewed: Ben
+Number of minutes taken to complete the review: 15
+A hypothetical change to make to the game related to file being reviewed 
+and how the current implementation could or could not easily support that change:
+The only think I think could improve would be to pull out the nested loops and if
+statements from the draw method and put them into seprate methods to improve readability.

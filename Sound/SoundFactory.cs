@@ -45,9 +45,9 @@ public class SoundFactory
             soundEffects.Add("LOZ_Refill_Loop", Content.Load<SoundEffect>("Sound2/LOZ_Refill_Loop"));
             soundEffects.Add("LOZ_Secret", Content.Load<SoundEffect>("Sound2/LOZ_Secret"));
             soundEffects.Add("LOZ_Shield", Content.Load<SoundEffect>("Sound2/LOZ_Shield"));
-            soundEffects.Add("LOZ_Stairs", Content.Load<SoundEffect>("Sound2/LOZ_Stairs"));
+            soundEffects.Add("LOZ_Stairs", Content.Load<SoundEffect>("Sound2/LOZ_Stairs"));//done
             soundEffects.Add("LOZ_Sword_Combined", Content.Load<SoundEffect>("Sound2/LOZ_Sword_Combined"));
-            soundEffects.Add("LOZ_Sword_Shoot", Content.Load<SoundEffect>("Sound2/LOZ_Sword_Shoot"));
+            soundEffects.Add("LOZ_Sword_Shoot", Content.Load<SoundEffect>("Sound2/LOZ_Sword_Shoot"));//done and tested
             soundEffects.Add("LOZ_Sword_Slash", Content.Load<SoundEffect>("Sound2/LOZ_Sword_Slash"));//done, tested
             soundEffects.Add("LOZ_Text", Content.Load<SoundEffect>("Sound2/LOZ_Text"));
             soundEffects.Add("LOZ_Text_Slow", Content.Load<SoundEffect>("Sound2/LOZ_Text_Slow"));
