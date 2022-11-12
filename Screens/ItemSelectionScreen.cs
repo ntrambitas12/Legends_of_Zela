@@ -130,7 +130,10 @@ public class ItemSelectionScreen
         items[(int)idx] = item;
         IDrop cloneDrop = (IDrop)item.Clone();
         cloneDrop.SetPosition(selectedItemCord);
-        selectedDrop.Add((int)idx, cloneDrop);
+        if (!selectedDrop.ContainsKey((int)idx))
+        {
+            selectedDrop.Add((int)idx, cloneDrop);
+        }
     }
 
     public void NextItem(bool forward)
