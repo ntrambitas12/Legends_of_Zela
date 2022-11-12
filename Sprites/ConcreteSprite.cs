@@ -135,9 +135,30 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     }
     public void ProjectileAttack()
     {
-        if (projectiles[projectileIndex] != null)
+        if (projectiles[(int)projectileIndex] != null)
         {
-            projectiles[projectileIndex].FireCommand().Execute();
+            switch ((ArrayIndex)projectileIndex)
+            {
+                case ArrayIndex.arrow:
+                    if (rubies > 0)
+                    {
+                        projectiles[(int)projectileIndex].FireCommand().Execute();
+                        rubies--;
+                    }
+                    break;
+                case ArrayIndex.bomb:
+                    if (bombs > 0 && projectiles[(int)projectileIndex].FireCommand().Counter() == 0)
+                    {
+                        projectiles[(int)projectileIndex].FireCommand().Execute();
+                        bombs--;
+                    }
+                    break;
+                case ArrayIndex.boomerang:
+                    projectiles[(int)projectileIndex].FireCommand().Execute();
+                    break;
+                default:
+                    break;
+            }
         }
     }
     public void SwordAttack()
