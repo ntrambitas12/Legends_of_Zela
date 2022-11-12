@@ -31,6 +31,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public int bombs { get; set; }
     public bool map { get; set; }
     public bool compass { get; set; }
+    public bool triforce { get; set; }
 
     public Boolean isDamaged { get; set; }
 
@@ -84,6 +85,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         bombs = 0;
         map = false;
         compass = false;
+        triforce = false;
 
         state = still;
         direction = SpriteAction.left;

@@ -26,6 +26,7 @@ public interface IConcreteSprite : ISprite
     public int bombs { get; set; }
     public bool map { get; set; }
     public bool compass { get; set; }
+    public bool triforce { get; set; }
 
     public SpriteAction direction { get; set; }
 
