@@ -63,6 +63,7 @@ public class LevelLoader: ILevelLoader
         constructer.Add("RoughFloor", new ConcreteEntities(SpriteFactory.Instance.CreateRoughFloorBlock));
         constructer.Add("FireBlock", new ConcreteEntities(SpriteFactory.Instance.CreateFireBlock));
         constructer.Add("Stairs", new ConcreteEntities(SpriteFactory.Instance.CreateStairsBlock));
+        constructer.Add("InvisibleStairs", new ConcreteEntities(SpriteFactory.Instance.CreateInvisibleStairsBlock));
         constructer.Add("Water", new ConcreteEntities(SpriteFactory.Instance.CreateWaterBlock));
         constructer.Add("StatueRight", new ConcreteEntities(SpriteFactory.Instance.CreateStatueRightBlock));
         constructer.Add("StatueLeft", new ConcreteEntities(SpriteFactory.Instance.CreateStatueLeftBlock));

@@ -162,7 +162,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
 
     public void nextRoom(String direction)
     {
-        this.direction = direction; 
+        this.direction = direction;
         roomDir.TryGetValue(direction, out var roomData);
         var Link = _currentRoom.Link;
         _currentRoom.UnpauseEnemies();
@@ -174,6 +174,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
         _currentRoom.Link = Link;
         _currentRoom.Link.screenCord = LinkCord + _currentRoom.BaseCord;
         isTransitioning = true;
+       
     }
 
     private void panRoom()

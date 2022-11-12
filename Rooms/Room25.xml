@@ -54,7 +54,7 @@
 			<xPos>400</xPos>
 			<yPos>274</yPos>
 			<Name>Stairs</Name>
-			<RoomObjectType>9</RoomObjectType>
+			<RoomObjectType>6</RoomObjectType>
 		</Block>
 		<Block>
 			<xPos>336</xPos>

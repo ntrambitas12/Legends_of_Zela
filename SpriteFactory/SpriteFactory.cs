@@ -781,7 +781,27 @@ public sealed class SpriteFactory : IFactory
     }
     public ISprite CreateStairsBlock(Vector2 location)
     {
-        return CreateEntityWithCollision(location, stairsFrames);
+        IDrop stairs = new Drop(_spriteBatch, location, stairsFrames);
+
+        Rectangle collisionRect = stairsFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(stairs, collisionRect);
+        stairs.collider = collisionObject;
+        stairs.collider.UpdateCollisionPosition();
+
+        stairs.SetItemType(new StairDropType(stairs));
+        return stairs;
+    }
+    public ISprite CreateInvisibleStairsBlock(Vector2 location)
+    {
+        IDrop stairs = new Drop(_spriteBatch, location, invisibleBarrierFrames);
+
+        Rectangle collisionRect = stairsFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(stairs, collisionRect);
+        stairs.collider = collisionObject;
+        stairs.collider.UpdateCollisionPosition();
+
+        stairs.SetItemType(new InvisibleStairDropType(stairs));
+        return stairs;
     }
     public ISprite CreateWaterBlock(Vector2 location)
     {
