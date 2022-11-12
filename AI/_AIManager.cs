@@ -37,6 +37,9 @@ public sealed class AIManager : IAIManager
             case AIType.AlwaysRandomMove:
                 newAI = new AlwaysRandomMove1(entity);
                 break;
+            case AIType.BladeTrapBehavior:
+                newAI = new BladeTrapBehavior(entity);
+                break;
         }
 
         entity.ai = newAI;
