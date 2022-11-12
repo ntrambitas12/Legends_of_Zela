@@ -247,12 +247,6 @@
 
 
 	<Items>
-		<Item>
-			<xPos>280</xPos>
-			<yPos>274</yPos>
-			<Name>Key</Name>
-			<RoomObjectType>6</RoomObjectType>
-		</Item>
 	</Items>
 	
 </XnaContent>
