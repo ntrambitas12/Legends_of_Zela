@@ -1,0 +1,18 @@
+﻿Readability review
+Author: Zach Kallmeyer
+Date: 11-8-22
+Sprint #4
+Files being reviewed: CollisionManager.cs
+Author of file being reviewed: Tony Mai
+Code review took 15 minutes
+
+This code is very concise and readable. Good use of constant variables to avoid
+magic numbers, and these variables have descriptive names where it is easy to
+tell what they represent. This is much more readable than just using the
+numbers. However, casting these enum values to ints reduces readability slightly.
+It may have been possible to use constant int variables instead, although I’m
+unsure the scope of this enum so it might be necessary to have it as is. Either
+way, this is a readability concern to keep in mind for the future. Otherwise,
+nice job avoiding clutter and giving descriptive names to otherwise seemingly
+random numbers.
+

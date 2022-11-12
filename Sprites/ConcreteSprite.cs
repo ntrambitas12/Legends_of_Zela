@@ -24,13 +24,25 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public ISpriteState attack { get; set; }
     public ISpriteState use { get; set; }
     public int health { get; set; }
+    public int maxHealth { get; set; }
     public bool isDead { get; set; }
+    public int keys { get; set; }
+    public int rubies { get; set; }
+    public int bombs { get; set; }
+    public bool map { get; set; }
+    public bool compass { get; set; }
+    public bool triforce { get; set; }
+
+    public Boolean isDamaged { get; set; }
 
     /*Projectile inventory
      Use ArrayIndex enums*/
     private int projectileIndex;
     public IProjectile[] projectiles { get; set; }
 
+    public SpriteAction direction { get; set; }
+
+    private float timeElapsed;
 
     private IDraw drawSprite = new DrawSprite();
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
@@ -51,6 +63,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         {
             state = ClosedDoor;
         }
+        direction = SpriteAction.left;
     }
 
     public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures)
@@ -63,24 +76,39 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         dead = new DeadState(this);
         use = new UseState(this);
 
-        health = 3;
+        health = 6;
+        maxHealth = 6;
         isDead = false;
 
-        state = still;
+        keys = 0;
+        rubies = 0;
+        bombs = 0;
+        map = false;
+        compass = false;
+        triforce = false;
 
-        projectiles = new IProjectile[4];
+        state = still;
+        direction = SpriteAction.left;
+
+        projectiles = new IProjectile[5];
         projectileIndex = (int)ArrayIndex.arrow;
+
+        projectiles[(int)ArrayIndex.swordShoot] = (IProjectile) SpriteFactory.Instance.CreateSwordShootProjectile(999, this);
     }
 
     public void SetSpriteState(SpriteAction action, ISpriteState state)
     {
+        
+        
 
         if (!isDead)
         {
             state.SetPreviousState(this.state);
             this.state = state;
             SetSpriteAction(action);
+            SoundManager.Instance.playStateSounds(action, state);
         }
+       
         
     }
     public override void Update(GameTime gameTime)
@@ -107,59 +135,126 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     }
     public void ProjectileAttack()
     {
-        if (projectiles[projectileIndex] != null)
+        if (projectiles[(int)projectileIndex] != null)
         {
-            projectiles[projectileIndex].FireCommand().Execute();
+            switch ((ArrayIndex)projectileIndex)
+            {
+                case ArrayIndex.arrow:
+                    if (rubies > 0)
+                    {
+                        projectiles[(int)projectileIndex].FireCommand().Execute();
+                        rubies--;
+                    }
+                    break;
+                case ArrayIndex.bomb:
+                    if (bombs > 0 && projectiles[(int)projectileIndex].FireCommand().Counter() == 0)
+                    {
+                        projectiles[(int)projectileIndex].FireCommand().Execute();
+                        bombs--;
+                    }
+                    break;
+                case ArrayIndex.boomerang:
+                    projectiles[(int)projectileIndex].FireCommand().Execute();
+                    break;
+                default:
+                    break;
+            }
         }
     }
     public void SwordAttack()
     {
         if (projectiles[(int) ArrayIndex.sword] != null)
         {
-            projectiles[(int) ArrayIndex.sword].FireCommand().Execute();
+            if (this.health < this.maxHealth){
+                projectiles[(int) ArrayIndex.sword].FireCommand().Execute();
+                SoundManager.Instance.PlayOnce("LOZ_Sword_Slash");
+
+            }else {
+                projectiles[(int)ArrayIndex.swordShoot].FireCommand().Execute();
+                SoundManager.Instance.PlayOnce("LOZ_Sword_Shoot");
+
+            }
         }
     }
 
-
-    //call so the entity gets repelled by walls
-    public void UpdateCollideWithWall(RoomObject roomObject)
+    public void TakeDamage()
     {
-        this.collider.ResetCollisionBooleans();
-        this.collider.UpdateCollision(roomObject.StaticTileList);
-        this.collider.UpdateCollision(roomObject.DynamicTileList);
-        if (this.collider.isColliding)
+        SpriteAction newPos;
+        SpriteAction currentPos = this.direction;
+        float orgX;
+        float orgY;
+        
+
+        /* Decrement the entitys health field */
+        this.health--;
+        SoundManager.Instance.PlayOnce("LOZ_Enemy_Hit");
+        //SoundManager.Instance.playPainSounds(this.maxHealth);
+
+        /* Keep the sprite facing in the same direction when they take damage */
+        int entityPos = this.spritePos;
+        switch (entityPos)
         {
-            if (this.collider.isCollidingBottom)
-            {
-                Vector2 position = this.screenCord;
-                double x = this.screenCord.X;
-                double y = this.screenCord.Y - 2;        //somebody make this an enum please
-                this.screenCord = new Vector2((int)x, (int)y);
-            }
-            if (this.collider.isCollidingTop)
-            {
-                Vector2 position = this.screenCord;
-                double x = this.screenCord.X;
-                double y = this.screenCord.Y + 2;        //somebody make this an enum please
-                this.screenCord = new Vector2((int)x, (int)y);
-            }
-            if (this.collider.isCollidingLeft)
-            {
-                Vector2 position = this.screenCord;
-                double x = this.screenCord.X + 2;
-                double y = this.screenCord.Y;        //somebody make this an enum please
-                this.screenCord = new Vector2((int)x, (int)y);
-            }
-            if (this.collider.isCollidingRight)
-            {
-                Vector2 position = this.screenCord;
-                double x = this.screenCord.X - 2;
-                double y = this.screenCord.Y;        //somebody make this an enum please
-                this.screenCord = new Vector2((int)x, (int)y);
-            }
+            case 0:
+                newPos = SpriteAction.damageLeft;
+                orgX = this.screenCord.X;
+                orgY = this.screenCord.Y;
+                this.screenCord = new Vector2((orgX + 20), orgY);
+                break;
+            case 1:
+                newPos = SpriteAction.damageRight;
+                orgX = this.screenCord.X;
+                orgY = this.screenCord.Y;
+                this.screenCord = new Vector2((orgX - 20), orgY);
+                break;
+            case 2:
+                newPos = SpriteAction.damageUp;
+                orgX = this.screenCord.X;
+                orgY = this.screenCord.Y;
+                this.screenCord = new Vector2(orgX, (orgY + 20));
+                break;
+            case 3:
+                newPos = SpriteAction.damageDown;
+                orgX = this.screenCord.X;
+                orgY = this.screenCord.Y;
+                this.screenCord = new Vector2(orgX, (orgY - 20));
+                break;
+            default:
+                newPos = (SpriteAction)this.spritePos;
+                break;
+
         }
+        this.SetSpriteState(newPos, this.damaged);
+        isDamaged = true;
+
+       // timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        //while (timeElapsed < 2)
+        //{
+        //    timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        //}
+        //this.SetSpriteState(currentPos, this.still);
+
     }
 
-    
+    public void SetDirection(SpriteAction direction)
+    {
+        this.direction = direction;
+    }
+
+    public void CarryToStart(IConcreteSprite wallmaster, IRoomObject room, RoomObjectManager roomSwitch)
+    {
+        room.PauseLink();
+        while (this.screenCord.Y < 400)
+        {
+            this.screenCord = new Vector2(this.screenCord.X, (this.screenCord.Y - 5));
+            wallmaster.screenCord = new Vector2(wallmaster.screenCord.X, (wallmaster.screenCord.Y - 5));
+        }
+        roomSwitch.setRoom(1, false);
+        room = (RoomObject)roomSwitch.currentRoom();
+        this.screenCord = new Vector2(1100, 350);
+        room.UnpauseLink();
+
+
+    }
+
 }
 

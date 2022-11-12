@@ -24,7 +24,7 @@ using System.Threading.Tasks;
         
         }
 
-    public KeyboardController InitalizeKeyboard(ISprite Link)
+    public KeyboardController InitalizeKeyboard(ISprite Link, ItemSelectionScreen inventory)
     {
         keyboard = KeyboardController.GetInstance;
 
@@ -49,12 +49,18 @@ using System.Threading.Tasks;
         keyboard.RegisterCommand(Keys.S, new MoveDown(Link));
         keyboard.RegisterCommand(Keys.Z, new Attack(Link));
         keyboard.RegisterCommand(Keys.Space, new ProjectileAttack(Link));
-        keyboard.RegisterCommand(Keys.P, new SwitchProjectile(Link));
+        
+
+        //intialize the inventory
+        inventory.Link = (IConcreteSprite)Link;
+        keyboard.RegisterCommand(Keys.I, new Inventory(inventory));
+        keyboard.RegisterCommand(Keys.P, new NextItem(inventory));
+        keyboard.RegisterCommand(Keys.O, new PreviousItem(inventory));
 
         // Add restart and exit commands to keyboard
         keyboard.RegisterCommand(Keys.Q, new ExitCommand(game1));
 
-        //doesnt work, needs refactoring
+        //Restart Game command
         keyboard.RegisterCommand(Keys.R, new RestartCommand(game1));
 
         // Add link with his keys to playable sprite

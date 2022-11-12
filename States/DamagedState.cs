@@ -16,6 +16,7 @@ public class DamagedState : ISpriteState
     private float timeElapsed;
     private int counter = 0;
     public int health = 0;
+    public Boolean isDamaged { get; set; }
 
 
    
@@ -37,15 +38,20 @@ public class DamagedState : ISpriteState
         if (health <= 0)
         {
             sprite.SetSpriteState(SpriteAction.damage, dead);
+            SoundManager.Instance.PauseSounds();
+            SoundManager.Instance.PlayOnce("LOZ_Link_Die");
+
         }
 
         else if (timeElapsed > 2)
         {
             timeElapsed = 0;
             sprite.SetSpriteState(prevAction, prevState);
+            isDamaged = false;
             counter = 0;
 
         }
+
     }
 
     public void Draw(GameTime gameTime)
@@ -61,6 +67,10 @@ public class DamagedState : ISpriteState
             prevAction = (SpriteAction)sprite.spritePos;
             prevState = state;
         }
+    }
+    public string toString()
+    {
+        return "DamagedState";
     }
 }
 

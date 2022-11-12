@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
 	<!-- ROOM COMPLETE -->
-	
+	<BaseCord>
+		<xCord>800</xCord>
+		<yCord>0</yCord>
+		<id>0</id>
+	</BaseCord>
 	<Blocks>
 		<Block>
 			<xPos>144</xPos>
@@ -35,7 +39,7 @@
 		</Block>
 		<Block>
 			<xPos>592</xPos>
-			<yPos>322</yPos>
+			<yPos>306</yPos>
 			<Name>WallRight2</Name>
 			<RoomObjectType>4</RoomObjectType>
 		</Block>
@@ -45,92 +49,26 @@
 			<Name>DoorRight</Name>
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
-		<Block>
-			<xPos>400</xPos>
-			<yPos>274</yPos>
-			<Name>Stairs</Name>
-			<RoomObjectType>9</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>336</xPos>
-			<yPos>274</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>5</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>368</xPos>
-			<yPos>242</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>400</xPos>
-			<yPos>210</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>432</xPos>
-			<yPos>242</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>464</xPos>
-			<yPos>274</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>432</xPos>
-			<yPos>306</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>400</xPos>
-			<yPos>338</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>368</xPos>
-			<yPos>306</yPos>
-			<Name>Barrier</Name>
-			<RoomObjectType>4</RoomObjectType>
-		</Block>
-		<Block>
-			<xPos>368</xPos>
-			<yPos>306</yPos>
-			<Name>InvisibleBarrier</Name>
-			<RoomObjectType>9</RoomObjectType>
-		</Block>
 	</Blocks>
 
 
 	<Enemies>
 		<Enemy>
-			<xPos>208</xPos>
-			<yPos>178</yPos>
-			<Name>Trap</Name>
+			<xPos>240</xPos>
+			<yPos>250</yPos>
+			<Name>Keese</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
-			<xPos>560</xPos>
-			<yPos>178</yPos>
-			<Name>Trap</Name>
+			<xPos>368</xPos>
+			<yPos>314</yPos>
+			<Name>Keese</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 		<Enemy>
-			<xPos>208</xPos>
-			<yPos>370</yPos>
-			<Name>Trap</Name>
-			<RoomObjectType>2</RoomObjectType>
-		</Enemy>
-		<Enemy>
-			<xPos>560</xPos>
-			<yPos>370</yPos>
-			<Name>Trap</Name>
+			<xPos>432</xPos>
+			<yPos>282</yPos>
+			<Name>Keese</Name>
 			<RoomObjectType>2</RoomObjectType>
 		</Enemy>
 	</Enemies>

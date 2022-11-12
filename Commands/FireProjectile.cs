@@ -21,12 +21,13 @@ public class FireProjectile : ICommand
 
     public void Execute()
     {
-        if (counter == 0)
+        if (counter == 0 && !RoomObject.pauseLink)
         {
             shooter = (IConcreteSprite)projectile.Owner();
             projectile.SetSpriteAction((SpriteAction)(shooter.spritePos % 4));
             projectile.SetDirection((shooter.spritePos % 4));
             newCord = projectile.screenCord;
+            projectile.SetShouldCollide(true);
 
             switch ((shooter.spritePos % 4))
             {

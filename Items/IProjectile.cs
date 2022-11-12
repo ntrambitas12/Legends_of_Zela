@@ -8,6 +8,8 @@ public interface IProjectile : IItem
     public void SetFireCommand(FireProjectile fireProjectile);
     public int Distance();
     public void SetDistance(int distance);
+    public bool ShouldCollide();
+    public void SetShouldCollide(bool shouldCollide);
 }
 
 

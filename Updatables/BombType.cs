@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-public class BombType : IItemType
+public class BombType : IProjectileType
 {
     private IProjectile projectile;
     private FireProjectile fireProjectile;
     private bool shouldDraw;
     private int counter;
     private int distance;
+    private float timeElapsed;
 
     public BombType(IProjectile projectile)
     {
         this.projectile = projectile;
+        timeElapsed = 0;
     }
 
     public void Update(GameTime gameTime)
@@ -24,46 +26,68 @@ public class BombType : IItemType
 
         if (counter >= distance - 20)
         {
-            projectile.SetSpriteAction(SpriteAction.bombCloud);
-
-            //check for collisions and effects
-            if (shouldDraw)
-            {
-                ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
-
-                //if (collidingObject != null)
-                //{
-                //    fireProjectile.ResetCounter();
-                //}
-
-                collidingObject = projectile.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
-                bool check = projectile.Owner() != RoomObjectManager.Instance.currentRoom().Link;
-
-                if (check && collidingObject != null)
-                {
-                    //fireProjectile.ResetCounter();
-                    RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
-                }
-
-                collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
-                check = !(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(projectile.Owner()));
-
-                if (check && collidingObject != null)
-                {
-                    //fireProjectile.ResetCounter();
-                    if (RoomObjectManager.Instance.currentRoom().EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
-                    {
-                        RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
-                    }
-                    RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
-                }
-            }
+            SoundManager.Instance.PlayOnce("LOZ_Bomb_Blow");
+            projectile.SetSpriteAction(SpriteAction.bombCloud);           
         }
 
         if (shouldDraw)
         {
             fireProjectile.Execute();
         }
+
+        //check for collisions and effects
+        //UpdateCollisions(gameTime);
+        timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+    }
+
+    
+    public void UpdateCollisions(GameTime gameTime)
+    {
+        
+        if (shouldDraw && counter >= distance - 20 && projectile.ShouldCollide())
+        {
+            IRoomObject _currentRoom = RoomObjectManager.Instance.currentRoom();
+            Vector2 prevCord = projectile.screenCord;
+            projectile.SetPosition(new Vector2(prevCord.X - 30, prevCord.Y - 30));
+            ISprite collidingObject = projectile.collider.isIntersecting(_currentRoom.ProjectileStopperList);
+
+            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { _currentRoom.Link });
+            bool check = projectile.Owner() != _currentRoom.Link;
+
+            if (check && collidingObject != null)
+            {
+                
+                _currentRoom.TakeDamage(collidingObject);
+            }
+
+            collidingObject = projectile.collider.isIntersecting(_currentRoom.EnemyList);
+            check = !(_currentRoom.EnemyList.Contains(projectile.Owner()));
+            check = check && !_currentRoom.DeadEnemyList.Contains(collidingObject);
+
+            if (check && collidingObject != null && timeElapsed > .1)
+            {
+                ((IConcreteSprite)collidingObject).health--;
+                projectile.SetShouldCollide(false);
+                if (((IConcreteSprite)collidingObject).health == 0)
+                {
+                    _currentRoom.KillEnemy(collidingObject);
+                    DropHandler.Drop(_currentRoom, collidingObject.screenCord);
+                }
+                timeElapsed = 0;
+            }
+
+            //check for bombable doors
+            collidingObject = projectile.collider.isIntersecting(_currentRoom.BombDoorsList.Keys);
+            check = projectile.Owner() == _currentRoom.Link;
+
+            if (check && collidingObject != null)
+            {
+                _currentRoom.OpenDoor(collidingObject);
+            }
+
+            projectile.SetPosition(prevCord);
+        }
+        
     }
 }
 

@@ -12,12 +12,14 @@ using System.Threading.Tasks;
     public int currentFrame { get { return _currentFrame; } set { _currentFrame = value; } }
     public int spritePos { get { return _spritePos; } set { _spritePos = value; } }
     public Vector2 screenCord { get { return _screenCord; } set { _screenCord = value; } }
+    public Vector2 orgScreenCord { get; set; }
     public int totalFrames { get { return _totalFrames; } set {} }
     public SpriteBatch spriteBatch { get { return _spriteBatch; } set {} }
     public List<Texture2D> textureToDraw { get { return _textureToDraw; } set {} }
 
     /*Declare collider variable*/
     public ICollision collider { get; set; }
+    public IAI ai { get; set; }
 
     private int _currentFrame;
     private int _totalFrames;

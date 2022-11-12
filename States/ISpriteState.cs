@@ -10,6 +10,7 @@ using System.Threading.Tasks;
     public void Update(GameTime gameTime);
     public void Draw(GameTime gameTime);
     public void SetPreviousState(ISpriteState state);
-   
+
+    public string toString();
 }
 

@@ -8,9 +8,10 @@ using System.Threading.Tasks;
     public interface IRoomObjectManager
     {
     
-    public void addRoom(IRoomObject room);
-    public void setRoom(int roomId);
+    public void addRoom(IRoomObject room, int id);
+    public void setRoom(int roomId, bool inc);
     public IRoomObject currentRoom();
+    public IRoomObject adjacentRoom(SpriteAction direction);
     public void Reset();
     public void Draw(GameTime gameTime);
     public void Update(GameTime gameTime);

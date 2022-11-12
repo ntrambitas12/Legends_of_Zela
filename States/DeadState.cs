@@ -27,5 +27,10 @@ public class DeadState : ISpriteState
     {
         //no need to update, sprite is not active
         sprite.isDead = true;
+
+    }
+    public string toString()
+    {
+        return "DeadState";
     }
 }

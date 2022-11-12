@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.Contracts;
 
 public interface IConcreteSprite : ISprite
 {
@@ -16,18 +17,29 @@ public interface IConcreteSprite : ISprite
     public ISpriteState attack { get; set; }
     public ISpriteState use { get; set; }
     public int health { get; set; }
+    public int maxHealth { get; set; }
     public bool isDead { get; set; }
-    public IProjectile[] projectiles { get; set; }
 
+    public IProjectile[] projectiles { get; set; }
+    public int keys { get; set; }
+    public int rubies { get; set; }
+    public int bombs { get; set; }
+    public bool map { get; set; }
+    public bool compass { get; set; }
+    public bool triforce { get; set; }
+
+    public SpriteAction direction { get; set; }
+
+    
     void SetSpriteState(SpriteAction action, ISpriteState spriteState);
+    public void SetDirection(SpriteAction direction);
 
     public void AddProjectile(IProjectile projectile, ArrayIndex i);
     public ArrayIndex ProjectileIndex();
     public void SetProjectileIndex(ArrayIndex i);
     public void ProjectileAttack();
     public void SwordAttack();
-
-    //call so the entity gets repelled by walls
-    public void UpdateCollideWithWall(RoomObject roomObject);
+    public void TakeDamage();
+    public void CarryToStart(IConcreteSprite sprite, IRoomObject room, RoomObjectManager roomSwitch);
 }
 

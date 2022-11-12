@@ -1,0 +1,38 @@
+﻿Code Quality Review
+Author: Ben Keip
+Date: 9-26-22
+Sprint #2
+File being reviewed: AbstractController.cs
+Author of file being reviewed: Nick Trambitas and Kyle Hoefker
+
+Code quality here is very strong. You can tell that the code was thought very well due to
+the methods all having their own specific purpose, and handling different cases which
+may occur in the game. For example, instead of simply haivng a way to add sprites to the
+game with the method AddSprite, there is also a way to clean the sprite up by "killing" it.
+This allows for easier trackage of objects in the game. There are only four fields declared in the class,
+and all of them have the appropriate level of access declared as well as each having its own very
+specific purpose.
+
+One potential change I could see being made to the game is if you wanted to add a sprite that
+attacked the player by hurling themselves at the player. Which AddSprite method would be used here, the one
+with two parameters or one? There could easily be further examples of non-trivial enemies, and having to write
+different AddSprite methods for each of these could be a bit tedious depending on if you needed to
+pass in more paramaters of information you needed to know.
+
+
+
+Code Quality Review
+Author: Ben Keip
+Date: 10-19-22
+Sprint #3
+File being reviewed: ProjectileAttack.cs and SwitchProjectile.cs
+Author of file being reviewed: Kyle Hoefker
+
+ProjectileSprite is very simple, which makes it easy to both use and understand.
+It also follows the convention of our other commands, so there is definitely something to be
+said for consistency. The same can be said with SwitchProjectile, it has very tight coupling and
+provides a much needed functionality for our project, allowing Link to actually use all the items
+in the game.
+One thing I could see being changed, however, is the bomb animation frames. I'm not sure this
+current implementation would work with it due to the bomb being animated differently, and additionally
+I believe fire could be changed to an ISprite and not a projectile.

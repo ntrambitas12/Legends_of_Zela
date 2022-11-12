@@ -15,6 +15,7 @@
     <EmbeddedResource Remove="Content\TileSprites\**" />
     <None Remove="Content\TileSprites\**" />
     <Compile Remove="Updatables\DropType.cs" />
+    <None Remove="Documentation\Sprint 4 Documentation\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\BlockSprites\BridgeHorizontal.png" />
@@ -159,30 +160,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Update="Rooms\DemoRoom.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room25.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room01.xml">
+    <None Update="Rooms\Room26.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room02.xml">
+    <None Update="Rooms\Roomxx.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room07.xml">
+    <None Update="Rooms\Room21.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room08.xml">
+    <None Update="Rooms\Room23.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room10.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Rooms\Room11.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Rooms\Room12.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Rooms\Room13.xml">
+    <None Update="Rooms\Room24.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Rooms\Room14.xml">
@@ -194,30 +189,39 @@
     <None Update="Rooms\Room16.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room19.xml">
+    <None Update="Rooms\Room17.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room20.xml">
+    <None Update="Rooms\Room18.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room21.xml">
+    <None Update="Rooms\Room10.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room26.xml">
+    <None Update="Rooms\Room11.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room31.xml">
+    <None Update="Rooms\Room12.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room32.xml">
+    <None Update="Rooms\Room06.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room01.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Rooms\Room00.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Rooms\Room.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Rooms\Room33.xml">
+    <None Update="Rooms\Room02.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Documentation\Sprint 4 Documentation\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

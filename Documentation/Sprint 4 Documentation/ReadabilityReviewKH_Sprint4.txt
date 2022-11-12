@@ -1,0 +1,12 @@
+﻿Readability review
+Author: Kyle Hoefker
+Date: 10/27/2022
+Sprint #4
+Files being reviewed: Camera.cs 
+Author of file being reviewed: Nick Trambitas
+Code review took 10 minutes
+
+The variable names seem meaningful, but I cannot understand what this class is
+doing. The white space and orginazation of this file make it easy for the eyes.
+What I would reccomend to make this more readable is to add comments on what is
+happening and comments to declare what each variable does.

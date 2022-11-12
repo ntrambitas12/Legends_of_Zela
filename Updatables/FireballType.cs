@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class FireballType : IItemType
+public class FireballType : IProjectileType
 {
     private IProjectile projectile;
     private int direction;
@@ -44,10 +44,16 @@ public class FireballType : IItemType
 
         if (shouldDraw)
         {
-            fireProjectile.Execute();
+            SoundManager.Instance.PlayOnce("LOZ_Boss_Scream1"); //fireball sound
+            fireProjectile.Execute(); 
         }
 
-        //check for collisions and effects
+    }
+
+
+    //check for collisions and effects
+    public void UpdateCollisions(GameTime gameTime)
+    {
         if (shouldDraw)
         {
             ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);

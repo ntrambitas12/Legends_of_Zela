@@ -33,5 +33,10 @@ using System.Threading.Tasks;
     
         // need collidable stuff
         }
+
+    public string toString()
+    {
+        return "OpenState";
     }
+}
 

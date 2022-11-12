@@ -1,5 +1,11 @@
 ﻿public enum SpriteAction
 {
+    //general directions
+    left = 0,
+    right = 1,
+    up = 2,
+    down = 3,
+
     //for sprites that don't need to change direction it's pointing
     still = 0,
     attack = 1,

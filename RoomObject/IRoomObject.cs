@@ -15,6 +15,7 @@ public enum RoomObjectTypes
     typeTileStatic = 4,
     typeTileDynamic = 5,
     typePickup = 6,
+    typeTileMoveable = 7,
     typeTopLayerNonCollidible = 8,
     typeReplacesFloor = 9,
     typeFloor = 10,
@@ -24,7 +25,10 @@ public enum RoomObjectTypes
 //ONLY GAME OBJECTS THAT ARE DRAWN AND/OR UPDATED ARE IN THESE LISTS.
 //  this should include ONLY the game objects in the CURRENT room.
 public interface IRoomObject
+
 {
+    public static bool pauseLink;
+
     //the controllers list
     //includes keyboardController, mouseController, gamepadController(?)
     public List<IController> ControllerList { get; set; }
@@ -35,6 +39,9 @@ public interface IRoomObject
     //the list for enemies
     public List<ISprite> EnemyList { get; set; }
 
+    //the list for dead enemies
+    public List<ISprite> DeadEnemyList { get; set; }
+
     //list for enemy projectiles
     public List<ISprite> EnemyProjectileList { get; set; }
 
@@ -43,6 +50,10 @@ public interface IRoomObject
 
     //list for dynamic tiles (doors, moving tiles)
     public List<ISprite> DynamicTileList { get; set; }
+    
+    //list for moveable tiles
+    public List<ISprite> MoveableTileList { get; set; }
+
 
     //list for item pickups
     public List<ISprite> PickupList { get; set; }
@@ -67,11 +78,25 @@ public interface IRoomObject
     //this is to exclude water from static tiles
     public List<ISprite> ProjectileStopperList { get; set; }
 
+    //list of locked doors (true if closed, false if open)
+    public Dictionary<ISprite, bool> LockedDoorsList { get; set; }
+
+    //list of bombable doors (true if closed, false if open)
+    public Dictionary<ISprite, bool> BombDoorsList { get; set; }
+
     //dict mapping enemies to their projectiles
     public Dictionary<ISprite, ISprite> EnemyToProjectile { get; set; }
+   //Base cord for camera
+    public Vector2 BaseCord { get; set; }
 
     //adds an enemy and its projectile to dict
     public void AddEnemyProjectilePair(ISprite enemy, ISprite projectile);
+
+    //adds a closed door to list
+    public void AddClosedDoor(ISprite door, String name);
+
+    //removes opened door from its list and sets its sprite action
+    public void OpenDoor(ISprite door);
 
     //adds gameObject into its lists
     //which list depends on the enum passed as objectType
@@ -86,6 +111,12 @@ public interface IRoomObject
     //  private List<(ISprite, int)> toBeDeleted;
     public void DeleteGameObject(int objectType, ISprite gameObject);
 
+    //Kills the enemy, and if it is the last one then it deletes all of them
+    public void KillEnemy(ISprite enemy);
+
+    //Resets enemies unless all enemies were killed
+    public void ResetEnemies();
+
     //is called by the Game class, Game1, in its Update() method.
     //updates all Updateables, includes
     //  controllers
@@ -94,6 +125,7 @@ public interface IRoomObject
     //  projectiles (both types)
     //  pickup items
     //  dynamic tiles
+    //  moveable tiles
     //after updating game objects, goes into 'delete step', and deletes game objects held in private toBeDeleted list
     //clears toBeDeleted once all objects in it have been deleted from Game Object's various lists
     public void Update(GameTime gameTime);
@@ -112,4 +144,13 @@ public interface IRoomObject
     public void ResetControllers();
 
     public void TakeDamage(ISprite sprite);
+
+    public void PauseEnemies(bool isInv);
+
+    public void UnpauseEnemies(bool isInv);
+
+    public void PauseLink();
+    public void UnpauseLink();
+
+    public Boolean IsPauseEnemies();
 }

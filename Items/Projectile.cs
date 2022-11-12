@@ -8,12 +8,14 @@ public class Projectile : AbstractItem, IProjectile
     private int direction;
     private FireProjectile fireProjectile;
     private int distance;
+    private bool shouldCollide;
 
     public Projectile(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures)
     {
         direction = -1;
         fireProjectile = null;
         distance = 0;
+        shouldCollide = true;
     }
 
     public int Direction()
@@ -44,6 +46,16 @@ public class Projectile : AbstractItem, IProjectile
     public void SetDistance(int distance)
     {
         this.distance = distance;
+    }
+
+    public bool ShouldCollide()
+    {
+        return shouldCollide;
+    }
+
+    public void SetShouldCollide(bool shouldCollide)
+    {
+        this.shouldCollide = shouldCollide;
     }
 }
 

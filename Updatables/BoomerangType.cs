@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-public class BoomerangType : IItemType
+public class BoomerangType : IProjectileType
 {
     private IProjectile projectile;
     private int direction;
@@ -15,11 +15,13 @@ public class BoomerangType : IItemType
     private Vector2 shooterCord;
     private Vector2 directionBack;
     private bool goingBack;
+    private float timeElapsed;
 
     public BoomerangType(IProjectile projectile)
     {
         this.projectile = projectile;
         goingBack = false;
+        timeElapsed = 0;
     }
 
     public void Update(GameTime gameTime)
@@ -64,56 +66,66 @@ public class BoomerangType : IItemType
             }
         }
         projectile.SetPosition(changeCord);
-        
+
         if (shouldDraw)
         {
             fireProjectile.Execute();
         }
+        timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+    }
 
-        //check for collisions and effects
+
+
+    //check for collisions and effects
+    public void UpdateCollisions(GameTime gameTime)
+    {
         if (shouldDraw)
         {
-            ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
+            IRoomObject currRoom = RoomObjectManager.Instance.currentRoom();
+            ISprite collidingObject = projectile.collider.isIntersecting(currRoom.ProjectileStopperList);
 
             if (collidingObject != null)
             {
                 goingBack = true;
             }
 
-            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
+            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { currRoom.Link });
 
             if (collidingObject != null)
             {
-                if (projectile.Owner() != RoomObjectManager.Instance.currentRoom().Link)
+                if (projectile.Owner() != currRoom.Link)
                 {
                     goingBack = true;
-                    RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
-                } else
-                {
-                    if (goingBack) fireProjectile.ResetCounter();
-                    goingBack = false;
-                    
-                }
-            }
-
-            collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
-
-            if (collidingObject != null)
-            {
-                if (!(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(projectile.Owner())))
-                {
-                    goingBack = true;
-                    if (RoomObjectManager.Instance.currentRoom().EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
-                    {
-                        RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
-                    }
-                    RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                    currRoom.TakeDamage(collidingObject);
                 }
                 else
                 {
                     if (goingBack) fireProjectile.ResetCounter();
                     goingBack = false;
-                    
+
+                }
+            }
+
+            collidingObject = projectile.collider.isIntersecting(currRoom.EnemyList);
+
+            if (collidingObject != null && projectile.ShouldCollide())
+            {
+                bool check = !currRoom.DeadEnemyList.Contains(collidingObject);
+                if (check && !(currRoom.EnemyList.Contains(projectile.Owner())) && timeElapsed > .1)
+                {
+                    ((IConcreteSprite)collidingObject).health--;
+                    projectile.SetShouldCollide(false);
+                    goingBack = true;
+                    if (((IConcreteSprite)collidingObject).health == 0)
+                    {
+                        currRoom.KillEnemy(collidingObject);
+                        DropHandler.Drop(currRoom, collidingObject.screenCord);
+                    }
+                }
+                else
+                {
+                    if (goingBack) fireProjectile.ResetCounter();
+                    goingBack = false;
                 }
             }
         }

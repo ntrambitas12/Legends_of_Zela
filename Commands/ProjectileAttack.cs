@@ -11,7 +11,10 @@ public class ProjectileAttack : ICommand
 
     public void Execute()
     {
-        sprite.SetSpriteState((SpriteAction)sprite.spritePos, sprite.use);
+        if (!RoomObject.pauseLink)
+        {
+            sprite.SetSpriteState((SpriteAction)sprite.spritePos, sprite.use);
+        }
     }
 }
 

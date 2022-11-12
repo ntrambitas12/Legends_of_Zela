@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics; 
 
-public class ArrowType : IItemType
+public class ArrowType : IProjectileType
 {
     private IProjectile projectile;
     private int direction;
     private FireProjectile fireProjectile;
     private bool shouldDraw;
     private Vector2 changeCord;
+    private float timeElapsed;
 
     public ArrowType(IProjectile projectile)
     {
         this.projectile = projectile;
+        timeElapsed = 0;
     }
 
     public void Update(GameTime gameTime)
@@ -48,35 +50,47 @@ public class ArrowType : IItemType
         }
 
         //check for collisions and effects
+        //UpdateCollisions(gameTime);
+        timeElapsed += (float) gameTime.ElapsedGameTime.TotalSeconds;
+    }
+
+    //check for collisions and effects
+    public void UpdateCollisions(GameTime gameTime)
+    { 
         if (shouldDraw)
         {
-            ISprite collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().ProjectileStopperList);
+            IRoomObject currRoom = RoomObjectManager.Instance.currentRoom();
+            ISprite collidingObject = projectile.collider.isIntersecting(currRoom.ProjectileStopperList);
 
             if (collidingObject != null)
             {
                 fireProjectile.ResetCounter();
             }
 
-            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
-            bool check = projectile.Owner() != RoomObjectManager.Instance.currentRoom().Link;
+            collidingObject = projectile.collider.isIntersecting(new List<ISprite> { currRoom.Link });
+            bool check = projectile.Owner() != currRoom.Link;
 
             if (check && collidingObject != null)
             {
                 fireProjectile.ResetCounter();
-                RoomObjectManager.Instance.currentRoom().TakeDamage(collidingObject);
+                currRoom.TakeDamage(collidingObject);
             }
 
-            collidingObject = projectile.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
-            check = !(RoomObjectManager.Instance.currentRoom().EnemyList.Contains(projectile.Owner()));
+            collidingObject = projectile.collider.isIntersecting(currRoom.EnemyList);
+            check = !(currRoom.EnemyList.Contains(projectile.Owner()));
+            check = check && !currRoom.DeadEnemyList.Contains(collidingObject);
 
-            if (check && collidingObject != null)
+            if (check && collidingObject != null && timeElapsed > .1 && projectile.ShouldCollide())
             {
+                ((IConcreteSprite)collidingObject).health--;
                 fireProjectile.ResetCounter();
-                if (RoomObjectManager.Instance.currentRoom().EnemyToProjectile.TryGetValue(collidingObject, out ISprite enemyProjectile))
+                projectile.SetShouldCollide(false);
+                if (((IConcreteSprite)collidingObject).health == 0)
                 {
-                    RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
+                    currRoom.KillEnemy(collidingObject);
+                    DropHandler.Drop(currRoom, collidingObject.screenCord);
                 }
-                RoomObjectManager.Instance.currentRoom().DeleteGameObject((int)RoomObjectTypes.typeEnemy, collidingObject);
+                timeElapsed = 0;
             }
         }
     }

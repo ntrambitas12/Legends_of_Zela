@@ -27,10 +27,13 @@ public class Collision : ICollision
     public Boolean isCollidingBottom { get; set; }
     public Boolean isCollidingLeft { get; set; }
     public Boolean isCollidingRight { get; set; }
-
+    
+    //set the object that the entity collided with
+    public ISprite collidedEntity { get; set; }
     //collider rect for this
     public Rectangle rect { get; set; }
     private Rectangle colliderDimensions;
+    private Rectangle roomEdgeRect;
 
 
     //--------------------------------INITIALIZER--------------------------------
@@ -39,6 +42,7 @@ public class Collision : ICollision
     {
         this.entity = entity;
         this.colliderDimensions = colliderDimensions;
+        this.roomEdgeRect = CollisionManager.Instance.roomEdge();
     }
 
     //--------------------------------METHODS--------------------------------
@@ -51,6 +55,7 @@ public class Collision : ICollision
         isCollidingBottom = false;
         isCollidingLeft = false;
         isCollidingRight = false;
+        collidedEntity = null;
     }
 
     //updates collider rect's position
@@ -58,14 +63,13 @@ public class Collision : ICollision
     {
         this.rect = new Rectangle((int)entity.screenCord.X, (int)entity.screenCord.Y, colliderDimensions.Width, colliderDimensions.Height);
     }
-
     //sets the various isColliding booleans against collidibleList
     public void UpdateCollision(List<ISprite> collidibleList)
     {
 
         //update collider position
         this.rect = new Rectangle((int)entity.screenCord.X, (int)entity.screenCord.Y, colliderDimensions.Width, colliderDimensions.Height);
-
+       
         foreach (ISprite collidingEntity in collidibleList)
         {
             Rectangle intersectRect = Rectangle.Intersect(this.rect, ((Collision)collidingEntity.collider).rect);
@@ -73,6 +77,7 @@ public class Collision : ICollision
             if (intersectRect.Height > (int)CONSTANTS.THRESHHOLD && intersectRect.Width > (int)CONSTANTS.THRESHHOLD)
             {
                 this.isColliding = true;                                                //collision detected
+                collidedEntity = collidingEntity;
                 if (intersectRect.Height > intersectRect.Width)                         //check whether horizontal or vertical collision
                 {
                     //case 1: horizontal collision (intersectRect has higher height)
@@ -105,8 +110,15 @@ public class Collision : ICollision
         }
     }
 
+    //overload for single element
+    public void UpdateCollision(ISprite collidable)
+    {
+        List<ISprite> collidableList = new List<ISprite> { collidable };
+        UpdateCollision(collidableList);
+    }
+
     //returns the object that this.rect has intersected with. returns null if not intersecting with anything in list
-    public ISprite isIntersecting(List<ISprite> collidibleList)
+    public ISprite isIntersecting(ICollection<ISprite> collidibleList)
     {
 
         //update collider position
@@ -120,5 +132,32 @@ public class Collision : ICollision
             }
         }
         return null;
+    }
+
+    //updates booleans against room edges
+    public void UpdateCollisionRoomEdge()
+    {
+        Vector2 roomOffset = RoomObjectManager.Instance.currentRoom().BaseCord;
+
+        if (this.rect.Top < roomEdgeRect.Top + roomOffset.Y)
+        {
+            this.isColliding = true;
+            this.isCollidingTop = true;
+        }
+        if (this.rect.Bottom > roomEdgeRect.Bottom + roomOffset.Y)
+        {
+            this.isColliding = true;
+            this.isCollidingBottom = true;
+        }
+        if (this.rect.Left < roomEdgeRect.Left + roomOffset.X)
+        {
+            this.isColliding = true;
+            this.isCollidingLeft = true;
+        }
+        if (this.rect.Right > roomEdgeRect.Right + roomOffset.X)
+        {
+            this.isColliding = true;
+            this.isCollidingRight = true;
+        }
     }
 }

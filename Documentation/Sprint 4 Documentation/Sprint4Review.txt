@@ -1,0 +1,22 @@
+Sprint 4 reflection. 
+The team came together as everyone found their role and preformed at a high level. No one was dead weight. We paced out the sprint
+appropriatly so we didn't have to cram too much at the end. Communication both online and in person helped 
+iron out bugs and stuck points we had doing our individual tasks. The efforts we made to fix the issues that held us back 
+in earlier sprints are paying off and we are excited to see how we do on the final sprint.
+
+Known Issues:
+1. Aquamentus is only able to shoot one fireball. Either FireProjectile command or FireballType need to be changed to address this.
+2. We chose to implement Link's health in terms of full heath rather than half hearts. His health value is still true to the game, however.
+3. Link does not have frames for holding up the Bow and Triforce. This needs to be changed in SpriteFactory.
+4. As a result of prioritizing a fully functional game, SpriteFactory refactoring got put on the back burner.
+5. Locked doors are shown as closed doors, but retain their intended functionality.
+6. Enemies only have one health, need to figure out what is going wrong in ConcreteSprite.
+7. Randomly, when enemies die, some invisible entity is left behind that damages the player.
+
+Known fixes from Sprint 3:
+1. Enemy behavior has been addressed.
+2. Link now correctly moves to the proper room when walking through door
+3. Keese behaviour and collisions have also been fixed
+4. Death animations added for enemies
+5. Link can now shoot his sword at full health
+6. Rooms are drawn with their correct door states
