@@ -18,7 +18,8 @@ public class InvisibleStairDropType : IItemType
         if (collidingObject != null)
         {
             RoomObjectManager.Instance.setRoom(25, false);
-            RoomObjectManager.Instance.currentRoom().Link.screenCord = new Vector2(380, 275);
+            IRoomObject currRoom = RoomObjectManager.Instance.currentRoom();
+            currRoom.Link.screenCord = new Vector2(360 + currRoom.BaseCord.X, 275 + currRoom.BaseCord.Y);
         }
 
     }
