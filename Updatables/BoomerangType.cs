@@ -110,9 +110,15 @@ public class BoomerangType : IProjectileType
                 bool check = !currRoom.DeadEnemyList.Contains(collidingObject);
                 if (check && !(currRoom.EnemyList.Contains(projectile.Owner())))
                 {
-                    goingBack = true;
-                    currRoom.KillEnemy(collidingObject);
-                    DropHandler.Drop(currRoom, collidingObject.screenCord);
+                    if (((IConcreteSprite)collidingObject).health == 1)
+                    {
+                        goingBack = true;
+                        currRoom.KillEnemy(collidingObject);
+                        DropHandler.Drop(currRoom, collidingObject.screenCord);
+                    } else
+                    {
+                        ((IConcreteSprite)collidingObject).health--;
+                    }
                 }
                 else
                 {

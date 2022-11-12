@@ -79,9 +79,15 @@ public class ArrowType : IProjectileType
 
             if (check && collidingObject != null)
             {
-                fireProjectile.ResetCounter();
-                currRoom.KillEnemy(collidingObject);
-                DropHandler.Drop(currRoom, collidingObject.screenCord);
+                if (((IConcreteSprite)collidingObject).health == 1)
+                {
+                    fireProjectile.ResetCounter();
+                    currRoom.KillEnemy(collidingObject);
+                    DropHandler.Drop(currRoom, collidingObject.screenCord);
+                } else
+                {
+                    ((IConcreteSprite)collidingObject).health--;
+                }
             }
         }
     }

@@ -227,6 +227,8 @@ public class RoomObject : IRoomObject
     {
         SoundManager.Instance.PlayOnce("LOZ_Enemy_Die");
         DeadEnemyList.Add(enemy);
+        ISprite deathCloud = SpriteFactory.Instance.CreateDeathCloud(enemy.screenCord);
+        PickupList.Add(deathCloud);
     }
 
     public void ResetEnemies()
@@ -234,6 +236,10 @@ public class RoomObject : IRoomObject
         if (DeadEnemyList.Count < EnemyList.Count)
         {
             DeadEnemyList = new List<ISprite>();
+            foreach (IConcreteSprite enemy in EnemyList)
+            {
+                enemy.health = enemy.maxHealth;
+            }
         }
     }
 

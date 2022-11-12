@@ -88,9 +88,10 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         state = still;
         direction = SpriteAction.left;
 
-        projectiles = new IProjectile[4];
+        projectiles = new IProjectile[5];
         projectileIndex = (int)ArrayIndex.arrow;
 
+        projectiles[(int)ArrayIndex.swordShoot] = (IProjectile) SpriteFactory.Instance.CreateSwordShootProjectile(999, this);
     }
 
     public void SetSpriteState(SpriteAction action, ISpriteState state)
@@ -141,7 +142,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
         if (projectiles[(int) ArrayIndex.sword] != null)
         {
-            projectiles[(int) ArrayIndex.sword].FireCommand().Execute();
+            if (this.health < this.maxHealth) projectiles[(int) ArrayIndex.sword].FireCommand().Execute();
+            else projectiles[(int)ArrayIndex.swordShoot].FireCommand().Execute();
         }
     }
 

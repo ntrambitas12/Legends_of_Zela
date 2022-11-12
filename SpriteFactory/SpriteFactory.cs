@@ -110,6 +110,9 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D>[] oldManFrames;
     private List<Texture2D> oldMan;
 
+    private List<Texture2D>[] deathCloudFrames;
+    private List<Texture2D> deathCloud;
+
 
     //Items
     private List<Texture2D>[] bowFrames;
@@ -176,6 +179,11 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> swordRight;
     private List<Texture2D> swordUp;
     private List<Texture2D> swordDown;
+    private List<Texture2D>[] swordShootFrames;
+    private List<Texture2D> swordShootLeft;
+    private List<Texture2D> swordShootRight;
+    private List<Texture2D> swordShootUp;
+    private List<Texture2D> swordShootDown;
     private List<Texture2D>[] fireballFrames;
     private List<Texture2D> fireball1;
     private List<Texture2D> fireball2;
@@ -300,6 +308,9 @@ public sealed class SpriteFactory : IFactory
         oldManFrames = new List<Texture2D>[4];
         oldMan = new List<Texture2D>();
 
+        deathCloudFrames = new List<Texture2D>[1];
+        deathCloud = new List<Texture2D>();
+
 
         //Items
         bowFrames = new List<Texture2D>[4];
@@ -367,6 +378,11 @@ public sealed class SpriteFactory : IFactory
         swordRight = new List<Texture2D>();
         swordUp = new List<Texture2D>();
         swordDown = new List<Texture2D>();
+        swordShootFrames = new List<Texture2D>[4];
+        swordShootLeft = new List<Texture2D>();
+        swordShootRight = new List<Texture2D>();
+        swordShootUp = new List<Texture2D>();
+        swordShootDown = new List<Texture2D>();
         fireballFrames = new List<Texture2D>[3];
         fireball1 = new List<Texture2D>();
         fireball2 = new List<Texture2D>();
@@ -435,6 +451,14 @@ public sealed class SpriteFactory : IFactory
         wallmasterOpen.Add(content.Load<Texture2D>("EnemySprites/WallmasterULOpen"));
         wallmasterClosed.Add(content.Load<Texture2D>("EnemySprites/WallmasterULClosed"));
 
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death0"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death1"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death2"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death3"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death2"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death1"));
+        deathCloud.Add(content.Load<Texture2D>("ItemSprites/Death0"));
+
 
         //Items
         //This first section is for animated items
@@ -469,6 +493,22 @@ public sealed class SpriteFactory : IFactory
         swordRight.Add(content.Load<Texture2D>("ItemSprites/SwordRight"));
         swordUp.Add(content.Load<Texture2D>("ItemSprites/SwordUp"));
         swordDown.Add(content.Load<Texture2D>("ItemSprites/SwordDown"));
+        swordLeft.Add(content.Load<Texture2D>("ItemSprites/SwordLeft"));
+        swordShootRight.Add(content.Load<Texture2D>("ItemSprites/SwordRight"));
+        swordShootUp.Add(content.Load<Texture2D>("ItemSprites/SwordUp"));
+        swordShootDown.Add(content.Load<Texture2D>("ItemSprites/SwordDown"));
+        swordShootLeft.Add(content.Load<Texture2D>("ItemSprites/WhiteSwordLeft"));
+        swordShootRight.Add(content.Load<Texture2D>("ItemSprites/WhiteSwordRight"));
+        swordShootUp.Add(content.Load<Texture2D>("ItemSprites/WhiteSwordUp"));
+        swordShootDown.Add(content.Load<Texture2D>("ItemSprites/WhiteSwordDown"));
+        swordShootLeft.Add(content.Load<Texture2D>("ItemSprites/RedSwordLeft"));
+        swordShootRight.Add(content.Load<Texture2D>("ItemSprites/RedSwordRight"));
+        swordShootUp.Add(content.Load<Texture2D>("ItemSprites/RedSwordUp"));
+        swordShootDown.Add(content.Load<Texture2D>("ItemSprites/RedSwordDown"));
+        swordShootLeft.Add(content.Load<Texture2D>("ItemSprites/BlueSwordLeft"));
+        swordShootRight.Add(content.Load<Texture2D>("ItemSprites/BlueSwordRight"));
+        swordShootUp.Add(content.Load<Texture2D>("ItemSprites/BlueSwordUp"));
+        swordShootDown.Add(content.Load<Texture2D>("ItemSprites/BlueSwordDown"));
         boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangLeft"));
         boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangDown"));
         boomerangLeft.Add(content.Load<Texture2D>("ItemSprites/BoomerangRight"));
@@ -550,22 +590,24 @@ public sealed class SpriteFactory : IFactory
             textFrames[i] = text;
         }
 
-            doorUpFrames[0] = doorUpOpen;
-            doorDownFrames[0] = doorDownOpen;
-            doorRightFrames[0] = doorRightOpen;
-            doorLeftFrames[0] = doorLeftOpen;
-            bombDoorUpFrames[0] = bombedUp;
-            bombDoorDownFrames[0] = bombedDown;
-            bombDoorRightFrames[0] = bombedRight;
-            bombDoorLeftFrames[0] = bombedLeft;
-            bombDoorUpFrames[1] = unbombedUp;
-            bombDoorDownFrames[1] = unbombedDown;
-            bombDoorRightFrames[1] = unbombedRight;
-            bombDoorLeftFrames[1] = unbombedLeft;
-            doorUpFrames[1] = doorUpClosed;
-            doorDownFrames[1] = doorDownClosed;
-            doorRightFrames[1] = doorRightClosed;
-            doorLeftFrames[1] = doorLeftClosed;
+        deathCloudFrames[0] = deathCloud;
+
+        doorUpFrames[0] = doorUpOpen;
+        doorDownFrames[0] = doorDownOpen;
+        doorRightFrames[0] = doorRightOpen;
+        doorLeftFrames[0] = doorLeftOpen;
+        bombDoorUpFrames[0] = bombedUp;
+        bombDoorDownFrames[0] = bombedDown;
+        bombDoorRightFrames[0] = bombedRight;
+        bombDoorLeftFrames[0] = bombedLeft;
+        bombDoorUpFrames[1] = unbombedUp;
+        bombDoorDownFrames[1] = unbombedDown;
+        bombDoorRightFrames[1] = unbombedRight;
+        bombDoorLeftFrames[1] = unbombedLeft;
+        doorUpFrames[1] = doorUpClosed;
+        doorDownFrames[1] = doorDownClosed;
+        doorRightFrames[1] = doorRightClosed;
+        doorLeftFrames[1] = doorLeftClosed;
 
         //Populate Enemies and Playables
         for (int i = 1; i <= 2; i++)
@@ -650,6 +692,11 @@ public sealed class SpriteFactory : IFactory
         swordFrames[(int)SpriteAction.moveRight] = swordRight;
         swordFrames[(int)SpriteAction.moveUp] = swordUp;
         swordFrames[(int)SpriteAction.moveDown] = swordDown;
+        // Add sword shoot frames to the list
+        swordShootFrames[(int)SpriteAction.moveLeft] = swordShootLeft;
+        swordShootFrames[(int)SpriteAction.moveRight] = swordShootRight;
+        swordShootFrames[(int)SpriteAction.moveUp] = swordShootUp;
+        swordShootFrames[(int)SpriteAction.moveDown] = swordShootDown;
         // Add fireball frames to the list
         fireballFrames[(int)SpriteAction.moveLeft] = fireball1;
         fireballFrames[(int)SpriteAction.moveRight] = fireball2;
@@ -859,24 +906,28 @@ public sealed class SpriteFactory : IFactory
     {
         IConcreteSprite goriya = (IConcreteSprite) CreateEntityWithCollision(location, goriyaFrames);
         goriya.health = 2;
+        goriya.maxHealth = 2;
         return AddAI(goriya, AIType.RandomMove);
     }
     public ISprite CreateKeeseSprite(Vector2 location)
     {
         IConcreteSprite keese = (IConcreteSprite) CreateEntityWithCollision(location, keeseFrames, ColliderType.Keese);
         keese.health = 1;
+        keese.maxHealth = 1;
         return AddAI(keese, AIType.AlwaysRandomMove);
     }
     public ISprite CreateStalfosSprite(Vector2 location)
     {
         IConcreteSprite stalfos = (IConcreteSprite) CreateEntityWithCollision(location, stalfosFrames);
         stalfos.health = 1;
+        stalfos.maxHealth = 1;
         return AddAI(stalfos, AIType.RandomMove);
     }
     public ISprite CreateGelSprite(Vector2 location)
     {
         IConcreteSprite gel = (IConcreteSprite) CreateEntityWithCollision(location, gelFrames);
         gel.health = 1;
+        gel.maxHealth = 1;
  return AddAI(gel, AIType.RandomMove);
     }
     public ISprite CreateAquamentusSprite(Vector2 location)
@@ -890,25 +941,35 @@ public sealed class SpriteFactory : IFactory
     {
         IConcreteSprite bladeTrap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
         bladeTrap.health = -1;
+        bladeTrap.maxHealth = -1;
         return AddAI(bladeTrap, AIType.RandomMove);
     }
     public ISprite CreateWallmasterSprite(Vector2 location)
     {
         IConcreteSprite wallmaster = (IConcreteSprite) CreateEntityWithCollision(location, wallmasterFrames);
         wallmaster.health = 2;
+        wallmaster.maxHealth = 2;
         return AddAI(wallmaster, AIType.RandomMove);
     }
     public ISprite CreateOldManSprite(Vector2 location)
     {
         IConcreteSprite oldMan = (IConcreteSprite) CreateEntityWithCollision(location, oldManFrames);
         oldMan.health = -1;
+        oldMan.maxHealth = -1;
         return AddAI(oldMan, AIType.RandomMove);
     }
     public ISprite CreateTrapSprite(Vector2 location)
     {
         IConcreteSprite trap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
         trap.health = -1;
+        trap.maxHealth = -1;
         return AddAI(trap, AIType.RandomMove);
+    }
+    public ISprite CreateDeathCloud(Vector2 location)
+    {
+        IDrop deathCloud = new Drop(_spriteBatch, location, deathCloudFrames);
+        deathCloud.SetItemType(new DeathCloudDropType(deathCloud));
+        return deathCloud;
     }
 
 
@@ -1161,8 +1222,24 @@ public sealed class SpriteFactory : IFactory
         sword.SetDistance(distance);
         sword.SetOwner(owner);
         sword.SetItemType(new SwordType(sword));
-        FireProjectile fireFire = new FireProjectile(sword);
-        sword.SetFireCommand(fireFire);
+        FireProjectile fireSword = new FireProjectile(sword);
+        sword.SetFireCommand(fireSword);
+        return sword;
+    }
+    public ISprite CreateSwordShootProjectile(int distance, ISprite owner)
+    {
+        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordShootFrames);
+
+        Rectangle collisionRect = swordShootFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(sword, collisionRect);
+        sword.collider = collisionObject;
+        sword.collider.UpdateCollisionPosition();
+
+        sword.SetDistance(distance);
+        sword.SetOwner(owner);
+        sword.SetItemType(new ArrowType(sword));
+        FireProjectile fireSword = new FireProjectile(sword);
+        sword.SetFireCommand(fireSword);
         return sword;
     }
 
