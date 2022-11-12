@@ -165,8 +165,15 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
         if (projectiles[(int) ArrayIndex.sword] != null)
         {
-            if (this.health < this.maxHealth) projectiles[(int) ArrayIndex.sword].FireCommand().Execute();
-            else projectiles[(int)ArrayIndex.swordShoot].FireCommand().Execute();
+            if (this.health < this.maxHealth){
+                projectiles[(int) ArrayIndex.sword].FireCommand().Execute();
+                SoundManager.Instance.PlayOnce("LOZ_Sword_Slash");
+
+            }else {
+                projectiles[(int)ArrayIndex.swordShoot].FireCommand().Execute();
+                SoundManager.Instance.PlayOnce("LOZ_Sword_Shoot");
+
+            }
         }
     }
 

@@ -83,9 +83,6 @@ public class SoundManager
     {
         switch (state.toString())
         {
-            case "AttackState":
-                SoundManager.Instance.PlayOnce("LOZ_Sword_Slash");
-                break;
 
             case "DamagedState":
                 SoundManager.Instance.PlayOnce("LOZ_Link_Hurt");
