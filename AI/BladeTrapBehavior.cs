@@ -44,11 +44,11 @@ public class BladeTrapBehavior : IAI
                 if (link.screenCord.Y > entity.screenCord.Y)
                 {
                     //move down
-                    cord.Y += 2;
+                    cord.Y += 3;
                 } else
                 {
                     //move up
-                    cord.Y -= 2;
+                    cord.Y -= 3;
                 }
                 entity.screenCord = cord;
             } else if (Math.Abs(link.screenCord.Y - entity.screenCord.Y) < 10 && (entity.screenCord.Y == 370 + currRoom.BaseCord.Y || entity.screenCord.Y == 178 + currRoom.BaseCord.Y))
@@ -58,11 +58,11 @@ public class BladeTrapBehavior : IAI
                 if (link.screenCord.X > entity.screenCord.X)
                 {
                     //move right
-                    cord.X += 2;
+                    cord.X += 3;
                 } else
                 {
                     //move left
-                    cord.X -= 2;
+                    cord.X -= 3;
                 }
                 entity.screenCord = cord;
             } else
@@ -82,11 +82,11 @@ public class BladeTrapBehavior : IAI
             if (entity.screenCord.X > 208 + currRoom.BaseCord.X)
             {
                 // move left
-                cord.X -= 2;
+                cord.X -= 1;
             } else
             {
                 // move up
-                cord.Y -= 2;
+                cord.Y -= 1;
             }
         } else if (corner.X == 560 + currRoom.BaseCord.X && corner.Y == 178 + currRoom.BaseCord.Y)
         {
@@ -94,12 +94,12 @@ public class BladeTrapBehavior : IAI
             if (entity.screenCord.X < 560 + currRoom.BaseCord.X)
             {
                 // move right
-                cord.X += 2;
+                cord.X += 1;
             }
             else
             {
                 // move up
-                cord.Y -= 2;
+                cord.Y -= 1;
             }
         }
         else if (corner.X == 208 + currRoom.BaseCord.X && corner.Y == 370 + currRoom.BaseCord.Y)
@@ -108,12 +108,12 @@ public class BladeTrapBehavior : IAI
             if (entity.screenCord.X > 208 + currRoom.BaseCord.X)
             {
                 // move left
-                cord.X -= 2;
+                cord.X -= 1;
             }
             else
             {
                 // move down
-                cord.Y += 2;
+                cord.Y += 1;
             }
         }
         else
@@ -122,11 +122,11 @@ public class BladeTrapBehavior : IAI
             if (entity.screenCord.X < 560 + currRoom.BaseCord.X)
             {
                 // move right
-                cord.X += 2;
+                cord.X += 1;
             } else
             {
                 // move down
-                cord.Y += 2;
+                cord.Y += 1;
             }
         }
         //if (entity.screenCord.X == 208 + currRoom.BaseCord.X || entity.screenCord.X == 560 + currRoom.BaseCord.X)
