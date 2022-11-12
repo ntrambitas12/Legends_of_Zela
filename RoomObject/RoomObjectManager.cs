@@ -165,7 +165,7 @@ public sealed class RoomObjectManager : IRoomObjectManager
         this.direction = direction;
         roomDir.TryGetValue(direction, out var roomData);
         var Link = _currentRoom.Link;
-        _currentRoom.UnpauseEnemies();
+        _currentRoom.UnpauseEnemies(false);
         _currentRoom.ResetEnemies();
         Vector2 LinkCord = new Vector2(roomData.Item1, roomData.Item2);
         _currentRoom.Link = null;

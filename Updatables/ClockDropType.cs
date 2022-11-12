@@ -22,7 +22,7 @@ public class ClockDropType : IItemType
             {
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 clock.SetShouldDraw(false);
-                currentRoom.PauseEnemies();
+                currentRoom.PauseEnemies(false);
             }
         }
     }

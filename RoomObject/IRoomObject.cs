@@ -145,9 +145,9 @@ public interface IRoomObject
 
     public void TakeDamage(ISprite sprite);
 
-    public void PauseEnemies();
+    public void PauseEnemies(bool isInv);
 
-    public void UnpauseEnemies();
+    public void UnpauseEnemies(bool isInv);
 
     public void PauseLink();
     public void UnpauseLink();
