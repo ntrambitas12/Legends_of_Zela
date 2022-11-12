@@ -25,6 +25,10 @@ public static class DropHandler
                 ISprite nickelRupee = spriteFactory.CreateNickelRubyDrop(pos);
                 currRoom.AddGameObject((int)RoomObjectTypes.typePickup, nickelRupee, "Nickel Rupee");
                 break;
+            case 4: // drop bomb
+                ISprite bomb = spriteFactory.CreateBombDrop(pos);
+                currRoom.AddGameObject((int)RoomObjectTypes.typePickup, bomb, "Bomb");
+                break;
             default: // don't drop anything
                 break;
         }
