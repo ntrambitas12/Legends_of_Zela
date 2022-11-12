@@ -280,7 +280,7 @@ public class LevelLoader: ILevelLoader
         }
 
         room.AddController(initalizeControllers.InitalizeKeyboard(Link, inventory));
-        room.AddController(initalizeControllers.InitalizeMouse());
+        //room.AddController(initalizeControllers.InitalizeMouse());
     }
 
     private void CreateLink(Vector2 baseCord)
