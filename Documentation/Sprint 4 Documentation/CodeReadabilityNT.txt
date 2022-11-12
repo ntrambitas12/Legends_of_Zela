@@ -1,0 +1,14 @@
+Code readability review
+Author: Nicholas Trambitas
+Date: 10/7/2022
+Sprint #4
+File being reviewed: dropType.cs
+Author of file being reviewed: Kyle Hoefker
+
+
+Overall, the dropType files are easily readable. They are well commented,
+spaced nicely, and use easy to understand variable names. My only complaint
+is that there are a lot of dropType files and it is hard to look for a specific
+functionality when searching thru the folder containing all of these files. 
+I feel that some of this could have been data driven more and we would end up
+having fewer files. Good work tho!

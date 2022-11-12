@@ -1,0 +1,14 @@
+Code quality review
+Author: Nicholas Trambitas
+Date: 10/5/2022
+Sprint #4
+File being reviewed: AIManager.cs
+Author of file being reviewed: Tony Mai
+
+
+Overall, this file has very good code quality. It follows the entity-component 
+paradigm which makes it super easy and modular to be able to create new AI enemy
+behavior for different enemies. This is a massive improvement from hardcoding the
+AI for enemies like it was done previosly in roomObjectManager. The module was
+very well thought out and it makes it easy to have flexible and reusable AI code.
+I cannot think of any improvements. Good job!
