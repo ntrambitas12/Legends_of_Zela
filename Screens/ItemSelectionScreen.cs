@@ -54,12 +54,12 @@ public class ItemSelectionScreen
             selectedItem = (int)Link.ProjectileIndex();
         if (isActive)
         {
-            room.PauseEnemies();
+            room.PauseEnemies(true);
             room.PauseLink();
         }
         else
         {
-            room.UnpauseEnemies();
+            room.UnpauseEnemies(true);
             room.UnpauseLink();
         }
             if (items[selectedItem] != null)

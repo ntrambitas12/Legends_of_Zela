@@ -448,9 +448,12 @@ public class RoomObject : IRoomObject
         castSprite.SetSpriteState(newPos, castSprite.damaged);
     }
 
-    public void PauseEnemies()
+    public void PauseEnemies(bool isInv)
     {
-        pauseEnemies = true;
+        if (!isInv)
+        {
+            pauseEnemies = true;
+        }
 
         //set all enemies to still
         foreach (IConcreteSprite enemy in EnemyList)
@@ -460,9 +463,12 @@ public class RoomObject : IRoomObject
         }
     }
 
-    public void UnpauseEnemies()
+    public void UnpauseEnemies(bool isInv)
     {
-        pauseEnemies = false;
+        if (!isInv)
+        {
+            pauseEnemies = false;
+        }
     }
 
     public void PauseLink()
