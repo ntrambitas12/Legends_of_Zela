@@ -52,6 +52,7 @@ namespace CSE3902Project
         protected override void LoadContent()
         {
             level.ParseRoom();
+            RoomObjectManager.Instance.setRoom(1, true);
         }
 
         public void resetGame()
