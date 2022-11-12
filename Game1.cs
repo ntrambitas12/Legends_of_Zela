@@ -34,7 +34,7 @@ namespace CSE3902Project
             roomObjectManager = RoomObjectManager.Instance;
             camera = Camera.Instance;
 
-            hud = new HUD(GraphicsDevice, _spriteBatch, hudFont, (RoomObjectManager)roomObjectManager);
+            hud = new HUD(this, GraphicsDevice, _spriteBatch, hudFont, (RoomObjectManager)roomObjectManager);
             inventory = new ItemSelectionScreen(GraphicsDevice, _spriteBatch, textFont, hud);
             level = new LevelLoader(this, inventory, hud);
 
@@ -87,10 +87,6 @@ namespace CSE3902Project
 
             else
             {
-                _spriteBatch.Begin();
-                hud.Draw(gameTime, false);
-                _spriteBatch.End();
-
                 _spriteBatch.Begin(SpriteSortMode.Immediate,
                             BlendState.AlphaBlend,
                             null,
@@ -101,6 +97,10 @@ namespace CSE3902Project
 
                 roomObjectManager.Draw(gameTime);
 
+                _spriteBatch.End();
+
+                _spriteBatch.Begin();
+                hud.Draw(gameTime, false);
                 _spriteBatch.End();
             }
 

@@ -249,24 +249,6 @@
 
 	
 	<Items>
-		<Item>
-			<xPos>380</xPos>
-			<yPos>306</yPos>
-			<Name>ArrowDrop</Name>
-			<RoomObjectType>6</RoomObjectType>
-		</Item>
-		<Item>
-			<xPos>412</xPos>
-			<yPos>282</yPos>
-			<Name>BoomerangDrop</Name>
-			<RoomObjectType>6</RoomObjectType>
-		</Item>
-		<Item>
-			<xPos>408</xPos>
-			<yPos>308</yPos>
-			<Name>BombDrop</Name>
-			<RoomObjectType>6</RoomObjectType>
-		</Item>
 	</Items>
 	
 </XnaContent>

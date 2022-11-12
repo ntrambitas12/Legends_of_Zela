@@ -15,6 +15,7 @@ public class HUD
 {
     public IConcreteSprite Link { get; set; }
     public SpriteFactory sf { get; set; }
+    private Game1 game1;
     private GraphicsDevice graphicsDevice;
     private SpriteBatch spriteBatch;
     private SpriteFont textFont;
@@ -41,13 +42,14 @@ public class HUD
     public int currentItem { get; set; }
     private static Dictionary<int, Vector2> linkMapLocation;
 
-    public HUD(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, SpriteFont textFont, RoomObjectManager rom)
+    public HUD(Game1 game1, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, SpriteFont textFont, RoomObjectManager rom)
     {
 
         this.graphicsDevice = graphicsDevice;
         this.spriteBatch = spriteBatch;
         this.textFont = textFont;
         this.rom = rom;
+        this.game1 = game1;
         isResetting = false;
         linkMapLocation = new Dictionary<int, Vector2>();
         LoadLocationDictionary();
@@ -55,13 +57,18 @@ public class HUD
 
     public void Draw(GameTime gameTime, bool isInvOpen)
     {
-        
+        if (Link.health == 0 || Link.triforce)
+        {
+            GameTransition();
+        }
+        else
+        {
             GetSecondaryItem(isInvOpen);
             DrawStaticElements(isInvOpen);
             DrawUpdatingElements(isInvOpen, gameTime);
             DrawHealth(isInvOpen);
             MapHandler(rom.currentRoomID(), gameTime, isInvOpen);
-        
+        }
     }
 
     public void DrawHealth(bool isInvOpen)
@@ -154,6 +161,20 @@ public class HUD
         linkMapLocation.Add(2, new Vector2(219, 85));
         linkMapLocation.Add(1, new Vector2(201, 85));
         linkMapLocation.Add(0, new Vector2(183, 85));
+    }
+
+    private void GameTransition()
+    {
+        game1.GraphicsDevice.Clear(Color.Black);
+        spriteBatch.Draw(sf.Splash(), new Vector2(0, 0), Color.White);
+        if (Link.triforce)
+        {
+            spriteBatch.DrawString(textFont, "     VICTORY!\n\n PRESS R TO RESTART\n  PRESS Q TO QUIT", new Vector2(240, 200), Color.White);
+        }
+        else
+        {
+            spriteBatch.DrawString(textFont, "     GAME OVER\n\n PRESS R TO RESTART\n  PRESS Q TO QUIT", new Vector2(240, 200), Color.White);
+        }
     }
 
 }
