@@ -10,10 +10,12 @@ public class ArrowType : IProjectileType
     private FireProjectile fireProjectile;
     private bool shouldDraw;
     private Vector2 changeCord;
+    private float timeElapsed;
 
     public ArrowType(IProjectile projectile)
     {
         this.projectile = projectile;
+        timeElapsed = 0;
     }
 
     public void Update(GameTime gameTime)
@@ -49,6 +51,7 @@ public class ArrowType : IProjectileType
 
         //check for collisions and effects
         //UpdateCollisions(gameTime);
+        timeElapsed += (float) gameTime.ElapsedGameTime.TotalSeconds;
     }
 
     //check for collisions and effects
@@ -77,17 +80,17 @@ public class ArrowType : IProjectileType
             check = !(currRoom.EnemyList.Contains(projectile.Owner()));
             check = check && !currRoom.DeadEnemyList.Contains(collidingObject);
 
-            if (check && collidingObject != null)
+            if (check && collidingObject != null && timeElapsed > .1 && projectile.ShouldCollide())
             {
-                if (((IConcreteSprite)collidingObject).health == 1)
+                ((IConcreteSprite)collidingObject).health--;
+                fireProjectile.ResetCounter();
+                projectile.SetShouldCollide(false);
+                if (((IConcreteSprite)collidingObject).health == 0)
                 {
-                    fireProjectile.ResetCounter();
                     currRoom.KillEnemy(collidingObject);
                     DropHandler.Drop(currRoom, collidingObject.screenCord);
-                } else
-                {
-                    ((IConcreteSprite)collidingObject).health--;
                 }
+                timeElapsed = 0;
             }
         }
     }

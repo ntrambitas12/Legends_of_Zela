@@ -27,6 +27,7 @@ public class FireProjectile : ICommand
             projectile.SetSpriteAction((SpriteAction)(shooter.spritePos % 4));
             projectile.SetDirection((shooter.spritePos % 4));
             newCord = projectile.screenCord;
+            projectile.SetShouldCollide(true);
 
             switch ((shooter.spritePos % 4))
             {
