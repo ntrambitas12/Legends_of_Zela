@@ -75,12 +75,6 @@
 
 
 	<Items>
-		<Item>
-			<xPos>472</xPos>
-			<yPos>371</yPos>
-			<Name>Key</Name>
-			<RoomObjectType>6</RoomObjectType>
-		</Item>
 	</Items>
 	
 </XnaContent>

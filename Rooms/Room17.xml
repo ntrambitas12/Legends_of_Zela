@@ -143,12 +143,6 @@
 
 
 	<Items>
-		<Item>
-			<xPos>412</xPos>
-			<yPos>218</yPos>
-			<Name>BoomerangDrop</Name>
-			<RoomObjectType>6</RoomObjectType>
-		</Item>
 	</Items>
 	
 </XnaContent>

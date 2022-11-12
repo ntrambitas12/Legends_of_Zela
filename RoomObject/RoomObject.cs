@@ -41,6 +41,10 @@ public class RoomObject : IRoomObject
     private int upDoorBoundary = 114;
     private int downDoorBoundary = 434;
 
+    private Vector2 room0Key = new Vector2(1272, 371);
+    private Vector2 room17Boomerang = new Vector2(2812, -1222);
+    private Vector2 room26Key = new Vector2(1880, -2126);
+
     public static bool pauseLink;
 
     //roomObjectManager
@@ -229,6 +233,26 @@ public class RoomObject : IRoomObject
         DeadEnemyList.Add(enemy);
         ISprite deathCloud = SpriteFactory.Instance.CreateDeathCloud(enemy.screenCord);
         PickupList.Add(deathCloud);
+
+        int cr = roomObjectManager.currentRoomID();
+        if (EnemyList.Count == DeadEnemyList.Count)
+        {
+            if (cr == 0)
+            {
+                ISprite newKey = SpriteFactory.Instance.CreateKeyDrop(room0Key);
+                AddGameObject((int)RoomObjectTypes.typePickup, newKey, "keyDrop");
+            }
+            if (cr == 17)
+            {
+                ISprite newBoomerang = SpriteFactory.Instance.CreateKeyDrop(room17Boomerang);
+                AddGameObject((int)RoomObjectTypes.typePickup, newBoomerang, "boomerangDrop");
+            }
+            if (cr == 26)
+            {
+                ISprite newKey = SpriteFactory.Instance.CreateKeyDrop(room26Key);
+                AddGameObject((int)RoomObjectTypes.typePickup, newKey, "keyDrop");
+            }
+        }
     }
 
     public void ResetEnemies()
