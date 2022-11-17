@@ -17,8 +17,6 @@ public class LevelLoader: ILevelLoader
     private delegate ISprite Projectiles(int distance, ISprite owner);
     private delegate ISprite Doors(Vector2 pos, bool isOpen);
     private bool runOnce;
-
-
     private Dictionary<String, Delegate> constructer;
     private RoomObject room;
     private IRoomObjectManager roomObjectManager;
@@ -30,8 +28,26 @@ public class LevelLoader: ILevelLoader
     private ISprite sprite;
     private ItemSelectionScreen inventory;
     private HUD hud;
-   
-  
+
+    //Projectile variables
+    private String projectile;
+    private int projDistance;
+    private int projType;
+    private ISprite enemyKey;
+    private ISprite enemyVal;
+
+    //RoomObject variables
+    private int xPos;
+    private int yPos;
+    private int baseX;
+    private int baseY;
+    private int id;
+    private String name;
+    private int roomObjectType;
+    private bool read;
+    private bool isDoor;
+    private bool isDoorOpen;
+
 
     public LevelLoader(Game1 game1, ItemSelectionScreen inventory, HUD hud)
     {
@@ -52,6 +68,209 @@ public class LevelLoader: ILevelLoader
         runOnce = false;
         this.inventory = inventory;
         this.hud = hud;
+    }
+
+   
+ 
+    public void ParseRoom()
+    {
+        var files = Directory.GetFiles(@"Rooms/", "*.xml");
+        
+        foreach (var file in files)
+        {
+            //Reset variables call
+            ResetVars();
+            
+            reader = XmlReader.Create(file);
+            room = new RoomObject();
+
+            //read the base coordinates of each room
+            ReadBase(reader);
+
+            IntializeRooms(baseX, baseY);
+            foreach (var parseType in parseTypes)
+            {
+                reader.ReadToFollowing(parseType.Item1);
+                read = reader.ReadToDescendant(parseType.Item2);
+               
+                if (read)
+                {
+                    do
+                    {
+                        /*Read the rest of the room onjects from XML file*/
+                        HandleObjects(reader);
+
+                        /*handle projectile call here*/
+                        HandleProjectile(reader);
+
+                        Vector2 _base = new Vector2(baseX, baseY);
+                        if (isDoor)
+                        {
+                            BuildDoor(_base);
+                        }
+                        else {
+
+                            BuildObject(_base);
+                        }
+                        room.BaseCord = _base;
+                        room.AddGameObject(roomObjectType, sprite, name);
+                        HandleProjectileEnemyPair();
+                    }
+                    while (reader.ReadToNextSibling(parseType.Item2));
+                }
+            }
+
+            BuildRoom(id);
+        }
+       
+    }
+
+    private void IntializeRooms(int xBase, int yBase)
+    {
+        if (!runOnce)
+        {
+            Vector2 baseCord = new Vector2(xBase, yBase);
+            Camera camera = Camera.Instance;
+            camera.Move(baseCord);
+            CreateLink(baseCord);
+        }
+
+        room.AddController(initalizeControllers.InitalizeKeyboard(Link, inventory));
+        //room.AddController(initalizeControllers.InitalizeMouse());
+    }
+
+    private void CreateLink(Vector2 baseCord)
+    {
+        /*
+         * Link only needs to be created once.
+         * Add him to the starting room only.
+         * Colisions will be responsible for moving him between rooms.
+         */
+
+        Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(300, 350) + baseCord);
+        room.Link = Link;
+        hud.Link = (ConcreteSprite)Link;
+
+        /* Tempelate for creating and adding projectiles to link. Will be useful later*/
+        // Create sword for link
+        IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link);
+
+        // Add sword to Link
+        ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
+
+    }
+
+    private void BuildDoor(Vector2 _base)
+    {
+        if (constructer.TryGetValue(name, out Delegate doorConstructor))
+        {
+            sprite = (ISprite)doorConstructor.DynamicInvoke(new Vector2(xPos, yPos) + _base, isDoorOpen);
+            room.ProjectileStopperList.Add(sprite);
+            if (!isDoorOpen)
+            {
+                ((IConcreteSprite)sprite).SetSpriteAction(SpriteAction.doorClosed);
+                room.AddClosedDoor(sprite, name);
+            }
+        }
+
+
+        isDoor = false;
+    }
+    private void BuildRoom(int id)
+    {
+        //Build the Room
+        roomObjectManager.addRoom(room, id);
+        runOnce = true;
+    }
+
+    private void ResetVars()
+    {
+        projectile = null;
+        projDistance = 0;
+        projType = 0;
+        enemyKey = null;
+        enemyVal = null;
+        read = false;
+        isDoor = false;
+        isDoorOpen = false;
+    }
+    private void HandleProjectile(XmlReader reader)
+    {
+        if (reader.ReadToNextSibling("Projectile"))
+        {
+            reader.ReadToDescendant("Name");
+            projectile = reader.ReadElementContentAsString();
+            reader.ReadToNextSibling("Distance");
+            projDistance = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("RoomObjectType");
+            projType = reader.ReadElementContentAsInt();
+            reader.Read();
+            reader.Read();
+            reader.Read();
+        }
+    }
+
+    private void HandleObjects(XmlReader reader)
+    {
+        if (reader.MoveToAttribute("isOpen"))
+        {
+            isDoor = true;
+            isDoorOpen = reader.ReadContentAsBoolean();
+        }
+        reader.ReadToFollowing("xPos");
+        xPos = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("yPos");
+        yPos = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("Name");
+        name = reader.ReadElementContentAsString();
+        reader.ReadToNextSibling("RoomObjectType");
+        roomObjectType = reader.ReadElementContentAsInt();
+    }
+
+    private void BuildObject(Vector2 _base)
+    {
+        if (constructer.TryGetValue(name, out Delegate value))
+        {
+            sprite = (ISprite)value.DynamicInvoke(new Vector2(xPos, yPos) + _base);
+            if (sprite != null && name.Equals("InvisibleStairs")) room.ProjectileStopperList.Add(sprite);
+            //check if projectile is not null
+            if (projectile != null && sprite != null)
+            {
+                //now we want to create the projectile from the factory
+                if (constructer.TryGetValue(projectile, out Delegate projectileDel))
+                {
+                    ISprite concreteProj = (ISprite)projectileDel.DynamicInvoke(projDistance, sprite);
+                    //add the projectile created to the room
+                    room.AddGameObject(projType, concreteProj, "");
+                    // Get enemy and projectile for dictionary
+                    enemyKey = sprite; enemyVal = concreteProj;
+                    //reset projectile read in as null since we've added it to the room
+                    projectile = null;
+                }
+
+            }
+
+        }
+    }
+
+    private void HandleProjectileEnemyPair()
+    {
+        if (enemyKey != null)
+        {
+            room.AddEnemyProjectilePair(enemyKey, enemyVal);
+            ((IConcreteSprite)enemyKey).ai.SetProjectile((IProjectile)enemyVal);
+        }
+    }
+
+    private void ReadBase(XmlReader reader)
+    {
+        reader.ReadToFollowing("BaseCord");
+        reader.ReadToDescendant("xCord");
+        baseX = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("yCord");
+        baseY = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("id");
+        id = reader.ReadElementContentAsInt();
     }
 
     private void populateDictionary()
@@ -128,188 +347,5 @@ public class LevelLoader: ILevelLoader
         constructer.Add("BombDoorUp", new Doors(SpriteFactory.Instance.CreateBombableUpBlock));
         constructer.Add("BombDoorDown", new Doors(SpriteFactory.Instance.CreateBombableDownBlock));
 
-
-    }
- 
-    public void ParseRoom()
-    {
-        var files = Directory.GetFiles(@"Rooms/", "*.xml");
-        
-        foreach (var file in files)
-        {
-            int xPos;
-            int yPos;
-            int baseX;
-            int baseY;
-            int id;
-            String name;
-            int roomObjectType;
-            bool read = false;
-            bool isDoor = false;
-            bool isDoorOpen = false;
-
-            //Projectile variables
-            String projectile = null;
-            int projDistance = 0;
-            int projType = 0;
-            ISprite enemyKey = null;
-            ISprite enemyVal = null;
-
-            reader = XmlReader.Create(file);
-            room = new RoomObject();
-       
-
-            //read the base coordinates of each room
-            reader.ReadToFollowing("BaseCord");
-            reader.ReadToDescendant("xCord");
-            baseX = reader.ReadElementContentAsInt();
-            reader.ReadToNextSibling("yCord");
-            baseY = reader.ReadElementContentAsInt();
-            reader.ReadToNextSibling("id");
-            id = reader.ReadElementContentAsInt();
-
-            IntializeRooms(baseX, baseY);
-            foreach (var parseType in parseTypes)
-            {
-                reader.ReadToFollowing(parseType.Item1);
-                read = reader.ReadToDescendant(parseType.Item2);
-               
-
-                if (read)
-                {
-                    do
-                    {
-
-                        if (reader.MoveToAttribute("isOpen"))
-                        {
-                            isDoor = true;
-                            isDoorOpen = reader.ReadContentAsBoolean();
-                        }
-                        reader.ReadToFollowing("xPos");
-                        xPos = reader.ReadElementContentAsInt();
-                        reader.ReadToNextSibling("yPos");
-                        yPos = reader.ReadElementContentAsInt();
-                        reader.ReadToNextSibling("Name");
-                        name = reader.ReadElementContentAsString();
-                        reader.ReadToNextSibling("RoomObjectType");
-                        roomObjectType = reader.ReadElementContentAsInt();
-                        if (reader.ReadToNextSibling("Projectile"))
-                        {
-                            reader.ReadToDescendant("Name");
-                            projectile = reader.ReadElementContentAsString();
-                            reader.ReadToNextSibling("Distance");
-                            projDistance = reader.ReadElementContentAsInt();
-                            reader.ReadToNextSibling("RoomObjectType");
-                            projType = reader.ReadElementContentAsInt();
-                            reader.Read();
-                            reader.Read();
-                            reader.Read();
-                        }
-
-
-                        /* This is where you call the corresponding method from spritefactory
-                         * and add that ISprite to the roomobject into correct list using add
-                         */
-                        Vector2 _base = new Vector2(baseX, baseY);
-                        if (isDoor)
-                        {
-                            if(constructer.TryGetValue(name, out Delegate doorConstructor))
-                            {
-                                sprite = (ISprite)doorConstructor.DynamicInvoke(new Vector2(xPos, yPos) + _base, isDoorOpen);
-                                room.ProjectileStopperList.Add(sprite);
-                                if (!isDoorOpen)
-                                {
-                                    ((IConcreteSprite)sprite).SetSpriteAction(SpriteAction.doorClosed);
-                                    room.AddClosedDoor(sprite, name);
-                                }
-                            }
-
-
-                            isDoor = false;
-                        }
-                        else { 
-                        if (constructer.TryGetValue(name, out Delegate value))
-                        {
-                             sprite = (ISprite)value.DynamicInvoke(new Vector2(xPos, yPos)+_base);
-                                if (sprite != null && name.Equals("InvisibleStairs")) room.ProjectileStopperList.Add(sprite);
-
-                            //case for when we have to pair projectile with parent sprite
-                            //check if projectile is not null
-                            if (projectile != null && sprite != null)
-                            {
-                                //now we want to create the projectile from the factory
-                                if (constructer.TryGetValue(projectile, out Delegate projectileDel))
-                                {
-                                    ISprite concreteProj = (ISprite)projectileDel.DynamicInvoke(projDistance, sprite);
-                                    //add the projectile created to the room
-                                    room.AddGameObject(projType, concreteProj, "");
-                                    // Get enemy and projectile for dictionary
-                                    enemyKey = sprite; enemyVal = concreteProj;
-                                    //reset projectile read in as null since we've added it to the room
-                                    projectile = null;
-                                }
-
-                                 }
-                            
-                             }
-                           
-                        }
-                        room.BaseCord = _base;
-                        room.AddGameObject(roomObjectType, sprite, name);
-                        if (enemyKey != null)
-                        {
-                            room.AddEnemyProjectilePair(enemyKey, enemyVal);
-                            ((IConcreteSprite)enemyKey).ai.SetProjectile((IProjectile) enemyVal);
-                        }
-                    }
-                    while (reader.ReadToNextSibling(parseType.Item2));
-                }
-            }
-
-            BuildRoom(id);
-        }
-       
-    }
-
-    private void IntializeRooms(int xBase, int yBase)
-    {
-        if (!runOnce)
-        {
-            Vector2 baseCord = new Vector2(xBase, yBase);
-            Camera camera = Camera.Instance;
-            camera.Move(baseCord);
-            CreateLink(baseCord);
-        }
-
-        room.AddController(initalizeControllers.InitalizeKeyboard(Link, inventory));
-        //room.AddController(initalizeControllers.InitalizeMouse());
-    }
-
-    private void CreateLink(Vector2 baseCord)
-    {
-        /*
-         * Link only needs to be created once.
-         * Add him to the starting room only.
-         * Colisions will be responsible for moving him between rooms.
-         */
-
-        Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(300, 350) + baseCord);
-        room.Link = Link;
-        hud.Link = (ConcreteSprite)Link;
-
-        /* Tempelate for creating and adding projectiles to link. Will be useful later*/
-        // Create sword for link
-        IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link);
-
-        // Add sword to Link
-        ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
-
-    }
-
-    private void BuildRoom(int id)
-    {
-        //Build the Room
-        roomObjectManager.addRoom(room, id);
-        runOnce = true;
     }
 }
