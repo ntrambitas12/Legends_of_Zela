@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+	<Link>
+		<Health>3</Health>
+		<Rupee>29</Rupee>
+		<Bombs>10</Bombs>
+		<Keys>34</Keys>
+		<xPos>1800</xPos>
+		<yPos>-710</yPos>
+		<currentRoom>11</currentRoom>
+		<Compass>true</Compass>
+		<Map>true</Map>
+	</Link>
+</XnaContent>

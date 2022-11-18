@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Emit;
 using System.Xml;
+using static System.Net.WebRequestMethods;
 
 public class LevelLoader: ILevelLoader
 {
@@ -23,7 +24,7 @@ public class LevelLoader: ILevelLoader
 
     private InitalizeControllers initalizeControllers;
   
-    private ISprite Link;
+    private IConcreteSprite Link;
     private Game1 game1;
     private ISprite sprite;
     private ItemSelectionScreen inventory;
@@ -122,9 +123,50 @@ public class LevelLoader: ILevelLoader
 
             BuildRoom(id);
         }
+
+        LoadSavedData();
        
     }
 
+    private void LoadSavedData()
+    {
+        var files = Directory.GetFiles(@"SavedData/", "*.xml");
+        foreach(var file in files)
+        {
+            reader = XmlReader.Create(file);
+
+            LoadSavedLink(reader);
+        }
+
+    }
+
+    private void LoadSavedLink(XmlReader reader)
+    {
+        reader.ReadToFollowing("Link");
+        reader.ReadToDescendant("Health");
+        Link.health = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("Rupee");
+        Link.rubies = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("Bombs");
+        Link.bombs = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("Keys");
+        Link.keys = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("xPos");
+        int xPos = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("yPos");
+        int yPos = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("currentRoom");
+        int roomID = reader.ReadElementContentAsInt();
+        roomObjectManager.setRoom(roomID, true);
+        Link.screenCord = new Vector2(xPos, yPos);
+        reader.ReadToNextSibling("Compass");
+        Link.compass = reader.ReadElementContentAsBoolean();
+        reader.ReadToNextSibling("Map");
+        Link.map = reader.ReadElementContentAsBoolean();
+            
+        
+
+    }
     private void IntializeRooms(int xBase, int yBase)
     {
         if (!runOnce)
@@ -147,7 +189,7 @@ public class LevelLoader: ILevelLoader
          * Colisions will be responsible for moving him between rooms.
          */
 
-        Link = SpriteFactory.Instance.CreateLinkSprite(new Vector2(300, 350) + baseCord);
+        Link = (IConcreteSprite)SpriteFactory.Instance.CreateLinkSprite(new Vector2(300, 350) + baseCord);
         room.Link = Link;
         hud.Link = (ConcreteSprite)Link;
 
