@@ -54,6 +54,27 @@ using System.Threading.Tasks;
         spriteReset();
 
         Keys[] pressedKeys = currentKeyState.GetPressedKeys();
+        
+        Keys[] oldPressedKeys = previousKeyState.GetPressedKeys();
+        foreach (Keys key in oldPressedKeys)
+        {
+            if (previousKeyState.IsKeyDown(key) && !currentKeyState.IsKeyDown(key))
+            {
+                if (key.CompareTo(Keys.W)==0.0 || key.CompareTo(Keys.Up)==0.0)
+                {
+                    UpdateSpritePos.GetInstance.smoothUp((ISprite)RoomObjectManager.Instance.currentRoom().Link);
+                }else if (key.CompareTo(Keys.A) ==0.0|| key.CompareTo(Keys.Left)==0.0)
+                {
+                    UpdateSpritePos.GetInstance.smoothLeft((ISprite)RoomObjectManager.Instance.currentRoom().Link);
+                }else if (key.CompareTo(Keys.S)==0.0 || key.CompareTo(Keys.Down)==0.0)
+                {
+                    UpdateSpritePos.GetInstance.smoothDown((ISprite)RoomObjectManager.Instance.currentRoom().Link);
+                }else if (key.CompareTo(Keys.D)==0.0 || key.CompareTo(Keys.Right)==0.0)
+                {
+                    UpdateSpritePos.GetInstance.smoothRight((ISprite)RoomObjectManager.Instance.currentRoom().Link);
+                }
+            }
+        }
        
 
         foreach (Keys key in pressedKeys)
