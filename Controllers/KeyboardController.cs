@@ -7,17 +7,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    public sealed class KeyboardController: IController
-    {
-    private Dictionary<Keys, ICommand> controllerMappings;
-    private List<(List<Keys> keys, ICommand still)> sprites;
+public sealed class KeyboardController : IController
+{
+    //encapsulates storing two keys 
+    private class DoubleKeys {
+        public Keys key1 { get; set; }
+        public Keys key2 { get; set; }
+        public Boolean wasPressed { get; set; }
+        public DoubleKeys(Keys key1, Keys key2) {
+            this.key1 = key1;
+            this.key2 = key2;
+            wasPressed = false;
+        }
+        public Boolean isPressed(Keys[] pressedKeys)
+        {
+            return pressedKeys.Contains(this.key1) && pressedKeys.Contains(this.key2);
+        }
+        public Boolean Equals(DoubleKeys keyComb)
+        {
+            return this.key1.Equals(keyComb.key1) && this.key2.Equals(keyComb.key2);    
+        }
+    }
 
+    private Dictionary<Keys, ICommand> controllerMappings;
+    private Dictionary<DoubleKeys, ICommand> controllerMappingsDoubleKeys;
+    private List<(List<Keys> keys, ICommand still)> sprites;
+    
     private KeyboardState currentKeyState;
     private KeyboardState previousKeyState;
+
     private KeyboardController()
     {
         controllerMappings = new Dictionary<Keys, ICommand>();
         sprites = new List<(List<Keys> keys, ICommand still)> ();
+
+        controllerMappingsDoubleKeys = new Dictionary<DoubleKeys, ICommand>();
     }
     private static readonly KeyboardController instance = new KeyboardController();
     public static KeyboardController GetInstance
@@ -28,13 +52,34 @@ using System.Threading.Tasks;
         }
     }
 
+    //registers single-key commands
     public void RegisterCommand(Keys key, ICommand command)
     {
-        // make sure the same key does not get added!
         if (!controllerMappings.ContainsKey(key))
         {
             controllerMappings.Add(key, command);
         }
+    }
+
+    //registers double-key commands
+    public void RegisterCommand(Keys key1, Keys key2, ICommand command)
+    {
+        DoubleKeys keyComb = new DoubleKeys(key1, key2);
+        if (!hasCombination(keyComb))
+        {
+            controllerMappingsDoubleKeys.Add(keyComb, command);
+        }
+    }
+    private Boolean hasCombination(DoubleKeys keyComb)
+    {
+        foreach (DoubleKeys existingKey in controllerMappingsDoubleKeys.Keys)
+        {
+            if (keyComb.Equals(existingKey))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /*
@@ -54,8 +99,29 @@ using System.Threading.Tasks;
         spriteReset();
 
         Keys[] pressedKeys = currentKeyState.GetPressedKeys();
+        
+        Keys[] oldPressedKeys = previousKeyState.GetPressedKeys();
+        foreach (Keys key in oldPressedKeys)
+        {
+            if (previousKeyState.IsKeyDown(key) && !currentKeyState.IsKeyDown(key))
+            {
+                if (key.CompareTo(Keys.W)==0.0 || key.CompareTo(Keys.Up)==0.0)
+                {
+                    UpdateSpritePos.GetInstance.smoothUp((ISprite)RoomObjectManager.Instance.currentRoom().Link);
+                }else if (key.CompareTo(Keys.A) ==0.0|| key.CompareTo(Keys.Left)==0.0)
+                {
+                    UpdateSpritePos.GetInstance.smoothLeft((ISprite)RoomObjectManager.Instance.currentRoom().Link);
+                }else if (key.CompareTo(Keys.S)==0.0 || key.CompareTo(Keys.Down)==0.0)
+                {
+                    UpdateSpritePos.GetInstance.smoothDown((ISprite)RoomObjectManager.Instance.currentRoom().Link);
+                }else if (key.CompareTo(Keys.D)==0.0 || key.CompareTo(Keys.Right)==0.0)
+                {
+                    UpdateSpritePos.GetInstance.smoothRight((ISprite)RoomObjectManager.Instance.currentRoom().Link);
+                }
+            }
+        }
        
-
+        //executes single-key commands
         foreach (Keys key in pressedKeys)
         {
 
@@ -68,6 +134,9 @@ using System.Threading.Tasks;
                     }  
             }
         }
+
+        //executes double-key commands
+        UpdateDoubleKeyCommands(pressedKeys);
     }
 
     public void Draw(GameTime gameTime)
@@ -78,6 +147,7 @@ using System.Threading.Tasks;
     public void resetController()
     {
         controllerMappings.Clear();
+        controllerMappingsDoubleKeys.Clear();
         sprites.Clear();
     }
 
@@ -91,5 +161,23 @@ using System.Threading.Tasks;
             }
         }
     }
+
+
+    private void UpdateDoubleKeyCommands(Keys[] pressedKeys)
+    {
+        foreach (DoubleKeys keyComb in controllerMappingsDoubleKeys.Keys)
+        {
+            if (!keyComb.wasPressed && keyComb.isPressed(pressedKeys))
+            {
+                controllerMappingsDoubleKeys[keyComb].Execute();
+                keyComb.wasPressed = true;
+            }
+            else if (keyComb.wasPressed && !keyComb.isPressed(pressedKeys))
+            {
+                keyComb.wasPressed = false;
+            }
+        }
+    }
+
 }
 
