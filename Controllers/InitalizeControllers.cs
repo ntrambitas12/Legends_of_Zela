@@ -49,7 +49,9 @@ using System.Threading.Tasks;
         keyboard.RegisterCommand(Keys.S, new MoveDown(Link));
         keyboard.RegisterCommand(Keys.Z, new Attack(Link));
         keyboard.RegisterCommand(Keys.Space, new ProjectileAttack(Link));
-        
+
+        keyboard.RegisterCommand(Keys.Y, Keys.U, new MoveUp(Link));
+
 
         //intialize the inventory
         inventory.Link = (IConcreteSprite)Link;
