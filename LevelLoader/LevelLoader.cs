@@ -145,16 +145,14 @@ public class LevelLoader: ILevelLoader
         reader.ReadToFollowing("Link");
         reader.ReadToDescendant("Health");
         Link.health = reader.ReadElementContentAsInt();
+        reader.ReadToNextSibling("MaxHealth");
+        Link.maxHealth = reader.ReadElementContentAsInt();
         reader.ReadToNextSibling("Rupee");
         Link.rubies = reader.ReadElementContentAsInt();
         reader.ReadToNextSibling("Bombs");
         Link.bombs = reader.ReadElementContentAsInt();
         reader.ReadToNextSibling("Keys");
         Link.keys = reader.ReadElementContentAsInt();
-        reader.ReadToNextSibling("xPos");
-        int xPos = reader.ReadElementContentAsInt();
-        reader.ReadToNextSibling("yPos");
-        int yPos = reader.ReadElementContentAsInt();
         reader.ReadToNextSibling("currentRoom");
         int roomID = reader.ReadElementContentAsInt();
         roomObjectManager.setRoom(roomID, true);
@@ -163,9 +161,46 @@ public class LevelLoader: ILevelLoader
         Link.compass = reader.ReadElementContentAsBoolean();
         reader.ReadToNextSibling("Map");
         Link.map = reader.ReadElementContentAsBoolean();
-            
-        
+       
+        ReadSavedInventory(reader);     
+    }
 
+    private void ReadSavedInventory(XmlReader reader)
+    {
+        reader.ReadToFollowing("Inventory");
+        reader.ReadToDescendant("Item");
+
+        do
+        {
+            reader.ReadToDescendant("Drop");
+            String drop = reader.ReadElementContentAsString();
+            reader.ReadToNextSibling("Proj");
+            String proj = reader.ReadElementContentAsString();
+            reader.ReadToNextSibling("Index");
+            int idx = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("Distance");
+            int distance = reader.ReadElementContentAsInt();
+            LoadInventory(drop, proj, idx, distance);   
+            reader.Read();
+        }
+
+        while (reader.ReadToNextSibling("Item"));
+
+    }
+    
+    private void LoadInventory(String drop, String proj, int idx, int distance)
+    {
+        //call constructor to create item
+        if (constructer.TryGetValue(drop, out Delegate dropConstructor))
+        {
+           IDrop _drop = (IDrop)dropConstructor.DynamicInvoke(new Vector2(0, 0));
+            ItemSelectionScreen.AddToInventory(_drop, (ArrayIndex)idx);
+        }
+        if (constructer.TryGetValue(proj, out Delegate projConstructor))
+        {
+            IProjectile _proj = (IProjectile)projConstructor.DynamicInvoke(distance, Link);
+            Link.AddProjectile(_proj, (ArrayIndex)idx);
+        }
     }
     private void IntializeRooms(int xBase, int yBase)
     {

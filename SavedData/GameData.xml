@@ -2,13 +2,33 @@
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
 	<Link>
 		<Health>3</Health>
+		<MaxHealth>6</MaxHealth>
 		<Rupee>29</Rupee>
 		<Bombs>10</Bombs>
 		<Keys>34</Keys>
-		<xPos>1800</xPos>
-		<yPos>-710</yPos>
 		<currentRoom>11</currentRoom>
 		<Compass>true</Compass>
 		<Map>true</Map>
 	</Link>
+	<Inventory>
+		<Item>
+			<Drop>ArrowDrop</Drop>
+			<Proj>Arrow</Proj>
+			<Index>0</Index>
+			<Distance>30</Distance>
+		</Item>
+		<Item>
+			<Drop>BoomerangDrop</Drop>
+			<Proj>Boomerang</Proj>
+			<Index>2</Index>
+			<Distance>2000</Distance>
+		</Item>
+		<Item>
+			<Drop>BombDrop</Drop>
+			<Proj>Bomb</Proj>
+			<Index>1</Index>
+			<Distance>50</Distance>
+		</Item>
+	</Inventory>
+	
 </XnaContent>
