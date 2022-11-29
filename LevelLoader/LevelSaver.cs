@@ -49,8 +49,8 @@ private XmlWriterSettings settings;
         writer.WriteElementString("Bombs", link.bombs.ToString());
         writer.WriteElementString("Keys", link.keys.ToString());
         writer.WriteElementString("currentRoom", roomObjectManager.currentRoomIdx().ToString());
-        writer.WriteElementString("Compass", link.compass.ToString());
-        writer.WriteElementString("Map", link.map.ToString());
+        writer.WriteElementString("Compass", link.compass.ToString().ToLower());
+        writer.WriteElementString("Map", link.map.ToString().ToLower());
         writer.WriteEndElement();
        
     }
@@ -60,48 +60,23 @@ private XmlWriterSettings settings;
        
         writer.WriteStartElement("Inventory");
         IConcreteSprite link = (IConcreteSprite)room.Link;
+        int idx = 0;
         foreach(var projectiles in link.projectiles)
         {
+            
             if(projectiles != null)
             {
                 writer.WriteStartElement("Item");
-                IItemType type = projectiles.ItemType();
-
-                /* 
-                 Make this data in a dictinoary to look up
-                 */
-                if (type is ArrowType)
-                {
-                    writer.WriteElementString("Drop", "ArrowDrop");
-                    writer.WriteElementString("Proj", "Arrow");
-                    writer.WriteElementString("Index", "0");
-                    writer.WriteElementString("Distance", "30");
-
-                }
-
-                if (type is BombType)
-                {
-                    writer.WriteElementString("Drop", "BombDrop");
-                    writer.WriteElementString("Proj", "Bomb");
-                    writer.WriteElementString("Index", "1");
-                    writer.WriteElementString("Distance", "50");
-
-                }
-
-                if (type is BoomerangType)
-                {
-                    writer.WriteElementString("Drop", "BoomerangDrop");
-                    writer.WriteElementString("Proj", "Boomerang");
-                    writer.WriteElementString("Index", "2");
-                    writer.WriteElementString("Distance", "2000");
-
-                }
-
-                
+               
+                    writer.WriteElementString("Drop", projectiles.GetDropName());
+                    writer.WriteElementString("Proj", projectiles.GetDropDescription());
+                    writer.WriteElementString("Index", idx.ToString());
+                    writer.WriteElementString("Distance", projectiles.Distance().ToString());
 
                 writer.WriteEndElement();
 
             }
+            idx++;
         }
         writer.WriteEndElement();
     }
