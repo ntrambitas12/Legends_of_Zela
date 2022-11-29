@@ -1167,9 +1167,9 @@ public sealed class SpriteFactory : IFactory
 
     // Projectiles
     // Add method for CreateFireballProjectile and CreateSwordProjectile
-    public ISprite CreateArrowProjectile(int distance, ISprite owner)
+    public ISprite CreateArrowProjectile(int distance, ISprite owner, String name)
     {
-        IProjectile arrow = new Projectile(_spriteBatch, new Vector2(0, 0), arrowFrames);
+        IProjectile arrow = new Projectile(_spriteBatch, new Vector2(0, 0), arrowFrames, name);
 
         Rectangle collisionRect = arrowFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(arrow, collisionRect);
@@ -1183,9 +1183,9 @@ public sealed class SpriteFactory : IFactory
         arrow.SetFireCommand(fireArrow);
         return arrow;
     }
-    public ISprite CreateBombProjectile(int distance, ISprite owner)
+    public ISprite CreateBombProjectile(int distance, ISprite owner, String name)
     {
-        IProjectile bomb = new Projectile(_spriteBatch, new Vector2(0, 0), bombFrames);
+        IProjectile bomb = new Projectile(_spriteBatch, new Vector2(0, 0), bombFrames, name);
 
         Rectangle collisionRect = bombFrames[0][0].Bounds;
         collisionRect.Inflate(30, 30);
@@ -1200,9 +1200,9 @@ public sealed class SpriteFactory : IFactory
         bomb.SetFireCommand(fireBomb);
         return bomb;
     }
-    public ISprite CreateBoomerangProjectile(int distance, ISprite owner)
+    public ISprite CreateBoomerangProjectile(int distance, ISprite owner, String name)
     {
-        IProjectile boomerang = new Projectile(_spriteBatch, new Vector2(0, 0), boomerangFrames);
+        IProjectile boomerang = new Projectile(_spriteBatch, new Vector2(0, 0), boomerangFrames, name);
 
         Rectangle collisionRect = boomerangFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(boomerang, collisionRect);
@@ -1216,9 +1216,9 @@ public sealed class SpriteFactory : IFactory
         boomerang.SetFireCommand(fireBoomerang);
         return boomerang;
     }
-    public ISprite CreateFireballProjectile(int distance, ISprite owner)
+    public ISprite CreateFireballProjectile(int distance, ISprite owner, String name)
     {
-        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames);
+        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames, name);
 
         Rectangle collisionRect = fireballFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(fireball, collisionRect);
@@ -1232,9 +1232,9 @@ public sealed class SpriteFactory : IFactory
         fireball.SetFireCommand(fireFireball);
         return fireball;
     }
-    public ISprite CreateSwordProjectile(int distance, ISprite owner)
+    public ISprite CreateSwordProjectile(int distance, ISprite owner, String name)
     {
-        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordFrames);
+        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordFrames, name);
 
         Rectangle collisionRect = swordFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(sword, collisionRect);
@@ -1248,9 +1248,9 @@ public sealed class SpriteFactory : IFactory
         sword.SetFireCommand(fireSword);
         return sword;
     }
-    public ISprite CreateSwordShootProjectile(int distance, ISprite owner)
+    public ISprite CreateSwordShootProjectile(int distance, ISprite owner, String name)
     {
-        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordShootFrames);
+        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordShootFrames, name);
 
         Rectangle collisionRect = swordShootFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(sword, collisionRect);

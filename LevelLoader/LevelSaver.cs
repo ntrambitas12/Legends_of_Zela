@@ -57,14 +57,13 @@ private XmlWriterSettings settings;
 
     private void writeInventory()
     {
-       
-        writer.WriteStartElement("Inventory");
         IConcreteSprite link = (IConcreteSprite)room.Link;
+        writer.WriteStartElement("Inventory");
         int idx = 0;
         foreach(var projectiles in link.projectiles)
         {
             
-            if(projectiles != null)
+            if(projectiles != null && !projectiles.GetDropName().Contains("Sword"))
             {
                 writer.WriteStartElement("Item");
                

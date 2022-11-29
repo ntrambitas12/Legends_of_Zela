@@ -78,7 +78,7 @@ namespace CSE3902Project
 
         protected override void Draw(GameTime gameTime)
         {
-            if (inventory.isOpen())
+            if (ItemSelectionScreen.isOpen())
             {
                 _spriteBatch.Begin();
                 inventory.Draw(gameTime);

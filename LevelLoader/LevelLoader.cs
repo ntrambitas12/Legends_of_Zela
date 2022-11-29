@@ -15,7 +15,7 @@ public class LevelLoader: ILevelLoader
     private XmlReader reader;
     private List<(string, string)> parseTypes;
     private delegate ISprite ConcreteEntities(Vector2 pos);
-    private delegate ISprite Projectiles(int distance, ISprite owner);
+    private delegate ISprite Projectiles(int distance, ISprite owner, String name);
     private delegate ISprite Doors(Vector2 pos, bool isOpen);
     private bool runOnce;
     private Dictionary<String, Delegate> constructer;
@@ -156,7 +156,6 @@ public class LevelLoader: ILevelLoader
         reader.ReadToNextSibling("currentRoom");
         int roomID = reader.ReadElementContentAsInt();
         roomObjectManager.setRoom(roomID, true);
-        Link.screenCord = new Vector2(xPos, yPos);
         reader.ReadToNextSibling("Compass");
         Link.compass = reader.ReadElementContentAsBoolean();
         reader.ReadToNextSibling("Map");
@@ -168,23 +167,24 @@ public class LevelLoader: ILevelLoader
     private void ReadSavedInventory(XmlReader reader)
     {
         reader.ReadToFollowing("Inventory");
-        reader.ReadToDescendant("Item");
-
-        do
+        if (reader.ReadToDescendant("Item"))
         {
-            reader.ReadToDescendant("Drop");
-            String drop = reader.ReadElementContentAsString();
-            reader.ReadToNextSibling("Proj");
-            String proj = reader.ReadElementContentAsString();
-            reader.ReadToNextSibling("Index");
-            int idx = reader.ReadElementContentAsInt();
-            reader.ReadToNextSibling("Distance");
-            int distance = reader.ReadElementContentAsInt();
-            LoadInventory(drop, proj, idx, distance);   
-            reader.Read();
-        }
+            do
+            {
+                reader.ReadToDescendant("Drop");
+                String drop = reader.ReadElementContentAsString();
+                reader.ReadToNextSibling("Proj");
+                String proj = reader.ReadElementContentAsString();
+                reader.ReadToNextSibling("Index");
+                int idx = reader.ReadElementContentAsInt();
+                reader.ReadToNextSibling("Distance");
+                int distance = reader.ReadElementContentAsInt();
+                LoadInventory(drop, proj, idx, distance);
+                reader.Read();
+            }
 
-        while (reader.ReadToNextSibling("Item"));
+            while (reader.ReadToNextSibling("Item"));
+        }
 
     }
     
@@ -195,10 +195,11 @@ public class LevelLoader: ILevelLoader
         {
            IDrop _drop = (IDrop)dropConstructor.DynamicInvoke(new Vector2(0, 0));
             ItemSelectionScreen.AddToInventory(_drop, (ArrayIndex)idx);
+
         }
         if (constructer.TryGetValue(proj, out Delegate projConstructor))
         {
-            IProjectile _proj = (IProjectile)projConstructor.DynamicInvoke(distance, Link);
+            IProjectile _proj = (IProjectile)projConstructor.DynamicInvoke(distance, Link, proj);
             Link.AddProjectile(_proj, (ArrayIndex)idx);
         }
     }
@@ -230,7 +231,7 @@ public class LevelLoader: ILevelLoader
 
         /* Tempelate for creating and adding projectiles to link. Will be useful later*/
         // Create sword for link
-        IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link);
+        IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link, "Sword");
 
         // Add sword to Link
         ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
@@ -316,7 +317,7 @@ public class LevelLoader: ILevelLoader
                 //now we want to create the projectile from the factory
                 if (constructer.TryGetValue(projectile, out Delegate projectileDel))
                 {
-                    ISprite concreteProj = (ISprite)projectileDel.DynamicInvoke(projDistance, sprite);
+                    ISprite concreteProj = (ISprite)projectileDel.DynamicInvoke(projDistance, sprite, projectile);
                     //add the projectile created to the room
                     room.AddGameObject(projType, concreteProj, "");
                     // Get enemy and projectile for dictionary

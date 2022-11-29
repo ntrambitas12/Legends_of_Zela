@@ -13,15 +13,14 @@ public class Projectile : AbstractItem, IProjectile
     private String dropName;
     private String dropDesc;
 
-    public Projectile(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, String
-        dropName, String dropDesc) : base(spriteBatch, position, textures)
+    public Projectile(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, String name) : base(spriteBatch, position, textures)
     {
         direction = -1;
         fireProjectile = null;
         distance = 0;
         shouldCollide = true;
-        this.dropName = dropName;
-        this.dropDesc = dropDesc;
+        dropName = name + "Drop";
+        dropDesc = name;
     }
 
     public int Direction()

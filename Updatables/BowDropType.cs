@@ -25,7 +25,7 @@ public class BowDropType : IItemType
                 bow.SetShouldDraw(false);
                 ItemSelectionScreen.AddToInventory(bow, ArrayIndex.arrow);
 
-                IProjectile Arrow = (IProjectile)SpriteFactory.Instance.CreateArrowProjectile(999, Link);
+                IProjectile Arrow = (IProjectile)SpriteFactory.Instance.CreateArrowProjectile(999, Link, "Arrow");
                 ((ConcreteSprite)Link).AddProjectile(Arrow, ArrayIndex.arrow);
                 ((ConcreteSprite)Link).SetProjectileIndex(ArrayIndex.arrow);
 

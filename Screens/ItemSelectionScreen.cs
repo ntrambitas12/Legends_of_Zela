@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class ItemSelectionScreen
     {
-    public IConcreteSprite Link { get; set; }
+    public static IConcreteSprite Link { get; set; }
     private static IDrop[] items;
     private HUD hud;
     private static Vector2 itemOffset = new Vector2(505, 100);
@@ -19,7 +19,7 @@ public class ItemSelectionScreen
     private Rectangle itemSelector = new Rectangle(490, 95, 40, 40);
     private Rectangle currentSelectedItem = new Rectangle(160, 85, 50, 55);
     private static int itemPadding = 90;
-    private bool isActive;
+    private static bool isActive;
     private GraphicsDevice graphicsDevice;
     private SpriteBatch spriteBatch;
     private SpriteFont textFont;
@@ -27,7 +27,7 @@ public class ItemSelectionScreen
     private Vector2 useTextPos = new Vector2(45, 180);
     private Vector2 useTextPos2 = new Vector2(90, 220);
     private static Vector2 selectedItemCord = new Vector2(180, 100);
-    private int selectedItem = 0;
+    private static int selectedItem = 0;
     private static Dictionary<int, IDrop> selectedDrop;
     public static IDrop currentItem;
     private int baseSelectorWidth = 6;
@@ -134,9 +134,10 @@ public class ItemSelectionScreen
         {
             selectedDrop.Add((int)idx, cloneDrop);
         }
+        NextItem(true);
     }
 
-    public void NextItem(bool forward)
+    public static void NextItem(bool forward)
     {
         int nextItem = (forward ? 1 : -1);
         selectedItem = (selectedItem + nextItem) % items.Length;
@@ -148,7 +149,7 @@ public class ItemSelectionScreen
         Link.SetProjectileIndex((ArrayIndex)selectedItem);
     }
 
-    private void NextNonNull(bool forward)
+    private static void NextNonNull(bool forward)
     {
         int count = 0;
         int nextItem = (forward ? 1 : -1);
@@ -162,7 +163,7 @@ public class ItemSelectionScreen
             count++;
         }
     }
-    public bool isOpen()
+    public static bool isOpen()
     {
         return isActive;
     }
