@@ -52,6 +52,8 @@ using System.Threading.Tasks;
 
         keyboard.RegisterCommand(Keys.Y, Keys.U, new MoveUp(Link));
 
+        keyboard.RegisterCommand(Keys.L, new SaveCommand());
+
 
         //intialize the inventory
         inventory.Link = (IConcreteSprite)Link;

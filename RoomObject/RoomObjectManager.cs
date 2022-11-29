@@ -57,6 +57,11 @@ public sealed class RoomObjectManager : IRoomObjectManager
         }
     }
 
+    public int currentRoomIdx()
+    {
+        return Array.IndexOf(roomList, _currentRoom);
+    }
+
     public IRoomObject currentRoom()
     {
         return _currentRoom;
