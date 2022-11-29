@@ -185,9 +185,7 @@ public sealed class SpriteFactory : IFactory
     private List<Texture2D> swordShootUp;
     private List<Texture2D> swordShootDown;
     private List<Texture2D>[] fireballFrames;
-    private List<Texture2D> fireball1;
-    private List<Texture2D> fireball2;
-    private List<Texture2D> fireball3;
+    private List<Texture2D> fireball;
 
     //HUDSprites
     private Texture2D HUDKeys;
@@ -385,9 +383,7 @@ public sealed class SpriteFactory : IFactory
         swordShootUp = new List<Texture2D>();
         swordShootDown = new List<Texture2D>();
         fireballFrames = new List<Texture2D>[3];
-        fireball1 = new List<Texture2D>();
-        fireball2 = new List<Texture2D>();
-        fireball3 = new List<Texture2D>();
+        fireball = new List<Texture2D>();
 
     }
 
@@ -534,9 +530,9 @@ public sealed class SpriteFactory : IFactory
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud2"));
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud3"));
         bombCloud.Add(content.Load<Texture2D>("ItemSprites/Cloud4"));
-        fireball1.Add(content.Load<Texture2D>("ItemSprites/fireball1"));
-        fireball2.Add(content.Load<Texture2D>("ItemSprites/fireball2"));
-        fireball3.Add(content.Load<Texture2D>("ItemSprites/fireball3"));
+        fireball.Add(content.Load<Texture2D>("ItemSprites/fireball1"));
+        fireball.Add(content.Load<Texture2D>("ItemSprites/fireball2"));
+        fireball.Add(content.Load<Texture2D>("ItemSprites/fireball3"));
 
         //HUD Elements
         HUDItemBorders = content.Load<Texture2D>("HUDElements/HUDItemBorder");
@@ -700,9 +696,9 @@ public sealed class SpriteFactory : IFactory
         swordShootFrames[(int)SpriteAction.moveUp] = swordShootUp;
         swordShootFrames[(int)SpriteAction.moveDown] = swordShootDown;
         // Add fireball frames to the list
-        fireballFrames[(int)SpriteAction.moveLeft] = fireball1;
-        fireballFrames[(int)SpriteAction.moveRight] = fireball2;
-        fireballFrames[(int)SpriteAction.moveUp] = fireball3;
+        fireballFrames[(int)SpriteAction.moveLeft] = fireball;
+        fireballFrames[(int)SpriteAction.moveRight] = fireball;
+        fireballFrames[(int)SpriteAction.moveUp] = fireball;
         //Needs to be reworked to rotate...
         boomerangFrames[(int)SpriteAction.moveLeft] = boomerangLeft;
         boomerangFrames[(int)SpriteAction.moveRight] = boomerangRight;
@@ -957,7 +953,7 @@ public sealed class SpriteFactory : IFactory
         IConcreteSprite aquamentus = (IConcreteSprite) CreateEntityWithCollision(location, aquamentusFrames);
         aquamentus.health = 4;
         aquamentus.maxHealth = 4;
-        return AddAI(aquamentus, AIType.RandomMove);
+        return AddAI(aquamentus, AIType.AquamentusBehavior);
     }
     public ISprite CreateBladeTrapSprite(Vector2 location)
     {
@@ -1232,7 +1228,46 @@ public sealed class SpriteFactory : IFactory
         fireball.SetFireCommand(fireFireball);
         return fireball;
     }
+
+
+
+    public ISprite CreateUpperFireballProjectile(int distance, ISprite owner, String name)
+    {
+        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames, name);
+
+        Rectangle collisionRect = fireballFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(fireball, collisionRect);
+        fireball.collider = collisionObject;
+        fireball.collider.UpdateCollisionPosition();
+
+        fireball.SetDistance(distance);
+        fireball.SetOwner(owner);
+        fireball.SetItemType(new OtherFireballType(fireball, -1));
+        FireProjectile fireFireball = new FireProjectile(fireball);
+        fireball.SetFireCommand(fireFireball);
+        return fireball;
+    }
+
+    public ISprite CreateLowerFireballProjectile(int distance, ISprite owner, String name)
+    {
+        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames, name);
+
+        Rectangle collisionRect = fireballFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(fireball, collisionRect);
+        fireball.collider = collisionObject;
+        fireball.collider.UpdateCollisionPosition();
+
+        fireball.SetDistance(distance);
+        fireball.SetOwner(owner);
+        fireball.SetItemType(new OtherFireballType(fireball, 1));
+        FireProjectile fireFireball = new FireProjectile(fireball);
+        fireball.SetFireCommand(fireFireball);
+        return fireball;
+    }
+
+
     public ISprite CreateSwordProjectile(int distance, ISprite owner, String name)
+
     {
         IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordFrames, name);
 

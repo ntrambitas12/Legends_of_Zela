@@ -82,5 +82,8 @@ public interface IFactory
     public ISprite CreateFireballProjectile(int distance, ISprite owner, String name);
     public ISprite CreateSwordProjectile(int distance, ISprite owner, String name);
     public ISprite CreateSwordShootProjectile(int distance, ISprite owner, String name);
+    public ISprite CreateLowerFireballProjectile(int distance, ISprite owner, String name);
+    public ISprite CreateUpperFireballProjectile(int distance, ISprite owner, String name);
+
 }
 

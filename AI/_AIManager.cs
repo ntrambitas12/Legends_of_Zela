@@ -40,6 +40,9 @@ public sealed class AIManager : IAIManager
             case AIType.BladeTrapBehavior:
                 newAI = new BladeTrapBehavior(entity);
                 break;
+            case AIType.AquamentusBehavior:
+                newAI = new AquamentusBehavior(entity);
+                break;
         }
 
         entity.ai = newAI;

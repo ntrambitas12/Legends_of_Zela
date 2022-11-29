@@ -146,6 +146,11 @@ public sealed class RoomObjectManager : IRoomObjectManager
         }
     }
 
+    public IRoomObject getRoom(int roomId)
+    {
+        return roomList[roomId];
+    }
+
     public IRoomObject adjacentRoom(SpriteAction direction)
     {
         switch (direction)
