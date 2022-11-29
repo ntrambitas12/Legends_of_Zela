@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class FireballType : IProjectileType
+public class OtherFireballType : IProjectileType
 {
     private IProjectile projectile;
     private Vector2 direction;
@@ -11,10 +11,13 @@ public class FireballType : IProjectileType
     private bool shouldDraw;
     private Vector2 changeCord;
     private Vector2 linkCord;
+    private int offset;
+    private int counter;
 
-    public FireballType(IProjectile projectile)
+    public OtherFireballType(IProjectile projectile, int offset)
     {
         this.projectile = projectile;
+        this.offset = offset;
     }
 
     public void Update(GameTime gameTime)
@@ -22,8 +25,9 @@ public class FireballType : IProjectileType
         fireProjectile = projectile.FireCommand();
         shouldDraw = projectile.ShouldDraw();
         changeCord = projectile.Position();
+        counter = fireProjectile.Counter();
 
-        if (fireProjectile.Counter() < 2)
+        if (counter < 2)
         {
             linkCord = RoomObjectManager.Instance.currentRoom().Link.screenCord;
             direction = linkCord - changeCord;
@@ -49,13 +53,14 @@ public class FireballType : IProjectileType
         //}
 
         changeCord += 4 * direction;
+        changeCord.Y = changeCord.Y + (offset * counter / 8);
 
         projectile.SetPosition(changeCord);
 
         if (shouldDraw)
         {
             SoundManager.Instance.PlayOnce("LOZ_Boss_Scream1"); //fireball sound
-            fireProjectile.Execute(); 
+            fireProjectile.Execute();
         }
 
     }
