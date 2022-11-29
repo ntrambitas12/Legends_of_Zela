@@ -53,7 +53,7 @@ public class OtherFireballType : IProjectileType
         //}
 
         changeCord += 4 * direction;
-        changeCord.Y = changeCord.Y + (offset * counter / 8);
+        changeCord.Y = changeCord.Y + (offset * counter / 4);
 
         projectile.SetPosition(changeCord);
 
