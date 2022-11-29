@@ -56,6 +56,7 @@ public class ItemSelectionScreen
         {
             room.PauseEnemies(true);
             room.PauseLink();
+
         }
         else
         {
@@ -130,11 +131,13 @@ public class ItemSelectionScreen
         items[(int)idx] = item;
         IDrop cloneDrop = (IDrop)item.Clone();
         cloneDrop.SetPosition(selectedItemCord);
+        cloneDrop.SetShouldDraw(true);
         if (!selectedDrop.ContainsKey((int)idx))
         {
             selectedDrop.Add((int)idx, cloneDrop);
         }
         NextItem(true);
+
     }
 
     public static void NextItem(bool forward)

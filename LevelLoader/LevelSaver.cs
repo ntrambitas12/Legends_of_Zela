@@ -17,19 +17,19 @@ private XmlWriterSettings settings;
    {
        
         roomObjectManager = RoomObjectManager.Instance;
-        room = roomObjectManager.currentRoom();
         settings = new XmlWriterSettings();
         settings.Indent = true;
         settings.IndentChars = ("    ");
         settings.CloseOutput = true;
         settings.OmitXmlDeclaration = false;
-        writer = XmlWriter.Create("SavedData/gameData1.xml", settings);
     }
     private static LevelSaver instance = new LevelSaver();
     public static LevelSaver Instance { get { return instance; } }
 
     public void Save()
     {
+        writer = XmlWriter.Create("SavedData/LinkData.xml", settings);
+        room = roomObjectManager.currentRoom();
         writer.WriteStartElement("XnaContent");
         writeLink(); 
         writeInventory();

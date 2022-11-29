@@ -137,7 +137,9 @@ public class LevelLoader: ILevelLoader
 
             LoadSavedLink(reader);
         }
-
+        
+          reader.Close();
+        
     }
 
     private void LoadSavedLink(XmlReader reader)

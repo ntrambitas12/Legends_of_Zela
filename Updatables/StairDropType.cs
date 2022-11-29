@@ -19,7 +19,7 @@ public class StairDropType : IItemType
         {
             SoundManager.Instance.PlayOnce("LOZ_Stairs");
             RoomObjectManager.Instance.setRoom(27, true);
-            RoomObjectManager.Instance.currentRoom().Link.screenCord = new Vector2(240, 200);
+            RoomObjectManager.Instance.currentRoom().Link.screenCord = RoomObjectManager.Instance.currentRoom().BaseCord + new Vector2(240, 200);
         }
         
     }
