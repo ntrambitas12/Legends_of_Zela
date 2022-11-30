@@ -52,12 +52,14 @@ using System.Threading.Tasks;
 
         keyboard.RegisterCommand(Keys.Y, Keys.U, new MoveUp(Link));
 
+        keyboard.RegisterCommand(Keys.L, new SaveCommand());
+
 
         //intialize the inventory
-        inventory.Link = (IConcreteSprite)Link;
+        ItemSelectionScreen.Link = (IConcreteSprite)Link;
         keyboard.RegisterCommand(Keys.I, new Inventory(inventory));
-        keyboard.RegisterCommand(Keys.P, new NextItem(inventory));
-        keyboard.RegisterCommand(Keys.O, new PreviousItem(inventory));
+        keyboard.RegisterCommand(Keys.P, new NextItem());
+        keyboard.RegisterCommand(Keys.O, new PreviousItem());
 
         // Add restart and exit commands to keyboard
         keyboard.RegisterCommand(Keys.Q, new ExitCommand(game1));

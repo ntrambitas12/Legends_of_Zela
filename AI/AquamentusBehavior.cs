@@ -47,8 +47,8 @@ public class AquamentusBehavior : IAI
             centerFireball.FireCommand().Execute();
             if (RoomObjectManager.Instance.currentRoomID() == 23 && RoomObjectManager.Instance.currentRoom().EnemyProjectileList.Count < 2)
             {
-                upperFireball = (IProjectile)SpriteFactory.Instance.CreateUpperFireballProjectile(100, entity);
-                lowerFireball = (IProjectile)SpriteFactory.Instance.CreateLowerFireballProjectile(100, entity);
+                upperFireball = (IProjectile)SpriteFactory.Instance.CreateUpperFireballProjectile(100, entity, "UpperFireball");
+                lowerFireball = (IProjectile)SpriteFactory.Instance.CreateLowerFireballProjectile(100, entity, "LowerFireball");
                 RoomObjectManager.Instance.currentRoom().AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, upperFireball, "Upper Fireball");
                 RoomObjectManager.Instance.currentRoom().AddGameObject((int)RoomObjectTypes.typeEnemyProjectile, lowerFireball, "Lower Fireball");
             }

@@ -23,7 +23,7 @@ public class BombDropType : IItemType
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 bomb.SetShouldDraw(false);
                 ItemSelectionScreen.AddToInventory(bomb, ArrayIndex.bomb);
-                IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link);
+                IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link, "Bomb");
                 ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);
                 ((ConcreteSprite)Link).SetProjectileIndex(ArrayIndex.bomb);
                 ((ConcreteSprite)Link).bombs += 4;

@@ -22,7 +22,7 @@ public class SwordDropType : IItemType
             {
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 sword.SetShouldDraw(false);
-                IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link);
+                IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link, "Sword");
                 ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
             }
         }

@@ -93,7 +93,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         projectiles = new IProjectile[5];
         projectileIndex = (int)ArrayIndex.arrow;
 
-        projectiles[(int)ArrayIndex.swordShoot] = (IProjectile) SpriteFactory.Instance.CreateSwordShootProjectile(999, this);
+        projectiles[(int)ArrayIndex.swordShoot] = (IProjectile) SpriteFactory.Instance.CreateSwordShootProjectile(999, this, "ShootingSword");
     }
 
     public void SetSpriteState(SpriteAction action, ISpriteState state)

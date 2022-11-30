@@ -222,6 +222,9 @@
     <None Update="SavedData\GameData.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SavedData\savedData.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Documentation\Sprint 4 Documentation\" />
