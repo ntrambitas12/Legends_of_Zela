@@ -83,6 +83,7 @@ public class ArrowType : IProjectileType
             if (check && collidingObject != null && timeElapsed > .1 && projectile.ShouldCollide())
             {
                 ((IConcreteSprite)collidingObject).health--;
+                SoundManager.Instance.playPainSounds(((IConcreteSprite)collidingObject).maxHealth,((IConcreteSprite)collidingObject).health);
                 fireProjectile.ResetCounter();
                 projectile.SetShouldCollide(false);
                 if (((IConcreteSprite)collidingObject).health == 0)

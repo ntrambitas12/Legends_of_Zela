@@ -114,6 +114,7 @@ public class BoomerangType : IProjectileType
                 if (check && !(currRoom.EnemyList.Contains(projectile.Owner())) && timeElapsed > .1)
                 {
                     ((IConcreteSprite)collidingObject).health--;
+                    SoundManager.Instance.playPainSounds(((IConcreteSprite)collidingObject).maxHealth,((IConcreteSprite)collidingObject).health);
                     projectile.SetShouldCollide(false);
                     goingBack = true;
                     if (((IConcreteSprite)collidingObject).health == 0)

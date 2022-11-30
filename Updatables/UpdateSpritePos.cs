@@ -60,7 +60,7 @@ public sealed class UpdateSpritePos : IPosition
          spritePos = sprite.spritePos;
 
          float temp= screenCord.Y;
-         temp = temp- (7-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
+         temp = temp- (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
          screenCord.Y=temp;
          sprite.screenCord = screenCord;
     }
@@ -71,7 +71,7 @@ public sealed class UpdateSpritePos : IPosition
          spritePos = sprite.spritePos;
 
          float temp= screenCord.Y;
-         temp = temp+ (7-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
+         temp = temp+ (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
          screenCord.Y=temp;
          sprite.screenCord = screenCord;
     }
@@ -82,7 +82,7 @@ public sealed class UpdateSpritePos : IPosition
          spritePos = sprite.spritePos;
 
          float temp= screenCord.X;
-         temp = temp+ (7-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
+         temp = temp+ (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
          screenCord.X=temp;
          sprite.screenCord = screenCord;
     }
@@ -93,7 +93,7 @@ public sealed class UpdateSpritePos : IPosition
          spritePos = sprite.spritePos;
 
          float temp= screenCord.X;
-         temp = temp- (7-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
+         temp = temp- (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
          screenCord.X=temp;
          sprite.screenCord = screenCord;
     }
