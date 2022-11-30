@@ -56,6 +56,7 @@ public class SwordType : IProjectileType
                 //    currRoom.DeleteGameObject((int)RoomObjectTypes.typeEnemyProjectile, enemyProjectile);
                 //}
                 ((IConcreteSprite)collidingObject).health--;
+                SoundManager.Instance.playPainSounds(((IConcreteSprite)collidingObject).maxHealth,((IConcreteSprite)collidingObject).health);
                 sword.SetShouldCollide(false);
                 if (((IConcreteSprite)collidingObject).health == 0)
                 {

@@ -92,15 +92,18 @@ public class SoundManager
         }
     }
 
-    public void playPainSounds(int maxHealth)
+    public void playPainSounds(int maxHealth, int currentHealth)
     {
-        switch (maxHealth)
+        if (currentHealth !=0)
         {
-            case 1:
-                break;
-            case 6:
-                SoundManager.Instance.PlayOnce("LOZ_Boss_Hurt");
-                break;
+            if (maxHealth==4)
+            {
+                SoundManager.Instance.PlayOnce("LOZ_Boss_Hit");
+            }else if (maxHealth==2)
+            {
+                SoundManager.Instance.PlayOnce("LOZ_Enemy_Hit");
+            }
+
         }
     }
 

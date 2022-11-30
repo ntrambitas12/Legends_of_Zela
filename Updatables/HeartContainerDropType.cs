@@ -18,11 +18,10 @@ public class HeartContainerDropType : IItemType
         {
             IConcreteSprite Link = (IConcreteSprite)RoomObjectManager.Instance.currentRoom().Link;
             ISprite collidingObject = heartContainer.collider.isIntersecting(new List<ISprite> { Link });
-            SoundManager.Instance.PlayOnce("LOZ_Get_Heart");
 
             if (collidingObject != null)
             {
-               
+                SoundManager.Instance.PlayOnce("LOZ_Get_Heart");
                 heartContainer.SetShouldDraw(false);
                 Link.maxHealth+=2;
                 Link.health+=2;

@@ -67,6 +67,7 @@ public class BombType : IProjectileType
             if (check && collidingObject != null && timeElapsed > .1)
             {
                 ((IConcreteSprite)collidingObject).health--;
+                SoundManager.Instance.playPainSounds(((IConcreteSprite)collidingObject).maxHealth,((IConcreteSprite)collidingObject).health);
                 projectile.SetShouldCollide(false);
                 if (((IConcreteSprite)collidingObject).health == 0)
                 {
