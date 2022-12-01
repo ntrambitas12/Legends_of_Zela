@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Xml;
 
 public sealed class LevelSaver
-    {
-private XmlWriter writer;
-private XmlWriterSettings settings;
+{
+    private XmlWriter writer;
+    private XmlWriterSettings settings;
     private IRoomObjectManager roomObjectManager;
     private IRoomObject room;
     
@@ -26,20 +26,26 @@ private XmlWriterSettings settings;
     private static LevelSaver instance = new LevelSaver();
     public static LevelSaver Instance { get { return instance; } }
 
-    public void Save()
+    //------------------------------------------LINK------------------------------------------
+    //handles player inventory 
+    public void SaveLink()
     {
+        //initialize writer
         writer = XmlWriter.Create("SavedData/LinkData.xml", settings);
         room = roomObjectManager.currentRoom();
         writer.WriteStartElement("XnaContent");
-        writeLink(); 
-        writeInventory();
+
+        //write content
+        WriteLink(); 
+        WriteInventory();
+
+        //release writer
         writer.WriteEndElement();
         writer.Flush();
         writer.Close();
        
     }
-
-    private void writeLink() 
+    private void WriteLink() 
     {
         IConcreteSprite link = (IConcreteSprite)room.Link;
         writer.WriteStartElement("Link");
@@ -54,8 +60,7 @@ private XmlWriterSettings settings;
         writer.WriteEndElement();
        
     }
-
-    private void writeInventory()
+    private void WriteInventory()
     {
         IConcreteSprite link = (IConcreteSprite)room.Link;
         writer.WriteStartElement("Inventory");
@@ -80,5 +85,75 @@ private XmlWriterSettings settings;
         writer.WriteEndElement();
     }
 
+    //------------------------------------------ROOMS------------------------------------------
+    //handles all entities
+    public void SaveRooms()
+    {
+        IRoomObject[] rooms = roomObjectManager.getRooms();
+        int i = 0;
+        while (i < rooms.Length)
+        {
+            if (rooms[i] != null)
+            {
+                WriteRoom(rooms[i], i);
+                i++;
+            }
+        }
+    }
+    private void WriteRoom(IRoomObject room, int i)
+    {
+        //initialize writer
+        String savePath = "SavedData/Room" + i + ".xml";
+        writer = XmlWriter.Create(savePath, settings);
+        room = roomObjectManager.currentRoom();
+        writer.WriteStartElement("XnaContent");
+
+        //write content
+        WriteBaseCord(room, i);
+        WriteBlocks(room);
+        WriteEnemies(room);
+        WriteItems(room);
+        // TODO: there may be more lists im missing
+
+        //release writer
+        writer.WriteEndElement();
+        writer.Flush();
+        writer.Close();
+    }
+    private void WriteBaseCord(IRoomObject room, int i)
+    {
+        writer.WriteStartElement("BaseCord");
+        writer.WriteElementString("xCord", room.BaseCord.X.ToString());
+        writer.WriteElementString("yCord", room.BaseCord.Y.ToString());
+        writer.WriteElementString("id", i.ToString());
+        writer.WriteEndElement();
+    }
+    private void WriteBlocks(IRoomObject room)
+    {
+        writer.WriteStartElement("Blocks");
+
+        // TODO
+        // iterate through list of blocks inside room
+        // figure out type of block
+        // write it
+
+        writer.WriteEndElement();
+    }
+    private void WriteEnemies(IRoomObject room)
+    {
+        writer.WriteStartElement("Enemies");
+
+        // TODO
+
+        writer.WriteEndElement();
+    }
+    private void WriteItems(IRoomObject room)
+    {
+        writer.WriteStartElement("Items");
+
+        // TODO
+
+        writer.WriteEndElement();
+    }
 }
 
