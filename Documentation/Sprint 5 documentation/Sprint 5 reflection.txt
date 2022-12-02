@@ -1,0 +1,22 @@
+Sprint 5 reflection. 
+For sprint 5 we decided to implement level saving and fix some things on our backlog. This sprint was much smaller than the others 
+so some people had trouble finding ways to contribute initially. After meeting up we divided up work for everyone to do. We are so proud
+with the way this game has turned out. If you showed us this at the beginning of the semester we would be impressed with what we were able to do.
+We did a great job refining our processes to make our team as efficient as possible by playing to everyone's strengths. We definitely have room to improve 
+but we have come a long way in the short time we have been working together.
+
+Known Issues:
+1. We chose to implement Link's health in terms of full heath rather than half hearts. His health value is still true to the game, however.
+2. Link does not have frames for holding up the Bow and Triforce. This needs to be changed in SpriteFactory.
+3. Locked doors are shown as closed doors, but retain their intended functionality.
+4. Randomly, when enemies die, some invisible entity is left behind that damages the player.
+5. You can lock up the movement by holding down multiple keys
+
+Known fixes from Sprint 4:
+1. Aquamentus shoots fireballs correctly.
+2. Movement is a bit smoother
+3. Sprite factory got refactored
+4. Enemies have correct health
+
+
+v

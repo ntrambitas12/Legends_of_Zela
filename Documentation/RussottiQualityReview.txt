@@ -1,9 +1,0 @@
-Author of the code review: Matt Russotti
-Date of the code review: 10/22
-Sprint number: 3
-Name of the .cs file being reviewed: RoomObjectManager.cs
-Author of the .cs file being reviewed: Nick Trambitas
-Number of minutes taken to complete the review: 15
-A hypothetical change to make to the game related to file being reviewed 
-and how the current implementation could or could not easily support that change:
-I don't have any suggested changes or improvments to make. The room object manager is in pretty good shape.
