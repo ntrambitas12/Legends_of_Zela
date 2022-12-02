@@ -6,7 +6,7 @@
 		<Rupee>29</Rupee>
 		<Bombs>10</Bombs>
 		<Keys>34</Keys>
-		<currentRoom>18</currentRoom>
+		<currentRoom>27</currentRoom>
 		<Compass>true</Compass>
 		<Map>true</Map>
 	</Link>
@@ -15,7 +15,7 @@
 			<Drop>ArrowDrop</Drop>
 			<Proj>Arrow</Proj>
 			<Index>0</Index>
-			<Distance>30</Distance>
+			<Distance>999</Distance>
 		</Item>
 		<Item>
 			<Drop>BoomerangDrop</Drop>

@@ -100,17 +100,44 @@ public sealed class CollisionManager : ICollisionManager
             //wall collision and repulsion
             UpdateCollideWithWall(currentRoom.Link, currentRoom, false);
             //contact damage with enemy
-            IConcreteSprite collidingEnemy = (IConcreteSprite)currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyList);
-            IProjectile collidingProjectile = (IProjectile) currentRoom.Link.collider.isIntersecting(RoomObjectManager.Instance.currentRoom().EnemyProjectileList);
-            if (currentRoom.BaseCord == new Vector2(3200, 1440))
+            List<ISprite> enemyList = new List<ISprite>();
+            List<ISprite> projectileList = new List<ISprite>();
+            foreach (ISprite enemy in currentRoom.EnemyList)
             {
-                ((IConcreteSprite)(currentRoom.Link)).CarryToStart(collidingEnemy, currentRoom, RoomObjectManager.Instance);
+                if (!(currentRoom.DeadEnemyList.Contains(enemy)))
+                {
+                    enemyList.Add(enemy);
+                    if (currentRoom.EnemyToProjectile.TryGetValue(enemy, out ISprite projectile))
+                    {
+                        projectileList.Add(projectile);
+                    }
+                }
             }
-            else if (collidingEnemy != null && !currentRoom.DeadEnemyList.Contains(collidingEnemy) && timeElapsed > 2)
+            IConcreteSprite collidingEnemy = (IConcreteSprite)currentRoom.Link.collider.isIntersecting(enemyList);
+            IProjectile collidingProjectile = (IProjectile) currentRoom.Link.collider.isIntersecting(projectileList);
+          
+
+            //if (currentRoom.BaseCord == new Vector2(3200, 1440))
+            //{
+            //    ((IConcreteSprite)(currentRoom.Link)).CarryToStart(collidingEnemy, currentRoom, RoomObjectManager.Instance);
+            //}
+            //else
+            
+            if (collidingEnemy != null && !currentRoom.DeadEnemyList.Contains(collidingEnemy) && timeElapsed > 2)
             {
+                if (RoomObjectManager.Instance.currentRoomID() == 18 && collidingEnemy != null)
+                {
+                    RoomObjectManager.Instance.setRoom(1, true);
+                    currentRoom = RoomObjectManager.Instance.currentRoom();
+                    currentRoom.Link.screenCord = new Vector2(currentRoom.BaseCord.X + 380, currentRoom.BaseCord.Y + 275);
+                }
+                else
+                {
+                    ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
+                }
                 timeElapsed = 0;
-                ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
-            } else if (collidingProjectile != null && !currentRoom.DeadEnemyList.Contains(collidingProjectile.Owner()) && timeElapsed > 2 )
+            }
+            else if (collidingProjectile != null && !currentRoom.DeadEnemyList.Contains(collidingProjectile.Owner()) && timeElapsed > 2)
             {
                 ((IConcreteSprite)(currentRoom.Link)).TakeDamage();
                 timeElapsed = 0;
