@@ -256,6 +256,7 @@ public class RoomObject : IRoomObject
                 SoundManager.Instance.PlayOnce("LOZ_Key_Appear");
 
             }
+            EnemyList.Clear();
         }
     }
 
