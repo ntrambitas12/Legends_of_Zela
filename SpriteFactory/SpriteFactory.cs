@@ -200,14 +200,20 @@ public sealed class SpriteFactory : IFactory
     private Texture2D HUDBoomerangs;
     private Texture2D SplashScreen;
 
-    //Dictinoary to allow for quick lookuo for frames
+    //delegates
+    private delegate IItemType DropType(IDrop drop);
+    //Dictinoary to allow for quick lookup for frames
     private Dictionary<String, List<Texture2D>[]> entityFrames;
+    // private Dictionary<String, (List<Texture2D>[], List<Texture2D>[], Delegate)> drops;
+     private Dictionary<String, Delegate> drops;
+
 
     private SpriteBatch _spriteBatch;
     private SpriteFactory()
     {
         //intialize dictionary
         entityFrames = new Dictionary<String, List<Texture2D>[]>();
+        drops = new Dictionary<String, Delegate>();
 
         //Blocks
         textFrames = new List<Texture2D>[4];
@@ -783,6 +789,10 @@ public sealed class SpriteFactory : IFactory
         entityFrames.Add("OldMan", oldManFrames);
         entityFrames.Add("Water", waterFrames);
         entityFrames.Add("Text", textFrames);
+
+        //drops
+        // drops.Add("ArrowDrop", (new List<Texture2D>[] { new List<Texture2D> { arrowFrames[2][0] } }, arrowFrames[0][0], new DropType(ArrowDropType.CreateDrop));
+        drops.Add("ArrowDrop", new DropType(ArrowDropType.CreateDrop));
     }
     //------------------------------PRIVATE COLLISION METHODS------------------------------
     //creates an entity with a default collider
@@ -905,6 +915,19 @@ public sealed class SpriteFactory : IFactory
 
 
     //Drops
+    /*Refactored to one method*/
+    public ISprite CreateDrop(Vector2 location, String name, int RoomObjectType)
+    {
+        IDrop drop = new Drop(_spriteBatch, location, new List<Texture2D>[] { new List<Texture2D> { arrowFrames[2][0] } });
+
+        Rectangle collisionRect = arrowFrames[0][0].Bounds;
+        ICollision collisionObject = new Collision(drop, collisionRect);
+        drop.collider = collisionObject;
+        drop.collider.UpdateCollisionPosition();
+
+        drop.SetItemType(new ArrowDropType(drop));
+        return drop;
+    }
     public ISprite CreateArrowDrop(Vector2 location)
     {
         IDrop arrow = new Drop(_spriteBatch, location, new List<Texture2D>[] { new List<Texture2D> { arrowFrames[2][0] } });

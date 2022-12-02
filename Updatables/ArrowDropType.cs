@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 
 public class ArrowDropType : IItemType
@@ -11,6 +12,10 @@ public class ArrowDropType : IItemType
         this.arrow = arrow;
     }
 
+    public static IItemType CreateDrop(IDrop arrow)
+    {
+        return new ArrowDropType(arrow);
+    }
     public void Update(GameTime gameTime)
     {
         if (arrow.ShouldDraw())

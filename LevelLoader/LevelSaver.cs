@@ -188,6 +188,15 @@ public sealed class LevelSaver
             writer.WriteElementString("MaxHealth", enemy.maxHealth.ToString());
 
             /*Deal with writing enemy projectiles here*/
+            if (room.EnemyToProjectile.TryGetValue(enemy, out ISprite projVal))
+            {
+                IProjectile projectile = projVal as IProjectile;
+                writer.WriteStartElement("Projectile");
+                writer.WriteElementString("Name", projectile.GetDropName());
+                writer.WriteElementString("Distance", projectile.Distance().ToString());
+               // writer.WriteElementString("RoomObjectType", projectile.)
+                writer.WriteEndElement();
+            }
 
             writer.WriteEndElement();
         }

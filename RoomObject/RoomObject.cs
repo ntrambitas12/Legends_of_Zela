@@ -252,6 +252,7 @@ public class RoomObject : IRoomObject
                 ISprite newKey = SpriteFactory.Instance.CreateKeyDrop(room26Key);
                 AddGameObject((int)RoomObjectTypes.typePickup, newKey, "keyDrop");
             }
+            EnemyList.Clear();
         }
     }
 
