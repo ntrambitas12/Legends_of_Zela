@@ -11,6 +11,11 @@ public class SwordDropType : IItemType
         this.sword = sword;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new SwordDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         ISprite Link = RoomObjectManager.Instance.currentRoom().Link;

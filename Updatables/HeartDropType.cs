@@ -12,6 +12,11 @@ public class HeartDropType : IItemType
         this.heart = heart;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new HeartDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         if (heart.ShouldDraw())

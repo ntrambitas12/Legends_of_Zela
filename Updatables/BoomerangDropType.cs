@@ -11,6 +11,11 @@ public class BoomerangDropType : IItemType
         this.boomerang = boomerang;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new BoomerangDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         ISprite Link = RoomObjectManager.Instance.currentRoom().Link;

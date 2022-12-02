@@ -12,6 +12,11 @@ public class RubyDropType : IItemType
         this.ruby = ruby;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new RubyDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         if (ruby.ShouldDraw())

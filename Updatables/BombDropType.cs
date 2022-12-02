@@ -11,6 +11,11 @@ public class BombDropType : IItemType
         this.bomb = bomb;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new BombDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         ISprite Link = RoomObjectManager.Instance.currentRoom().Link;

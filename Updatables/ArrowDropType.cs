@@ -12,9 +12,9 @@ public class ArrowDropType : IItemType
         this.arrow = arrow;
     }
 
-    public static IItemType CreateDrop(IDrop arrow)
+    public static IItemType CreateDrop(IDrop drop)
     {
-        return new ArrowDropType(arrow);
+        return new ArrowDropType(drop);
     }
     public void Update(GameTime gameTime)
     {

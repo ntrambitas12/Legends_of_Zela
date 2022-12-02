@@ -12,6 +12,11 @@ public class BowDropType : IItemType
         this.bow = bow;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new BowDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         ISprite Link = RoomObjectManager.Instance.currentRoom().Link;
