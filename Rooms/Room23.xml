@@ -184,11 +184,13 @@
 
 
 	<Enemies>
-		<Enemy>
+		<Enemy aiType='11'>
 			<xPos>464</xPos>
 			<yPos>242</yPos>
 			<Name>Aquamentus</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>4</Health>
+			<MaxHealth>4</MaxHealth>
 			<Projectile>
 				<Name>Fireball</Name>
 				<Distance>100</Distance>

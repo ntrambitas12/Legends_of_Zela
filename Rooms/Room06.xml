@@ -101,23 +101,29 @@
 
 
 	<Enemies>
-		<Enemy>
+		<Enemy aiType='11'>
 			<xPos>304</xPos>
 			<yPos>306</yPos>
 			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>1</Health>
+			<MaxHealth>1</MaxHealth>
 		</Enemy>
-		<Enemy>
+		<Enemy aiType='11'>
 			<xPos>240</xPos>
 			<yPos>210</yPos>
 			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>1</Health>
+			<MaxHealth>1</MaxHealth>
 		</Enemy>
-		<Enemy>
+		<Enemy aiType='11'>
 			<xPos>336</xPos>
 			<yPos>178</yPos>
 			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>1</Health>
+			<MaxHealth>1</MaxHealth>
 		</Enemy>
 	</Enemies>
 	

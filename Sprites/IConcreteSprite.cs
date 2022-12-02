@@ -29,8 +29,11 @@ public interface IConcreteSprite : ISprite
     public bool triforce { get; set; }
 
     public SpriteAction direction { get; set; }
+    public String name { get; set; }
+    public int roomObjectType { get; set; }
+    public int aiType { get; set; }
 
-    
+
     void SetSpriteState(SpriteAction action, ISpriteState spriteState);
     public void SetDirection(SpriteAction direction);
 

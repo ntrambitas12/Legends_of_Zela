@@ -14,7 +14,8 @@ namespace CSE3902Project.Commands
         }
         public void Execute()
         {
-            LevelSaver.Instance.Save();
+            LevelSaver.Instance.SaveLink();
+            LevelSaver.Instance.SaveRooms();
         }
     }
 }

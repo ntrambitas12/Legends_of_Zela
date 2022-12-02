@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
+using System.Xml.Linq;
 
 public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
@@ -32,6 +33,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public bool map { get; set; }
     public bool compass { get; set; }
     public bool triforce { get; set; }
+    public String name { get; set; }
+    public int roomObjectType { get; set; }
 
     public Boolean isDamaged { get; set; }
 
@@ -41,6 +44,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public IProjectile[] projectiles { get; set; }
 
     public SpriteAction direction { get; set; }
+    public int aiType { get; set; }
 
     private float timeElapsed;
 
@@ -52,7 +56,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
     
 
-    public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, bool isDoorOpen) : base(spriteBatch, position, textures) {
+    public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, bool isDoorOpen, String name, int roomObjectType) : base(spriteBatch, position, textures) {
         OpenDoor = new OpenState(this);
         ClosedDoor = new ClosedState(this);
         if (isDoorOpen)
@@ -64,9 +68,11 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
             state = ClosedDoor;
         }
         direction = SpriteAction.left;
+        this.name = name;
+        this.roomObjectType = roomObjectType;
     }
 
-    public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures)
+    public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, String name, int roomObjectType) : base(spriteBatch, position, textures)
     {
         still = new StillState(this);
         stillAnimated = new StillAnimated(this);
@@ -94,6 +100,9 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         projectileIndex = (int)ArrayIndex.arrow;
 
         projectiles[(int)ArrayIndex.swordShoot] = (IProjectile) SpriteFactory.Instance.CreateSwordShootProjectile(999, this, "ShootingSword");
+        this.name = name;
+        this.roomObjectType = roomObjectType;
+
     }
 
     public void SetSpriteState(SpriteAction action, ISpriteState state)
