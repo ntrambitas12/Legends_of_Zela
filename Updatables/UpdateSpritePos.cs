@@ -54,13 +54,24 @@ public sealed class UpdateSpritePos : IPosition
         }
     }
 
-    public void smoothUp(ISprite sprite)//how to get link sprite to keyboard controller
+  /*  public void smoothUp(ISprite sprite)//how to get link sprite to keyboard controller
     {
          screenCord = sprite.screenCord;
          spritePos = sprite.spritePos;
 
          float temp= screenCord.Y;
          temp = temp- (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
+         screenCord.Y=temp;
+         sprite.screenCord = screenCord;
+    }
+*/
+    public void smoothUp(ISprite sprite)//how to get link sprite to keyboard controller
+    {
+         screenCord = sprite.screenCord;
+         spritePos = sprite.spritePos;
+
+         float temp= screenCord.Y;
+         temp = (int)temp;//rounds movement to nearest int
          screenCord.Y=temp;
          sprite.screenCord = screenCord;
     }
@@ -71,7 +82,7 @@ public sealed class UpdateSpritePos : IPosition
          spritePos = sprite.spritePos;
 
          float temp= screenCord.Y;
-         temp = temp+ (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
+         temp = (int)temp;//rounds movement to nearest int
          screenCord.Y=temp;
          sprite.screenCord = screenCord;
     }
@@ -82,7 +93,7 @@ public sealed class UpdateSpritePos : IPosition
          spritePos = sprite.spritePos;
 
          float temp= screenCord.X;
-         temp = temp+ (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
+         temp = (int)temp;//rounds movement to nearest int
          screenCord.X=temp;
          sprite.screenCord = screenCord;
     }
@@ -93,9 +104,11 @@ public sealed class UpdateSpritePos : IPosition
          spritePos = sprite.spritePos;
 
          float temp= screenCord.X;
-         temp = temp- (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
+         temp = (int)temp;//rounds movement to nearest int
          screenCord.X=temp;
          sprite.screenCord = screenCord;
     }
+
+
 }
 
