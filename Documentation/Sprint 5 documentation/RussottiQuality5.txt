@@ -1,0 +1,10 @@
+Author of the code review: Matt Russotti
+Date of the code review: 12/2
+Sprint number: 5
+Name of the .cs file being reviewed: AquamentusBehavior.cs
+Author of the .cs file being reviewed: Kyle Hoefker
+Number of minutes taken to complete the review: 15
+A hypothetical change to make to the game related to file being reviewed 
+and how the current implementation could or could not easily support that change:
+In the update method there are a few nested if statements. A suggested change would be to have method calls that 
+handle what happens in the if statements. Other than that the code is very well written. Many instance variables.
