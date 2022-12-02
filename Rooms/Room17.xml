@@ -106,33 +106,39 @@
 
 
 	<Enemies>
-		<Enemy>
+		<Enemy aiType='11'>
 			<xPos>274</xPos>
 			<yPos>178</yPos>
 			<Name>Goriya</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>2</Health>
+			<MaxHealth>2</MaxHealth>
 			<Projectile>
 				<Name>Boomerang</Name>
 				<Distance>1000</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
 		</Enemy>
-		<Enemy>
+		<Enemy aiType='11'>
 			<xPos>306</xPos>
 			<yPos>338</yPos>
 			<Name>Goriya</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>2</Health>
+			<MaxHealth>2</MaxHealth>
 			<Projectile>
 				<Name>Boomerang</Name>
 				<Distance>1000</Distance>
 				<RoomObjectType>3</RoomObjectType>
 			</Projectile>
 		</Enemy>
-		<Enemy>
+		<Enemy aiType='11'>
 			<xPos>562</xPos>
 			<yPos>306</yPos>
 			<Name>Goriya</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>2</Health>
+			<MaxHealth>2</MaxHealth>
 			<Projectile>
 				<Name>Boomerang</Name>
 				<Distance>1000</Distance>

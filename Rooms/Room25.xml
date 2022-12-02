@@ -109,29 +109,37 @@
 
 
 	<Enemies>
-		<Enemy>
+		<Enemy aiType='13'>
 			<xPos>208</xPos>
 			<yPos>178</yPos>
 			<Name>Trap</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>-1</Health>
+			<MaxHealth>-1</MaxHealth>
 		</Enemy>
-		<Enemy>
+		<Enemy aiType='13'>
 			<xPos>560</xPos>
 			<yPos>178</yPos>
 			<Name>Trap</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>-1</Health>
+			<MaxHealth>-1</MaxHealth>
 		</Enemy>
-		<Enemy>
+		<Enemy aiType='13'>
 			<xPos>208</xPos>
 			<yPos>370</yPos>
 			<Name>Trap</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>-1</Health>
+			<MaxHealth>-1</MaxHealth>
 		</Enemy>
-		<Enemy>
+		<Enemy aiType='13'>
 			<xPos>560</xPos>
 			<yPos>370</yPos>
 			<Name>Trap</Name>
 			<RoomObjectType>2</RoomObjectType>
+			<Health>-1</Health>
+			<MaxHealth>-1</MaxHealth>
 		</Enemy>
 	</Enemies>
 
