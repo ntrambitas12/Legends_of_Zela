@@ -96,8 +96,8 @@ public sealed class LevelSaver
             if (rooms[i] != null)
             {
                 WriteRoom(rooms[i], i);
-                i++;
             }
+            i++;
         }
     }
     private void WriteRoom(IRoomObject room, int i)
@@ -111,8 +111,8 @@ public sealed class LevelSaver
         //write content
         WriteBaseCord(room, i);
         WriteBlocks(room);
-        WriteEnemies(room);
-        WriteItems(room);
+      //  WriteEnemies(room);
+        //WriteItems(room);
         // TODO: there may be more lists im missing
 
         //release writer
@@ -132,10 +132,41 @@ public sealed class LevelSaver
     {
         writer.WriteStartElement("Blocks");
 
-        // TODO
-        // iterate through list of blocks inside room
-        // figure out type of block
-        // write it
+        foreach(IConcreteSprite item in room.StaticTileList)
+        {
+            writer.WriteStartElement("Block");
+            
+            writer.WriteElementString("xPos", item.screenCord.X.ToString());
+            writer.WriteElementString("yPos", item.screenCord.Y.ToString());
+            writer.WriteElementString("Name", item.name);
+            writer.WriteElementString("RoomObjectType", item.roomObjectType.ToString());
+
+            writer.WriteEndElement();
+        }
+
+        foreach (IConcreteSprite item in room.DynamicTileList)
+        {
+            writer.WriteStartElement("Block");
+
+            writer.WriteElementString("xPos", item.screenCord.X.ToString());
+            writer.WriteElementString("yPos", item.screenCord.Y.ToString());
+            writer.WriteElementString("Name", item.name);
+            writer.WriteElementString("RoomObjectType", item.roomObjectType.ToString());
+
+            writer.WriteEndElement();
+        }
+       
+        foreach (IConcreteSprite item in room.MoveableTileList)
+        {
+            writer.WriteStartElement("Block");
+
+            writer.WriteElementString("xPos", item.screenCord.X.ToString());
+            writer.WriteElementString("yPos", item.screenCord.Y.ToString());
+            writer.WriteElementString("Name", item.name);
+            writer.WriteElementString("RoomObjectType", item.roomObjectType.ToString());
+
+            writer.WriteEndElement();
+        }
         
 
         writer.WriteEndElement();
@@ -144,7 +175,22 @@ public sealed class LevelSaver
     {
         writer.WriteStartElement("Enemies");
 
-        // TODO
+        foreach (IConcreteSprite enemy in room.EnemyList)
+        {
+            writer.WriteStartElement("Enemy");
+            writer.WriteStartAttribute("aiType", enemy.aiType.ToString());
+
+            writer.WriteElementString("xPos", enemy.screenCord.X.ToString());
+            writer.WriteElementString("yPos", enemy.screenCord.Y.ToString());
+            writer.WriteElementString("Name", enemy.name);
+            writer.WriteElementString("RoomObjectType", enemy.roomObjectType.ToString());
+            writer.WriteElementString("Health", enemy.health.ToString());
+            writer.WriteElementString("MaxHealth", enemy.maxHealth.ToString());
+
+            /*Deal with writing enemy projectiles here*/
+
+            writer.WriteEndElement();
+        }
 
         writer.WriteEndElement();
     }

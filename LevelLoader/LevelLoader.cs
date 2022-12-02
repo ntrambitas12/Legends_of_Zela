@@ -360,8 +360,6 @@ public class LevelLoader: ILevelLoader
                 }
 
             }
-
-        
     }
  
     private void HandleProjectileEnemyPair()
