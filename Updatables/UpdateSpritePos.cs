@@ -54,7 +54,7 @@ public sealed class UpdateSpritePos : IPosition
         }
     }
 
-    public void smoothUp(ISprite sprite)//how to get link sprite to keyboard controller
+  /*  public void smoothUp(ISprite sprite)//how to get link sprite to keyboard controller
     {
          screenCord = sprite.screenCord;
          spritePos = sprite.spritePos;
@@ -71,7 +71,7 @@ public sealed class UpdateSpritePos : IPosition
          spritePos = sprite.spritePos;
 
          float temp= screenCord.Y;
-         temp = temp+ (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
+         temp. = temp+ (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
          screenCord.Y=temp;
          sprite.screenCord = screenCord;
     }
@@ -96,6 +96,52 @@ public sealed class UpdateSpritePos : IPosition
          temp = temp- (5-temp%10);//isolates last digit of y coordinate and rounds it to nearest 10
          screenCord.X=temp;
          sprite.screenCord = screenCord;
+    }*/
+
+    public void smoothUp(ISprite sprite)//how to get link sprite to keyboard controller
+    {
+         screenCord = sprite.screenCord;
+         spritePos = sprite.spritePos;
+
+         float temp= screenCord.Y;
+         temp = (int)temp;//rounds movement to nearest int
+         screenCord.Y=temp;
+         sprite.screenCord = screenCord;
     }
+
+    public void smoothDown(ISprite sprite)//how to get link sprite to keyboard controller
+    {
+         screenCord = sprite.screenCord;
+         spritePos = sprite.spritePos;
+
+         float temp= screenCord.Y;
+         temp = (int)temp;//rounds movement to nearest int
+         screenCord.Y=temp;
+         sprite.screenCord = screenCord;
+    }
+
+    public void smoothRight(ISprite sprite)//how to get link sprite to keyboard controller
+    {
+         screenCord = sprite.screenCord;
+         spritePos = sprite.spritePos;
+
+         float temp= screenCord.X;
+         temp = (int)temp;//rounds movement to nearest int
+         screenCord.X=temp;
+         sprite.screenCord = screenCord;
+    }
+
+    public void smoothLeft(ISprite sprite)//how to get link sprite to keyboard controller
+    {
+         screenCord = sprite.screenCord;
+         spritePos = sprite.spritePos;
+
+         float temp= screenCord.X;
+         temp = (int)temp;//rounds movement to nearest int
+         screenCord.X=temp;
+         sprite.screenCord = screenCord;
+    }
+
+
 }
 
