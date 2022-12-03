@@ -165,7 +165,7 @@ public sealed class KeyboardController : IController
 
     private void UpdateDoubleKeyCommands(Keys[] pressedKeys)
     {
-        foreach (DoubleKeys keyComb in controllerMappingsDoubleKeys.Keys)
+        foreach (DoubleKeys keyComb in controllerMappingsDoubleKeys.Keys.ToList())
         {
             if (!keyComb.wasPressed && keyComb.isPressed(pressedKeys))
             {

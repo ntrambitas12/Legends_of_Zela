@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Xml.Linq;
 
 public sealed class SpriteFactory : IFactory
 {
@@ -805,6 +806,9 @@ public sealed class SpriteFactory : IFactory
             drops.Add("Sword", (swordFrames, swordFrames[0][0], new DropType(SwordDropType.CreateDrop)));
             drops.Add("Map", (mapFrames, mapFrames[0][0], new DropType(MapDropType.CreateDrop)));
             drops.Add("TriforceShard", (triforceFrames, triforceFrames[0][0], new DropType(TriforceDropType.CreateDrop)));
+            drops.Add("Stairs", (stairsFrames, stairsFrames[0][0], new DropType(StairDropType.CreateDrop)));
+            drops.Add("InvisibleStairs", (invisibleBarrierFrames, stairsFrames[0][0], new DropType(InvisibleStairDropType.CreateDrop)));
+
         }
     }
     //------------------------------PRIVATE COLLISION METHODS------------------------------
@@ -857,31 +861,6 @@ public sealed class SpriteFactory : IFactory
         return CreateEntityWithCollision(location, baseCord, frame, name, roomObjectType);
     }
  
-    public ISprite CreateStairsBlock(Vector2 location, Vector2 baseCord)
-    {
-        IDrop stairs = new Drop(_spriteBatch, location, stairsFrames);
-        stairs.initScreenCoord = baseCord; 
-        Rectangle collisionRect = stairsFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(stairs, collisionRect);
-        stairs.collider = collisionObject;
-        stairs.collider.UpdateCollisionPosition();
-
-        stairs.SetItemType(new StairDropType(stairs));
-        return stairs;
-    }
-    public ISprite CreateInvisibleStairsBlock(Vector2 location, Vector2 baseCord)
-    {
-        IDrop stairs = new Drop(_spriteBatch, location, invisibleBarrierFrames);
-        stairs.initScreenCoord = baseCord;
-
-        Rectangle collisionRect = stairsFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(stairs, collisionRect);
-        stairs.collider = collisionObject;
-        stairs.collider.UpdateCollisionPosition();
-
-        stairs.SetItemType(new InvisibleStairDropType(stairs));
-        return stairs;
-    }
     
     public ISprite CreateDoorBlock(Vector2 location, Vector2 baseCord, bool isOpen, String name, int roomObjectType)
     {

@@ -119,6 +119,7 @@ public sealed class LevelSaver
         writer.WriteEndElement();
         writer.Flush();
         writer.Close();
+        
     }
     private void WriteBaseCord(IRoomObject room, int i)
     {
@@ -189,7 +190,6 @@ public sealed class LevelSaver
             writer.WriteEndElement();
         }
         
-
         writer.WriteEndElement();
     }
     private void WriteEnemies(IRoomObject room)
@@ -229,15 +229,14 @@ public sealed class LevelSaver
 
         foreach(IDrop item in room.PickupList)
         {
-            writer.WriteStartElement("Item");
-           WriteItem(item);
-            writer.WriteEndElement();
+                writer.WriteStartElement("Item");
+                WriteItem(item);
+                writer.WriteEndElement();  
         }
 
         writer.WriteEndElement();
     }
 
-    /*TODO: FIX COORDINATE FOR Y*/
     private void WriteItem(IConcreteSprite item)
     {
         writer.WriteElementString("xPos", item.initalCoord.X.ToString());
