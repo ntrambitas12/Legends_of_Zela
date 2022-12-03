@@ -173,69 +173,53 @@
 
 
 	<Enemies>
-		<Enemy aiType='11'>
+		<Enemy>
 			<xPos>208</xPos>
 			<yPos>306</yPos>
 			<Name>Wallmaster</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>2</Health>
-			<MaxHealth>2</MaxHealth>
 		</Enemy>
-		<Enemy aiType='11'>
+		<Enemy>
 			<xPos>208</xPos>
 			<yPos>338</yPos>
 			<Name>Wallmaster</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>2</Health>
-			<MaxHealth>2</MaxHealth>
 		</Enemy>
-		<Enemy aiType='11'>
+		<Enemy>
 			<xPos>560</xPos>
 			<yPos>370</yPos>
 			<Name>Wallmaster</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>2</Health>
-			<MaxHealth>2</MaxHealth>
 		</Enemy>
-		<Enemy aiType='11'>
+		<Enemy>
 			<xPos>560</xPos>
 			<yPos>338</yPos>
 			<Name>Wallmaster</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>2</Health>
-			<MaxHealth>2</MaxHealth>
 		</Enemy>
-		<Enemy aiType='11'>
+		<Enemy>
 			<xPos>272</xPos>
 			<yPos>178</yPos>
 			<Name>Wallmaster</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>2</Health>
-			<MaxHealth>2</MaxHealth>
 		</Enemy>
-		<Enemy aiType='11'>
+		<Enemy>
 			<xPos>304</xPos>
 			<yPos>178</yPos>
 			<Name>Wallmaster</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>2</Health>
-			<MaxHealth>2</MaxHealth>
 		</Enemy>
-		<Enemy aiType='11'>
+		<Enemy>
 			<xPos>560</xPos>
 			<yPos>178</yPos>
 			<Name>Wallmaster</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>2</Health>
-			<MaxHealth>2</MaxHealth>
 		</Enemy>
-		<Enemy aiType='11'>
+		<Enemy>
 			<xPos>528</xPos>
 			<yPos>178</yPos>
 			<Name>Wallmaster</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>2</Health>
-			<MaxHealth>2</MaxHealth>
 		</Enemy>
 	</Enemies>
 

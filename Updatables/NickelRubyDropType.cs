@@ -12,11 +12,6 @@ public class NickelRubyDropType : IItemType
         this.nickelRuby = nickelRuby;
     }
 
-    public static IItemType CreateDrop(IDrop drop)
-    {
-        return new NickelRubyDropType(drop);
-    }
-
     public void Update(GameTime gameTime)
     {
         if (nickelRuby.ShouldDraw())

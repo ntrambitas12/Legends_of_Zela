@@ -125,45 +125,35 @@
 
 
 	<Enemies>
-		<Enemy aiType="11">
+		<Enemy>
 			<xPos>272</xPos>
 			<yPos>210</yPos>
 			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>1</Health>
-			<MaxHealth>1</MaxHealth>
 		</Enemy>
-		<Enemy aiType="11">
+		<Enemy>
 			<xPos>272</xPos>
 			<yPos>338</yPos>
 			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>1</Health>
-			<MaxHealth>1</MaxHealth>
 		</Enemy>
-		<Enemy aiType="11">
+		<Enemy>
 			<xPos>432</xPos>
 			<yPos>274</yPos>
 			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>1</Health>
-			<MaxHealth>1</MaxHealth>
 		</Enemy>
-		<Enemy aiType="11">
+		<Enemy>
 			<xPos>528</xPos>
 			<yPos>242</yPos>
 			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>1</Health>
-			<MaxHealth>1</MaxHealth>
 		</Enemy>
-		<Enemy aiType="11">
+		<Enemy>
 			<xPos>560</xPos>
 			<yPos>370</yPos>
 			<Name>Stalfos</Name>
 			<RoomObjectType>2</RoomObjectType>
-			<Health>1</Health>
-			<MaxHealth>1</MaxHealth>
 		</Enemy>
 	</Enemies>
 

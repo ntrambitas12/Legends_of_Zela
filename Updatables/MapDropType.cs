@@ -11,11 +11,6 @@ public class MapDropType : IItemType
         this.map = map;
     }
 
-    public static IItemType CreateDrop(IDrop drop)
-    {
-        return new MapDropType(drop);
-    }
-
     public void Update(GameTime gameTime)
     {
         if (map.ShouldDraw())

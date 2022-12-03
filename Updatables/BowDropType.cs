@@ -12,11 +12,6 @@ public class BowDropType : IItemType
         this.bow = bow;
     }
 
-    public static IItemType CreateDrop(IDrop drop)
-    {
-        return new BowDropType(drop);
-    }
-
     public void Update(GameTime gameTime)
     {
         ISprite Link = RoomObjectManager.Instance.currentRoom().Link;
@@ -30,7 +25,7 @@ public class BowDropType : IItemType
                 bow.SetShouldDraw(false);
                 ItemSelectionScreen.AddToInventory(bow, ArrayIndex.arrow);
 
-                IProjectile Arrow = (IProjectile)SpriteFactory.Instance.CreateArrowProjectile(999, Link, "Arrow", (int)RoomObjectTypes.typeEnemyProjectile);
+                IProjectile Arrow = (IProjectile)SpriteFactory.Instance.CreateArrowProjectile(999, Link, "Arrow");
                 ((ConcreteSprite)Link).AddProjectile(Arrow, ArrayIndex.arrow);
                 ((ConcreteSprite)Link).SetProjectileIndex(ArrayIndex.arrow);
 
