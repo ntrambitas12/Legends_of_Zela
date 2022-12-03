@@ -254,6 +254,7 @@ public class RoomObject : IRoomObject
                 ISprite newKey = SpriteFactory.Instance.CreateKeyDrop(room26Key);
                 AddGameObject((int)RoomObjectTypes.typePickup, newKey, "keyDrop");
                 SoundManager.Instance.PlayOnce("LOZ_Key_Appear");
+
             }
             EnemyList.Clear();
         }

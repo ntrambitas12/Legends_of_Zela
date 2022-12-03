@@ -1,0 +1,27 @@
+﻿Code quality review
+Author: Zach Kallmeyer
+Date: 12-22-22
+Sprint #5
+File being reviewed: KeyboardController.cs
+Author of file being reviewed: Tony Mai
+
+This code does not have many blatant code smells. The DoubleKeys subclass does
+a good job encapsulating the behavior for multiple button presses while
+protecting this behavior from the rest of the keyboard controller. The use of a
+Dictionary to map the commands to each key was a smart decision taken from how
+the rest of our keyboard controller functionality works, so figuring out how to
+combine the multiple pressed keys into one K for a K-V pair was essential and
+well executed. Methods are short and concise with single purposes, and instance
+variables are private. Variables are named properly, and it appears all code is
+used. You did a good job factoring out the hasCombination functionality into its
+own method. One potential code smell is that there are some private methods
+(i.e. hasCombination and UpdateDoubleKeyCommands). Methods should generally be
+public, so this might be a smell to look into. Other than that, good job!
+
+One change we could make to the game in this sprint would be to have each save
+file be saved to and loaded from via button combinations, such as Ctrl-1 to save
+to Save File 1 and Shift-1 to load from Save File 1. This would be a very
+intuitive way to control saves, and through this implementation based on these
+changes it could easily be handled, as we could map the commands to each of
+these button combinations rather than to a single button.
+
