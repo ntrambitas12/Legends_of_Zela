@@ -6,7 +6,7 @@
         <Rupee>0</Rupee>
         <Bombs>0</Bombs>
         <Keys>0</Keys>
-        <currentRoom>1</currentRoom>
+        <currentRoom>0</currentRoom>
         <Compass>false</Compass>
         <Map>false</Map>
     </Link>
