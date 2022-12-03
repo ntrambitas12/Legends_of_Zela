@@ -231,7 +231,11 @@
     <None Update="SavedData\GameData.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+<<<<<<< HEAD
+    <None Update="SavedData\savedData.xml">
+=======
     <None Update="SavedData\Link\LinkData.xml">
+>>>>>>> 958b4d4858d34744a16f5dda6e1c8f8f5ddba6ee
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

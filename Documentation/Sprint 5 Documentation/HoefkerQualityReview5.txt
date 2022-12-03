@@ -1,0 +1,15 @@
+﻿Code quality review
+Author: Kyle Hoefker
+Date: 11/21/2022
+Sprint #5
+File being reviewed: Hud.cs
+Author of file being reviewed: Ben Keip
+
+Overall this file has very good code quality. A dictionary is used for the
+different locations of the HUD which is very good. Throughout this code there is
+little compexity, loose coupling, and high cohesion. These are all preferred.
+There are very clever solutions throughout this to keep the class as small as
+possible. Helper methods are used to keep the important methods very
+understandable. The only change I would reccomend is to remove the literals
+throughout to further data drive this code.
+

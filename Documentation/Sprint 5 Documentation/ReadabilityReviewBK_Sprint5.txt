@@ -1,0 +1,27 @@
+﻿Readability Review
+Author: Ben Keip
+Date: 11-6-22
+Sprint #4
+File being reviewed: Camera.cs
+Author of file being reviewed: Nick Trambitas
+Code review took 5 minutes
+
+This is some of the most readable code in our entire project. Methods are restricted to at most, 6 lines.
+Variable updates are practical and clear. The get set design pattern is used here with great effect to
+keep methods tight. There are only 5 fields in the class, four of which are set in the constructor directly without
+depending on other classes.
+
+
+
+Readability Review
+Author: Ben Keip
+Date: 12-1-22
+Sprint #5
+File being reviewed: Camera.cs
+Author of file being reviewed: Nick Trambitas
+Code review took 5 minutes
+
+This is some of the most readable code in our entire project. Methods are restricted to at most, 6 lines.
+Variable updates are practical and clear. The get set design pattern is used here with great effect to
+keep methods tight. There are only 5 fields in the class, four of which are set in the constructor directly without
+depending on other classes.
