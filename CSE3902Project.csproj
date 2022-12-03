@@ -219,19 +219,19 @@
     <None Update="Rooms\Room02.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SavedData\1\LinkData.xml">
+    <None Update="SavedData\1\Link\LinkData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="SavedData\2\LinkData.xml">
+    <None Update="SavedData\2\Link\LinkData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="SavedData\3\LinkData.xml">
+    <None Update="SavedData\3\Link\LinkData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="SavedData\GameData.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SavedData\LinkData.xml">
+    <None Update="SavedData\Link\LinkData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

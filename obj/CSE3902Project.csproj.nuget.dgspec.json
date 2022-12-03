@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ben\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj": {}
+    "C:\\Users\\Ben\\source\\repos\\CSE3902Project\\CSE3902Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ben\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj": {
+    "C:\\Users\\Ben\\source\\repos\\CSE3902Project\\CSE3902Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ben\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj",
+        "projectUniqueName": "C:\\Users\\Ben\\source\\repos\\CSE3902Project\\CSE3902Project.csproj",
         "projectName": "CSE3902Project",
-        "projectPath": "C:\\Users\\Ben\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj",
+        "projectPath": "C:\\Users\\Ben\\source\\repos\\CSE3902Project\\CSE3902Project.csproj",
         "packagesPath": "C:\\Users\\Ben\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ben\\Source\\Repos\\CSE3902Project\\obj\\",
+        "outputPath": "C:\\Users\\Ben\\source\\repos\\CSE3902Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

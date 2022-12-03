@@ -931,7 +931,7 @@ public sealed class SpriteFactory : IFactory
         return deathCloud;
     }
 
-
+    
     //Drops
     /*Refactored to one method*/
     public ISprite CreateDrop(Vector2 location, Vector2 baseCord, String name, int RoomObjectType)

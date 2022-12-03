@@ -1,11 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "C0Uyn9ULYH3Zx+J0Q0CdEkF0SMUPBI6ls3dPErUTEUdDVpIqgW0NxO0p7QJP4Id/kiTwar2Ameem+deU74Ut3w==",
+  "dgSpecHash": "UZzUJlL4fJh6cLf+Wmg6uockJFx1CunT2ZKj6YkcyzCsDLynUqIZU2+yT/LOCq4FtMITmsM+GVNE6Hxi0YpWUw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ben\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj",
+  "projectFilePath": "C:\\Users\\Ben\\source\\repos\\CSE3902Project\\CSE3902Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ben\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "C:\\Users\\Ben\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\Ben\\source\\repos\\CSE3902Project\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

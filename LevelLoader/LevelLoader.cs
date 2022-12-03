@@ -136,7 +136,7 @@ public class LevelLoader: ILevelLoader
 
     private void LoadSavedData(string linkData)
     {
-        var files = Directory.GetFiles(@linkData, "*.xml");
+        var files = Directory.GetFiles(@linkData + "/Link/", "*.xml");
         foreach(var file in files)
         {
            reader = XmlReader.Create(file);
