@@ -127,8 +127,9 @@ public class LevelLoader: ILevelLoader
             }
 
             BuildRoom(id);
+            reader.Close();
         }
-        reader.Close();
+       
         LoadSavedData(saveLink);
         
        

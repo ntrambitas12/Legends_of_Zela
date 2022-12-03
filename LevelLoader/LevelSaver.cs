@@ -104,6 +104,7 @@ public sealed class LevelSaver
     private void WriteRoom(IRoomObject room, int i, int saveState)
     {
         //initialize writer
+       
         String savePath = "SavedData/" + saveState + "/Room" + i + ".xml";
         writer = XmlWriter.Create(savePath, settings);
         //room = roomObjectManager.currentRoom();
