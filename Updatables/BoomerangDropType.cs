@@ -11,11 +11,6 @@ public class BoomerangDropType : IItemType
         this.boomerang = boomerang;
     }
 
-    public static IItemType CreateDrop(IDrop drop)
-    {
-        return new BoomerangDropType(drop);
-    }
-
     public void Update(GameTime gameTime)
     {
         ISprite Link = RoomObjectManager.Instance.currentRoom().Link;
@@ -29,7 +24,7 @@ public class BoomerangDropType : IItemType
                 boomerang.SetShouldDraw(false);
                 ItemSelectionScreen.AddToInventory(boomerang, ArrayIndex.boomerang);
 
-                IProjectile Boomerang = (IProjectile)SpriteFactory.Instance.CreateBoomerangProjectile(1000, Link, "Boomerang", (int)RoomObjectTypes.typeEnemyProjectile);
+                IProjectile Boomerang = (IProjectile)SpriteFactory.Instance.CreateBoomerangProjectile(1000, Link, "Boomerang");
                 ((ConcreteSprite)Link).AddProjectile(Boomerang, ArrayIndex.boomerang);
                 ((ConcreteSprite)Link).SetProjectileIndex(ArrayIndex.boomerang);
 

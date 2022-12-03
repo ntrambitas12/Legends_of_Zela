@@ -17,6 +17,7 @@ public class BladeTrapBehavior : IAI
     public ISprite entity { get; set; }
 
     private bool pauseEnemies;
+    private SpriteAction enemyAction;
     private IRoomObject currRoom;
     private Vector2 corner;
 

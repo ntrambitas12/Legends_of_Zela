@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
-using System.Xml.Linq;
 
 public class ConcreteSprite: AbstractSprite, IConcreteSprite
     {
@@ -33,12 +32,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public bool map { get; set; }
     public bool compass { get; set; }
     public bool triforce { get; set; }
-    public bool isDoorOpen { get; set; }
-    public String name { get; set; }
-    public int roomObjectType { get; set; }
 
     public Boolean isDamaged { get; set; }
-    public Vector2 initalCoord { get; set; }
 
     /*Projectile inventory
      Use ArrayIndex enums*/
@@ -46,8 +41,8 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public IProjectile[] projectiles { get; set; }
 
     public SpriteAction direction { get; set; }
-    public int aiType { get; set; }
 
+    private float timeElapsed;
 
     private IDraw drawSprite = new DrawSprite();
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
@@ -57,7 +52,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
 
     
 
-    public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, bool isDoorOpen, String name, int roomObjectType) : base(spriteBatch, position, textures) {
+    public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, bool isDoorOpen) : base(spriteBatch, position, textures) {
         OpenDoor = new OpenState(this);
         ClosedDoor = new ClosedState(this);
         if (isDoorOpen)
@@ -69,11 +64,9 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
             state = ClosedDoor;
         }
         direction = SpriteAction.left;
-        this.name = name;
-        this.roomObjectType = roomObjectType;
     }
 
-    public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, String name, int roomObjectType) : base(spriteBatch, position, textures)
+    public ConcreteSprite(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures)
     {
         still = new StillState(this);
         stillAnimated = new StillAnimated(this);
@@ -100,10 +93,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         projectiles = new IProjectile[5];
         projectileIndex = (int)ArrayIndex.arrow;
 
-        projectiles[(int)ArrayIndex.swordShoot] = (IProjectile) SpriteFactory.Instance.CreateSwordShootProjectile(999, this, "ShootingSword", (int)RoomObjectTypes.typeEnemyProjectile);
-        this.name = name;
-        this.roomObjectType = roomObjectType;
-
+        projectiles[(int)ArrayIndex.swordShoot] = (IProjectile) SpriteFactory.Instance.CreateSwordShootProjectile(999, this, "ShootingSword");
     }
 
     public void SetSpriteState(SpriteAction action, ISpriteState state)

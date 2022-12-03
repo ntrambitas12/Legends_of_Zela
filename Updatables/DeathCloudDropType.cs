@@ -12,11 +12,6 @@ public class DeathCloudDropType : IItemType
         this.deathCloud = deathCloud;
     }
 
-    public static IItemType CreateDrop(IDrop drop)
-    {
-        return new DeathCloudDropType(drop);
-    }
-
     public void Update(GameTime gameTime)
     {
         if (timeElapsed > 0.75)

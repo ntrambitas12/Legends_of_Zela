@@ -11,11 +11,6 @@ public class TriforceDropType : IItemType
         this.triforce = triforce;
     }
 
-    public static IItemType CreateDrop(IDrop drop)
-    {
-        return new TriforceDropType(drop);
-    }
-
     public void Update(GameTime gameTime)
     {
         if (triforce.ShouldDraw())

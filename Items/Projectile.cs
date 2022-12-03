@@ -12,9 +12,8 @@ public class Projectile : AbstractItem, IProjectile
     private bool shouldCollide;
     private String dropName;
     private String dropDesc;
-    private int roomObjectType;
 
-    public Projectile(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, String name, int roomObjectType) : base(spriteBatch, position, textures)
+    public Projectile(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, String name) : base(spriteBatch, position, textures)
     {
         direction = -1;
         fireProjectile = null;
@@ -22,16 +21,11 @@ public class Projectile : AbstractItem, IProjectile
         shouldCollide = true;
         dropName = name + "Drop";
         dropDesc = name;
-        this.roomObjectType = roomObjectType;
     }
 
     public int Direction()
     {
         return this.direction;
-    }
-    public int GetRoomObjectType()
-    {
-        return roomObjectType;
     }
 
     public void SetDirection(int direction)

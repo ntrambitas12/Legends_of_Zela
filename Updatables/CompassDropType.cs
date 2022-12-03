@@ -11,11 +11,6 @@ public class CompassDropType : IItemType
         this.compass = compass;
     }
 
-    public static IItemType CreateDrop(IDrop drop)
-    {
-        return new CompassDropType(drop);
-    }
-
     public void Update(GameTime gameTime)
     {
         if (compass.ShouldDraw())
