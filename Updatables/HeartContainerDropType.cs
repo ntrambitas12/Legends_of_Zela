@@ -12,6 +12,11 @@ public class HeartContainerDropType : IItemType
         this.heartContainer = heartContainer;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new HeartContainerDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         if (heartContainer.ShouldDraw())

@@ -200,10 +200,19 @@ public sealed class SpriteFactory : IFactory
     private Texture2D HUDBoomerangs;
     private Texture2D SplashScreen;
 
+    //delegates
+    private delegate IItemType DropType(IDrop drop);
+    //Dictinoary to allow for quick lookup for frames
+    private Dictionary<String, List<Texture2D>[]> entityFrames;
+    private Dictionary<String, (List<Texture2D>[], Texture2D, Delegate)> drops;
 
     private SpriteBatch _spriteBatch;
     private SpriteFactory()
     {
+        //intialize dictionary
+        entityFrames = new Dictionary<String, List<Texture2D>[]>();
+        drops = new Dictionary<String, (List<Texture2D>[], Texture2D, Delegate)>();
+
         //Blocks
         textFrames = new List<Texture2D>[4];
         barrierFrames = new List<Texture2D>[4];
@@ -657,28 +666,41 @@ public sealed class SpriteFactory : IFactory
         goriyaFrames[(int)SpriteAction.moveRight] = goriyaRight;
         goriyaFrames[(int)SpriteAction.moveUp] = goriyaUp;
         goriyaFrames[(int)SpriteAction.moveDown] = goriyaDown;
+       
+
         gelFrames[(int)SpriteAction.moveLeft] = gel;
         gelFrames[(int)SpriteAction.moveRight] = gel;
         gelFrames[(int)SpriteAction.moveUp] = gel;
         gelFrames[(int)SpriteAction.moveDown] = gel;
+        
+
         stalfosFrames[(int)SpriteAction.moveLeft] = stalfos;
         stalfosFrames[(int)SpriteAction.moveRight] = stalfos;
         stalfosFrames[(int)SpriteAction.moveUp] = stalfos;
         stalfosFrames[(int)SpriteAction.moveDown] = stalfos;
+    
+
         keeseFrames[(int)SpriteAction.moveLeft] = keese;
         keeseFrames[(int)SpriteAction.moveRight] = keese;
         keeseFrames[(int)SpriteAction.moveUp] = keese;
         keeseFrames[(int)SpriteAction.moveDown] = keese;
+
+
         trapFrames[(int)SpriteAction.moveLeft] = trap;
         trapFrames[(int)SpriteAction.moveRight] = trap;
         trapFrames[(int)SpriteAction.moveUp] = trap;
         trapFrames[(int)SpriteAction.moveDown] = trap;
+       
+
         wallmasterFrames[(int)SpriteAction.moveLeft] = wallmasterOpen;
         wallmasterFrames[(int)SpriteAction.moveRight] = wallmasterClosed;
         wallmasterFrames[(int)SpriteAction.moveUp] = wallmasterOpen;
         wallmasterFrames[(int)SpriteAction.moveDown] = wallmasterClosed;
+       
+
         aquamentusFrames[(int)SpriteAction.moveLeft] = aquamentusLeft;
         aquamentusFrames[(int)SpriteAction.moveRight] = aquamentusRight;
+ 
 
         // Add arrow frames to the list
         arrowFrames[(int)SpriteAction.moveLeft] = arrowLeft;
@@ -710,14 +732,85 @@ public sealed class SpriteFactory : IFactory
         bombFrames[(int)SpriteAction.moveUp] = bombUp;
         bombFrames[(int)SpriteAction.moveDown] = bombDown;
         bombFrames[(int)SpriteAction.bombCloud] = bombCloud;
+
+        popuplateDictionary();
     }
 
+    private void popuplateDictionary()
+    {
+        //add all the characters
+        entityFrames.Add("Link", linkFrames);
+        entityFrames.Add("Keese", keeseFrames);
+        entityFrames.Add("Stalfos", stalfosFrames);
+        entityFrames.Add("Gel", gelFrames);
+        entityFrames.Add("Goriya", goriyaFrames);
+        entityFrames.Add("Wallmaster", wallmasterFrames);
+        entityFrames.Add("Aquamentus", aquamentusFrames);
+        entityFrames.Add("Trap", trapFrames);
+
+        //floors
+        entityFrames.Add("DungeonFloor", dungeonFloorFrames);
+        entityFrames.Add("RoughFloor", roughFloorFrames);
+        entityFrames.Add("AlternateBackground", alternateBackgroundFrames);
+
+        //walls
+        entityFrames.Add("WallTop", wallTopFrames);
+        entityFrames.Add("WallTop1", wallTop1Frames);
+        entityFrames.Add("WallTop2", wallTop2Frames);
+        entityFrames.Add("WallBottom", wallBottomFrames);
+        entityFrames.Add("WallBottom1", wallBottom1Frames);
+        entityFrames.Add("WallBottom2", wallBottom2Frames);
+        entityFrames.Add("WallRight", wallRightFrames);
+        entityFrames.Add("WallRight1", wallRight1Frames);
+        entityFrames.Add("WallRight2", wallRight2Frames);
+        entityFrames.Add("WallLeft", wallLeftFrames);
+        entityFrames.Add("WallLeft1", wallLeft1Frames);
+        entityFrames.Add("WallLeft2", wallLeft2Frames);
+
+        //doors
+        entityFrames.Add("DoorRight", doorRightFrames);
+        entityFrames.Add("DoorLeft", doorLeftFrames);
+        entityFrames.Add("DoorUp", doorUpFrames);
+        entityFrames.Add("DoorDown", doorDownFrames);
+        entityFrames.Add("BombDoorUp", bombDoorUpFrames);
+        entityFrames.Add("BombDoorDown", bombDoorDownFrames);
+        entityFrames.Add("BombDoorLeft", bombDoorLeftFrames);
+        entityFrames.Add("BombDoorRight", bombDoorRightFrames);
+
+        //blocks
+        entityFrames.Add("StatueRight", statueRightFrames);
+        entityFrames.Add("StatueLeft", statueLeftFrames);
+        entityFrames.Add("Barrier", barrierFrames);
+        entityFrames.Add("Opening", openingFrames);
+        entityFrames.Add("FireBlock", fireFrames);
+        entityFrames.Add("InvisibleBarrier", invisibleBarrierFrames);
+        entityFrames.Add("OldMan", oldManFrames);
+        entityFrames.Add("Water", waterFrames);
+        entityFrames.Add("Text", textFrames);
+
+        //drops
+        drops.Add("ArrowDrop", (new List<Texture2D>[] { new List<Texture2D> { arrowFrames[2][0] } }, arrowFrames[0][0], new DropType(ArrowDropType.CreateDrop)));
+        drops.Add("NickelRuby", (nickelRupiesFrames, nickelRupiesFrames[0][0], new DropType(NickelRubyDropType.CreateDrop)));
+        drops.Add("BoomerangDrop", (new List<Texture2D>[] { new List<Texture2D> { boomerangFrames[0][0] } }, boomerangFrames[0][0], new DropType(BoomerangDropType.CreateDrop)));
+        drops.Add("BombDrop", (bombFrames, bombFrames[0][0], new DropType(BombDropType.CreateDrop)));
+        drops.Add("Ruby", (rupiesFrames, rupiesFrames[0][0], new DropType(RubyDropType.CreateDrop)));
+        drops.Add("Bow", (bowFrames, bowFrames[0][0], new DropType(BowDropType.CreateDrop)));
+        drops.Add("Clock", (clockFrames, clockFrames[0][0], new DropType(ClockDropType.CreateDrop)));
+        drops.Add("Compass", (compassFrames, compassFrames[0][0], new DropType(CompassDropType.CreateDrop)));
+        drops.Add("Heart", (heartFrames, heartFrames[0][0], new DropType(HeartDropType.CreateDrop)));
+        drops.Add("HeartContainer", (heartContainerFrames, heartContainerFrames[0][0], new DropType(HeartContainerDropType.CreateDrop)));
+        drops.Add("Key", (keyFrames, keyFrames[0][0], new DropType(KeyDropType.CreateDrop)));
+        drops.Add("Sword", (swordFrames, swordFrames[0][0], new DropType(SwordDropType.CreateDrop)));
+        drops.Add("Map", (mapFrames, mapFrames[0][0], new DropType(MapDropType.CreateDrop)));
+        drops.Add("TriforceShard", (triforceFrames, triforceFrames[0][0], new DropType(TriforceDropType.CreateDrop)));
+    }
     //------------------------------PRIVATE COLLISION METHODS------------------------------
     //creates an entity with a default collider
-    private ISprite CreateEntityWithCollision(Vector2 location, List<Texture2D>[] frames1)
+    private ISprite CreateEntityWithCollision(Vector2 location, Vector2 baseCord, List<Texture2D>[] frames1, String name, int roomObjectType)
     {
 
-        ISprite entity = new ConcreteSprite(_spriteBatch, location, frames1);
+        IConcreteSprite entity = new ConcreteSprite(_spriteBatch, location, frames1, name, roomObjectType);
+        entity.initalCoord = baseCord;
         Rectangle collisionRect = frames1[0][0].Bounds;
 
         int x = 2 * frames1[0][0].Width;
@@ -729,10 +822,11 @@ public sealed class SpriteFactory : IFactory
         return entity;
     }
     //creates an entity with the specified collider
-    private ISprite CreateEntityWithCollision(Vector2 location, List<Texture2D>[] frames1, ColliderType collider)
+    private ISprite CreateEntityWithCollision(Vector2 location, Vector2 baseCord, List<Texture2D>[] frames1, ColliderType collider, String name, int roomObjectType)
     {
 
-        ISprite entity = new ConcreteSprite(_spriteBatch, location, frames1);
+        IConcreteSprite entity = new ConcreteSprite(_spriteBatch, location, frames1, name, roomObjectType);
+        entity.initalCoord = baseCord;
         Rectangle collisionRect = frames1[0][0].Bounds;
 
         int x = 2 * frames1[0][0].Width;
@@ -753,34 +847,17 @@ public sealed class SpriteFactory : IFactory
     }
 
     //Blocks
-    public ISprite CreateTextBlock(Vector2 location)
+    /*Refactor to one method*/
+    public ISprite CreateBlock(Vector2 location, Vector2 baseCord, String name, int roomObjectType)
     {
-        return CreateEntityWithCollision(location, textFrames);
+        List<Texture2D>[] frame = entityFrames[name];
+        return CreateEntityWithCollision(location, baseCord, frame, name, roomObjectType);
     }
-    public ISprite CreateOpeningBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, openingFrames);
-    }
-    public ISprite CreateAlternateBackgroundBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, alternateBackgroundFrames);
-    }
-    public ISprite CreateInvisibleBarrierBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, invisibleBarrierFrames);
-    }
-    public ISprite CreateDungeonFloorBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, dungeonFloorFrames);
-    }
-    public ISprite CreateBarrierBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, barrierFrames);
-    }
-    public ISprite CreateStairsBlock(Vector2 location)
+ 
+    public ISprite CreateStairsBlock(Vector2 location, Vector2 baseCord)
     {
         IDrop stairs = new Drop(_spriteBatch, location, stairsFrames);
-
+        stairs.initScreenCoord = baseCord; 
         Rectangle collisionRect = stairsFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(stairs, collisionRect);
         stairs.collider = collisionObject;
@@ -789,9 +866,10 @@ public sealed class SpriteFactory : IFactory
         stairs.SetItemType(new StairDropType(stairs));
         return stairs;
     }
-    public ISprite CreateInvisibleStairsBlock(Vector2 location)
+    public ISprite CreateInvisibleStairsBlock(Vector2 location, Vector2 baseCord)
     {
         IDrop stairs = new Drop(_spriteBatch, location, invisibleBarrierFrames);
+        stairs.initScreenCoord = baseCord;
 
         Rectangle collisionRect = stairsFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(stairs, collisionRect);
@@ -801,371 +879,81 @@ public sealed class SpriteFactory : IFactory
         stairs.SetItemType(new InvisibleStairDropType(stairs));
         return stairs;
     }
-    public ISprite CreateWaterBlock(Vector2 location)
+    
+    public ISprite CreateDoorBlock(Vector2 location, Vector2 baseCord, bool isOpen, String name, int roomObjectType)
     {
-        return CreateEntityWithCollision(location, waterFrames);
-    }
-    public ISprite CreateRoughFloorBlock(Vector2 location)
-    {
-        return new ConcreteSprite(_spriteBatch, location, roughFloorFrames);
-    }
-    public ISprite CreateStatueRightBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, statueRightFrames);
-    }
-    public ISprite CreateStatueLeftBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, statueLeftFrames);
-    }
-    public ISprite CreateWallTopBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallTopFrames);
-    }
-    public ISprite CreateWallTop1Block(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallTop1Frames);
-    }
-    public ISprite CreateWallTop2Block(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallTop2Frames);
-    }
-    public ISprite CreateWallBottomBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallBottomFrames);
-    }
-    public ISprite CreateWallBottom1Block(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallBottom1Frames);
-    }
-    public ISprite CreateWallBottom2Block(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallBottom2Frames);
-    }
-    public ISprite CreateWallRightBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallRightFrames);
-    }
-    public ISprite CreateWallRight1Block(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallRight1Frames);
-    }
-    public ISprite CreateWallRight2Block(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallRight2Frames);
-    }
-    public ISprite CreateWallLeftBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallLeftFrames);
-    }
-    public ISprite CreateWallLeft1Block(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallLeft1Frames);
-    }
-    public ISprite CreateWallLeft2Block(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, wallLeft2Frames);
-    }
-    public ISprite CreateDoorUpBlock(Vector2 location, bool isOpen)
-    {
-        IConcreteSprite door = (IConcreteSprite) CreateEntityWithCollision(location, doorUpFrames);
-        door.SetDirection(SpriteAction.up);
+        List<Texture2D>[] frames = entityFrames[name];
+        IConcreteSprite door = (IConcreteSprite) CreateEntityWithCollision(location, baseCord, frames, name, roomObjectType);
+        door.SetDirection(findDirection(name));
+        door.isDoorOpen = isOpen;
         return door;
     }
-    public ISprite CreateDoorDownBlock(Vector2 location, bool isOpen)
+        
+    private SpriteAction findDirection (string name)
     {
-        IConcreteSprite door = (IConcreteSprite) CreateEntityWithCollision(location, doorDownFrames);
-        door.SetDirection(SpriteAction.down);
-        return door;
+        SpriteAction ret = SpriteAction.down;
+        if (name.Contains("Up"))
+        {
+            ret = SpriteAction.up;
+        } else if (name.Contains("Down"))
+        {
+            ret = SpriteAction.down;
+        } else if (name.Contains("Right"))
+        {
+            ret = SpriteAction.right;
+        } else if (name.Contains("Left"))
+        {
+            ret = SpriteAction.left;
+        }
+        return ret;
     }
-    public ISprite CreateDoorLeftBlock(Vector2 location, bool isOpen)
-    {
-        IConcreteSprite door = (IConcreteSprite) CreateEntityWithCollision(location, doorLeftFrames);
-        door.SetDirection(SpriteAction.left);
-        return door;
-    }
-    public ISprite CreateDoorRightBlock(Vector2 location, bool isOpen)
-    {
-        IConcreteSprite door = (IConcreteSprite) CreateEntityWithCollision(location, doorRightFrames);
-        door.SetDirection(SpriteAction.right);
-        return door;
-    }
-    public ISprite CreateBombableUpBlock(Vector2 location, bool isBombed)
-    {
-        IConcreteSprite door = (IConcreteSprite) CreateEntityWithCollision(location, bombDoorUpFrames);
-        door.SetDirection(SpriteAction.up);
-        return door;
-    }
-    public ISprite CreateBombableDownBlock(Vector2 location, bool isBombed)
-    {
-        IConcreteSprite door = (IConcreteSprite)CreateEntityWithCollision(location, bombDoorDownFrames);
-        door.SetDirection(SpriteAction.down);
-        return door;
-    }
-    public ISprite CreateBombableRightBlock(Vector2 location, bool isBombed)
-    {
-        IConcreteSprite door = (IConcreteSprite)CreateEntityWithCollision(location, bombDoorRightFrames);
-        door.SetDirection(SpriteAction.right);
-        return door;
-    }
-    public ISprite CreateBombableLeftBlock(Vector2 location, bool isBombed)
-    {
-        IConcreteSprite door = (IConcreteSprite)CreateEntityWithCollision(location, bombDoorLeftFrames);
-        door.SetDirection(SpriteAction.left);
-        return door;
-    }
-    public ISprite CreateFireBlock(Vector2 location)
-    {
-        return CreateEntityWithCollision(location, fireFrames);
-    }
-
 
     //Enemies
-    public ISprite CreateGoriyaSprite(Vector2 location)
+    /*Refactor to one method*/
+    public ISprite CreateEnemy(Vector2 location, Vector2 baseCord, String name, int roomObjectType, int health, int maxHealth, int aiType)
     {
-        IConcreteSprite goriya = (IConcreteSprite) CreateEntityWithCollision(location, goriyaFrames);
-        goriya.health = 2;
-        goriya.maxHealth = 2;
-        return AddAI(goriya, AIType.RandomMove);
+        List<Texture2D>[] frame = entityFrames[name];
+        IConcreteSprite enemy = (IConcreteSprite)CreateEntityWithCollision(location, baseCord, frame, name, roomObjectType);
+        enemy.health = health;
+        enemy.maxHealth = maxHealth;
+        enemy.aiType = aiType;
+        return AddAI(enemy, (AIType)aiType);
     }
-    public ISprite CreateKeeseSprite(Vector2 location)
-    {
-        IConcreteSprite keese = (IConcreteSprite) CreateEntityWithCollision(location, keeseFrames, ColliderType.Keese);
-        keese.health = 1;
-        keese.maxHealth = 1;
-        return AddAI(keese, AIType.AlwaysRandomMove);
-    }
-    public ISprite CreateStalfosSprite(Vector2 location)
-    {
-        IConcreteSprite stalfos = (IConcreteSprite) CreateEntityWithCollision(location, stalfosFrames);
-        stalfos.health = 1;
-        stalfos.maxHealth = 1;
-        return AddAI(stalfos, AIType.RandomMove);
-    }
-    public ISprite CreateGelSprite(Vector2 location)
-    {
-        IConcreteSprite gel = (IConcreteSprite) CreateEntityWithCollision(location, gelFrames);
-        gel.health = 1;
-        gel.maxHealth = 1;
- return AddAI(gel, AIType.RandomMove);
-    }
-    public ISprite CreateAquamentusSprite(Vector2 location)
-    {
-        IConcreteSprite aquamentus = (IConcreteSprite) CreateEntityWithCollision(location, aquamentusFrames);
-        aquamentus.health = 4;
-        aquamentus.maxHealth = 4;
-        return AddAI(aquamentus, AIType.AquamentusBehavior);
-    }
-    public ISprite CreateBladeTrapSprite(Vector2 location)
-    {
-        IConcreteSprite bladeTrap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
-        bladeTrap.health = -1;
-        bladeTrap.maxHealth = -1;
-        return AddAI(bladeTrap, AIType.BladeTrapBehavior);
-    }
-    public ISprite CreateWallmasterSprite(Vector2 location)
-    {
-        IConcreteSprite wallmaster = (IConcreteSprite) CreateEntityWithCollision(location, wallmasterFrames);
-        wallmaster.health = 2;
-        wallmaster.maxHealth = 2;
-        return AddAI(wallmaster, AIType.RandomMove);
-    }
-    public ISprite CreateOldManSprite(Vector2 location)
-    {
-        IConcreteSprite oldMan = (IConcreteSprite) CreateEntityWithCollision(location, oldManFrames);
-        oldMan.health = -1;
-        oldMan.maxHealth = -1;
-        return AddAI(oldMan, AIType.RandomMove);
-    }
-    public ISprite CreateTrapSprite(Vector2 location)
-    {
-        IConcreteSprite trap = (IConcreteSprite) CreateEntityWithCollision(location, trapFrames);
-        trap.health = -1;
-        trap.maxHealth = -1;
-        return AddAI(trap, AIType.BladeTrapBehavior);
-    }
-    public ISprite CreateDeathCloud(Vector2 location)
+ 
+    public ISprite CreateDeathCloud(Vector2 location, Vector2 baseCord)
     {
         IDrop deathCloud = new Drop(_spriteBatch, location, deathCloudFrames);
+        deathCloud.initScreenCoord = baseCord;
         deathCloud.SetItemType(new DeathCloudDropType(deathCloud));
         return deathCloud;
     }
 
 
     //Drops
-    public ISprite CreateArrowDrop(Vector2 location)
+    /*Refactored to one method*/
+    public ISprite CreateDrop(Vector2 location, Vector2 baseCord, String name, int RoomObjectType)
     {
-        IDrop arrow = new Drop(_spriteBatch, location, new List<Texture2D>[] { new List<Texture2D> { arrowFrames[2][0] } });
+        (List<Texture2D>[], Texture2D, Delegate) obj = drops[name];
 
-        Rectangle collisionRect = arrowFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(arrow, collisionRect);
-        arrow.collider = collisionObject;
-        arrow.collider.UpdateCollisionPosition();
+        IDrop drop = new Drop(_spriteBatch, location, obj.Item1);
+        drop.name = name;
+        drop.RoomObjectType = RoomObjectType;
+        drop.initScreenCoord = baseCord;
 
-        arrow.SetItemType(new ArrowDropType(arrow)); 
-        return arrow;
+        Rectangle collisionRect = obj.Item2.Bounds;
+        ICollision collisionObject = new Collision(drop, collisionRect);
+        drop.collider = collisionObject;
+        drop.collider.UpdateCollisionPosition();
+
+        drop.SetItemType((IItemType)obj.Item3.DynamicInvoke(drop));
+        return drop;
     }
-    public ISprite CreateNickelRubyDrop(Vector2 location)
-    {
-        IDrop nickelRuby = new Drop(_spriteBatch, location, nickelRupiesFrames);
-
-        Rectangle collisionRect = nickelRupiesFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(nickelRuby, collisionRect);
-        nickelRuby.collider = collisionObject;
-        nickelRuby.collider.UpdateCollisionPosition();
-
-        nickelRuby.SetItemType(new NickelRubyDropType(nickelRuby));
-        return nickelRuby;
-    }
-    public ISprite CreateBoomerangDrop(Vector2 location)
-    {
-        IDrop boomerang = new Drop(_spriteBatch, location, new List<Texture2D>[] { new List<Texture2D> { boomerangFrames[0][0] } });
-
-        Rectangle collisionRect = boomerangFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(boomerang, collisionRect);
-        boomerang.collider = collisionObject;
-        boomerang.collider.UpdateCollisionPosition();
-
-        boomerang.SetItemType(new BoomerangDropType(boomerang));
-        return boomerang;
-    }
-    public ISprite CreateBombDrop(Vector2 location)
-    {
-        IDrop bomb = new Drop(_spriteBatch, location, bombFrames);
-
-        Rectangle collisionRect = bombFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(bomb, collisionRect);
-        bomb.collider = collisionObject;
-        bomb.collider.UpdateCollisionPosition();
-
-        bomb.SetItemType(new BombDropType(bomb));
-        return bomb;
-    }
-    public ISprite CreateRubyDrop(Vector2 location)
-    {
-        IDrop ruby = new Drop(_spriteBatch, location, rupiesFrames);
-
-        Rectangle collisionRect = rupiesFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(ruby, collisionRect);
-        ruby.collider = collisionObject;
-        ruby.collider.UpdateCollisionPosition();
-
-        ruby.SetItemType(new RubyDropType(ruby));
-        return ruby;
-    }
-    public ISprite CreateBowDrop(Vector2 location)
-    {
-        IDrop bow = new Drop(_spriteBatch, location, bowFrames);
-
-        Rectangle collisionRect = bowFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(bow, collisionRect);
-        bow.collider = collisionObject;
-        bow.collider.UpdateCollisionPosition();
-
-        bow.SetItemType(new BowDropType(bow));
-        return bow;
-    }
-    public ISprite CreateClockDrop(Vector2 location)
-    {
-        IDrop clock = new Drop(_spriteBatch, location, clockFrames);
-
-        Rectangle collisionRect = clockFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(clock, collisionRect);
-        clock.collider = collisionObject;
-        clock.collider.UpdateCollisionPosition();
-
-        clock.SetItemType(new ClockDropType(clock));
-        return clock;
-    }
-    public ISprite CreateCompassDrop(Vector2 location)
-    {
-        IDrop compass = new Drop(_spriteBatch, location, compassFrames);
-
-        Rectangle collisionRect = compassFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(compass, collisionRect);
-        compass.collider = collisionObject;
-        compass.collider.UpdateCollisionPosition();
-
-        compass.SetItemType(new CompassDropType(compass));
-        return compass;
-    }
-    public ISprite CreateHeartDrop(Vector2 location)
-    {
-        IDrop heart = new Drop(_spriteBatch, location, heartFrames);
-
-        Rectangle collisionRect = heartFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(heart, collisionRect);
-        heart.collider = collisionObject;
-        heart.collider.UpdateCollisionPosition();
-
-        heart.SetItemType(new HeartDropType(heart));
-        return heart;
-    }
-    public ISprite CreateHeartContainerDrop(Vector2 location)
-    {
-        IDrop heartContainer = new Drop(_spriteBatch, location, heartContainerFrames);
-
-        Rectangle collisionRect = heartContainerFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(heartContainer, collisionRect);
-        heartContainer.collider = collisionObject;
-        heartContainer.collider.UpdateCollisionPosition();
-
-        heartContainer.SetItemType(new HeartContainerDropType(heartContainer));
-        return heartContainer;
-    }
-    public ISprite CreateKeyDrop(Vector2 location)
-    {
-        IDrop key = new Drop(_spriteBatch, location, keyFrames);
-
-        Rectangle collisionRect = keyFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(key, collisionRect);
-        key.collider = collisionObject;
-        key.collider.UpdateCollisionPosition();
-
-        key.SetItemType(new KeyDropType(key));
-        return key;
-    }
-    public ISprite CreateMapDrop(Vector2 location)
-    {
-        IDrop map = new Drop(_spriteBatch, location, mapFrames);
-
-        Rectangle collisionRect = mapFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(map, collisionRect);
-        map.collider = collisionObject;
-        map.collider.UpdateCollisionPosition();
-
-        map.SetItemType(new MapDropType(map));
-        return map;
-    }
-    public ISprite CreateSwordDrop(Vector2 location)
-    {
-        IDrop sword = new Drop(_spriteBatch, location, swordFrames);
-
-        Rectangle collisionRect = swordFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(sword, collisionRect);
-        sword.collider = collisionObject;
-        sword.collider.UpdateCollisionPosition();
-
-        sword.SetItemType(new SwordDropType(sword));
-        return sword;
-    }
-    public ISprite CreateTriforceShardDrop(Vector2 location)
-    {
-        IDrop triforce = new Drop(_spriteBatch, location, triforceFrames);
-
-        Rectangle collisionRect = triforceFrames[0][0].Bounds;
-        ICollision collisionObject = new Collision(triforce, collisionRect);
-        triforce.collider = collisionObject;
-        triforce.collider.UpdateCollisionPosition();
-
-        triforce.SetItemType(new TriforceDropType(triforce));
-        return triforce;
-    }
-
+    
     // Projectiles
     // Add method for CreateFireballProjectile and CreateSwordProjectile
-    public ISprite CreateArrowProjectile(int distance, ISprite owner, String name)
+    public ISprite CreateArrowProjectile(int distance, ISprite owner, String name, int roomObjectType)
     {
-        IProjectile arrow = new Projectile(_spriteBatch, new Vector2(0, 0), arrowFrames, name);
+        IProjectile arrow = new Projectile(_spriteBatch, new Vector2(0, 0), arrowFrames, name, roomObjectType);
 
         Rectangle collisionRect = arrowFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(arrow, collisionRect);
@@ -1179,9 +967,9 @@ public sealed class SpriteFactory : IFactory
         arrow.SetFireCommand(fireArrow);
         return arrow;
     }
-    public ISprite CreateBombProjectile(int distance, ISprite owner, String name)
+    public ISprite CreateBombProjectile(int distance, ISprite owner, String name, int roomObjectType)
     {
-        IProjectile bomb = new Projectile(_spriteBatch, new Vector2(0, 0), bombFrames, name);
+        IProjectile bomb = new Projectile(_spriteBatch, new Vector2(0, 0), bombFrames, name, roomObjectType);
 
         Rectangle collisionRect = bombFrames[0][0].Bounds;
         collisionRect.Inflate(30, 30);
@@ -1196,9 +984,9 @@ public sealed class SpriteFactory : IFactory
         bomb.SetFireCommand(fireBomb);
         return bomb;
     }
-    public ISprite CreateBoomerangProjectile(int distance, ISprite owner, String name)
+    public ISprite CreateBoomerangProjectile(int distance, ISprite owner, String name, int roomObjectType)
     {
-        IProjectile boomerang = new Projectile(_spriteBatch, new Vector2(0, 0), boomerangFrames, name);
+        IProjectile boomerang = new Projectile(_spriteBatch, new Vector2(0, 0), boomerangFrames, name, roomObjectType);
 
         Rectangle collisionRect = boomerangFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(boomerang, collisionRect);
@@ -1212,9 +1000,9 @@ public sealed class SpriteFactory : IFactory
         boomerang.SetFireCommand(fireBoomerang);
         return boomerang;
     }
-    public ISprite CreateFireballProjectile(int distance, ISprite owner, String name)
+    public ISprite CreateFireballProjectile(int distance, ISprite owner, String name, int roomObjectType)
     {
-        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames, name);
+        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames, name, roomObjectType);
 
         Rectangle collisionRect = fireballFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(fireball, collisionRect);
@@ -1231,9 +1019,9 @@ public sealed class SpriteFactory : IFactory
 
 
 
-    public ISprite CreateUpperFireballProjectile(int distance, ISprite owner, String name)
+    public ISprite CreateUpperFireballProjectile(int distance, ISprite owner, String name, int roomObjectType)
     {
-        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames, name);
+        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames, name, roomObjectType);
 
         Rectangle collisionRect = fireballFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(fireball, collisionRect);
@@ -1248,9 +1036,9 @@ public sealed class SpriteFactory : IFactory
         return fireball;
     }
 
-    public ISprite CreateLowerFireballProjectile(int distance, ISprite owner, String name)
+    public ISprite CreateLowerFireballProjectile(int distance, ISprite owner, String name, int roomObjectType)
     {
-        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames, name);
+        IProjectile fireball = new Projectile(_spriteBatch, new Vector2(0, 0), fireballFrames, name, roomObjectType);
 
         Rectangle collisionRect = fireballFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(fireball, collisionRect);
@@ -1266,10 +1054,10 @@ public sealed class SpriteFactory : IFactory
     }
 
 
-    public ISprite CreateSwordProjectile(int distance, ISprite owner, String name)
+    public ISprite CreateSwordProjectile(int distance, ISprite owner, String name, int roomObjectType)
 
     {
-        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordFrames, name);
+        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordFrames, name, roomObjectType);
 
         Rectangle collisionRect = swordFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(sword, collisionRect);
@@ -1283,9 +1071,9 @@ public sealed class SpriteFactory : IFactory
         sword.SetFireCommand(fireSword);
         return sword;
     }
-    public ISprite CreateSwordShootProjectile(int distance, ISprite owner, String name)
+    public ISprite CreateSwordShootProjectile(int distance, ISprite owner, String name, int roomObjectType)
     {
-        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordShootFrames, name);
+        IProjectile sword = new Projectile(_spriteBatch, new Vector2(0, 0), swordShootFrames, name, roomObjectType);
 
         Rectangle collisionRect = swordShootFrames[0][0].Bounds;
         ICollision collisionObject = new Collision(sword, collisionRect);
@@ -1301,9 +1089,9 @@ public sealed class SpriteFactory : IFactory
     }
 
     //Playables
-    public ISprite CreateLinkSprite(Vector2 location)
+    public ISprite CreateLinkSprite(Vector2 location, String name, int roomObjectType)
     {
-        return CreateEntityWithCollision(location, linkFrames);
+        return CreateEntityWithCollision(location, location, linkFrames, name, roomObjectType);
     }
 
     //HUD Elements

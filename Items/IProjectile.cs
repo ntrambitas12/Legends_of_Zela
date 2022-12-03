@@ -2,6 +2,7 @@
 
 public interface IProjectile : IItem
 {
+    public int GetRoomObjectType();
     public int Direction();
     public void SetDirection(int direction);
     public FireProjectile FireCommand();

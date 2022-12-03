@@ -11,6 +11,11 @@ public class ClockDropType : IItemType
         this.clock = clock;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new ClockDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         if (clock.ShouldDraw())
