@@ -11,6 +11,11 @@ public class KeyDropType : IItemType
         this.key = key;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new KeyDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         if (key.ShouldDraw())

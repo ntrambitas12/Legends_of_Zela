@@ -150,6 +150,10 @@ public sealed class RoomObjectManager : IRoomObjectManager
     {
         return roomList[roomId];
     }
+    public IRoomObject[] getRooms()
+    {
+        return roomList;
+    }
 
     public IRoomObject adjacentRoom(SpriteAction direction)
     {

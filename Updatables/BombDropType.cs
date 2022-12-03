@@ -11,6 +11,11 @@ public class BombDropType : IItemType
         this.bomb = bomb;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new BombDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         ISprite Link = RoomObjectManager.Instance.currentRoom().Link;
@@ -23,7 +28,7 @@ public class BombDropType : IItemType
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 bomb.SetShouldDraw(false);
                 ItemSelectionScreen.AddToInventory(bomb, ArrayIndex.bomb);
-                IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link, "Bomb");
+                IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link, "Bomb", (int)RoomObjectTypes.typeEnemyProjectile);
                 ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);
                 ((ConcreteSprite)Link).SetProjectileIndex(ArrayIndex.bomb);
                 ((ConcreteSprite)Link).bombs += 4;

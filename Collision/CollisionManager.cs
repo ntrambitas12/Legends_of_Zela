@@ -116,12 +116,6 @@ public sealed class CollisionManager : ICollisionManager
             IConcreteSprite collidingEnemy = (IConcreteSprite)currentRoom.Link.collider.isIntersecting(enemyList);
             IProjectile collidingProjectile = (IProjectile) currentRoom.Link.collider.isIntersecting(projectileList);
           
-
-            //if (currentRoom.BaseCord == new Vector2(3200, 1440))
-            //{
-            //    ((IConcreteSprite)(currentRoom.Link)).CarryToStart(collidingEnemy, currentRoom, RoomObjectManager.Instance);
-            //}
-            //else
             
             if (collidingEnemy != null && !currentRoom.DeadEnemyList.Contains(collidingEnemy) && timeElapsed > 2)
             {
