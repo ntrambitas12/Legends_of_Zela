@@ -738,71 +738,74 @@ public sealed class SpriteFactory : IFactory
 
     private void popuplateDictionary()
     {
-        //add all the characters
-        entityFrames.Add("Link", linkFrames);
-        entityFrames.Add("Keese", keeseFrames);
-        entityFrames.Add("Stalfos", stalfosFrames);
-        entityFrames.Add("Gel", gelFrames);
-        entityFrames.Add("Goriya", goriyaFrames);
-        entityFrames.Add("Wallmaster", wallmasterFrames);
-        entityFrames.Add("Aquamentus", aquamentusFrames);
-        entityFrames.Add("Trap", trapFrames);
+        if (!entityFrames.ContainsKey("Link"))
+        {
+            //add all the characters
+            entityFrames.Add("Link", linkFrames);
+            entityFrames.Add("Keese", keeseFrames);
+            entityFrames.Add("Stalfos", stalfosFrames);
+            entityFrames.Add("Gel", gelFrames);
+            entityFrames.Add("Goriya", goriyaFrames);
+            entityFrames.Add("Wallmaster", wallmasterFrames);
+            entityFrames.Add("Aquamentus", aquamentusFrames);
+            entityFrames.Add("Trap", trapFrames);
 
-        //floors
-        entityFrames.Add("DungeonFloor", dungeonFloorFrames);
-        entityFrames.Add("RoughFloor", roughFloorFrames);
-        entityFrames.Add("AlternateBackground", alternateBackgroundFrames);
+            //floors
+            entityFrames.Add("DungeonFloor", dungeonFloorFrames);
+            entityFrames.Add("RoughFloor", roughFloorFrames);
+            entityFrames.Add("AlternateBackground", alternateBackgroundFrames);
 
-        //walls
-        entityFrames.Add("WallTop", wallTopFrames);
-        entityFrames.Add("WallTop1", wallTop1Frames);
-        entityFrames.Add("WallTop2", wallTop2Frames);
-        entityFrames.Add("WallBottom", wallBottomFrames);
-        entityFrames.Add("WallBottom1", wallBottom1Frames);
-        entityFrames.Add("WallBottom2", wallBottom2Frames);
-        entityFrames.Add("WallRight", wallRightFrames);
-        entityFrames.Add("WallRight1", wallRight1Frames);
-        entityFrames.Add("WallRight2", wallRight2Frames);
-        entityFrames.Add("WallLeft", wallLeftFrames);
-        entityFrames.Add("WallLeft1", wallLeft1Frames);
-        entityFrames.Add("WallLeft2", wallLeft2Frames);
+            //walls
+            entityFrames.Add("WallTop", wallTopFrames);
+            entityFrames.Add("WallTop1", wallTop1Frames);
+            entityFrames.Add("WallTop2", wallTop2Frames);
+            entityFrames.Add("WallBottom", wallBottomFrames);
+            entityFrames.Add("WallBottom1", wallBottom1Frames);
+            entityFrames.Add("WallBottom2", wallBottom2Frames);
+            entityFrames.Add("WallRight", wallRightFrames);
+            entityFrames.Add("WallRight1", wallRight1Frames);
+            entityFrames.Add("WallRight2", wallRight2Frames);
+            entityFrames.Add("WallLeft", wallLeftFrames);
+            entityFrames.Add("WallLeft1", wallLeft1Frames);
+            entityFrames.Add("WallLeft2", wallLeft2Frames);
 
-        //doors
-        entityFrames.Add("DoorRight", doorRightFrames);
-        entityFrames.Add("DoorLeft", doorLeftFrames);
-        entityFrames.Add("DoorUp", doorUpFrames);
-        entityFrames.Add("DoorDown", doorDownFrames);
-        entityFrames.Add("BombDoorUp", bombDoorUpFrames);
-        entityFrames.Add("BombDoorDown", bombDoorDownFrames);
-        entityFrames.Add("BombDoorLeft", bombDoorLeftFrames);
-        entityFrames.Add("BombDoorRight", bombDoorRightFrames);
+            //doors
+            entityFrames.Add("DoorRight", doorRightFrames);
+            entityFrames.Add("DoorLeft", doorLeftFrames);
+            entityFrames.Add("DoorUp", doorUpFrames);
+            entityFrames.Add("DoorDown", doorDownFrames);
+            entityFrames.Add("BombDoorUp", bombDoorUpFrames);
+            entityFrames.Add("BombDoorDown", bombDoorDownFrames);
+            entityFrames.Add("BombDoorLeft", bombDoorLeftFrames);
+            entityFrames.Add("BombDoorRight", bombDoorRightFrames);
 
-        //blocks
-        entityFrames.Add("StatueRight", statueRightFrames);
-        entityFrames.Add("StatueLeft", statueLeftFrames);
-        entityFrames.Add("Barrier", barrierFrames);
-        entityFrames.Add("Opening", openingFrames);
-        entityFrames.Add("FireBlock", fireFrames);
-        entityFrames.Add("InvisibleBarrier", invisibleBarrierFrames);
-        entityFrames.Add("OldMan", oldManFrames);
-        entityFrames.Add("Water", waterFrames);
-        entityFrames.Add("Text", textFrames);
+            //blocks
+            entityFrames.Add("StatueRight", statueRightFrames);
+            entityFrames.Add("StatueLeft", statueLeftFrames);
+            entityFrames.Add("Barrier", barrierFrames);
+            entityFrames.Add("Opening", openingFrames);
+            entityFrames.Add("FireBlock", fireFrames);
+            entityFrames.Add("InvisibleBarrier", invisibleBarrierFrames);
+            entityFrames.Add("OldMan", oldManFrames);
+            entityFrames.Add("Water", waterFrames);
+            entityFrames.Add("Text", textFrames);
 
-        //drops
-        drops.Add("ArrowDrop", (new List<Texture2D>[] { new List<Texture2D> { arrowFrames[2][0] } }, arrowFrames[0][0], new DropType(ArrowDropType.CreateDrop)));
-        drops.Add("NickelRuby", (nickelRupiesFrames, nickelRupiesFrames[0][0], new DropType(NickelRubyDropType.CreateDrop)));
-        drops.Add("BoomerangDrop", (new List<Texture2D>[] { new List<Texture2D> { boomerangFrames[0][0] } }, boomerangFrames[0][0], new DropType(BoomerangDropType.CreateDrop)));
-        drops.Add("BombDrop", (bombFrames, bombFrames[0][0], new DropType(BombDropType.CreateDrop)));
-        drops.Add("Ruby", (rupiesFrames, rupiesFrames[0][0], new DropType(RubyDropType.CreateDrop)));
-        drops.Add("Bow", (bowFrames, bowFrames[0][0], new DropType(BowDropType.CreateDrop)));
-        drops.Add("Clock", (clockFrames, clockFrames[0][0], new DropType(ClockDropType.CreateDrop)));
-        drops.Add("Compass", (compassFrames, compassFrames[0][0], new DropType(CompassDropType.CreateDrop)));
-        drops.Add("Heart", (heartFrames, heartFrames[0][0], new DropType(HeartDropType.CreateDrop)));
-        drops.Add("HeartContainer", (heartContainerFrames, heartContainerFrames[0][0], new DropType(HeartContainerDropType.CreateDrop)));
-        drops.Add("Key", (keyFrames, keyFrames[0][0], new DropType(KeyDropType.CreateDrop)));
-        drops.Add("Sword", (swordFrames, swordFrames[0][0], new DropType(SwordDropType.CreateDrop)));
-        drops.Add("Map", (mapFrames, mapFrames[0][0], new DropType(MapDropType.CreateDrop)));
-        drops.Add("TriforceShard", (triforceFrames, triforceFrames[0][0], new DropType(TriforceDropType.CreateDrop)));
+            //drops
+            drops.Add("ArrowDrop", (new List<Texture2D>[] { new List<Texture2D> { arrowFrames[2][0] } }, arrowFrames[0][0], new DropType(ArrowDropType.CreateDrop)));
+            drops.Add("NickelRuby", (nickelRupiesFrames, nickelRupiesFrames[0][0], new DropType(NickelRubyDropType.CreateDrop)));
+            drops.Add("BoomerangDrop", (new List<Texture2D>[] { new List<Texture2D> { boomerangFrames[0][0] } }, boomerangFrames[0][0], new DropType(BoomerangDropType.CreateDrop)));
+            drops.Add("BombDrop", (bombFrames, bombFrames[0][0], new DropType(BombDropType.CreateDrop)));
+            drops.Add("Ruby", (rupiesFrames, rupiesFrames[0][0], new DropType(RubyDropType.CreateDrop)));
+            drops.Add("Bow", (bowFrames, bowFrames[0][0], new DropType(BowDropType.CreateDrop)));
+            drops.Add("Clock", (clockFrames, clockFrames[0][0], new DropType(ClockDropType.CreateDrop)));
+            drops.Add("Compass", (compassFrames, compassFrames[0][0], new DropType(CompassDropType.CreateDrop)));
+            drops.Add("Heart", (heartFrames, heartFrames[0][0], new DropType(HeartDropType.CreateDrop)));
+            drops.Add("HeartContainer", (heartContainerFrames, heartContainerFrames[0][0], new DropType(HeartContainerDropType.CreateDrop)));
+            drops.Add("Key", (keyFrames, keyFrames[0][0], new DropType(KeyDropType.CreateDrop)));
+            drops.Add("Sword", (swordFrames, swordFrames[0][0], new DropType(SwordDropType.CreateDrop)));
+            drops.Add("Map", (mapFrames, mapFrames[0][0], new DropType(MapDropType.CreateDrop)));
+            drops.Add("TriforceShard", (triforceFrames, triforceFrames[0][0], new DropType(TriforceDropType.CreateDrop)));
+        }
     }
     //------------------------------PRIVATE COLLISION METHODS------------------------------
     //creates an entity with a default collider

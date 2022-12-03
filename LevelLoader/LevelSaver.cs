@@ -29,10 +29,10 @@ public sealed class LevelSaver
 
     //------------------------------------------LINK------------------------------------------
     //handles player inventory 
-    public void SaveLink()
+    public void SaveLink(int saveState)
     {
         //initialize writer
-        writer = XmlWriter.Create("SavedData/LinkData.xml", settings);
+        writer = XmlWriter.Create("SavedData/" + saveState + "/LinkData.xml", settings);
         room = roomObjectManager.currentRoom();
         writer.WriteStartElement("XnaContent");
 
@@ -88,7 +88,7 @@ public sealed class LevelSaver
 
     //------------------------------------------ROOMS------------------------------------------
     //handles all entities
-    public void SaveRooms()
+    public void SaveRooms(int saveState)
     {
         IRoomObject[] rooms = roomObjectManager.getRooms();
         int i = 0;
@@ -96,15 +96,15 @@ public sealed class LevelSaver
         {
             if (rooms[i] != null)
             {
-                WriteRoom(rooms[i], i);
+                WriteRoom(rooms[i], i, saveState);
             }
             i++;
         }
     }
-    private void WriteRoom(IRoomObject room, int i)
+    private void WriteRoom(IRoomObject room, int i, int saveState)
     {
         //initialize writer
-        String savePath = "SavedData/Room" + i + ".xml";
+        String savePath = "SavedData/" + saveState + "/Room" + i + ".xml";
         writer = XmlWriter.Create(savePath, settings);
         //room = roomObjectManager.currentRoom();
         writer.WriteStartElement("XnaContent");

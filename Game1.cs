@@ -15,12 +15,16 @@ namespace CSE3902Project
         private ItemSelectionScreen inventory;
         private HUD hud;
         private Camera camera;
+        public static string defaultRoomPath { get; set; }
+        public static string defaultLinkPath { get; set; }
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            defaultRoomPath = "Rooms/";
+            defaultLinkPath = "SavedData/";
         }
 
 
@@ -51,7 +55,7 @@ namespace CSE3902Project
 
         protected override void LoadContent()
         {
-            level.ParseRoom();
+            level.ParseRoom(defaultRoomPath, defaultLinkPath);
             //RoomObjectManager.Instance.setRoom(1, true);
         }
 

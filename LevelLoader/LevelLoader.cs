@@ -77,9 +77,9 @@ public class LevelLoader: ILevelLoader
 
    
  
-    public void ParseRoom()
+    public void ParseRoom(string saveState, string saveLink)
     {
-        var files = Directory.GetFiles(@"Rooms/", "*.xml");
+        var files = Directory.GetFiles(@saveState, "*.xml");
         
         foreach (var file in files)
         {
@@ -130,13 +130,13 @@ public class LevelLoader: ILevelLoader
             BuildRoom(id);
         }
 
-        LoadSavedData();
+        LoadSavedData(saveLink);
        
     }
 
-    private void LoadSavedData()
+    private void LoadSavedData(string linkData)
     {
-        var files = Directory.GetFiles(@"SavedData/", "*.xml");
+        var files = Directory.GetFiles(@linkData, "*.xml");
         foreach(var file in files)
         {
            reader = XmlReader.Create(file);
