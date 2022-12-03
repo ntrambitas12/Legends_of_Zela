@@ -32,6 +32,9 @@ public interface IConcreteSprite : ISprite
     public String name { get; set; }
     public int roomObjectType { get; set; }
     public int aiType { get; set; }
+    public bool isDoorOpen { get; set; }
+
+    public Vector2 initalCoord { get; set; }
 
 
     void SetSpriteState(SpriteAction action, ISpriteState spriteState);

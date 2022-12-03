@@ -33,10 +33,12 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public bool map { get; set; }
     public bool compass { get; set; }
     public bool triforce { get; set; }
+    public bool isDoorOpen { get; set; }
     public String name { get; set; }
     public int roomObjectType { get; set; }
 
     public Boolean isDamaged { get; set; }
+    public Vector2 initalCoord { get; set; }
 
     /*Projectile inventory
      Use ArrayIndex enums*/
@@ -46,7 +48,6 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
     public SpriteAction direction { get; set; }
     public int aiType { get; set; }
 
-    private float timeElapsed;
 
     private IDraw drawSprite = new DrawSprite();
     private IPosition posUpdate = UpdateSpritePos.GetInstance;
@@ -99,7 +100,7 @@ public class ConcreteSprite: AbstractSprite, IConcreteSprite
         projectiles = new IProjectile[5];
         projectileIndex = (int)ArrayIndex.arrow;
 
-        projectiles[(int)ArrayIndex.swordShoot] = (IProjectile) SpriteFactory.Instance.CreateSwordShootProjectile(999, this, "ShootingSword");
+        projectiles[(int)ArrayIndex.swordShoot] = (IProjectile) SpriteFactory.Instance.CreateSwordShootProjectile(999, this, "ShootingSword", (int)RoomObjectTypes.typeEnemyProjectile);
         this.name = name;
         this.roomObjectType = roomObjectType;
 

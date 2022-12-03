@@ -14,9 +14,8 @@ public class LevelLoader: ILevelLoader
 {
     private XmlReader reader;
     private List<(string, string)> parseTypes;
-    private delegate ISprite ConcreteEntities(Vector2 pos);
-    private delegate ISprite Projectiles(int distance, ISprite owner, String name);
-    private delegate ISprite Doors(Vector2 pos, bool isOpen);
+    private delegate ISprite ConcreteEntities(Vector2 pos, Vector2 baseCord);
+    private delegate ISprite Projectiles(int distance, ISprite owner, String name, int roomObjectType);
     private bool runOnce;
     private Dictionary<String, Delegate> constructer;
     private RoomObject room;
@@ -52,7 +51,7 @@ public class LevelLoader: ILevelLoader
     private bool isDoor;
     private bool isDoorOpen;
     private bool isEnemy;
-
+    private bool isDrop;
 
 
     public LevelLoader(Game1 game1, ItemSelectionScreen inventory, HUD hud)
@@ -98,6 +97,7 @@ public class LevelLoader: ILevelLoader
             {
                 reader.ReadToFollowing(parseType.Item1);
                 read = reader.ReadToDescendant(parseType.Item2);
+                isDrop = parseType.Item2 == "Item";
                
                 if (read)
                 {
@@ -139,37 +139,36 @@ public class LevelLoader: ILevelLoader
         var files = Directory.GetFiles(@"SavedData/", "*.xml");
         foreach(var file in files)
         {
-            reader = XmlReader.Create(file);
-
+           reader = XmlReader.Create(file);
             LoadSavedLink(reader);
+            ReadSavedInventory(reader);
+            reader.Close();
         }
-        
-          reader.Close();
-        
     }
 
     private void LoadSavedLink(XmlReader reader)
     {
-        reader.ReadToFollowing("Link");
-        reader.ReadToDescendant("Health");
-        Link.health = reader.ReadElementContentAsInt();
-        reader.ReadToNextSibling("MaxHealth");
-        Link.maxHealth = reader.ReadElementContentAsInt();
-        reader.ReadToNextSibling("Rupee");
-        Link.rubies = reader.ReadElementContentAsInt();
-        reader.ReadToNextSibling("Bombs");
-        Link.bombs = reader.ReadElementContentAsInt();
-        reader.ReadToNextSibling("Keys");
-        Link.keys = reader.ReadElementContentAsInt();
-        reader.ReadToNextSibling("currentRoom");
-        int roomID = reader.ReadElementContentAsInt();
-        roomObjectManager.setRoom(roomID, true);
-        reader.ReadToNextSibling("Compass");
-        Link.compass = reader.ReadElementContentAsBoolean();
-        reader.ReadToNextSibling("Map");
-        Link.map = reader.ReadElementContentAsBoolean();
-       
-        ReadSavedInventory(reader);     
+        if (reader.ReadToFollowing("Link"))
+        {
+            reader.ReadToDescendant("Health");
+            Link.health = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("MaxHealth");
+            Link.maxHealth = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("Rupee");
+            Link.rubies = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("Bombs");
+            Link.bombs = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("Keys");
+            Link.keys = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("currentRoom");
+            int roomID = reader.ReadElementContentAsInt();
+            roomObjectManager.setRoom(roomID, true);
+            reader.ReadToNextSibling("Compass");
+            Link.compass = reader.ReadElementContentAsBoolean();
+            reader.ReadToNextSibling("Map");
+            Link.map = reader.ReadElementContentAsBoolean();
+
+        }
     }
 
     private void ReadSavedInventory(XmlReader reader)
@@ -239,7 +238,7 @@ public class LevelLoader: ILevelLoader
 
         /* Tempelate for creating and adding projectiles to link. Will be useful later*/
         // Create sword for link
-        IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link, "Sword");
+        IProjectile Sword = (IProjectile)SpriteFactory.Instance.CreateSwordProjectile(12, Link, "Sword", roomObjectType);
 
         // Add sword to Link
         ((ConcreteSprite)Link).AddProjectile(Sword, ArrayIndex.sword);
@@ -248,7 +247,7 @@ public class LevelLoader: ILevelLoader
 
     private void BuildDoor(Vector2 _base)
     {
-            sprite = SpriteFactory.Instance.CreateDoorBlock(new Vector2(xPos, yPos) + _base, isDoorOpen, name, roomObjectType);
+            sprite = SpriteFactory.Instance.CreateDoorBlock(new Vector2(xPos, yPos) + _base, new Vector2(xPos, yPos), isDoorOpen, name, roomObjectType);
             room.ProjectileStopperList.Add(sprite);
             if (!isDoorOpen)
             {
@@ -276,6 +275,7 @@ public class LevelLoader: ILevelLoader
         isDoor = false;
         isDoorOpen = false;
         isEnemy = false;
+        isDrop = false;
         name = null;
         aiType = 0;
         health = 0;
@@ -332,16 +332,20 @@ public class LevelLoader: ILevelLoader
     {
         if (isEnemy)
         {
-            sprite = SpriteFactory.Instance.CreateEnemy(new Vector2(xPos, yPos) + _base, name, roomObjectType, health, maxHealth, aiType);
+            sprite = SpriteFactory.Instance.CreateEnemy(new Vector2(xPos, yPos) + _base, new Vector2(xPos, yPos), name, roomObjectType, health, maxHealth, aiType);
         }
         /*This case is only for drops*/
+        else if(isDrop)
+        {
+            sprite = SpriteFactory.Instance.CreateDrop(new Vector2(xPos, yPos) + _base, new Vector2(xPos, yPos), name, roomObjectType);
+        }
         else if (constructer.ContainsKey(name))
         {
-            sprite = (ISprite)constructer[name].DynamicInvoke(new Vector2(xPos, yPos) + _base);
+            sprite = (ISprite)constructer[name].DynamicInvoke(new Vector2(xPos, yPos) + _base, new Vector2(xPos, yPos));
         }
         else
         {
-            sprite = SpriteFactory.Instance.CreateBlock(new Vector2(xPos, yPos) + _base, name, roomObjectType);
+            sprite = SpriteFactory.Instance.CreateBlock(new Vector2(xPos, yPos) + _base, new Vector2(xPos, yPos), name, roomObjectType);
         }
             if (sprite != null && name.Equals("InvisibleStairs")) room.ProjectileStopperList.Add(sprite);
             //check if projectile is not null
@@ -350,7 +354,7 @@ public class LevelLoader: ILevelLoader
                 //now we want to create the projectile from the factory
                 if (constructer.TryGetValue(projectile, out Delegate projectileDel))
                 {
-                    ISprite concreteProj = (ISprite)projectileDel.DynamicInvoke(projDistance, sprite, projectile);
+                    ISprite concreteProj = (ISprite)projectileDel.DynamicInvoke(projDistance, sprite, projectile, roomObjectType);
                     //add the projectile created to the room
                     room.AddGameObject(projType, concreteProj, "");
                     // Get enemy and projectile for dictionary
@@ -384,23 +388,6 @@ public class LevelLoader: ILevelLoader
 
     private void populateDictionary()
     {
-      
-        //Items 
-        constructer.Add("ArrowDrop", new ConcreteEntities(SpriteFactory.Instance.CreateArrowDrop));
-        constructer.Add("NickelRuby", new ConcreteEntities(SpriteFactory.Instance.CreateNickelRubyDrop));
-        constructer.Add("Ruby", new ConcreteEntities(SpriteFactory.Instance.CreateRubyDrop));
-        constructer.Add("Bow", new ConcreteEntities(SpriteFactory.Instance.CreateBowDrop));
-        constructer.Add("Clock", new ConcreteEntities(SpriteFactory.Instance.CreateClockDrop));
-        constructer.Add("Heart", new ConcreteEntities(SpriteFactory.Instance.CreateHeartDrop));
-        constructer.Add("Sword", new ConcreteEntities(SpriteFactory.Instance.CreateSwordDrop));
-        constructer.Add("TriforceShard", new ConcreteEntities(SpriteFactory.Instance.CreateTriforceShardDrop));
-        constructer.Add("Compass", new ConcreteEntities(SpriteFactory.Instance.CreateCompassDrop));
-        constructer.Add("Map", new ConcreteEntities(SpriteFactory.Instance.CreateMapDrop));
-        constructer.Add("HeartContainer", new ConcreteEntities(SpriteFactory.Instance.CreateHeartContainerDrop));
-        constructer.Add("Key", new ConcreteEntities(SpriteFactory.Instance.CreateKeyDrop));
-        constructer.Add("BoomerangDrop", new ConcreteEntities(SpriteFactory.Instance.CreateBoomerangDrop));
-        constructer.Add("BombDrop", new ConcreteEntities(SpriteFactory.Instance.CreateBombDrop));
-
         //stairs
         constructer.Add("Stairs", new ConcreteEntities(SpriteFactory.Instance.CreateStairsBlock));
         constructer.Add("InvisibleStairs", new ConcreteEntities(SpriteFactory.Instance.CreateInvisibleStairsBlock));
@@ -410,6 +397,5 @@ public class LevelLoader: ILevelLoader
         constructer.Add("Bomb", new Projectiles(SpriteFactory.Instance.CreateBombProjectile));
         constructer.Add("Boomerang", new Projectiles(SpriteFactory.Instance.CreateBoomerangProjectile));
         constructer.Add("Fireball", new Projectiles(SpriteFactory.Instance.CreateFireballProjectile));
-
     }
 }

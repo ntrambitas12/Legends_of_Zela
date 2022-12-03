@@ -231,7 +231,7 @@ public class RoomObject : IRoomObject
     {
         SoundManager.Instance.PlayOnce("LOZ_Enemy_Die");
         DeadEnemyList.Add(enemy);
-        ISprite deathCloud = SpriteFactory.Instance.CreateDeathCloud(enemy.screenCord);
+        ISprite deathCloud = SpriteFactory.Instance.CreateDeathCloud(enemy.screenCord, enemy.screenCord);
         PickupList.Add(deathCloud);
 
         int cr = roomObjectManager.currentRoomID();
@@ -239,19 +239,19 @@ public class RoomObject : IRoomObject
         {
             if (cr == 0)
             {
-                ISprite newKey = SpriteFactory.Instance.CreateKeyDrop(room0Key);
+                ISprite newKey = SpriteFactory.Instance.CreateDrop(room0Key, room0Key, "Key", (int)RoomObjectTypes.typePickup);
                 AddGameObject((int)RoomObjectTypes.typePickup, newKey, "keyDrop");
                         SoundManager.Instance.PlayOnce("LOZ_Key_Appear");
 
             }
             if (cr == 17)
             {
-                ISprite newBoomerang = SpriteFactory.Instance.CreateKeyDrop(room17Boomerang);
+                ISprite newBoomerang = SpriteFactory.Instance.CreateDrop(room17Boomerang, room17Boomerang, "BoomerangDrop", (int)RoomObjectTypes.typePickup);
                 AddGameObject((int)RoomObjectTypes.typePickup, newBoomerang, "boomerangDrop");
             }
             if (cr == 26)
             {
-                ISprite newKey = SpriteFactory.Instance.CreateKeyDrop(room26Key);
+                ISprite newKey = SpriteFactory.Instance.CreateDrop(room26Key, room26Key, "Key", (int)RoomObjectTypes.typePickup);
                 AddGameObject((int)RoomObjectTypes.typePickup, newKey, "keyDrop");
                 SoundManager.Instance.PlayOnce("LOZ_Key_Appear");
             }

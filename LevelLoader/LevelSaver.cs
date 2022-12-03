@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -105,15 +106,14 @@ public sealed class LevelSaver
         //initialize writer
         String savePath = "SavedData/Room" + i + ".xml";
         writer = XmlWriter.Create(savePath, settings);
-        room = roomObjectManager.currentRoom();
+        //room = roomObjectManager.currentRoom();
         writer.WriteStartElement("XnaContent");
 
         //write content
         WriteBaseCord(room, i);
         WriteBlocks(room);
-      //  WriteEnemies(room);
-        //WriteItems(room);
-        // TODO: there may be more lists im missing
+        WriteEnemies(room);
+        WriteItems(room);
 
         //release writer
         writer.WriteEndElement();
@@ -132,14 +132,41 @@ public sealed class LevelSaver
     {
         writer.WriteStartElement("Blocks");
 
-        foreach(IConcreteSprite item in room.StaticTileList)
+        //write door
+        foreach(IConcreteSprite item in room.TopLayerNonCollidibleList)
         {
             writer.WriteStartElement("Block");
-            
-            writer.WriteElementString("xPos", item.screenCord.X.ToString());
-            writer.WriteElementString("yPos", item.screenCord.Y.ToString());
-            writer.WriteElementString("Name", item.name);
-            writer.WriteElementString("RoomObjectType", item.roomObjectType.ToString());
+            writer.WriteAttributeString("isOpen", item.isDoorOpen.ToString().ToLower());
+            WriteItem(item);
+
+            writer.WriteEndElement();
+        }
+
+        //write dungeon floor
+        foreach (IConcreteSprite item in room.floorList)
+        {
+            writer.WriteStartElement("Block");
+
+            WriteItem(item);
+
+            writer.WriteEndElement();
+        }
+
+        //write dungeon floor
+        foreach (IConcreteSprite item in room.replacesFloorList)
+        {
+            writer.WriteStartElement("Block");
+
+            WriteItem(item);
+
+            writer.WriteEndElement();
+        }
+
+        foreach (IConcreteSprite item in room.StaticTileList)
+        {
+            writer.WriteStartElement("Block");
+
+            WriteItem(item);
 
             writer.WriteEndElement();
         }
@@ -148,10 +175,7 @@ public sealed class LevelSaver
         {
             writer.WriteStartElement("Block");
 
-            writer.WriteElementString("xPos", item.screenCord.X.ToString());
-            writer.WriteElementString("yPos", item.screenCord.Y.ToString());
-            writer.WriteElementString("Name", item.name);
-            writer.WriteElementString("RoomObjectType", item.roomObjectType.ToString());
+            WriteItem(item);
 
             writer.WriteEndElement();
         }
@@ -160,10 +184,7 @@ public sealed class LevelSaver
         {
             writer.WriteStartElement("Block");
 
-            writer.WriteElementString("xPos", item.screenCord.X.ToString());
-            writer.WriteElementString("yPos", item.screenCord.Y.ToString());
-            writer.WriteElementString("Name", item.name);
-            writer.WriteElementString("RoomObjectType", item.roomObjectType.ToString());
+            WriteItem(item);
 
             writer.WriteEndElement();
         }
@@ -178,23 +199,22 @@ public sealed class LevelSaver
         foreach (IConcreteSprite enemy in room.EnemyList)
         {
             writer.WriteStartElement("Enemy");
-            writer.WriteStartAttribute("aiType", enemy.aiType.ToString());
+            writer.WriteAttributeString("aiType", enemy.aiType.ToString());
 
-            writer.WriteElementString("xPos", enemy.screenCord.X.ToString());
-            writer.WriteElementString("yPos", enemy.screenCord.Y.ToString());
-            writer.WriteElementString("Name", enemy.name);
-            writer.WriteElementString("RoomObjectType", enemy.roomObjectType.ToString());
+            WriteItem(enemy);
+
             writer.WriteElementString("Health", enemy.health.ToString());
             writer.WriteElementString("MaxHealth", enemy.maxHealth.ToString());
 
             /*Deal with writing enemy projectiles here*/
             if (room.EnemyToProjectile.TryGetValue(enemy, out ISprite projVal))
-            {
+            {   
                 IProjectile projectile = projVal as IProjectile;
+                int projType = (int)RoomObjectTypes.typeEnemyProjectile;
                 writer.WriteStartElement("Projectile");
-                writer.WriteElementString("Name", projectile.GetDropName());
+                writer.WriteElementString("Name", projectile.GetDropName().Replace("Drop", ""));
                 writer.WriteElementString("Distance", projectile.Distance().ToString());
-               // writer.WriteElementString("RoomObjectType", projectile.)
+                writer.WriteElementString("RoomObjectType", projType.ToString());
                 writer.WriteEndElement();
             }
 
@@ -207,9 +227,31 @@ public sealed class LevelSaver
     {
         writer.WriteStartElement("Items");
 
-        // TODO
+        foreach(IDrop item in room.PickupList)
+        {
+            writer.WriteStartElement("Item");
+           WriteItem(item);
+            writer.WriteEndElement();
+        }
 
         writer.WriteEndElement();
+    }
+
+    /*TODO: FIX COORDINATE FOR Y*/
+    private void WriteItem(IConcreteSprite item)
+    {
+        writer.WriteElementString("xPos", item.initalCoord.X.ToString());
+        writer.WriteElementString("yPos", item.initalCoord.Y.ToString());
+        writer.WriteElementString("Name", item.name);
+        writer.WriteElementString("RoomObjectType", item.roomObjectType.ToString());
+    }
+    private void WriteItem(IDrop item)
+    {
+
+        writer.WriteElementString("xPos", item.initScreenCoord.X.ToString());
+        writer.WriteElementString("yPos", item.initScreenCoord.Y.ToString());
+        writer.WriteElementString("Name", item.name);
+        writer.WriteElementString("RoomObjectType", item.RoomObjectType.ToString());
     }
 }
 
