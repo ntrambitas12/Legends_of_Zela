@@ -9,6 +9,8 @@
 		<currentRoom>1</currentRoom>
 		<Compass>false</Compass>
 		<Map>false</Map>
+		<xCord>1986</xCord>
+		<yCord>320</yCord>
 	</Link>
 	<Inventory>
 	</Inventory>

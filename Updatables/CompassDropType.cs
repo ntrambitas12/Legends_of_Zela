@@ -27,6 +27,7 @@ public class CompassDropType : IItemType
             {
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 compass.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, compass);
                 link.compass = true;
             }
         }

@@ -27,6 +27,7 @@ public class ArrowDropType : IItemType
                 //Add pickup sound
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 arrow.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, arrow);
                 // Add to Link's inventory here
             }
         }

@@ -32,6 +32,7 @@ public sealed class LevelSaver
     public void SaveLink(int saveState)
     {
         //initialize writer
+        roomObjectManager = RoomObjectManager.Instance;
         writer = XmlWriter.Create("SavedData/" + saveState + "/Link/LinkData.xml", settings);
         room = roomObjectManager.currentRoom();
         writer.WriteStartElement("XnaContent");
@@ -58,6 +59,8 @@ public sealed class LevelSaver
         writer.WriteElementString("currentRoom", roomObjectManager.currentRoomIdx().ToString());
         writer.WriteElementString("Compass", link.compass.ToString().ToLower());
         writer.WriteElementString("Map", link.map.ToString().ToLower());
+        writer.WriteElementString("xCord", ((int)link.screenCord.X).ToString());
+        writer.WriteElementString("yCord", ((int)link.screenCord.Y).ToString());
         writer.WriteEndElement();
        
     }
@@ -90,6 +93,7 @@ public sealed class LevelSaver
     //handles all entities
     public void SaveRooms(int saveState)
     {
+        roomObjectManager = RoomObjectManager.Instance;
         IRoomObject[] rooms = roomObjectManager.getRooms();
         int i = 0;
         while (i < rooms.Length)
@@ -104,7 +108,6 @@ public sealed class LevelSaver
     private void WriteRoom(IRoomObject room, int i, int saveState)
     {
         //initialize writer
-       
         String savePath = "SavedData/" + saveState + "/Room" + i + ".xml";
         writer = XmlWriter.Create(savePath, settings);
         //room = roomObjectManager.currentRoom();

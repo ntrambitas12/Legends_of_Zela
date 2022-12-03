@@ -28,6 +28,7 @@ public class TriforceDropType : IItemType
                 SoundManager.Instance.PauseSounds();
                 SoundManager.Instance.PlayOnce("LOZ_Fanfare");
                 triforce.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, triforce);
                 link.triforce = true;
                 // Add to Link's inventory here
             }

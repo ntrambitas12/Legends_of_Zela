@@ -29,6 +29,7 @@ public class RubyDropType : IItemType
                 SoundManager.Instance.PlayOnce("LOZ_Get_Rupee");
 
                 ruby.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, ruby);
                 Link.rubies++;
             }
         }

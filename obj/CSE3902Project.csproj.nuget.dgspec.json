@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ntram\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj": {}
+    "/Users/kylehoefker/Desktop/CSE3902Project/CSE3902Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ntram\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj": {
+    "/Users/kylehoefker/Desktop/CSE3902Project/CSE3902Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ntram\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj",
+        "projectUniqueName": "/Users/kylehoefker/Desktop/CSE3902Project/CSE3902Project.csproj",
         "projectName": "CSE3902Project",
-        "projectPath": "C:\\Users\\ntram\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj",
-        "packagesPath": "C:\\Users\\ntram\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ntram\\Source\\Repos\\CSE3902Project\\obj\\",
+        "projectPath": "/Users/kylehoefker/Desktop/CSE3902Project/CSE3902Project.csproj",
+        "packagesPath": "/Users/kylehoefker/.nuget/packages/",
+        "outputPath": "/Users/kylehoefker/Desktop/CSE3902Project/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ntram\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/kylehoefker/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -65,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
         }
       }
     }

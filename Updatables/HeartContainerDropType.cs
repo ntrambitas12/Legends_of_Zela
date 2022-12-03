@@ -28,6 +28,7 @@ public class HeartContainerDropType : IItemType
             {
                 SoundManager.Instance.PlayOnce("LOZ_Get_Heart");
                 heartContainer.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, heartContainer);
                 Link.maxHealth+=2;
                 Link.health+=2;
             }

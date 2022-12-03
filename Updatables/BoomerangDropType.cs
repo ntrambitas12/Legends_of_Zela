@@ -27,6 +27,7 @@ public class BoomerangDropType : IItemType
             {
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 boomerang.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, boomerang);
                 ItemSelectionScreen.AddToInventory(boomerang, ArrayIndex.boomerang);
 
                 IProjectile Boomerang = (IProjectile)SpriteFactory.Instance.CreateBoomerangProjectile(1000, Link, "Boomerang", (int)RoomObjectTypes.typeEnemyProjectile);

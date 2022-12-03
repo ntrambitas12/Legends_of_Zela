@@ -27,7 +27,8 @@ public class HeartDropType : IItemType
             if (collidingObject != null)
             {
                 SoundManager.Instance.PlayOnce("LOZ_Get_Heart");
-                heart.SetShouldDraw(false);            
+                heart.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, heart);
                 if (Link.health < Link.maxHealth)
                 {
                     

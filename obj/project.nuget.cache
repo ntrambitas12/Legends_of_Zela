@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "AWMtcptga49B68WR/HYed7Owcb7STruR/YI92eOZoO2LrtssBKqkTXjNWRhRKduYFXTqQSKGusLNycyBFNkwPQ==",
+  "dgSpecHash": "Bky699+o1+btZGKiaM2KnitJIWERspYNOx/K7QEYQe7tJ2/nXV/RP1rvlT0rV6FqfSg0HmYuTz6JSCJqFKtJog==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ntram\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj",
+  "projectFilePath": "/Users/kylehoefker/Desktop/CSE3902Project/CSE3902Project.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ntram\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
-    "C:\\Users\\ntram\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"
+    "/Users/kylehoefker/.nuget/packages/monogame.content.builder.task/3.8.1.303/monogame.content.builder.task.3.8.1.303.nupkg.sha512",
+    "/Users/kylehoefker/.nuget/packages/monogame.framework.desktopgl/3.8.1.303/monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"
   ],
   "logs": []
 }

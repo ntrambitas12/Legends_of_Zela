@@ -124,6 +124,7 @@ public class RoomObject : IRoomObject
     {
         IConcreteSprite _door = (IConcreteSprite) door;
         _door.SetSpriteAction(SpriteAction.doorOpen);
+        _door.isDoorOpen = true;
         IRoomObject otherRoom = RoomObjectManager.Instance.adjacentRoom(_door.direction);
         if (LockedDoorsList.ContainsKey(door))
         {
@@ -137,6 +138,7 @@ public class RoomObject : IRoomObject
                         if (otherDoor.direction == SpriteAction.right)
                         {
                             otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherDoor.isDoorOpen = true;
                             otherRoom.LockedDoorsList[otherDoor] = false;
                         }
                         break;
@@ -144,6 +146,7 @@ public class RoomObject : IRoomObject
                         if (otherDoor.direction == SpriteAction.left)
                         {
                             otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherDoor.isDoorOpen = true;
                             otherRoom.LockedDoorsList[otherDoor] = false;
                         }
                         break;
@@ -151,6 +154,7 @@ public class RoomObject : IRoomObject
                         if (otherDoor.direction == SpriteAction.down)
                         {
                             otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherDoor.isDoorOpen = true;
                             otherRoom.LockedDoorsList[otherDoor] = false;
                         }
                         break;
@@ -158,6 +162,7 @@ public class RoomObject : IRoomObject
                         if (otherDoor.direction == SpriteAction.up)
                         {
                             otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherDoor.isDoorOpen = true;
                             otherRoom.LockedDoorsList[otherDoor] = false;
                         }
                         break;
@@ -177,6 +182,7 @@ public class RoomObject : IRoomObject
                         if (otherDoor.direction == SpriteAction.right)
                         {
                             otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherDoor.isDoorOpen = true;
                             otherRoom.BombDoorsList[otherDoor] = false;
                         }
                         break;
@@ -184,6 +190,7 @@ public class RoomObject : IRoomObject
                         if (otherDoor.direction == SpriteAction.left)
                         {
                             otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherDoor.isDoorOpen = true;
                             otherRoom.BombDoorsList[otherDoor] = false;
                         }
                         break;
@@ -191,6 +198,7 @@ public class RoomObject : IRoomObject
                         if (otherDoor.direction == SpriteAction.down)
                         {
                             otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherDoor.isDoorOpen = true;
                             otherRoom.BombDoorsList[otherDoor] = false;
                         }
                         break;
@@ -198,6 +206,7 @@ public class RoomObject : IRoomObject
                         if (otherDoor.direction == SpriteAction.up)
                         {
                             otherDoor.SetSpriteAction(SpriteAction.doorOpen);
+                            otherDoor.isDoorOpen = true;
                             otherRoom.BombDoorsList[otherDoor] = false;
                         }
                         break;

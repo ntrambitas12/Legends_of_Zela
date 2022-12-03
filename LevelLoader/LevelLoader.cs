@@ -168,7 +168,11 @@ public class LevelLoader: ILevelLoader
             Link.compass = reader.ReadElementContentAsBoolean();
             reader.ReadToNextSibling("Map");
             Link.map = reader.ReadElementContentAsBoolean();
-
+            reader.ReadToNextSibling("xCord");
+            int xCord = reader.ReadElementContentAsInt();
+            reader.ReadToNextSibling("yCord");
+            int yCord = reader.ReadElementContentAsInt();
+            Link.screenCord = new Vector2(xCord, yCord);
         }
     }
 
