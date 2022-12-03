@@ -57,6 +57,11 @@ public sealed class RoomObjectManager : IRoomObjectManager
         }
     }
 
+    public int currentRoomIdx()
+    {
+        return Array.IndexOf(roomList, _currentRoom);
+    }
+
     public IRoomObject currentRoom()
     {
         return _currentRoom;
@@ -141,6 +146,15 @@ public sealed class RoomObjectManager : IRoomObjectManager
         }
     }
 
+    public IRoomObject getRoom(int roomId)
+    {
+        return roomList[roomId];
+    }
+    public IRoomObject[] getRooms()
+    {
+        return roomList;
+    }
+
     public IRoomObject adjacentRoom(SpriteAction direction)
     {
         switch (direction)
@@ -164,17 +178,16 @@ public sealed class RoomObjectManager : IRoomObjectManager
     {
         this.direction = direction;
         roomDir.TryGetValue(direction, out var roomData);
-        var Link = _currentRoom.Link;
+            var Link = _currentRoom.Link;
         _currentRoom.UnpauseEnemies(false);
         _currentRoom.ResetEnemies();
         Vector2 LinkCord = new Vector2(roomData.Item1, roomData.Item2);
         _currentRoom.Link = null;
         //move link to the next room and enter the transition state
-        _currentRoom = roomList[currentRoomID() + roomData.Item3];
-        _currentRoom.Link = Link;
-        _currentRoom.Link.screenCord = LinkCord + _currentRoom.BaseCord;
-        isTransitioning = true;
-       
+            _currentRoom = roomList[currentRoomID() + roomData.Item3];
+            _currentRoom.Link = Link;
+            _currentRoom.Link.screenCord = LinkCord + _currentRoom.BaseCord;
+            isTransitioning = true;
     }
 
     private void panRoom()

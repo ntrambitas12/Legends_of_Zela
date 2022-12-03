@@ -11,6 +11,11 @@ public class InvisibleStairDropType : IItemType
         this.stairs = stairs;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new InvisibleStairDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         ISprite collidingObject = stairs.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });

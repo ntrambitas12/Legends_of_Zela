@@ -2,16 +2,15 @@
 
 public class PreviousItem : ICommand
 {
-    private ItemSelectionScreen inventory;
-    public PreviousItem(ItemSelectionScreen inventory)
+    public PreviousItem()
     {
-        this.inventory = inventory;
+        
     }
     public void Execute()
     {
-        if (inventory.isOpen())
+        if (ItemSelectionScreen.isOpen())
         {
-            inventory.NextItem(false);
+            ItemSelectionScreen.NextItem(false);
         }
     }
 }

@@ -52,7 +52,7 @@ namespace CSE3902Project
         protected override void LoadContent()
         {
             level.ParseRoom();
-            RoomObjectManager.Instance.setRoom(1, true);
+            //RoomObjectManager.Instance.setRoom(1, true);
         }
 
         public void resetGame()
@@ -78,7 +78,7 @@ namespace CSE3902Project
 
         protected override void Draw(GameTime gameTime)
         {
-            if (inventory.isOpen())
+            if (ItemSelectionScreen.isOpen())
             {
                 _spriteBatch.Begin();
                 inventory.Draw(gameTime);

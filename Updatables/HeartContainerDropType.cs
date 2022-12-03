@@ -12,17 +12,21 @@ public class HeartContainerDropType : IItemType
         this.heartContainer = heartContainer;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new HeartContainerDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         if (heartContainer.ShouldDraw())
         {
             IConcreteSprite Link = (IConcreteSprite)RoomObjectManager.Instance.currentRoom().Link;
             ISprite collidingObject = heartContainer.collider.isIntersecting(new List<ISprite> { Link });
-            SoundManager.Instance.PlayOnce("LOZ_Get_Heart");
 
             if (collidingObject != null)
             {
-               
+                SoundManager.Instance.PlayOnce("LOZ_Get_Heart");
                 heartContainer.SetShouldDraw(false);
                 Link.maxHealth+=2;
                 Link.health+=2;

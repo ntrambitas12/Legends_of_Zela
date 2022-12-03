@@ -11,6 +11,11 @@ public class StairDropType : IItemType
         this.stairs = stairs;
     }
 
+    public static IItemType CreateDrop(IDrop drop)
+    {
+        return new StairDropType(drop);
+    }
+
     public void Update(GameTime gameTime)
     {
         ISprite collidingObject = stairs.collider.isIntersecting(new List<ISprite> { RoomObjectManager.Instance.currentRoom().Link });
@@ -19,7 +24,7 @@ public class StairDropType : IItemType
         {
             SoundManager.Instance.PlayOnce("LOZ_Stairs");
             RoomObjectManager.Instance.setRoom(27, true);
-            RoomObjectManager.Instance.currentRoom().Link.screenCord = new Vector2(240, 200);
+            RoomObjectManager.Instance.currentRoom().Link.screenCord = RoomObjectManager.Instance.currentRoom().BaseCord + new Vector2(240, 200);
         }
         
     }

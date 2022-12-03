@@ -6,10 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 public class FireballType : IProjectileType
 {
     private IProjectile projectile;
-    private int direction;
+    private Vector2 direction;
     private FireProjectile fireProjectile;
     private bool shouldDraw;
     private Vector2 changeCord;
+    private Vector2 linkCord;
 
     public FireballType(IProjectile projectile)
     {
@@ -18,28 +19,37 @@ public class FireballType : IProjectileType
 
     public void Update(GameTime gameTime)
     {
-        direction = projectile.Direction();
         fireProjectile = projectile.FireCommand();
         shouldDraw = projectile.ShouldDraw();
         changeCord = projectile.Position();
 
-        switch (direction)
+        if (fireProjectile.Counter() < 2)
         {
-            case 0:
-                changeCord.X -= 4;
-                break;
-            case 1:
-                changeCord.X += 4;
-                break;
-            case 2:
-                changeCord.Y -= 4;
-                break;
-            case 3:
-                changeCord.Y += 4;
-                break;
-            default:
-                break;
+            linkCord = RoomObjectManager.Instance.currentRoom().Link.screenCord;
+            direction = linkCord - changeCord;
+            direction.Normalize();
         }
+
+        //switch (direction)
+        //{
+        //    case 0:
+        //        changeCord.X -= 4;
+        //        break;
+        //    case 1:
+        //        changeCord.X += 4;
+        //        break;
+        //    case 2:
+        //        changeCord.Y -= 4;
+        //        break;
+        //    case 3:
+        //        changeCord.Y += 4;
+        //        break;
+        //    default:
+        //        break;
+        //}
+
+        changeCord += 4 * direction;
+
         projectile.SetPosition(changeCord);
 
         if (shouldDraw)

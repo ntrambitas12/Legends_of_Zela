@@ -38,7 +38,7 @@ public class SoundFactory
             soundEffects.Add("LOZ_Get_Heart", Content.Load<SoundEffect>("Sound2/LOZ_Get_Heart"));//done, tested
             soundEffects.Add("LOZ_Get_Item", Content.Load<SoundEffect>("Sound2/LOZ_Get_Item"));//done, tested
             soundEffects.Add("LOZ_Get_Rupee", Content.Load<SoundEffect>("Sound2/LOZ_Get_Rupee"));//done, tested
-            soundEffects.Add("LOZ_Key_Appear", Content.Load<SoundEffect>("Sound2/LOZ_Key_Appear"));
+            soundEffects.Add("LOZ_Key_Appear", Content.Load<SoundEffect>("Sound2/LOZ_Key_Appear"));//done tested
             soundEffects.Add("LOZ_Link_Die", Content.Load<SoundEffect>("Sound2/LOZ_Link_Die"));//done, tested
             soundEffects.Add("LOZ_Link_Hurt", Content.Load<SoundEffect>("Sound2/LOZ_Link_Hurt"));//done, tested
             soundEffects.Add("LOZ_LowHealth", Content.Load<SoundEffect>("Sound2/LOZ_LowHealth"));

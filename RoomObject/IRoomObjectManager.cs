@@ -10,7 +10,10 @@ using System.Threading.Tasks;
     
     public void addRoom(IRoomObject room, int id);
     public void setRoom(int roomId, bool inc);
+    public IRoomObject getRoom(int roomId);
+    public IRoomObject[] getRooms();
     public IRoomObject currentRoom();
+    public int currentRoomIdx();
     public IRoomObject adjacentRoom(SpriteAction direction);
     public void Reset();
     public void Draw(GameTime gameTime);

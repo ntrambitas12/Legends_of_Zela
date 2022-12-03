@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using System.Security.AccessControl;
 
 public class Projectile : AbstractItem, IProjectile
 {
@@ -9,18 +10,28 @@ public class Projectile : AbstractItem, IProjectile
     private FireProjectile fireProjectile;
     private int distance;
     private bool shouldCollide;
+    private String dropName;
+    private String dropDesc;
+    private int roomObjectType;
 
-    public Projectile(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures) : base(spriteBatch, position, textures)
+    public Projectile(SpriteBatch spriteBatch, Vector2 position, List<Texture2D>[] textures, String name, int roomObjectType) : base(spriteBatch, position, textures)
     {
         direction = -1;
         fireProjectile = null;
         distance = 0;
         shouldCollide = true;
+        dropName = name + "Drop";
+        dropDesc = name;
+        this.roomObjectType = roomObjectType;
     }
 
     public int Direction()
     {
         return this.direction;
+    }
+    public int GetRoomObjectType()
+    {
+        return roomObjectType;
     }
 
     public void SetDirection(int direction)
@@ -56,6 +67,16 @@ public class Projectile : AbstractItem, IProjectile
     public void SetShouldCollide(bool shouldCollide)
     {
         this.shouldCollide = shouldCollide;
+    }
+
+    public string GetDropName()
+    {
+        return dropName;
+    }
+
+    public string GetDropDescription()
+    {
+        return dropDesc;
     }
 }
 
