@@ -1,7 +1,7 @@
 Code readability review
 Author: Nicholas Trambitas
-Date: 10/7/2022
-Sprint #4
+Date: 11/6/2022
+Sprint #5
 File being reviewed: dropType.cs
 Author of file being reviewed: Kyle Hoefker
 
