@@ -51,12 +51,6 @@
 			<RoomObjectType>8</RoomObjectType>
 		</Block>
 		<Block>
-			<xPos>400</xPos>
-			<yPos>274</yPos>
-			<Name>Stairs</Name>
-			<RoomObjectType>6</RoomObjectType>
-		</Block>
-		<Block>
 			<xPos>336</xPos>
 			<yPos>274</yPos>
 			<Name>Barrier</Name>
@@ -145,6 +139,12 @@
 
 
 	<Items>
+		<Item>
+			<xPos>400</xPos>
+			<yPos>274</yPos>
+			<Name>Stairs</Name>
+			<RoomObjectType>6</RoomObjectType>
+		</Item>
 	</Items>
 	
 </XnaContent>

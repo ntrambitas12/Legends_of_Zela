@@ -14,7 +14,6 @@ public class LevelLoader: ILevelLoader
 {
     private XmlReader reader;
     private List<(string, string)> parseTypes;
-    private delegate ISprite ConcreteEntities(Vector2 pos, Vector2 baseCord);
     private delegate ISprite Projectiles(int distance, ISprite owner, String name, int roomObjectType);
     private bool runOnce;
     private Dictionary<String, Delegate> constructer;
@@ -77,9 +76,9 @@ public class LevelLoader: ILevelLoader
 
    
  
-    public void ParseRoom()
+    public void ParseRoom(string saveState, string saveLink)
     {
-        var files = Directory.GetFiles(@"Rooms/", "*.xml");
+        var files = Directory.GetFiles(@saveState, "*.xml");
         
         foreach (var file in files)
         {
@@ -97,7 +96,7 @@ public class LevelLoader: ILevelLoader
             {
                 reader.ReadToFollowing(parseType.Item1);
                 read = reader.ReadToDescendant(parseType.Item2);
-                isDrop = parseType.Item2 == "Item";
+             
                
                 if (read)
                 {
@@ -128,15 +127,17 @@ public class LevelLoader: ILevelLoader
             }
 
             BuildRoom(id);
+            reader.Close();
         }
-
-        LoadSavedData();
+       
+        LoadSavedData(saveLink);
+        
        
     }
 
-    private void LoadSavedData()
+    private void LoadSavedData(string linkData)
     {
-        var files = Directory.GetFiles(@"SavedData/", "*.xml");
+        var files = Directory.GetFiles(@linkData + "/Link/", "*.xml");
         foreach(var file in files)
         {
            reader = XmlReader.Create(file);
@@ -198,22 +199,19 @@ public class LevelLoader: ILevelLoader
     private void LoadInventory(String drop, String proj, int idx, int distance)
     {
         //call constructor to create item
-        if (constructer.TryGetValue(drop, out Delegate dropConstructor))
-        {
-           IDrop _drop = (IDrop)dropConstructor.DynamicInvoke(new Vector2(0, 0));
+            IDrop _drop = (IDrop)SpriteFactory.Instance.CreateDrop(new Vector2(0, 0), new Vector2(0, 0), drop, 0);
             ItemSelectionScreen.AddToInventory(_drop, (ArrayIndex)idx);
-
-        }
+        
         if (constructer.TryGetValue(proj, out Delegate projConstructor))
         {
-            IProjectile _proj = (IProjectile)projConstructor.DynamicInvoke(distance, Link, proj);
+            IProjectile _proj = (IProjectile)projConstructor.DynamicInvoke(distance, Link, proj, ((int)RoomObjectTypes.typeEnemyProjectile));
             Link.AddProjectile(_proj, (ArrayIndex)idx);
         }
     }
     private void IntializeRooms(int xBase, int yBase)
     {
         if (!runOnce)
-        {
+       {
             Vector2 baseCord = new Vector2(xBase, yBase);
             Camera camera = Camera.Instance;
             camera.Move(baseCord);
@@ -319,6 +317,7 @@ public class LevelLoader: ILevelLoader
         name = reader.ReadElementContentAsString();
         reader.ReadToNextSibling("RoomObjectType");
         roomObjectType = reader.ReadElementContentAsInt();
+        isDrop = roomObjectType == 6;
         if (isEnemy)
         {
             reader.ReadToNextSibling("Health");
@@ -339,9 +338,10 @@ public class LevelLoader: ILevelLoader
         {
             sprite = SpriteFactory.Instance.CreateDrop(new Vector2(xPos, yPos) + _base, new Vector2(xPos, yPos), name, roomObjectType);
         }
+        //for projectiles
         else if (constructer.ContainsKey(name))
         {
-            sprite = (ISprite)constructer[name].DynamicInvoke(new Vector2(xPos, yPos) + _base, new Vector2(xPos, yPos));
+            sprite = (ISprite)constructer[name].DynamicInvoke(new Vector2(xPos, yPos) + _base, new Vector2(xPos, yPos), name, roomObjectType);
         }
         else
         {
@@ -388,9 +388,6 @@ public class LevelLoader: ILevelLoader
 
     private void populateDictionary()
     {
-        //stairs
-        constructer.Add("Stairs", new ConcreteEntities(SpriteFactory.Instance.CreateStairsBlock));
-        constructer.Add("InvisibleStairs", new ConcreteEntities(SpriteFactory.Instance.CreateInvisibleStairsBlock));
 
         //Projectiles
         constructer.Add("Arrow", new Projectiles(SpriteFactory.Instance.CreateArrowProjectile));

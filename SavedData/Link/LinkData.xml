@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+	<Link>
+		<Health>6</Health>
+		<MaxHealth>6</MaxHealth>
+		<Rupee>0</Rupee>
+		<Bombs>0</Bombs>
+		<Keys>0</Keys>
+		<currentRoom>1</currentRoom>
+		<Compass>false</Compass>
+		<Map>false</Map>
+	</Link>
+	<Inventory>
+	</Inventory>
+
+</XnaContent>

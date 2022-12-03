@@ -107,11 +107,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ntram\\source\\repos\\CSE3902Project\\CSE3902Project.csproj",
+      "projectUniqueName": "C:\\Users\\ntram\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj",
       "projectName": "CSE3902Project",
-      "projectPath": "C:\\Users\\ntram\\source\\repos\\CSE3902Project\\CSE3902Project.csproj",
+      "projectPath": "C:\\Users\\ntram\\Source\\Repos\\CSE3902Project\\CSE3902Project.csproj",
       "packagesPath": "C:\\Users\\ntram\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ntram\\source\\repos\\CSE3902Project\\obj\\",
+      "outputPath": "C:\\Users\\ntram\\Source\\Repos\\CSE3902Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ntram\\AppData\\Roaming\\NuGet\\NuGet.Config",

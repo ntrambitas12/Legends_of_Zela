@@ -52,8 +52,13 @@ using System.Threading.Tasks;
 
         keyboard.RegisterCommand(Keys.Y, Keys.U, new MoveUp(Link));
 
-        keyboard.RegisterCommand(Keys.L, new SaveCommand());
-
+        //keyboard.RegisterCommand(Keys.L, new SaveCommand());
+        keyboard.RegisterCommand(Keys.LeftControl, Keys.D1, new SaveCommand(1));
+        keyboard.RegisterCommand(Keys.LeftControl, Keys.D2, new SaveCommand(2));
+        keyboard.RegisterCommand(Keys.LeftControl, Keys.D3, new SaveCommand(3));
+        keyboard.RegisterCommand(Keys.LeftShift, Keys.D1, new LoadCommand(1, game1));
+        keyboard.RegisterCommand(Keys.LeftShift, Keys.D2, new LoadCommand(2, game1));
+        keyboard.RegisterCommand(Keys.LeftShift, Keys.D3, new LoadCommand(3, game1));
 
         //intialize the inventory
         ItemSelectionScreen.Link = (IConcreteSprite)Link;
