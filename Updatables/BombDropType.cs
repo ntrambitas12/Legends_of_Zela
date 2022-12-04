@@ -27,6 +27,7 @@ public class BombDropType : IItemType
             {
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 bomb.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, bomb);
                 ItemSelectionScreen.AddToInventory(bomb, ArrayIndex.bomb);
                 IProjectile Bomb = (IProjectile)SpriteFactory.Instance.CreateBombProjectile(100, Link, "Bomb", (int)RoomObjectTypes.typeEnemyProjectile);
                 ((ConcreteSprite)Link).AddProjectile(Bomb, ArrayIndex.bomb);

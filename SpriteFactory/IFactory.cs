@@ -20,8 +20,6 @@ public interface IFactory
 
     //Block methods
     public ISprite CreateBlock(Vector2 location, Vector2 baseCord, String name, int roomObjectType);
-    public ISprite CreateStairsBlock(Vector2 location, Vector2 baseCord);
-    public ISprite CreateInvisibleStairsBlock(Vector2 location, Vector2 baseCord);
     public ISprite CreateDoorBlock(Vector2 location, Vector2 baseCord, bool isOpen, String name, int roomObjectType);
 
 

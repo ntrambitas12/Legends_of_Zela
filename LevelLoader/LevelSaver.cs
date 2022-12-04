@@ -29,10 +29,12 @@ public sealed class LevelSaver
 
     //------------------------------------------LINK------------------------------------------
     //handles player inventory 
-    public void SaveLink()
+    public void SaveLink(int saveState)
     {
         //initialize writer
-        writer = XmlWriter.Create("SavedData/savedData.xml", settings);
+        roomObjectManager = RoomObjectManager.Instance;
+
+        writer = XmlWriter.Create("SavedData/" + saveState + "/Link/LinkData.xml", settings);
         room = roomObjectManager.currentRoom();
         writer.WriteStartElement("XnaContent");
 
@@ -58,6 +60,8 @@ public sealed class LevelSaver
         writer.WriteElementString("currentRoom", roomObjectManager.currentRoomIdx().ToString());
         writer.WriteElementString("Compass", link.compass.ToString().ToLower());
         writer.WriteElementString("Map", link.map.ToString().ToLower());
+        writer.WriteElementString("xCord", ((int)link.screenCord.X).ToString());
+        writer.WriteElementString("yCord", ((int)link.screenCord.Y).ToString());
         writer.WriteEndElement();
        
     }
@@ -88,23 +92,24 @@ public sealed class LevelSaver
 
     //------------------------------------------ROOMS------------------------------------------
     //handles all entities
-    public void SaveRooms()
+    public void SaveRooms(int saveState)
     {
+        roomObjectManager = RoomObjectManager.Instance;
         IRoomObject[] rooms = roomObjectManager.getRooms();
         int i = 0;
         while (i < rooms.Length)
         {
             if (rooms[i] != null)
             {
-                WriteRoom(rooms[i], i);
+                WriteRoom(rooms[i], i, saveState);
             }
             i++;
         }
     }
-    private void WriteRoom(IRoomObject room, int i)
+    private void WriteRoom(IRoomObject room, int i, int saveState)
     {
         //initialize writer
-        String savePath = "SavedData/Room" + i + ".xml";
+        String savePath = "SavedData/" + saveState + "/Room" + i + ".xml";
         writer = XmlWriter.Create(savePath, settings);
         //room = roomObjectManager.currentRoom();
         writer.WriteStartElement("XnaContent");
@@ -119,6 +124,7 @@ public sealed class LevelSaver
         writer.WriteEndElement();
         writer.Flush();
         writer.Close();
+        
     }
     private void WriteBaseCord(IRoomObject room, int i)
     {
@@ -189,7 +195,6 @@ public sealed class LevelSaver
             writer.WriteEndElement();
         }
         
-
         writer.WriteEndElement();
     }
     private void WriteEnemies(IRoomObject room)
@@ -229,15 +234,14 @@ public sealed class LevelSaver
 
         foreach(IDrop item in room.PickupList)
         {
-            writer.WriteStartElement("Item");
-           WriteItem(item);
-            writer.WriteEndElement();
+                writer.WriteStartElement("Item");
+                WriteItem(item);
+                writer.WriteEndElement();  
         }
 
         writer.WriteEndElement();
     }
 
-    /*TODO: FIX COORDINATE FOR Y*/
     private void WriteItem(IConcreteSprite item)
     {
         writer.WriteElementString("xPos", item.initalCoord.X.ToString());

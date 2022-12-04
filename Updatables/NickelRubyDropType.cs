@@ -29,6 +29,7 @@ public class NickelRubyDropType : IItemType
                 SoundManager.Instance.PlayOnce("LOZ_Get_Rupee");
 
                 nickelRuby.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, nickelRuby);
                 Link.rubies += 5;
             }
         }

@@ -28,6 +28,7 @@ public class BowDropType : IItemType
             {
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 bow.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, bow);
                 ItemSelectionScreen.AddToInventory(bow, ArrayIndex.arrow);
 
                 IProjectile Arrow = (IProjectile)SpriteFactory.Instance.CreateArrowProjectile(999, Link, "Arrow", (int)RoomObjectTypes.typeEnemyProjectile);

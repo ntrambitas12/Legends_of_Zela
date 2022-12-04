@@ -27,6 +27,7 @@ public class KeyDropType : IItemType
             {
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 key.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, key);
                 Link.keys++;
             }
         }

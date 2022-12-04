@@ -27,6 +27,7 @@ public class ClockDropType : IItemType
             {
                 SoundManager.Instance.PlayOnce("LOZ_Get_Item");
                 clock.SetShouldDraw(false);
+                RoomObjectManager.Instance.DeleteGameObject((int)RoomObjectTypes.typePickup, clock);
                 currentRoom.PauseEnemies(false);
             }
         }
