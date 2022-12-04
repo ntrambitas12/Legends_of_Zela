@@ -12,8 +12,9 @@ namespace CSE3902Project
         }
         public void Execute()
         {
+            Game1.defaultLinkPath = "SavedData/";
+            Game1.defaultRoomPath = "Rooms";
             game.resetGame();
-           
         }
     }
 }
