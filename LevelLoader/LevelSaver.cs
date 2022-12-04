@@ -32,15 +32,9 @@ public sealed class LevelSaver
     public void SaveLink(int saveState)
     {
         //initialize writer
-<<<<<<< HEAD
         roomObjectManager = RoomObjectManager.Instance;
-=======
-<<<<<<< HEAD
-        writer = XmlWriter.Create("SavedData/savedData.xml", settings);
-=======
->>>>>>> 8af5b1c6cf98a88466e9d019731eaaf01520d023
+
         writer = XmlWriter.Create("SavedData/" + saveState + "/Link/LinkData.xml", settings);
->>>>>>> 958b4d4858d34744a16f5dda6e1c8f8f5ddba6ee
         room = roomObjectManager.currentRoom();
         writer.WriteStartElement("XnaContent");
 
